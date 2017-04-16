@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=c++11  -g
 
 CXX_DEFINES = -DOX_HAVE_LIBJPEG -DOX_HAVE_LIBPNG -DOX_NO_HTTP
 
-CXX_INCLUDES = -I/home/ruslan/QTProjects/oxygine-framework/oxygine/src -I/home/ruslan/QTProjects/oxygine-framework/oxygine/third_party/linux/pthreads/include -I/home/ruslan/QTProjects/oxygine-framework/oxygine/third_party/linux/zlib -I/usr/include/SDL2 -I/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/proj.cmake/../box2d 
+CXX_INCLUDES = -I/home/ruslan/Work/oxygine-framework/oxygine/src -I/home/ruslan/Work/oxygine-framework/oxygine/third_party/linux/pthreads/include -I/home/ruslan/Work/oxygine-framework/oxygine/third_party/linux/zlib -I/usr/include/SDL2 -I/home/ruslan/Work/oxygine-framework/examples/MyDemo/proj.cmake/../box2d 
 

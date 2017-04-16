@@ -1,4 +1,4 @@
-# Install script for directory: /home/ruslan/QTProjects/oxygine-framework
+# Install script for directory: /home/ruslan/Work/oxygine-framework
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,13 +34,13 @@ endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./debug" TYPE STATIC_LIBRARY FILES "/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/oxygine-framework/liboxygine-framework.a")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./debug" TYPE STATIC_LIBRARY FILES "/home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/oxygine-framework/liboxygine-framework.a")
   endif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./release" TYPE STATIC_LIBRARY FILES "/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/oxygine-framework/liboxygine-framework.a")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./release" TYPE STATIC_LIBRARY FILES "/home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/oxygine-framework/liboxygine-framework.a")
   endif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
 endif()
 

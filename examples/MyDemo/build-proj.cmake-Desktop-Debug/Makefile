@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/proj.cmake
+CMAKE_SOURCE_DIR = /home/ruslan/Work/oxygine-framework/examples/MyDemo/proj.cmake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug
+CMAKE_BINARY_DIR = /home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,9 +124,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles /home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles /home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruslan/Work/oxygine-framework/examples/MyDemo/build-proj.cmake-Desktop-Debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -180,1463 +180,1463 @@ oxygine-framework/fast:
 	$(MAKE) -f oxygine-framework/CMakeFiles/oxygine-framework.dir/build.make oxygine-framework/CMakeFiles/oxygine-framework.dir/build
 .PHONY : oxygine-framework/fast
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o
-
-# target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
-
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
-
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i
-
-# target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
-
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
-
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s
-
-# target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
-
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
-
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.cpp.s
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.o: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.o
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.o
 
 # target to build an object file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.o:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.o
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.o
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.o
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.i: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.i
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.i
 
 # target to preprocess a source file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.i:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.i
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.i
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.i
 
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.s: home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.s
 
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.s
 
 # target to generate assembly for a file
-home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.s:
-	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.s
-.PHONY : home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.cpp.s
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.cpp.s
+
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.o: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.o
+
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.o
+
+# target to build an object file
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.o:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.o
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.o
+
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.i: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.i
+
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.i
+
+# target to preprocess a source file
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.i:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.i
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.i
+
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.s: home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.s
+
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.s
+
+# target to generate assembly for a file
+home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.s:
+	$(MAKE) -f CMakeFiles/MyDemo.dir/build.make CMakeFiles/MyDemo.dir/home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.s
+.PHONY : home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.cpp.s
 
 # Help Target
 help:
@@ -1652,168 +1652,168 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... oxygine-framework"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Game.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Joystick.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Player.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/Unit.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/example.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/main.s"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.o"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.i"
-	@echo "... home/ruslan/QTProjects/oxygine-framework/examples/MyDemo/src/res.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2ChainShape.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2CircleShape.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2EdgeShape.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/Shapes/b2PolygonShape.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2BroadPhase.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideCircle.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollideEdge.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2CollidePolygon.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Collision.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2Distance.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2DynamicTree.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Collision/b2TimeOfImpact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2BlockAllocator.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Draw.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Math.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Settings.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2StackAllocator.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Common/b2Timer.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2CircleContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2Contact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2ContactSolver.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Contacts/b2PolygonContact.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2DistanceJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2FrictionJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2GearJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2Joint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MotorJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2MouseJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PrismaticJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2PulleyJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RevoluteJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2RopeJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WeldJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/Joints/b2WheelJoint.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Body.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2ContactManager.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Fixture.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2Island.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2World.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Dynamics/b2WorldCallbacks.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/box2d/Box2D/Rope/b2Rope.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Box2DDebugDraw.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Game.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Joystick.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Player.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/Unit.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/example.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/main.s"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.o"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.i"
+	@echo "... home/ruslan/Work/oxygine-framework/examples/MyDemo/src/res.s"
 .PHONY : help
 
 
