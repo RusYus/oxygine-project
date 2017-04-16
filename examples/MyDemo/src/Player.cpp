@@ -26,18 +26,14 @@ void Player::_init(b2World* world)
 
     setUserData(_body);
 
-//    b2PolygonShape shape;
-//    b2Vec2 sz = convert2(_view->getSize() / 2);
-//    shape.SetAsBox(sz.x, sz.y);
     b2PolygonShape shape;
     shape.SetAsBox(100/SCALE/2.0f, 100/SCALE/2.0f);
-    std::cout << "RADIUS!!!!!" << _ship->getHeight() << std::endl;
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
 //    fixtureDef.isSensor= true;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = 1.3f;
 
 //    _body->SetBullet(true);
 
@@ -80,24 +76,26 @@ void Player::_update(const UpdateState& us)
     {
         if (_canMove)
         {
+            if (_body != nullptr)
+            {
+                _body->SetLinearVelocity(convert2(dir*3));
+            }
+
             //update player position according to delta time and finger direction from virtual joystick
-            Vector2 pos = _view->getPosition();
-            pos = pos + dir * (us.dt / 1000.0f) * 5;
-            _view->setPosition(pos);
 
             //rotate it
-            float angle = atan2f(dir.y, dir.x);
-            _view->setRotation(angle);
+//            float angle = atan2f(dir.y, dir.x);
+//            _view->setRotation(angle);
 
             //if player moves show engine's fire
 //            _engine->setVisible(true);
-            if (_body != nullptr)
-            {
-//                _body->SetTransform(convert2(pos), static_cast<float32>(angle));
-                _body->SetLinearVelocity(convert2(dir));
-            }
         }
     }
+
+    b2Vec2 b2pos = _body->GetPosition();
+    Vector2 pos = Vector2(b2pos.x*SCALE, b2pos.y*SCALE);
+//            pos = pos + dir * (us.dt / 1000.0f) * 5;
+    _view->setPosition(pos);
 }
 
 void Player::setPosition(const Vector2& pos)
