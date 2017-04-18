@@ -1,0 +1,119 @@
+﻿  winnie_alloc.cpp
+  system_alloc.cpp
+  WebImage.cpp
+  VisualStyle.cpp
+  ImageUtils.cpp
+  AtlasTool.cpp
+  pugixml.cpp
+  AffineTransform.cpp
+  stringUtils.cpp
+  TweenQueue.cpp
+  TweenOutline.cpp
+  TweenGlow.cpp
+  TweenAnim.cpp
+  TweenAlphaFade.cpp
+  Tween.cpp
+  TextBuilder.cpp
+  Node.cpp
+  Aligner.cpp
+  TextField.cpp
+  STDRenderer.cpp
+  Создание кода...
+  Компиляция...
+  STDMaterial.cpp
+  Sprite.cpp
+  SlidingActor.cpp
+  Serialize.cpp
+  Stage.cpp
+  Serializable.cpp
+  ResStarlingAtlas.cpp
+  Resources.cpp
+  Resource.cpp
+  ResFontBM.cpp
+  ResFont.cpp
+  ResBuffer.cpp
+  ResAtlasPrebuilt.cpp
+  ResAtlasGeneric.cpp
+  ResAtlas.cpp
+  ResAnim.cpp
+  CreateResourceContext.cpp
+  ProgressBar.cpp
+  Polygon.cpp
+  PointerState.cpp
+  Создание кода...
+  Компиляция...
+  ThreadLoader.cpp
+  SingleResAnim.cpp
+  PostProcess.cpp
+  Image.cpp
+  Material.cpp
+  MaskedSprite.cpp
+  MaskedRenderer.cpp
+  key.cpp
+  jsoncpp.cpp
+  InputText.cpp
+  Input.cpp
+  HttpRequestTask.cpp
+  Font.cpp
+  EventDispatcher.cpp
+  Draggable.cpp
+  TreeInspectorPreview.cpp
+  TreeInspectorPage.cpp
+  TreeInspectorLine.cpp
+  TreeInspector.cpp
+  TexturesInspector.cpp
+  Создание кода...
+  Компиляция...
+  DeveloperMenu.cpp
+  DebugActor.cpp
+  ZipFileSystem.cpp
+  VideoDriver.cpp
+  UberShaderProgram.cpp
+  ThreadDispatcher.cpp
+  Texture.cpp
+  system_data.cpp
+  STDFileSystem.cpp
+  Restorable.cpp
+  Renderer.cpp
+  oxygine.cpp
+  Object.cpp
+  NativeTexture.cpp
+  Mutex.cpp
+  Mem2Native.cpp
+  log.cpp
+  ImageDataOperations.cpp
+  ImageData.cpp
+  VideoDriverGLES20.cpp
+  Создание кода...
+  Компиляция...
+  VideoDriverGL.cpp
+  VertexDeclarationGL.cpp
+  ShaderProgramGL.cpp
+  oxgl.cpp
+  NativeTextureGLES.cpp
+  FileSystem.cpp
+  file.cpp
+  HttpRequestCurlTask.cpp
+  ColorRectSprite.cpp
+  Clock.cpp
+  ClipRectActor.cpp
+  Button.cpp
+  Box9Sprite.cpp
+  AsyncTask.cpp
+  AnimationFrame.cpp
+  Actor.cpp
+  Создание кода...
+  cdecode.c
+  unzip.c
+  ioapi_mem.c
+  ioapi.c
+  Создание кода...
+ws2_32.lib(WS2_32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+ws2_32.lib(WS2_32.dll) : warning LNK4221: ▌ЄюЄ Їрщы юс·хъЄр эх юяЁхфхы хЄ ъръшх-ышсю Ёрэхх эхюяЁхфхыхээ√х юЄъЁ√Є√х ёшьтюы√, яю¤Єюьє юэ эх сєфхЄ шёяюы№чютрЄ№ё  эшъръшьш юяхЁрЎш ьш ъюьяюэютъш, юсЁр∙р■∙шьшё  ъ ¤Єющ сшсышюЄхъх
+  libjpeg-2015.lib(jaricom.obj) : эрщфхэ .netmodule MSIL шыш ьюфєы№, юЄъюьяшышЁютрээ√щ ё ярЁрьхЄЁюь /GL; яхЁхчряєёърхЄё  ъюьяюэютър ё ярЁрьхЄЁюь /LTCG; фюсрт№Єх /LTCG т ъюьрэфэє■ ёЄЁюъє ъюьяюэютъш фы  яют√°хэш  яЁюшчтюфшЄхы№эюёЄш ъюьяюэют∙шър
+ws2_32.lib(WS2_32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+libzlib.lib(zlib.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+pthreadVCE2.lib(pthreadVCE2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR єцх юяЁхфхыхэ т libcurl_imp.lib(libcurl.dll); тЄюЁюх юяЁхфхыхэшх яЁюяє∙хэю
+  oxygine.vcxproj -> D:\Download\oxygine-framework-with-sdl\oxygine-framework\examples\HelloWorld\proj.win32\Debug_v140_xp\oxygine_d.lib

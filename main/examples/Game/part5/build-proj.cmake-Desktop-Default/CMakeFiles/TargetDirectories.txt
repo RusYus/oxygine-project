@@ -1,0 +1,14 @@
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/install/strip.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/install/local.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/GamePart5.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/install.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/list_install_components.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/edit_cache.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/CMakeFiles/rebuild_cache.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/install/strip.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/install/local.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/oxygine-framework.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/install.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/list_install_components.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/edit_cache.dir
+/home/ruslan/QTProjects/oxygine-framework/examples/Game/part5/build-proj.cmake-Desktop-Default/oxygine-framework/CMakeFiles/rebuild_cache.dir
