@@ -12,6 +12,7 @@ public:
 
 private:
     void onEvent(Event* ev);
+    void onEventClick(Event* ev);
     bool _pressed;
     Vector2 _dir;
 

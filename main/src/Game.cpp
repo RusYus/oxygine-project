@@ -251,6 +251,7 @@ void Game::click(Event* event)
 {
     TouchEvent* te = safeCast<TouchEvent*>(event);
 
+
     if (event->target.get() == this)
     {
         spCircle circle = new Circle(_world, te->localPosition);
