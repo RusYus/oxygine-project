@@ -1,20 +1,24 @@
 #include "Player.h"
-// TODO: Get rid of this mutual includeness
 #include "Game.h"
 #include "res.h"
 #include "Joystick.h"
 
-b2Vec2 Player::Convert(const Vector2& pos)
+b2Vec2 Player::_Convert(const Vector2& pos)
 {
     return b2Vec2(pos.x / SCALE, pos.y / SCALE);
 }
 
-void Player::_init(b2World* world)
+Player::Player()
+    : _game(0)
+{
+}
+
+void Player::_Init(b2World* world)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position = Convert(_view->getPosition());
+    bodyDef.position = _Convert(_view->getPosition());
 
     _body = world->CreateBody(&bodyDef);
 
@@ -32,26 +36,29 @@ void Player::_init(b2World* world)
     _body->SetUserData(this);
 }
 
-void Player::_init()
+void Player::Init(Game* game)
 {
-    //initialize player's ship
-    // TODO: Get size another way (mb change in Unit definition
-    // to pass size?)
+    _game = game;
+
+    _view = new Actor;
+    _view->attachTo(game);
     _view->setPosition(_game->getSize() / 2);
 
     _box = new Sprite;
     _box->setResAnim(res::ui.getResAnim("player"));
     _box->attachTo(_view);
     _box->setAnchor(Vector2(0.5f, 0.5f));
+
+    _Init(game->_world);
 }
 
-void Player::_update(const UpdateState& us)
+void Player::Update(const UpdateState& us)
 {
     Vector2 dir;
 
     if (_game->_move->getDirection(dir) && _body != nullptr)
     {
-        _body->SetLinearVelocity(Convert(dir * _speed));
+        _body->SetLinearVelocity(_Convert(dir * _speed));
     }
 
     b2Vec2 b2pos = _body->GetPosition();
@@ -59,12 +66,12 @@ void Player::_update(const UpdateState& us)
     _view->setPosition(pos);
 }
 
-void Player::setPosition(const Vector2& pos)
+void Player::SetPosition(const Vector2& pos)
 {
     _view->setPosition(pos);
 }
 
-void Player::setRotation(float angle)
+void Player::SetRotation(float angle)
 {
     _view->setRotation(angle);
 }

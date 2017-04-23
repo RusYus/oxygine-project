@@ -1,27 +1,32 @@
 #pragma once
 #include "Box2D/Box2D.h"
-#include "Unit.h"
+#include "Box2D/Dynamics/b2Body.h"
+#include "oxygine-framework.h"
+
+using namespace oxygine;
 
 constexpr const float SCALE = 100.0f;
 
-DECLARE_SMART(Player, spPlayer);
-class Player: public Unit
+class Game;
+class Player: public Object
 {
 public:
-    void _init(b2World*);
-    void setPosition(const Vector2&);
-    void setRotation(float);
+    Player();
+    void Init(Game* game);
+    void Update(const UpdateState& us);
+    void SetPosition(const Vector2&);
+    void SetRotation(float);
 
-protected:
-    void _init();
-    void _update(const UpdateState& us);
+private:
+    void _Init(b2World*);
+    b2Vec2 _Convert(const Vector2&);
 
+private:
+    spActor _view;
+    Game* _game;
     spSprite _box;
     b2Body* _body;
-
-private:
-    b2Vec2 Convert(const Vector2&);
-
-private:
     const int _speed = 3;
 };
+
+DECLARE_SMART(Player, spPlayer);

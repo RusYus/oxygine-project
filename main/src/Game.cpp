@@ -84,8 +84,7 @@ void Game::init()
 
     //create player ship
     _player = new Player;
-    _player->init(this);
-    _player->_init(_world);
+    _player->Init(this);
 
     //create virtual joystick
     _move = new Joystick;
@@ -110,7 +109,7 @@ void Game::doUpdate(const UpdateState& us)
     //in real project you should make steps with fixed dt, check box2d documentation
      _world->Step(us.dt / 1000.0f, 6, 2);
 
-     _player->update(us);
+     _player->Update(us);
 
     for(auto& circle : _circles)
     {
