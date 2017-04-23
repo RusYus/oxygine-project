@@ -73,10 +73,11 @@ Game::Game()
 
 void Game::init()
 {
-//    //create background
-////    spSprite sky = new Sprite;
-////    sky->setResAnim(res::ui.getResAnim("sky"));
-////    sky->attachTo(this);
+    //create background
+    // TODO : [4]
+//    spSprite sky = new Sprite;
+//    sky->setResAnim(res::ui.getResAnim("sky"));
+//    sky->attachTo(this);
 
     setSize(getStage()->getSize());
 

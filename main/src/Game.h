@@ -17,9 +17,10 @@ class Circle : public Sprite
 {
 public:
     Circle(b2World*, const Vector2&, float);
-
     void Update();
     bool IsAlive = true;
+
+public:
     b2Body* _body;
 };
 
