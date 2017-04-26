@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "Game.h"
+#include "DemoLevel.h"
 #include "res.h"
 #include "Joystick.h"
 
@@ -36,7 +36,7 @@ void Player::_Init(b2World* world)
     _body->SetUserData(this);
 }
 
-void Player::Init(Game* game)
+void Player::Init(DemoLevel* game)
 {
     _game = game;
 

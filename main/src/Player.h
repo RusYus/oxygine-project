@@ -7,12 +7,12 @@ using namespace oxygine;
 
 constexpr const float SCALE = 100.0f;
 
-class Game;
+class DemoLevel;
 class Player: public Object
 {
 public:
     Player();
-    void Init(Game* game);
+    void Init(DemoLevel* game);
     void Update(const UpdateState& us);
     void SetPosition(const Vector2&);
     void SetRotation(float);
@@ -23,7 +23,7 @@ private:
 
 private:
     spActor _view;
-    Game* _game;
+    DemoLevel* _game;
     spSprite _box;
     b2Body* _body;
     const int _speed = 3;

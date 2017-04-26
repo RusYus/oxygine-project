@@ -11,7 +11,7 @@ DECLARE_SMART(Player, spPlayer);
 DECLARE_SMART(Joystick, spJoystick);
 DECLARE_SMART(Circle, spCircle);
 DECLARE_SMART(Static, spStatic);
-DECLARE_SMART(Game, spGame);
+DECLARE_SMART(DemoLevel, spDemoLevel);
 
 class Circle : public Sprite
 {
@@ -30,10 +30,10 @@ public:
     Static(b2World*, const RectF&);
 };
 
-class Game: public Actor
+class DemoLevel: public Actor
 {
 public:
-    Game();
+    DemoLevel();
 
     void init();
     void click(Event*);

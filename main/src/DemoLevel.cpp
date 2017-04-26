@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "DemoLevel.h"
 #include "Player.h"
 #include "Joystick.h"
 #include "res.h"
@@ -67,11 +67,11 @@ Static::Static(b2World* world, const RectF& rc)
     groundBody->CreateFixture(&groundBox, 0.0f);
 }
 
-Game::Game()
+DemoLevel::DemoLevel()
 {
 }
 
-void Game::init()
+void DemoLevel::init()
 {
     //create background
     // TODO : [4]
@@ -96,15 +96,15 @@ void Game::init()
     btn->setX(getWidth() - btn->getWidth() - 3);
     btn->setY(3);
     btn->attachTo(this);
-    btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::showHideDebug));
+    btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::showHideDebug));
 
     spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
     addChild(ground);
 
-    addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::click));
+    addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 }
 
-void Game::doUpdate(const UpdateState& us)
+void DemoLevel::doUpdate(const UpdateState& us)
 {
     //update player each frame
     //in real project you should make steps with fixed dt, check box2d documentation
@@ -131,7 +131,7 @@ void Game::doUpdate(const UpdateState& us)
     _circles.remove_if([](spCircle circle) { return !circle->IsAlive; });
 }
 
-void Game::showHideDebug(Event* event)
+void DemoLevel::showHideDebug(Event* event)
 {
     TouchEvent* te = safeCast<TouchEvent*>(event);
     te->stopsImmediatePropagation = true;
@@ -149,7 +149,7 @@ void Game::showHideDebug(Event* event)
     _debugDraw->setPriority(1);
 }
 
-void Game::click(Event* event)
+void DemoLevel::click(Event* event)
 {
     TouchEvent* te = safeCast<TouchEvent*>(event);
 
