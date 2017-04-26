@@ -12,7 +12,7 @@ file(GLOB_RECURSE BOX2DSRC
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OXYGINE_CXX_FLAGS}")
 
-add_executable(MyDemo ${BOX2DSRC} ../src/Box2DDebugDraw.cpp ../src/Box2DDebugDraw.h ../src/DemoLevel.cpp ../src/Joystick.cpp ../src/Player.cpp ../src/example.cpp ../src/main.cpp ../src/res.cpp  ../src/BasicCamera.cpp ../src/BasicCamera.h ../src/DemoLevel.h ../src/Joystick.h ../src/Player.h ../src/example.h ../src/res.h )
+add_executable(MyDemo ${BOX2DSRC} ../src/Box2DDebugDraw.cpp ../src/Box2DDebugDraw.h ../src/DemoLevel.cpp ../src/Joystick.cpp ../src/Player.cpp ../src/example.cpp ../src/main.cpp ../src/res.cpp  ../src/BasicCamera.cpp ../src/Game.cpp  ../src/Game.h ../src/BasicCamera.h ../src/DemoLevel.h ../src/Joystick.h ../src/Player.h ../src/example.h ../src/res.h )
 source_group(box2d FILES ${BOX2DSRC})
 include_directories(../box2d)
 

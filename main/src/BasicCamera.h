@@ -6,6 +6,7 @@
 
 using namespace oxygine;
 
+DECLARE_SMART(Camera, spCamera);
 class Camera : public Actor
 {
 

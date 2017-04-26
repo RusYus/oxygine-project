@@ -1,6 +1,7 @@
 #include "oxygine-framework.h"
 #include "res.h"
-#include "DemoLevel.h"
+#include "Game.h"
+
 using namespace oxygine;
 
 void example_preinit()
@@ -13,9 +14,8 @@ void example_init()
     res::load();
 
     //create scene with game
-    spDemoLevel demoLevel = new DemoLevel;
-    demoLevel->init();
-    demoLevel->attachTo(getStage());
+    spGame game = new Game;
+    game->attachTo(getStage());
 }
 
 void example_update()

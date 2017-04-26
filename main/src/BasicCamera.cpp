@@ -1,7 +1,9 @@
 #include <map>
 
 #include "BasicCamera.h"
-DECLARE_SMART(Camera, spCamera);
+
+#include <iostream>
+
 Camera::Camera()
 {
     addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &Camera::onEvent));
@@ -20,6 +22,8 @@ void Camera::setContent(spActor content)
 
 void Camera::onEvent(Event* ev)
 {
+    std::cout << "Camera event!" << std::endl;
+
     TouchEvent* te = safeCast<TouchEvent*>(ev);
     const Vector2& pos = te->localPosition;
 
