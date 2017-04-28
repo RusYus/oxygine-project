@@ -2,6 +2,8 @@
 
 #include <map>
 
+#include "PlayerEvents.h"
+#include "PlayerEventProxy.h"
 #include "oxygine-framework.h"
 
 using namespace oxygine;
@@ -17,7 +19,7 @@ public:
         Vector2 previous;
     };
 
-    Camera();
+    Camera(spEventProxy);
 
     void setContent(spActor);
     void onEvent(Event*);
@@ -26,5 +28,6 @@ public:
 
     std::map<int, touch> _touches;
     spActor _content;
+    spEventProxy _eventProxy;
     Matrix _transform;
 };

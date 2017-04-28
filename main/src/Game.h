@@ -34,7 +34,7 @@ public:
     Game()
         : content()
     {
-        spCamera cam = new Camera;
+        spCamera cam = new Camera(_eventProxy);
         cam->attachTo(&content);
         // TODO : figure out what's wrong with 0 size
 //        cam->setSize(content.getSize());
@@ -46,9 +46,10 @@ public:
 
         cam->setContent(demoLevel);
 
-        demoLevel->init();
+        demoLevel->init(_eventProxy);
         addChild(demoLevel);
     }
 
+    spEventProxy _eventProxy;
     Content content;
 };

@@ -2,6 +2,7 @@
 
 #include <forward_list>
 
+#include "PlayerEventProxy.h"
 #include "Box2D/Box2D.h"
 #include "Box2DDebugDraw.h"
 #include "oxygine-framework.h"
@@ -35,7 +36,7 @@ class DemoLevel: public Actor
 public:
     DemoLevel();
 
-    void init();
+    void init(spEventProxy);
     void click(Event*);
     void showHideDebug(Event*);
 

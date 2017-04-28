@@ -71,7 +71,7 @@ DemoLevel::DemoLevel()
 {
 }
 
-void DemoLevel::init()
+void DemoLevel::init(spEventProxy aEventProxy)
 {
     //create background
     // TODO : [4]
@@ -85,7 +85,7 @@ void DemoLevel::init()
 
     //create player ship
     _player = new Player;
-    _player->Init(this);
+    _player->Init(this, aEventProxy);
 
     //create virtual joystick
     _move = new Joystick;

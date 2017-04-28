@@ -2,6 +2,7 @@
 #include "DemoLevel.h"
 #include "res.h"
 #include "Joystick.h"
+#include "PlayerEvents.h"
 
 b2Vec2 Player::_Convert(const Vector2& pos)
 {
@@ -36,7 +37,7 @@ void Player::_Init(b2World* world)
     _body->SetUserData(this);
 }
 
-void Player::Init(DemoLevel* game)
+void Player::Init(DemoLevel* game, spEventProxy aEventProxy)
 {
     _game = game;
 
@@ -50,6 +51,8 @@ void Player::Init(DemoLevel* game)
     _box->setAnchor(Vector2(0.5f, 0.5f));
 
     _Init(game->_world);
+
+    _eventProxy = aEventProxy;
 }
 
 void Player::Update(const UpdateState& us)
@@ -63,7 +66,9 @@ void Player::Update(const UpdateState& us)
 
     b2Vec2 b2pos = _body->GetPosition();
     Vector2 pos = Vector2(b2pos.x * SCALE, b2pos.y * SCALE);
+    PlayerMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
+    _eventProxy->dispatchEvent(&event);
 }
 
 void Player::SetPosition(const Vector2& pos)
