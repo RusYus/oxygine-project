@@ -57,12 +57,11 @@ public:
         //create virtual joystick
         _move = new Joystick;
         _move->attachTo(this);
-        _move->setY(demoLevel->getHeight() - _move->getHeight());
-
-        std::cout << "MOVE:" << _move->getX() << " : " << _move->getY() << std::endl;
+        _move->setY(getStage()->getHeight() - _move->getHeight());
 
         //create player ship
         _player = new Player;
+//        addChild(_player);
         _player->Init(demoLevel, _eventProxy);
     }
 

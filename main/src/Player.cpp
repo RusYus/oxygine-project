@@ -19,7 +19,6 @@ void Player::_Init(b2World* world)
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.gravityScale = 0.5;
     bodyDef.position = _Convert(_view->getPosition());
 
     _body = world->CreateBody(&bodyDef);
@@ -32,7 +31,7 @@ void Player::_Init(b2World* world)
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 1.3f;
+    fixtureDef.friction = 0.3f;
 
     _body->CreateFixture(&fixtureDef);
     _body->SetUserData(this);
@@ -44,7 +43,7 @@ void Player::Init(spDemoLevel game, spEventProxy aEventProxy)
 
     _view = new Actor;
     _view->attachTo(game);
-    _view->setPosition(_game->getSize() / 2);
+    _view->setPosition(getStage()->getSize() / 2);
 
     _box = new Sprite;
     _box->setResAnim(res::ui.getResAnim("player"));

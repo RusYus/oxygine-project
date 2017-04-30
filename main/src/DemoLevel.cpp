@@ -75,11 +75,11 @@ void DemoLevel::init()
 {
     //create background
     // TODO : [4]
-//    spSprite sky = new Sprite;
-//    sky->setResAnim(res::ui.getResAnim("sky"));
-//    sky->attachTo(this);
+    spSprite sky = new Sprite;
+    sky->setResAnim(res::ui.getResAnim("sky"));
+    sky->attachTo(this);
 
-    setSize(getStage()->getSize());
+    setSize(getStage()->getSize().x*3, getStage()->getSize().y*2);
 
     _world = new b2World(b2Vec2(0, 10));
 

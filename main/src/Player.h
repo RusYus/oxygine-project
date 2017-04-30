@@ -29,5 +29,5 @@ private:
     spDemoLevel _game;
     spSprite _box;
     b2Body* _body;
-    const int _speed = 3;
+    const int _speed = 9;
 };
