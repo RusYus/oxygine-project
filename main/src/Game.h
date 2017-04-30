@@ -1,7 +1,11 @@
 #pragma once
 #include "Actor.h"
 #include "BasicCamera.h"
+#include "Player.h"
 #include "DemoLevel.h"
+#include "Joystick.h"
+
+#include <iostream>
 
 using namespace oxygine;
 
@@ -33,6 +37,7 @@ class Game: public Actor
 public:
     Game()
         : content()
+        , _eventProxy(new EventProxy)
     {
         spCamera cam = new Camera(_eventProxy);
         cam->attachTo(&content);
@@ -46,10 +51,34 @@ public:
 
         cam->setContent(demoLevel);
 
-        demoLevel->init(_eventProxy);
+        demoLevel->init();
         addChild(demoLevel);
+
+        //create virtual joystick
+        _move = new Joystick;
+        _move->attachTo(this);
+        _move->setY(demoLevel->getHeight() - _move->getHeight());
+
+        std::cout << "MOVE:" << _move->getX() << " : " << _move->getY() << std::endl;
+
+        //create player ship
+        _player = new Player;
+        _player->Init(demoLevel, _eventProxy);
+    }
+
+    void doUpdate(const UpdateState& us)
+    {
+        Vector2 dir;
+        if (_move->getDirection(dir))
+        {
+            _player->Move(dir);
+        }
+
+        _player->Update(us);
     }
 
     spEventProxy _eventProxy;
+    spPlayer _player;
+    spJoystick _move;
     Content content;
 };

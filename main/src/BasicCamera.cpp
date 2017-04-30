@@ -6,13 +6,7 @@
 
 Camera::Camera(spEventProxy aEventProxy)
 {
-//    addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &Camera::onEvent));
-//    addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &Camera::onEvent));
-//    addEventListener(TouchEvent::MOVE, CLOSURE(this, &Camera::onEvent));
-//    addEventListener(TouchEvent::WHEEL_DIR, CLOSURE(this, &Camera::onEvent));
-
-    _eventProxy = aEventProxy;
-    _eventProxy->addEventListener(PlayerMovementEvent::EVENT, CLOSURE(this, &Camera::onEvent));
+    aEventProxy->addEventListener(PlayerMovementEvent::EVENT, CLOSURE(this, &Camera::onEvent));
 
     _transform.identity();
 }
@@ -25,12 +19,11 @@ void Camera::setContent(spActor content)
 
 void Camera::onEvent(Event* ev)
 {
-    std::cout << "Camera event!" << std::endl;
 
-//    TouchEvent* te = safeCast<TouchEvent*>(ev);
-//    const Vector2& pos = te->localPosition;
-
-
+    PlayerMovementEvent* pe = safeCast<PlayerMovementEvent*>(ev);
+    const Vector2& pos = pe->movement;
+    _transform.translate(-Vector3(pos.x, pos.y, 0));
+    update();
 
 //    if (te->type == TouchEvent::TOUCH_DOWN)
 //    {
@@ -102,7 +95,6 @@ void Camera::onEvent(Event* ev)
 //        }
 //    }
 
-//    update();
 }
 
 void Camera::doUpdate(const UpdateState& us)

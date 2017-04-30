@@ -71,7 +71,7 @@ DemoLevel::DemoLevel()
 {
 }
 
-void DemoLevel::init(spEventProxy aEventProxy)
+void DemoLevel::init()
 {
     //create background
     // TODO : [4]
@@ -82,15 +82,6 @@ void DemoLevel::init(spEventProxy aEventProxy)
     setSize(getStage()->getSize());
 
     _world = new b2World(b2Vec2(0, 10));
-
-    //create player ship
-    _player = new Player;
-    _player->Init(this, aEventProxy);
-
-    //create virtual joystick
-    _move = new Joystick;
-    _move->attachTo(this);
-    _move->setY(getHeight() - _move->getHeight());
 
     spButton btn = new Button;
     btn->setX(getWidth() - btn->getWidth() - 3);
@@ -109,8 +100,6 @@ void DemoLevel::doUpdate(const UpdateState& us)
     //update player each frame
     //in real project you should make steps with fixed dt, check box2d documentation
      _world->Step(us.dt / 1000.0f, 6, 2);
-
-     _player->Update(us);
 
     for(auto& circle : _circles)
     {
@@ -151,6 +140,8 @@ void DemoLevel::showHideDebug(Event* event)
 
 void DemoLevel::click(Event* event)
 {
+    std::cout << "demo level click" << std::endl;
+
     TouchEvent* te = safeCast<TouchEvent*>(event);
 
     if (event->target.get() == this)

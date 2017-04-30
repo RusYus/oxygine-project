@@ -28,6 +28,5 @@ public:
 
     std::map<int, touch> _touches;
     spActor _content;
-    spEventProxy _eventProxy;
     Matrix _transform;
 };

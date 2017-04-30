@@ -2,14 +2,11 @@
 
 #include <forward_list>
 
-#include "PlayerEventProxy.h"
 #include "Box2D/Box2D.h"
 #include "Box2DDebugDraw.h"
 #include "oxygine-framework.h"
 using namespace oxygine;
 
-DECLARE_SMART(Player, spPlayer);
-DECLARE_SMART(Joystick, spJoystick);
 DECLARE_SMART(Circle, spCircle);
 DECLARE_SMART(Static, spStatic);
 DECLARE_SMART(DemoLevel, spDemoLevel);
@@ -36,16 +33,13 @@ class DemoLevel: public Actor
 public:
     DemoLevel();
 
-    void init(spEventProxy);
+    void init();
     void click(Event*);
     void showHideDebug(Event*);
 
 private:
     friend class Player;
-    void doUpdate(const UpdateState& us);
-
-    spJoystick _move;
-    spPlayer _player;
+    void doUpdate(const UpdateState&);
 
     b2World* _world;
     spBox2DDraw _debugDraw;

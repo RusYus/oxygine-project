@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DemoLevel.h"
+#include "PlayerEventProxy.h"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
@@ -14,10 +15,9 @@ class Player: public Object
 {
 public:
     Player();
-    void Init(DemoLevel*, spEventProxy);
+    void Init(spDemoLevel, spEventProxy);
     void Update(const UpdateState&);
-    void SetPosition(const Vector2&);
-    void SetRotation(float);
+    void Move(const Vector2&);
 
 private:
     void _Init(b2World*);
@@ -26,7 +26,7 @@ private:
 private:
     spEventProxy _eventProxy;
     spActor _view;
-    DemoLevel* _game;
+    spDemoLevel _game;
     spSprite _box;
     b2Body* _body;
     const int _speed = 3;

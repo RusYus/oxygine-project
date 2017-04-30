@@ -2,7 +2,7 @@
 #include "oxygine-framework.h"
 using namespace oxygine;
 
-DECLARE_SMART(Joystick, spController);
+DECLARE_SMART(Joystick, spJoystick);
 class Joystick: public Sprite
 {
 public:

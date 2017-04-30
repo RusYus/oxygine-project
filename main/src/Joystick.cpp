@@ -63,10 +63,6 @@ void Joystick::onEvent(Event* ev)
     {
         _dir = Vector2(0, 0);
     }
-    else
-    {
-        std::cout << "J) " << _dir.x << ":" << _dir.y << std::endl;
-    }
 }
 
 bool Joystick::getDirection(Vector2& dir) const

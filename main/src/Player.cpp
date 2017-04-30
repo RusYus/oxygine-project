@@ -19,6 +19,7 @@ void Player::_Init(b2World* world)
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
+    bodyDef.gravityScale = 0.5;
     bodyDef.position = _Convert(_view->getPosition());
 
     _body = world->CreateBody(&bodyDef);
@@ -37,7 +38,7 @@ void Player::_Init(b2World* world)
     _body->SetUserData(this);
 }
 
-void Player::Init(DemoLevel* game, spEventProxy aEventProxy)
+void Player::Init(spDemoLevel game, spEventProxy aEventProxy)
 {
     _game = game;
 
@@ -55,28 +56,19 @@ void Player::Init(DemoLevel* game, spEventProxy aEventProxy)
     _eventProxy = aEventProxy;
 }
 
+void Player::Move(const Vector2& aDir)
+{
+    if (_body != nullptr)
+    {
+        _body->SetLinearVelocity(_Convert(aDir * _speed));
+    }
+}
+
 void Player::Update(const UpdateState& us)
 {
-    Vector2 dir;
-
-    if (_game->_move->getDirection(dir) && _body != nullptr)
-    {
-        _body->SetLinearVelocity(_Convert(dir * _speed));
-    }
-
     b2Vec2 b2pos = _body->GetPosition();
     Vector2 pos = Vector2(b2pos.x * SCALE, b2pos.y * SCALE);
     PlayerMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
     _eventProxy->dispatchEvent(&event);
-}
-
-void Player::SetPosition(const Vector2& pos)
-{
-    _view->setPosition(pos);
-}
-
-void Player::SetRotation(float angle)
-{
-    _view->setRotation(angle);
 }
