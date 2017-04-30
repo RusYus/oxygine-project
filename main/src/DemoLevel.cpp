@@ -71,8 +71,9 @@ DemoLevel::DemoLevel()
 {
 }
 
-void DemoLevel::init()
+void DemoLevel::Init(b2World* aWorld)
 {
+    _world = aWorld;
     //create background
     // TODO : [4]
     spSprite sky = new Sprite;
@@ -81,26 +82,14 @@ void DemoLevel::init()
 
     setSize(getStage()->getSize().x*3, getStage()->getSize().y*2);
 
-    _world = new b2World(b2Vec2(0, 10));
-
-    spButton btn = new Button;
-    btn->setX(getWidth() - btn->getWidth() - 3);
-    btn->setY(3);
-    btn->attachTo(this);
-    btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::showHideDebug));
-
     spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
     addChild(ground);
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 }
 
-void DemoLevel::doUpdate(const UpdateState& us)
+void DemoLevel::doUpdate(const UpdateState& /*us*/)
 {
-    //update player each frame
-    //in real project you should make steps with fixed dt, check box2d documentation
-     _world->Step(us.dt / 1000.0f, 6, 2);
-
     for(auto& circle : _circles)
     {
         assert(circle->IsAlive);
@@ -118,24 +107,6 @@ void DemoLevel::doUpdate(const UpdateState& us)
     }
 
     _circles.remove_if([](spCircle circle) { return !circle->IsAlive; });
-}
-
-void DemoLevel::showHideDebug(Event* event)
-{
-    TouchEvent* te = safeCast<TouchEvent*>(event);
-    te->stopsImmediatePropagation = true;
-    if (_debugDraw)
-    {
-        _debugDraw->detach();
-        _debugDraw = 0;
-        return;
-    }
-
-    _debugDraw = new Box2DDraw;
-    _debugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
-    _debugDraw->attachTo(this);
-    _debugDraw->setWorld(SCALE, _world);
-    _debugDraw->setPriority(1);
 }
 
 void DemoLevel::click(Event* event)

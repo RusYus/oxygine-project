@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Actor.h"
+#include "Box2DDebugDraw.h"
 #include "BasicCamera.h"
 #include "Player.h"
 #include "DemoLevel.h"
@@ -39,6 +41,8 @@ public:
         : content()
         , _eventProxy(new EventProxy)
     {
+        _world = new b2World(b2Vec2(0, 10));
+
         spCamera cam = new Camera(_eventProxy);
         cam->attachTo(&content);
         // TODO : figure out what's wrong with 0 size
@@ -51,7 +55,7 @@ public:
 
         cam->setContent(demoLevel);
 
-        demoLevel->init();
+        demoLevel->Init(_world);
         addChild(demoLevel);
 
         //create virtual joystick
@@ -63,10 +67,19 @@ public:
         _player = new Player;
 //        addChild(_player);
         _player->Init(demoLevel, _eventProxy);
+
+        spButton btn = new Button;
+        btn->setX(getStage()->getWidth() - btn->getWidth() - 3);
+        btn->setY(3);
+        btn->attachTo(this);
+        btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
     }
 
     void doUpdate(const UpdateState& us)
     {
+        //in real project you should make steps with fixed dt, check box2d documentation
+        _world->Step(us.dt / 1000.0f, 6, 2);
+
         Vector2 dir;
         if (_move->getDirection(dir))
         {
@@ -76,8 +89,28 @@ public:
         _player->Update(us);
     }
 
+    void ShowHideDebug(Event* event)
+    {
+        TouchEvent* te = safeCast<TouchEvent*>(event);
+        te->stopsImmediatePropagation = true;
+        if (_debugDraw)
+        {
+            _debugDraw->detach();
+            _debugDraw = 0;
+            return;
+        }
+
+        _debugDraw = new Box2DDraw;
+        _debugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+        _debugDraw->attachTo(this);
+        _debugDraw->setWorld(100, _world);
+        _debugDraw->setPriority(1);
+    }
+
     spEventProxy _eventProxy;
+    b2World* _world;
     spPlayer _player;
     spJoystick _move;
     Content content;
+    spBox2DDraw _debugDraw;
 };

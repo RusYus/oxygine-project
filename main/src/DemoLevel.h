@@ -3,7 +3,6 @@
 #include <forward_list>
 
 #include "Box2D/Box2D.h"
-#include "Box2DDebugDraw.h"
 #include "oxygine-framework.h"
 using namespace oxygine;
 
@@ -33,7 +32,7 @@ class DemoLevel: public Actor
 public:
     DemoLevel();
 
-    void init();
+    void Init(b2World*);
     void click(Event*);
     void showHideDebug(Event*);
 
@@ -42,7 +41,6 @@ private:
     void doUpdate(const UpdateState&);
 
     b2World* _world;
-    spBox2DDraw _debugDraw;
 
     std::forward_list<spCircle> _circles;
 };
