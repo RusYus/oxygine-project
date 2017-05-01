@@ -43,17 +43,14 @@ public:
     {
         _world = new b2World(b2Vec2(0, 10));
 
-        spCamera cam = new Camera(_eventProxy);
-        cam->attachTo(&content);
-        // TODO : figure out what's wrong with 0 size
-//        cam->setSize(content.getSize());
-        // TODO : level's touch event overrides camera's
-        cam->setSize(getStage()->getSize());
-        addChild(cam);
+        _camera = new Camera(_eventProxy);
+        _camera->attachTo(&content);
+        _camera->setSize(getStage()->getSize());
+        addChild(_camera);
 
         spDemoLevel demoLevel = new DemoLevel;
 
-        cam->setContent(demoLevel);
+        _camera->setContent(demoLevel);
 
         demoLevel->Init(_world);
         addChild(demoLevel);
@@ -65,8 +62,12 @@ public:
 
         //create player ship
         _player = new Player;
-//        addChild(_player);
         _player->Init(demoLevel, _eventProxy);
+
+        // TODO : camera not changing coordinates.
+//        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
+//        _camera->setY(_player->GetY() - _camera->getHeight() * 0.01);
+
 
         spButton btn = new Button;
         btn->setX(getStage()->getWidth() - btn->getWidth() - 3);
@@ -87,6 +88,9 @@ public:
         }
 
         _player->Update(us);
+
+
+        std::cout << "cam:" << _camera->getX() << " : " << _camera->getY() << std::endl;
     }
 
     void ShowHideDebug(Event* event)
@@ -110,6 +114,7 @@ public:
     spEventProxy _eventProxy;
     b2World* _world;
     spPlayer _player;
+    spCamera _camera;
     spJoystick _move;
     Content content;
     spBox2DDraw _debugDraw;

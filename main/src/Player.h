@@ -18,6 +18,8 @@ public:
     void Init(spDemoLevel, spEventProxy);
     void Update(const UpdateState&);
     void Move(const Vector2&);
+    float GetX() const;
+    float GetY() const;
 
 private:
     void _Init(b2World*);

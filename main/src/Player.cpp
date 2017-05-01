@@ -63,6 +63,16 @@ void Player::Move(const Vector2& aDir)
     }
 }
 
+float Player::GetX() const
+{
+    return (_view.get() ? _view->getX() : .0f);
+}
+
+float Player::GetY() const
+{
+    return (_view.get() ? _view->getY() : .0f);
+}
+
 void Player::Update(const UpdateState& us)
 {
     b2Vec2 b2pos = _body->GetPosition();
