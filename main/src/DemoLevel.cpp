@@ -79,8 +79,6 @@ void DemoLevel::Init(b2World* aWorld)
     spSprite sky = new Sprite;
     sky->setResAnim(res::ui.getResAnim("sky"));
     sky->attachTo(this);
-    sky->setPriority(0);
-    sky->setName("sky_name");
 
     setSize(getStage()->getSize().x*3, getStage()->getSize().y*2);
 
