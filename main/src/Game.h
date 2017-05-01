@@ -88,11 +88,9 @@ public:
         }
 
         _player->Update(us);
-
-
-        std::cout << "cam:" << _camera->getX() << " : " << _camera->getY() << std::endl;
     }
 
+    // TODO : Not working right now.
     void ShowHideDebug(Event* event)
     {
         TouchEvent* te = safeCast<TouchEvent*>(event);

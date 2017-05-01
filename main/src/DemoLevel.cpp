@@ -115,10 +115,13 @@ void DemoLevel::click(Event* event)
 
     TouchEvent* te = safeCast<TouchEvent*>(event);
 
-    if (event->target.get() == this)
-    {
+    // Background is target in this case, so removing if statement
+    // for now. In future, need to read manuals for more inticate case.
+//    if (event->target.get() == this)
+//    {
+        std::cout << "Creating circle!" << std::endl;
         spCircle circle = new Circle(_world, te->localPosition);
         circle->attachTo(this);
         _circles.push_front(circle);
-    }
+//    }
 }
