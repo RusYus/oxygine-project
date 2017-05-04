@@ -74,6 +74,16 @@ public:
         btn->setY(3);
         btn->attachTo(this);
         btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
+
+        spButton _moveLeft = new Button;
+        _moveLeft->setWidth(100);
+        _moveLeft->setHeight(100);
+        _moveLeft->setX(_move->getX() + _move->getWidth());
+        _moveLeft->setY(_move->getY() + (_move->getHeight() - _moveLeft->getHeight()) / 2.0f);
+        _moveLeft->attachTo(this);
+//        _moveLeft->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
+
+        std::cout << _move->getX() << ";" << _move->getY() << " | " << _moveLeft->getX() << ";" << _moveLeft->getY() << std::endl;
     }
 
     void doUpdate(const UpdateState& us)
@@ -114,6 +124,7 @@ public:
     spPlayer _player;
     spCamera _camera;
     spJoystick _move;
+    spButton _moveLeft;
     Content content;
     spBox2DDraw _debugDraw;
 };
