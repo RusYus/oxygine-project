@@ -2,7 +2,7 @@
 #include "DemoLevel.h"
 #include "res.h"
 #include "Joystick.h"
-#include "PlayerEvents.h"
+#include "BasicEvents.h"
 
 b2Vec2 Player::_Convert(const Vector2& pos)
 {
@@ -77,7 +77,7 @@ void Player::Update(const UpdateState& us)
 {
     b2Vec2 b2pos = _body->GetPosition();
     Vector2 pos = Vector2(b2pos.x * SCALE, b2pos.y * SCALE);
-    PlayerMovementEvent event(pos - _view->getPosition());
+    CameraMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
     _eventProxy->dispatchEvent(&event);
 }
