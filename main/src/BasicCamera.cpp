@@ -18,10 +18,10 @@ void Camera::setContent(spActor content)
     addChild(content);
 }
 
-void Camera::onEvent(Event* ev)
+void Camera::onEvent(Event* aEvent)
 {
-    CameraMovementEvent* pe = safeCast<CameraMovementEvent*>(ev);
-    const Vector2& pos = pe->_movement;
+    CameraMovementEvent* cameraEvent = safeCast<CameraMovementEvent*>(aEvent);
+    const Vector2& pos = cameraEvent->_movement;
     _transform.translate(-Vector3(pos.x, pos.y, 0));
     update();
 }

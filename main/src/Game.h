@@ -5,6 +5,7 @@
 #include "BasicCamera.h"
 #include "Player.h"
 #include "DemoLevel.h"
+#include "MovementButton.h"
 
 #include <iostream>
 
@@ -69,20 +70,19 @@ public:
         btn->attachTo(this);
         btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
 
-        _moveLeft = new Button;
+        _moveLeft = new MovementButton(false, _eventProxy);
         _moveLeft->setWidth(100);
         _moveLeft->setHeight(100);
         _moveLeft->setX(10);
         _moveLeft->setY(getStage()->getHeight() - _moveLeft->getHeight() - 10);
         _moveLeft->attachTo(this);
 
-        _moveRight = new Button;
+        _moveRight = new MovementButton(true, _eventProxy);
         _moveRight->setWidth(100);
         _moveRight->setHeight(100);
         _moveRight->setX(10 + _moveLeft->getX() + _moveLeft->getWidth());
         _moveRight->setY(_moveLeft->getY());
         _moveRight->attachTo(this);
-//        _moveLeft->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
     }
 
     void doUpdate(const UpdateState& us)
@@ -122,8 +122,8 @@ public:
     b2World* _world;
     spPlayer _player;
     spCamera _camera;
-    spButton _moveLeft;
-    spButton _moveRight;
+    spMovementButton _moveLeft;
+    spMovementButton _moveRight;
     Content content;
     spBox2DDraw _debugDraw;
 };

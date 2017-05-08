@@ -4,8 +4,11 @@
 #include "PlayerEventProxy.h"
 #include "BasicEvents.h"
 
+#include <iostream>
+
 using namespace oxygine;
 
+DECLARE_SMART(MovementButton, spMovementButton);
 class MovementButton : public Button
 {
 public:
@@ -19,7 +22,7 @@ public:
     }
 
 private:
-    void Move()
+    void Move(Event*)
     {
         if (!_isMoving)
         {
@@ -29,7 +32,7 @@ private:
         SendEvent();
     }
 
-    void Stop()
+    void Stop(Event*)
     {
         if (_isMoving)
         {
@@ -41,6 +44,7 @@ private:
 
     void SendEvent()
     {
+        std::cout << "Sending event..." << std::endl;
         PlayerMovementEvent event(_isMoving, _isRight);
         _eventProxy->dispatchEvent(&event);
     }
