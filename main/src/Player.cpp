@@ -65,16 +65,15 @@ void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)
 
     _eventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
-    _direction = Vector2();
+    _direction = _body->GetLinearVelocity();
 }
 
 void Player::Jump(Event* /*aEvent*/)
 {
-//    PlayerJumpEvent* playerEvent = safeCast<PlayerJumpEvent*>(aEvent);
     if (!_isJumping)
     {
         _isJumping = true;
-        _body->SetLinearVelocity(_Convert(Vector2(_direction.x, -_jumpSpeed)));
+        _body->SetLinearVelocity(b2Vec2(_direction.x, -_jumpSpeed / SCALE));
     }
 }
 
@@ -84,20 +83,19 @@ void Player::Move(Event* aEvent)
     {
         PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
 
-        Vector2 dir = _Convert(_body->GetLinearVelocity());
+        _direction = _body->GetLinearVelocity();
 
         if (playerEvent->_isMoving)
         {
-            dir.x = playerEvent->_isMovingRight ? _maxSpeed : -_maxSpeed;
+            _direction.x = playerEvent->_isMovingRight ? _maxSpeed : -_maxSpeed;
+            _direction.x /= SCALE;
         }
         else
         {
-            dir.x = 0;
+            _direction.x = 0;
         }
 
-        std::cout << "Player:" << dir.x << ":" << dir.y << std::endl;
-        _direction = dir;
-        _body->SetLinearVelocity(_Convert(_direction));
+        _body->SetLinearVelocity(_direction);
     }
 }
 
@@ -111,22 +109,11 @@ float Player::GetY() const
     return (_view.get() ? _view->getY() : .0f);
 }
 
-inline bool Player::_IsMoving() const
-{
-    return _direction.x != .0f || _direction.y != .0f;
-}
-
 void Player::Update(const UpdateState& /*us*/)
 {
-    // Do I actually need this? Need to check out.
-    if (_IsMoving())
-    {
-        std::cout << "Moving!" << _direction.x << ";" <<
-                  _direction.y << std::endl;
-        Vector2 newDir = _Convert(_body->GetLinearVelocity());
-        newDir.x = _direction.x;
-        _body->SetLinearVelocity(_Convert(newDir));
-    }
+    std::cout << _direction.x << " : " << _direction.y << std::endl;
+    _direction.y = _body->GetLinearVelocity().y;
+    _body->SetLinearVelocity(_direction);
 
     if (_body->GetLinearVelocity().y == .0f)
     {
