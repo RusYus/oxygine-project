@@ -18,10 +18,10 @@ public:
     Vector2 _movement;
 };
 
-class PlayerMovementEvent : public Event
+class PlayerMoveEvent : public Event
 {
 public:
-    PlayerMovementEvent(bool aMoving = false, bool aMovingRight = true)
+    PlayerMoveEvent(bool aMoving = false, bool aMovingRight = true)
         : Event(EVENT)
         , _isMoving(aMoving)
         , _isMovingRight(aMovingRight)
@@ -32,4 +32,16 @@ public:
     enum { EVENT = eventID('P','l','a','M') };
     bool _isMoving;
     bool _isMovingRight;
+};
+
+class PlayerJumpEvent : public Event
+{
+public:
+    PlayerJumpEvent()
+        : Event(EVENT)
+    {
+    }
+
+public:
+    enum { EVENT = eventID('P','l','a','J') };
 };

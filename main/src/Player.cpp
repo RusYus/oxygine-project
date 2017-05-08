@@ -61,16 +61,28 @@ void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)
 
     _eventProxy = aEventProxy;
 
-    _eventProxy->addEventListener(PlayerMovementEvent::EVENT, CLOSURE(this, &Player::Move));
+    _eventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::Move));
+
+    _eventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
     _direction = Vector2();
+}
+
+void Player::Jump(Event* /*aEvent*/)
+{
+//    PlayerJumpEvent* playerEvent = safeCast<PlayerJumpEvent*>(aEvent);
+    if (!_isJumping)
+    {
+        _isJumping = true;
+        _body->SetLinearVelocity(_Convert(Vector2(_direction.x, -_jumpSpeed)));
+    }
 }
 
 void Player::Move(Event* aEvent)
 {
     if (_body != nullptr)
     {
-        PlayerMovementEvent* playerEvent = safeCast<PlayerMovementEvent*>(aEvent);
+        PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
 
         Vector2 dir = _Convert(_body->GetLinearVelocity());
 
@@ -111,7 +123,14 @@ void Player::Update(const UpdateState& /*us*/)
     {
         std::cout << "Moving!" << _direction.x << ";" <<
                   _direction.y << std::endl;
-        _body->SetLinearVelocity(_Convert(_direction));
+        Vector2 newDir = _Convert(_body->GetLinearVelocity());
+        newDir.x = _direction.x;
+        _body->SetLinearVelocity(_Convert(newDir));
+    }
+
+    if (_body->GetLinearVelocity().y == .0f)
+    {
+        _isJumping = false;
     }
 
     b2Vec2 b2pos = _body->GetPosition();

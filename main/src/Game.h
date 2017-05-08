@@ -83,6 +83,13 @@ public:
         _moveRight->setX(10 + _moveLeft->getX() + _moveLeft->getWidth());
         _moveRight->setY(_moveLeft->getY());
         _moveRight->attachTo(this);
+
+        _jump = new JumpButton(_eventProxy);
+        _jump->setWidth(100);
+        _jump->setHeight(100);
+        _jump->setX(getStage()->getWidth() - _jump->getWidth() - 10);
+        _jump->setY(getStage()->getHeight() - _jump->getHeight() - 10);
+        _jump->attachTo(this);
     }
 
     void doUpdate(const UpdateState& us)
@@ -124,6 +131,7 @@ public:
     spCamera _camera;
     spMovementButton _moveLeft;
     spMovementButton _moveRight;
+    spJumpButton _jump;
     Content content;
     spBox2DDraw _debugDraw;
 };

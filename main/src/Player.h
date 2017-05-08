@@ -18,6 +18,7 @@ public:
     void Init(spDemoLevel, spEventProxy);
     void Update(const UpdateState&);
     void Move(Event*);
+    void Jump(Event*);
     float GetX() const;
     float GetY() const;
 
@@ -34,5 +35,7 @@ private:
     spSprite _box;
     b2Body* _body;
     Vector2 _direction;
+    bool _isJumping;
     const int _maxSpeed = 900;
+    const int _jumpSpeed = 400;
 };

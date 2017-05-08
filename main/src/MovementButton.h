@@ -45,7 +45,7 @@ private:
     void SendEvent()
     {
         std::cout << "Sending event..." << std::endl;
-        PlayerMovementEvent event(_isMoving, _isRight);
+        PlayerMoveEvent event(_isMoving, _isRight);
         _eventProxy->dispatchEvent(&event);
     }
 
@@ -53,4 +53,27 @@ private:
     spEventProxy _eventProxy;
     bool _isMoving;
     bool _isRight;
+};
+
+DECLARE_SMART(JumpButton, spJumpButton);
+class JumpButton : public Button
+{
+public:
+    JumpButton(spEventProxy aEventProxy)
+    {
+        _eventProxy = aEventProxy;
+
+        addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &JumpButton::Jump));
+    }
+
+private:
+    void Jump(Event*)
+    {
+        std::cout << "Sending event..." << std::endl;
+        PlayerJumpEvent event;
+        _eventProxy->dispatchEvent(&event);
+    }
+
+private:
+    spEventProxy _eventProxy;
 };
