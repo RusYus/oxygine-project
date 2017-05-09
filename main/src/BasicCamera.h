@@ -2,7 +2,6 @@
 
 #include <map>
 
-#include "PlayerEvents.h"
 #include "PlayerEventProxy.h"
 #include "oxygine-framework.h"
 

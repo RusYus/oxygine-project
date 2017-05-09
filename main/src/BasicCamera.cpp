@@ -1,12 +1,13 @@
 #include <map>
 
 #include "BasicCamera.h"
+#include "BasicEvents.h"
 
 #include <iostream>
 
 Camera::Camera(spEventProxy aEventProxy)
 {
-    aEventProxy->addEventListener(PlayerMovementEvent::EVENT, CLOSURE(this, &Camera::onEvent));
+    aEventProxy->addEventListener(CameraMovementEvent::EVENT, CLOSURE(this, &Camera::onEvent));
 
     _transform.identity();
 }
@@ -17,10 +18,10 @@ void Camera::setContent(spActor content)
     addChild(content);
 }
 
-void Camera::onEvent(Event* ev)
+void Camera::onEvent(Event* aEvent)
 {
-    PlayerMovementEvent* pe = safeCast<PlayerMovementEvent*>(ev);
-    const Vector2& pos = pe->movement;
+    CameraMovementEvent* cameraEvent = safeCast<CameraMovementEvent*>(aEvent);
+    const Vector2& pos = cameraEvent->_movement;
     _transform.translate(-Vector3(pos.x, pos.y, 0));
     update();
 }

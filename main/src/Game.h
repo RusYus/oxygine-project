@@ -5,7 +5,7 @@
 #include "BasicCamera.h"
 #include "Player.h"
 #include "DemoLevel.h"
-#include "Joystick.h"
+#include "MovementButton.h"
 
 #include <iostream>
 
@@ -55,11 +55,6 @@ public:
         demoLevel->Init(_world);
         addChild(demoLevel);
 
-        //create virtual joystick
-        _move = new Joystick;
-        _move->attachTo(this);
-        _move->setY(getStage()->getHeight() - _move->getHeight());
-
         //create player ship
         _player = new Player;
         _player->Init(demoLevel, _eventProxy);
@@ -74,19 +69,33 @@ public:
         btn->setY(3);
         btn->attachTo(this);
         btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
+
+        _moveLeft = new MovementButton(false, _eventProxy);
+        _moveLeft->setWidth(100);
+        _moveLeft->setHeight(100);
+        _moveLeft->setX(10);
+        _moveLeft->setY(getStage()->getHeight() - _moveLeft->getHeight() - 10);
+        _moveLeft->attachTo(this);
+
+        _moveRight = new MovementButton(true, _eventProxy);
+        _moveRight->setWidth(100);
+        _moveRight->setHeight(100);
+        _moveRight->setX(10 + _moveLeft->getX() + _moveLeft->getWidth());
+        _moveRight->setY(_moveLeft->getY());
+        _moveRight->attachTo(this);
+
+        _jump = new JumpButton(_eventProxy);
+        _jump->setWidth(100);
+        _jump->setHeight(100);
+        _jump->setX(getStage()->getWidth() - _jump->getWidth() - 10);
+        _jump->setY(getStage()->getHeight() - _jump->getHeight() - 10);
+        _jump->attachTo(this);
     }
 
     void doUpdate(const UpdateState& us)
     {
         //in real project you should make steps with fixed dt, check box2d documentation
         _world->Step(us.dt / 1000.0f, 6, 2);
-
-        Vector2 dir;
-        if (_move->getDirection(dir))
-        {
-            _player->Move(dir);
-        }
-
         _player->Update(us);
     }
 
@@ -113,7 +122,9 @@ public:
     b2World* _world;
     spPlayer _player;
     spCamera _camera;
-    spJoystick _move;
+    spMoveButton _moveLeft;
+    spMoveButton _moveRight;
+    spJumpButton _jump;
     Content content;
     spBox2DDraw _debugDraw;
 };
