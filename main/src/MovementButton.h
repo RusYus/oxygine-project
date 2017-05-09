@@ -8,7 +8,7 @@
 
 using namespace oxygine;
 
-DECLARE_SMART(MovementButton, spMovementButton);
+DECLARE_SMART(MovementButton, spMoveButton);
 class MovementButton : public Button
 {
 public:

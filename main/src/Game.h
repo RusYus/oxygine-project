@@ -96,13 +96,6 @@ public:
     {
         //in real project you should make steps with fixed dt, check box2d documentation
         _world->Step(us.dt / 1000.0f, 6, 2);
-
-//        Vector2 dir;
-//        if (_move->getDirection(dir))
-//        {
-//            _player->Move(dir);
-//        }
-
         _player->Update(us);
     }
 
@@ -129,8 +122,8 @@ public:
     b2World* _world;
     spPlayer _player;
     spCamera _camera;
-    spMovementButton _moveLeft;
-    spMovementButton _moveRight;
+    spMoveButton _moveLeft;
+    spMoveButton _moveRight;
     spJumpButton _jump;
     Content content;
     spBox2DDraw _debugDraw;
