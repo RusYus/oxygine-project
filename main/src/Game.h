@@ -62,7 +62,8 @@ public:
 
         //create player ship
         _player = new Player;
-        _player->Init(demoLevel, _eventProxy);
+        _player->Init(_world, _eventProxy);
+        addChild(_player->GetView());
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);

@@ -9,19 +9,14 @@ b2Vec2 Player::_Convert(const Vector2& pos)
     return b2Vec2(pos.x / SCALE, pos.y / SCALE);
 }
 
-Player::Player()
-    : _game(0)
-{
-}
-
-void Player::_Init(b2World* world)
+void Player::_Init(b2World* aWorld)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
     bodyDef.position = _Convert(_view->getPosition());
 
-    _body = world->CreateBody(&bodyDef);
+    _body = aWorld->CreateBody(&bodyDef);
 
     setUserData(_body);
 
@@ -37,12 +32,14 @@ void Player::_Init(b2World* world)
     _body->SetUserData(this);
 }
 
-void Player::Init(spDemoLevel game, spEventProxy aEventProxy)
+spActor Player::GetView() const
 {
-    _game = game;
+    return _view;
+}
 
+void Player::Init(b2World* aWorld, spEventProxy aEventProxy)
+{
     _view = new Actor;
-    _view->attachTo(game);
     _view->setPosition(getStage()->getSize() / 2);
 
     _box = new Sprite;
@@ -50,7 +47,7 @@ void Player::Init(spDemoLevel game, spEventProxy aEventProxy)
     _box->attachTo(_view);
     _box->setAnchor(Vector2(0.5f, 0.5f));
 
-    _Init(game->_world);
+    _Init(aWorld);
 
     _eventProxy = aEventProxy;
 }
