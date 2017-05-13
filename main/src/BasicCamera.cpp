@@ -21,6 +21,7 @@ void Camera::onEvent(Event* ev)
 {
     PlayerMovementEvent* pe = safeCast<PlayerMovementEvent*>(ev);
     const Vector2& pos = pe->movement;
+    std::cout << pos.x << " : " << pos.y << std::endl;
     _transform.translate(-Vector3(pos.x, pos.y, 0));
     update();
 }

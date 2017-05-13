@@ -82,10 +82,18 @@ public:
         //in real project you should make steps with fixed dt, check box2d documentation
         _world->Step(us.dt / 1000.0f, 6, 2);
 
+//        std::cout << "Cam: "
+//            << _camera->getX() << ":" << _camera->getY()
+//            << std::endl
+//            << "Player: "
+//            << _player->GetX() << ":" << _player->GetY()
+//            << std::endl;
+
         Vector2 dir;
         if (_move->getDirection(dir))
         {
             _player->Move(dir);
+
         }
 
         _player->Update(us);
