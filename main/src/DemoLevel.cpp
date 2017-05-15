@@ -1,6 +1,6 @@
-#include "DemoLevel.h"
-#include "Joystick.h"
-#include "res.h"
+#include "DemoLevel.hpp"
+#include "Joystick.hpp"
+#include "res.hpp"
 #include <iostream>
 
 Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)

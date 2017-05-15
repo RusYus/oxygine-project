@@ -1,6 +1,6 @@
 #include "oxygine-framework.h"
-#include "res.h"
-#include "Game.h"
+#include "res.hpp"
+#include "Game.hpp"
 
 using namespace oxygine;
 

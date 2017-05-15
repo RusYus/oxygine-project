@@ -1,8 +1,8 @@
-#include "Player.h"
-#include "DemoLevel.h"
-#include "res.h"
-#include "Joystick.h"
-#include "PlayerEvents.h"
+#include "Player.hpp"
+#include "DemoLevel.hpp"
+#include "res.hpp"
+#include "Joystick.hpp"
+#include "PlayerEvents.hpp"
 
 void Player::_Init(b2World* aWorld)
 {
