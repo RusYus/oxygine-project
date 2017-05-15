@@ -52,6 +52,8 @@ public:
 
         _camera->setContent(demoLevel);
 
+        // TODO: Make class field, add to container;
+        // vector is enough for now?
         demoLevel->Init(_world);
         addChild(demoLevel);
 
