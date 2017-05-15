@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Actor.h"
-#include "Box2DDebugDraw.h"
-#include "BasicCamera.h"
-#include "Player.h"
-#include "DemoLevel.h"
-#include "Joystick.h"
+#include "Box2DDebugDraw.hpp"
+#include "BasicCamera.hpp"
+#include "Player.hpp"
+#include "DemoLevel.hpp"
+#include "Joystick.hpp"
 
 #include <iostream>
 

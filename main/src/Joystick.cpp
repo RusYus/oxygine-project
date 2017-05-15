@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Joystick.h"
-#include "res.h"
+#include "Joystick.hpp"
+#include "res.hpp"
 
 Joystick::Joystick(): _pressed(false), _dir(0, 0)
 {

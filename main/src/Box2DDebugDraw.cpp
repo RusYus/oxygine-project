@@ -1,4 +1,4 @@
-#include "Box2DDebugDraw.h"
+#include "Box2DDebugDraw.hpp"
 #include "core/VideoDriver.h"
 #include "RenderState.h"
 #include "core/gl/VideoDriverGLES20.h"

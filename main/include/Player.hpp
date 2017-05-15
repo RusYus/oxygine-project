@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PlayerEventProxy.h"
+#include "PlayerEventProxy.hpp"
 #include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
