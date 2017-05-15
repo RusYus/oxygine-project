@@ -4,24 +4,21 @@
 #include "Joystick.h"
 #include "PlayerEvents.h"
 
-b2Vec2 Player::_Convert(const Vector2& pos)
-{
-    return b2Vec2(pos.x / SCALE, pos.y / SCALE);
-}
-
 void Player::_Init(b2World* aWorld)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position = _Convert(_view->getPosition());
+    bodyDef.position = Service::Utils::Convert(_view->getPosition());
 
     _body = aWorld->CreateBody(&bodyDef);
 
     setUserData(_body);
 
     b2PolygonShape shape;
-    shape.SetAsBox(_box->getWidth() / SCALE / 2.0f, _box->getHeight() / SCALE / 2.0f);
+    float32 width = _box->getWidth() / Service::Constants::SCALE / 2.0f;
+    float32 height = _box->getHeight() / Service::Constants::SCALE / 2.0f;
+    shape.SetAsBox(width, height);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
@@ -56,7 +53,7 @@ void Player::Move(const Vector2& aDir)
 {
     if (_body != nullptr)
     {
-        _body->SetLinearVelocity(_Convert(aDir * _speed));
+        _body->SetLinearVelocity(Service::Utils::Convert(aDir * _speed));
     }
 }
 
@@ -73,7 +70,7 @@ float Player::GetY() const
 void Player::Update(const UpdateState& us)
 {
     b2Vec2 b2pos = _body->GetPosition();
-    Vector2 pos = Vector2(b2pos.x * SCALE, b2pos.y * SCALE);
+    Vector2 pos = Service::Utils::Convert(b2pos);
     PlayerMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
     _eventProxy->dispatchEvent(&event);

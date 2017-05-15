@@ -1,13 +1,12 @@
 #pragma once
 
 #include "PlayerEventProxy.h"
+#include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
 using namespace oxygine;
-
-constexpr const float SCALE = 100.0f;
 
 DECLARE_SMART(Player, spPlayer);
 class Player: public Object
@@ -23,7 +22,6 @@ public:
 
 private:
     void _Init(b2World*);
-    b2Vec2 _Convert(const Vector2&);
 
 private:
     spEventProxy _eventProxy;

@@ -2,6 +2,7 @@
 
 #include <forward_list>
 
+#include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "oxygine-framework.h"
 using namespace oxygine;

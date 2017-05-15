@@ -1,18 +1,7 @@
 #include "DemoLevel.h"
-#include "Player.h"
 #include "Joystick.h"
 #include "res.h"
 #include <iostream>
-
-b2Vec2 convert(const Vector2& pos)
-{
-    return b2Vec2(pos.x / SCALE, pos.y / SCALE);
-}
-
-Vector2 convert(const b2Vec2& pos)
-{
-    return Vector2(pos.x * SCALE, pos.y * SCALE);
-}
 
 Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
 {
@@ -22,7 +11,7 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = convert(pos);
+    bodyDef.position = Service::Utils::Convert(pos);
 
     _body = world->CreateBody(&bodyDef);
 
@@ -31,7 +20,7 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
     setScale(scale);
 
     b2CircleShape shape;
-    shape.m_radius = getWidth() / SCALE / 2 * scale;
+    shape.m_radius = getWidth() / Service::Constants::SCALE / 2 * scale;
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
@@ -57,12 +46,12 @@ Static::Static(b2World* world, const RectF& rc)
     setAnchor(Vector2(0.5f, 0.5f));
 
     b2BodyDef groundBodyDef;
-    groundBodyDef.position = convert(getPosition());
+    groundBodyDef.position = Service::Utils::Convert(getPosition());
 
     b2Body* groundBody = world->CreateBody(&groundBodyDef);
 
     b2PolygonShape groundBox;
-    b2Vec2 sz = convert(getSize() / 2);
+    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
     groundBox.SetAsBox(sz.x, sz.y);
     groundBody->CreateFixture(&groundBox, 0.0f);
 }
