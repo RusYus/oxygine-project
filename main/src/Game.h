@@ -52,6 +52,8 @@ public:
 
         _camera->setContent(demoLevel);
 
+        // TODO: Make class field, add to container;
+        // vector is enough for now?
         demoLevel->Init(_world);
         addChild(demoLevel);
 
@@ -63,7 +65,7 @@ public:
         //create player ship
         _player = new Player;
         _player->Init(_world, _eventProxy);
-        addChild(_player->GetView());
+        demoLevel->addChild(_player->GetView());
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
