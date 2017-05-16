@@ -111,7 +111,6 @@ void DemoLevel::Init(b2World* aWorld)
 {
     _world = aWorld;
     //create background
-    // TODO : [4]
     spSprite sky = new Sprite;
     sky->setResAnim(res::ui.getResAnim("sky"));
     sky->attachTo(this);
