@@ -7,6 +7,7 @@
 using namespace oxygine;
 
 DECLARE_SMART(Circle, spCircle);
+DECLARE_SMART(Square, spSquare);
 DECLARE_SMART(Static, spStatic);
 DECLARE_SMART(DemoLevel, spDemoLevel);
 
@@ -14,6 +15,17 @@ class Circle : public Sprite
 {
 public:
     Circle(b2World*, const Vector2&, float);
+    void Update();
+    bool IsAlive = true;
+
+public:
+    b2Body* _body;
+};
+
+class Square : public Sprite
+{
+public:
+    Square(b2World*, const Vector2&, float);
     void Update();
     bool IsAlive = true;
 
@@ -43,4 +55,5 @@ private:
     b2World* _world;
 
     std::forward_list<spCircle> _circles;
+    std::forward_list<spSquare> _squares;
 };
