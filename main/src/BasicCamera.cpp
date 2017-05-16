@@ -1,8 +1,6 @@
 #include <map>
 
-#include "BasicCamera.h"
-
-#include <iostream>
+#include "BasicCamera.hpp"
 
 Camera::Camera(spEventProxy aEventProxy)
 {

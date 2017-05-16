@@ -7,8 +7,7 @@
 #include "core/oxygine.h"
 #include "Stage.h"
 #include "DebugActor.h"
-#include "example.h"
-
+#include "example.hpp"
 
 using namespace oxygine;
 
