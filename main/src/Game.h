@@ -33,6 +33,29 @@ public:
     */
 };
 
+class ContactFilter : public b2ContactFilter
+{
+    bool ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
+    {
+        const b2Filter& filterA = fixtureA->GetFilterData();
+        const b2Filter& filterB = fixtureB->GetFilterData();
+
+        std::cout << "FilterA:" << filterA.categoryBits
+                  << ";" << filterA.maskBits << ";" << filterA.groupIndex << std::endl;
+        std::cout << "FilterB:" << filterB.categoryBits
+                  << ";" << filterB.maskBits << ";" << filterB.groupIndex << std::endl;
+        if (filterA.groupIndex == filterB.groupIndex && filterA.groupIndex != 0)
+        {
+            return filterA.groupIndex > 0;
+        }
+
+        bool collide = (filterA.maskBits & filterB.categoryBits) != 0 &&
+                        (filterA.categoryBits & filterB.maskBits) != 0;
+        return collide;
+//        return true;
+    }
+};
+
 DECLARE_SMART(Game, spGame);
 class Game: public Actor
 {
@@ -90,6 +113,8 @@ public:
         _jump->setX(getStage()->getWidth() - _jump->getWidth() - 10);
         _jump->setY(getStage()->getHeight() - _jump->getHeight() - 10);
         _jump->attachTo(this);
+
+        _world->SetContactFilter(&_cf);
     }
 
     void doUpdate(const UpdateState& us)
@@ -126,5 +151,6 @@ public:
     spMoveButton _moveRight;
     spJumpButton _jump;
     Content content;
+    ContactFilter _cf;
     spBox2DDraw _debugDraw;
 };

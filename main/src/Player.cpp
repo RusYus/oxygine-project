@@ -35,10 +35,16 @@ void Player::_Init(b2World* world)
     b2PolygonShape shape;
     shape.SetAsBox(_box->getWidth() / SCALE / 2.0f, _box->getHeight() / SCALE / 2.0f);
 
+    b2Filter filter;
+    filter.categoryBits = 0x0002;
+    filter.maskBits = 0x0001;
+    filter.groupIndex = 1;
+
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
     _body->SetUserData(this);
@@ -111,7 +117,7 @@ float Player::GetY() const
 
 void Player::Update(const UpdateState& /*us*/)
 {
-    std::cout << _direction.x << " : " << _direction.y << std::endl;
+//    std::cout << _direction.x << " : " << _direction.y << std::endl;
     _direction.y = _body->GetLinearVelocity().y;
     _body->SetLinearVelocity(_direction);
 

@@ -69,10 +69,16 @@ Square::Square(b2World* world, const Vector2& pos, float scale = 1)
     b2PolygonShape shape;
     shape.SetAsBox(getWidth() / SCALE / 2.0f, getHeight() / SCALE / 2.0f);
 
+    b2Filter filter;
+    filter.categoryBits = 0x0003;
+    filter.maskBits = 0x0001;
+    filter.groupIndex = 2;
+
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 100.0f;
-    fixtureDef.friction = 0;
+    fixtureDef.friction = 0.3f;
+    fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
     _body->SetUserData(this);
@@ -100,7 +106,17 @@ Static::Static(b2World* world, const RectF& rc)
     b2PolygonShape groundBox;
     b2Vec2 sz = convert(getSize() / 2);
     groundBox.SetAsBox(sz.x, sz.y);
-    groundBody->CreateFixture(&groundBox, 0.0f);
+
+    b2Filter filter;
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0003;
+    filter.groupIndex = 3;
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = 0.0f;
+    fixtureDef.shape = &groundBox;
+    fixtureDef.filter = filter;
+    groundBody->CreateFixture(&fixtureDef);
 }
 
 DemoLevel::DemoLevel()
