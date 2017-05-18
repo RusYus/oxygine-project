@@ -67,29 +67,38 @@ class ContactListenerWrapper : public b2ContactListener
         if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
             || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
         {
-            contact->SetEnabled(false);
-
             if (userDataA->first == ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+                static_cast<Player*>(userDataA->second)->SetNormal(contact->GetManifold()->localNormal);
             }
 
             if (userDataB->first == ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+                static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
+            }
+        }
+    }
+
+    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+    {
+        auto userDataA = static_cast<std::pair<ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
+            || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
+        {
+            contact->SetEnabled(false);
+
+            if (userDataA->first == ObjectType::DynamicBody)
+            {
+                // For future use, need to add every ObjectType for each movable object
+                // And cast it accordingly (move to function I think with a lot of switches).
+                static_cast<Circle*>(userDataA->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
             }
 
-            // TODO : Use localPoint or Normal to restrict player's movement
-            // instead of zero linear velocity.
-
-            std::cout << "Player" << std::endl;
-            std::cout << "localPoint:" << contact->GetManifold()->localPoint.x
-                      << ":" << contact->GetManifold()->localPoint.y << std::endl;
-
-            std::cout << "Normal:" << contact->GetManifold()->localNormal.x
-                      << ":" << contact->GetManifold()->localNormal.y << std::endl;
-//            userDataA->second->SetLinearVelocity(b2Vec2);
-//            userDataB->second->SetLinearVelocity(b2Vec2);
+            if (userDataB->first == ObjectType::DynamicBody)
+            {
+                static_cast<Circle*>(userDataB->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+            }
         }
     }
 };

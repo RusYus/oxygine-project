@@ -24,6 +24,8 @@ public:
     void Jump(Event*);
     inline float GetX() const;
     inline float GetY() const;
+    void SetNormal(const b2Vec2);
+    void SetZeroNormal();
     b2Body* _body;
 
 private:
@@ -37,6 +39,7 @@ private:
     spActor _view;
     spSprite _box;
     b2Vec2 _direction;
+    b2Vec2 _normal;
     bool _isJumping;
     const int _maxSpeed = PLAYER_MAX_SPEED;
     const int _jumpSpeed = PLAYER_JUMP_SPEED;
