@@ -136,17 +136,17 @@ void DemoLevel::Init(b2World* aWorld)
     spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
     addChild(ground);
 
-    spSquare square = new Square(_world, Vector2(200, 300));
-    square->attachTo(this);
-    _squares.emplace_front(std::move(square));
+//    spSquare square = new Square(_world, Vector2(200, 300));
+//    square->attachTo(this);
+//    _squares.emplace_front(std::move(square));
 
-    spSquare square2 = new Square(_world, Vector2(650, 300));
-    square2->attachTo(this);
-    _squares.emplace_front(std::move(square2));
+//    spSquare square2 = new Square(_world, Vector2(650, 300));
+//    square2->attachTo(this);
+//    _squares.emplace_front(std::move(square2));
 
-    spSquare square3 = new Square(_world, Vector2(1100, 300));
-    square3->attachTo(this);
-    _squares.emplace_front(std::move(square3));
+//    spSquare square3 = new Square(_world, Vector2(1100, 300));
+//    square3->attachTo(this);
+//    _squares.emplace_front(std::move(square3));
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 }

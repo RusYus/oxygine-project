@@ -8,6 +8,7 @@
 #include "MovementButton.h"
 
 #include <iostream>
+#include <typeinfo>
 
 using namespace oxygine;
 
@@ -33,7 +34,7 @@ public:
     */
 };
 
-class ContactFilter : public b2ContactFilter
+class ContactFilterWrapper : public b2ContactFilter
 {
     bool ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
     {
@@ -53,6 +54,27 @@ class ContactFilter : public b2ContactFilter
                         (filterA.categoryBits & filterB.maskBits) != 0;
         return collide;
 //        return true;
+    }
+};
+
+class ContactListenerWrapper : public b2ContactListener
+{
+    void BeginContact(b2Contact* contact)
+    {
+        void* userDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+        if (userDataA)
+        {
+//            if (typeid(userDataA) == "Player*")
+//            {
+
+//            }
+        }
+
+        void* userDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+        if (userDataB)
+        {
+
+        }
     }
 };
 
@@ -115,6 +137,7 @@ public:
         _jump->attachTo(this);
 
         _world->SetContactFilter(&_cf);
+        _world->SetContactListener(&_cl);
     }
 
     void doUpdate(const UpdateState& us)
@@ -151,6 +174,7 @@ public:
     spMoveButton _moveRight;
     spJumpButton _jump;
     Content content;
-    ContactFilter _cf;
+    ContactFilterWrapper _cf;
+    ContactListenerWrapper _cl;
     spBox2DDraw _debugDraw;
 };
