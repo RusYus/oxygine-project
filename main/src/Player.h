@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BasisObject.hpp"
 #include "PlayerEventProxy.h"
 #include "DemoLevel.h"
 #include "Box2D/Box2D.h"
@@ -13,7 +14,7 @@ constexpr const int PLAYER_MAX_SPEED = 900;
 constexpr const int PLAYER_JUMP_SPEED = 700;
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public Object
+class Player: public Object, public BasisObject
 {
 public:
     Player();
@@ -23,6 +24,7 @@ public:
     void Jump(Event*);
     inline float GetX() const;
     inline float GetY() const;
+    b2Body* _body;
 
 private:
     void _Init(b2World*);
@@ -34,9 +36,10 @@ private:
     spDemoLevel _game;
     spActor _view;
     spSprite _box;
-    b2Body* _body;
     b2Vec2 _direction;
     bool _isJumping;
     const int _maxSpeed = PLAYER_MAX_SPEED;
     const int _jumpSpeed = PLAYER_JUMP_SPEED;
+
+    std::pair<ObjectType, Player*> _bodyPair;
 };

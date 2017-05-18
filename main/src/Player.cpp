@@ -18,6 +18,7 @@ Vector2 Player::_Convert(const b2Vec2& pos)
 
 Player::Player()
     : _game(0)
+    , _bodyPair(ObjectType::Player, this)
 {
 }
 
@@ -47,7 +48,7 @@ void Player::_Init(b2World* world)
     fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(this);
+    _body->SetUserData(&_bodyPair);
 }
 
 void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)

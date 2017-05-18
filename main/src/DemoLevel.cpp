@@ -15,6 +15,7 @@ Vector2 convert(const b2Vec2& pos)
 }
 
 Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
+    : _bodyPair(ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("circle"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -39,7 +40,7 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
     fixtureDef.friction = 0.3f;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(this);
+    _body->SetUserData(&_bodyPair);
 }
 
 void Circle::Update()
@@ -50,6 +51,7 @@ void Circle::Update()
 }
 
 Square::Square(b2World* world, const Vector2& pos, float scale = 1)
+    : _bodyPair(ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -81,7 +83,7 @@ Square::Square(b2World* world, const Vector2& pos, float scale = 1)
     fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(this);
+    _body->SetUserData(&_bodyPair);
 }
 
 void Square::Update()
@@ -92,6 +94,7 @@ void Square::Update()
 }
 
 Static::Static(b2World* world, const RectF& rc)
+    : _bodyPair(ObjectType::Ground, this)
 {
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());
@@ -117,6 +120,7 @@ Static::Static(b2World* world, const RectF& rc)
     fixtureDef.shape = &groundBox;
     fixtureDef.filter = filter;
     groundBody->CreateFixture(&fixtureDef);
+    groundBody->SetUserData(&_bodyPair);
 }
 
 DemoLevel::DemoLevel()
@@ -136,17 +140,17 @@ void DemoLevel::Init(b2World* aWorld)
     spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
     addChild(ground);
 
-//    spSquare square = new Square(_world, Vector2(200, 300));
-//    square->attachTo(this);
-//    _squares.emplace_front(std::move(square));
+    spSquare square = new Square(_world, Vector2(200, 300));
+    square->attachTo(this);
+    _squares.emplace_front(std::move(square));
 
-//    spSquare square2 = new Square(_world, Vector2(650, 300));
-//    square2->attachTo(this);
-//    _squares.emplace_front(std::move(square2));
+    spSquare square2 = new Square(_world, Vector2(650, 300));
+    square2->attachTo(this);
+    _squares.emplace_front(std::move(square2));
 
-//    spSquare square3 = new Square(_world, Vector2(1100, 300));
-//    square3->attachTo(this);
-//    _squares.emplace_front(std::move(square3));
+    spSquare square3 = new Square(_world, Vector2(1100, 300));
+    square3->attachTo(this);
+    _squares.emplace_front(std::move(square3));
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 }
