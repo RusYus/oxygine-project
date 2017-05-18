@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "BasisObject.hpp"
 #include "Box2DDebugDraw.h"
 #include "BasicCamera.h"
 #include "Player.h"
@@ -8,6 +9,7 @@
 #include "MovementButton.h"
 
 #include <iostream>
+#include <typeinfo>
 
 using namespace oxygine;
 
@@ -31,6 +33,74 @@ public:
         renderer.end();
     }
     */
+};
+
+class ContactFilterWrapper : public b2ContactFilter
+{
+    bool ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
+    {
+        const b2Filter& filterA = fixtureA->GetFilterData();
+        const b2Filter& filterB = fixtureB->GetFilterData();
+
+        std::cout << "FilterA:" << filterA.categoryBits
+                  << ";" << filterA.maskBits << ";" << filterA.groupIndex << std::endl;
+        std::cout << "FilterB:" << filterB.categoryBits
+                  << ";" << filterB.maskBits << ";" << filterB.groupIndex << std::endl;
+        if (filterA.groupIndex == filterB.groupIndex && filterA.groupIndex != 0)
+        {
+            return filterA.groupIndex > 0;
+        }
+
+        bool collide = (filterA.maskBits & filterB.categoryBits) != 0 &&
+                        (filterA.categoryBits & filterB.maskBits) != 0;
+        return collide;
+//        return true;
+    }
+};
+
+class ContactListenerWrapper : public b2ContactListener
+{
+    void BeginContact(b2Contact* contact)
+    {
+        auto userDataA = static_cast<std::pair<ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
+            || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
+        {
+            if (userDataA->first == ObjectType::Player)
+            {
+                static_cast<Player*>(userDataA->second)->SetNormal(contact->GetManifold()->localNormal);
+            }
+
+            if (userDataB->first == ObjectType::Player)
+            {
+                static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
+            }
+        }
+    }
+
+    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+    {
+        auto userDataA = static_cast<std::pair<ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
+            || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
+        {
+            contact->SetEnabled(false);
+
+            if (userDataA->first == ObjectType::DynamicBody)
+            {
+                // For future use, need to add every ObjectType for each movable object
+                // And cast it accordingly (move to function I think with a lot of switches).
+                static_cast<Circle*>(userDataA->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+            }
+
+            if (userDataB->first == ObjectType::DynamicBody)
+            {
+                static_cast<Circle*>(userDataB->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+            }
+        }
+    }
 };
 
 DECLARE_SMART(Game, spGame);
@@ -90,6 +160,9 @@ public:
         _jump->setX(getStage()->getWidth() - _jump->getWidth() - 10);
         _jump->setY(getStage()->getHeight() - _jump->getHeight() - 10);
         _jump->attachTo(this);
+
+        _world->SetContactFilter(&_cf);
+        _world->SetContactListener(&_cl);
     }
 
     void doUpdate(const UpdateState& us)
@@ -126,5 +199,7 @@ public:
     spMoveButton _moveRight;
     spJumpButton _jump;
     Content content;
+    ContactFilterWrapper _cf;
+    ContactListenerWrapper _cl;
     spBox2DDraw _debugDraw;
 };

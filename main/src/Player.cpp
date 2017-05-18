@@ -18,6 +18,8 @@ Vector2 Player::_Convert(const b2Vec2& pos)
 
 Player::Player()
     : _game(0)
+    , _bodyPair(ObjectType::Player, this)
+    , _normal(0, 0)
 {
 }
 
@@ -35,13 +37,19 @@ void Player::_Init(b2World* world)
     b2PolygonShape shape;
     shape.SetAsBox(_box->getWidth() / SCALE / 2.0f, _box->getHeight() / SCALE / 2.0f);
 
+    b2Filter filter;
+    filter.categoryBits = 0x0002;
+    filter.maskBits = 0x0001;
+    filter.groupIndex = 1;
+
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(this);
+    _body->SetUserData(&_bodyPair);
 }
 
 void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)
@@ -74,6 +82,12 @@ void Player::Jump(Event* /*aEvent*/)
     {
         _isJumping = true;
         _body->SetLinearVelocity(b2Vec2(_direction.x, -_jumpSpeed / SCALE));
+
+        // This most likely not gonna work in bigger objects,
+        // when jumping height less than their heights
+        // So collision is still intact
+        // Need to check this, but far later.
+        SetZeroNormal();
     }
 }
 
@@ -89,8 +103,21 @@ void Player::Move(Event* aEvent)
         {
             _direction.x = playerEvent->_isMovingRight ? _maxSpeed : -_maxSpeed;
             _direction.x /= SCALE;
+
+            // Moving opposing direction of collision
+            // If collision more than one, need more normals
+            // Therefore, this is not gonna work
+            if ((playerEvent->_isMovingRight && _normal.x < 0)
+                || (!playerEvent->_isMovingRight && _normal.x > 0))
+            {
+                SetZeroNormal();
+            }
         }
-        else
+
+        // Collision took place, or move button released.
+        if (!playerEvent->_isMoving
+            || (playerEvent->_isMovingRight && _normal.x > 0)
+            || (!playerEvent->_isMovingRight && _normal.x < 0))
         {
             _direction.x = 0;
         }
@@ -109,10 +136,26 @@ float Player::GetY() const
     return (_view.get() ? _view->getY() : .0f);
 }
 
+void Player::SetNormal(const b2Vec2 aNormal)
+{
+    _normal = aNormal;
+}
+
+void Player::SetZeroNormal()
+{
+    _normal.SetZero();
+}
+
 void Player::Update(const UpdateState& /*us*/)
 {
-    std::cout << _direction.x << " : " << _direction.y << std::endl;
+//    std::cout << _direction.x << " : " << _direction.y << std::endl;
     _direction.y = _body->GetLinearVelocity().y;
+
+    // Reseting direction, if collision in place.
+    if (_normal.x != 0)
+    {
+        _direction.x = 0;
+    }
     _body->SetLinearVelocity(_direction);
 
     if (_body->GetLinearVelocity().y == .0f)
