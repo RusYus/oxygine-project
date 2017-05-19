@@ -1,11 +1,10 @@
 #pragma once
 
-#include <map>
-
-#include "PlayerEvents.hpp"
-#include "PlayerEventProxy.hpp"
+#include "BasisEvents.hpp"
+#include "BasisEventProxy.hpp"
 #include "oxygine-framework.h"
 
+#include <map>
 using namespace oxygine;
 
 DECLARE_SMART(Camera, spCamera);

@@ -15,6 +15,7 @@
 
 	<atlas>
 		<image file="circle.png"/>
+		<image file="square.png"/>
 		<image file="pen.png" />				
 		<image file="shot.png" />	
 	</atlas>

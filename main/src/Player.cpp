@@ -2,8 +2,15 @@
 #include "DemoLevel.hpp"
 #include "res.hpp"
 #include "Joystick.hpp"
-#include "PlayerEvents.hpp"
+#include "BasisEvents.hpp"
 
+#include <iostream>
+
+Player::Player()
+    : _bodyPair(ObjectType::Player, this)
+    , _normal(0, 0)
+{
+}
 void Player::_Init(b2World* aWorld)
 {
     b2BodyDef bodyDef;
@@ -20,13 +27,19 @@ void Player::_Init(b2World* aWorld)
     float32 height = _box->getHeight() / Service::Constants::SCALE / 2.0f;
     shape.SetAsBox(width, height);
 
+    b2Filter filter;
+    filter.categoryBits = 0x0002;
+    filter.maskBits = 0x0001;
+    filter.groupIndex = 1;
+
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(this);
+    _body->SetUserData(&_bodyPair);
 }
 
 spActor Player::GetView() const
@@ -47,13 +60,61 @@ void Player::Init(b2World* aWorld, spEventProxy aEventProxy)
     _Init(aWorld);
 
     _eventProxy = aEventProxy;
+
+    _eventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::Move));
+
+    _eventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
+
+    _direction = _body->GetLinearVelocity();
 }
 
-void Player::Move(const Vector2& aDir)
+void Player::Jump(Event* /*aEvent*/)
+{
+    if (!_isJumping)
+    {
+        _isJumping = true;
+        _body->SetLinearVelocity(b2Vec2(_direction.x, -_jumpSpeed / SCALE));
+
+        // This most likely not gonna work in bigger objects,
+        // when jumping height less than their heights
+        // So collision is still intact
+        // Need to check this, but far later.
+        SetZeroNormal();
+    }
+}
+
+void Player::Move(Event* aEvent)
 {
     if (_body != nullptr)
     {
-        _body->SetLinearVelocity(Service::Utils::Convert(aDir * _speed));
+        PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
+
+        _direction = _body->GetLinearVelocity();
+
+        if (playerEvent->_isMoving)
+        {
+            _direction.x = playerEvent->_isMovingRight ? _maxSpeed : -_maxSpeed;
+            _direction.x /= SCALE;
+
+            // Moving opposing direction of collision
+            // If collision more than one, need more normals
+            // Therefore, this is not gonna work
+            if ((playerEvent->_isMovingRight && _normal.x < 0)
+                || (!playerEvent->_isMovingRight && _normal.x > 0))
+            {
+                SetZeroNormal();
+            }
+        }
+
+        // Collision took place, or move button released.
+        if (!playerEvent->_isMoving
+            || (playerEvent->_isMovingRight && _normal.x > 0)
+            || (!playerEvent->_isMovingRight && _normal.x < 0))
+        {
+            _direction.x = 0;
+        }
+
+        _body->SetLinearVelocity(_direction);
     }
 }
 
@@ -67,11 +128,36 @@ float Player::GetY() const
     return (_view.get() ? _view->getY() : .0f);
 }
 
-void Player::Update(const UpdateState& us)
+void Player::SetNormal(const b2Vec2 aNormal)
 {
+    _normal = aNormal;
+}
+
+void Player::SetZeroNormal()
+{
+    _normal.SetZero();
+}
+
+void Player::Update(const UpdateState& /*us*/)
+{
+//    std::cout << _direction.x << " : " << _direction.y << std::endl;
+    _direction.y = _body->GetLinearVelocity().y;
+
+    // Reseting direction, if collision in place.
+    if (_normal.x != 0)
+    {
+        _direction.x = 0;
+    }
+    _body->SetLinearVelocity(_direction);
+
+    if (_body->GetLinearVelocity().y == .0f)
+    {
+        _isJumping = false;
+    }
+
     b2Vec2 b2pos = _body->GetPosition();
     Vector2 pos = Service::Utils::Convert(b2pos);
-    PlayerMovementEvent event(pos - _view->getPosition());
+    CameraMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
     _eventProxy->dispatchEvent(&event);
 }
