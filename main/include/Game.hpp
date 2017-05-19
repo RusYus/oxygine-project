@@ -2,14 +2,14 @@
 
 #include "Actor.h"
 #include "BasisObject.hpp"
-#include "Box2DDebugDraw.h"
-#include "BasicCamera.h"
-#include "Player.h"
-#include "DemoLevel.h"
-#include "MovementButton.h"
+#include "Box2DDebugDraw.hpp"
+#include "BasisCamera.hpp"
+#include "Player.hpp"
+#include "DemoLevel.hpp"
+#include "MovementButton.hpp"
 
 #include <iostream>
-#include <typeinfo>
+#include <vector>
 
 using namespace oxygine;
 
@@ -118,16 +118,16 @@ public:
         _camera->setSize(getStage()->getSize());
         addChild(_camera);
 
-        spDemoLevel demoLevel = new DemoLevel;
+        _levels.emplace_back(new DemoLevel);
+        _levels.back()->Init(_world);
+        addChild(_levels.back());
 
-        _camera->setContent(demoLevel);
-
-        demoLevel->Init(_world);
-        addChild(demoLevel);
+        _camera->setContent(_levels.back());
 
         //create player ship
         _player = new Player;
-        _player->Init(demoLevel, _eventProxy);
+        _player->Init(_world, _eventProxy);
+        _levels.back()->addChild(_player->GetView());
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
@@ -186,7 +186,7 @@ public:
 
         _debugDraw = new Box2DDraw;
         _debugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
-        _debugDraw->attachTo(this);
+        _debugDraw->attachTo(_levels.back());
         _debugDraw->setWorld(100, _world);
         _debugDraw->setPriority(1);
     }
@@ -202,4 +202,5 @@ public:
     ContactFilterWrapper _cf;
     ContactListenerWrapper _cl;
     spBox2DDraw _debugDraw;
+    std::vector<spDemoLevel> _levels;
 };

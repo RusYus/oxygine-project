@@ -1,8 +1,8 @@
 #pragma once
 
+#include "BasisEventProxy.hpp"
+#include "BasisEvents.hpp"
 #include "Button.h"
-#include "PlayerEventProxy.h"
-#include "BasicEvents.h"
 
 #include <iostream>
 

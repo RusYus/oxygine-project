@@ -1,41 +1,31 @@
-#include "Player.h"
-#include "DemoLevel.h"
-#include "res.h"
-#include "Joystick.h"
-#include "BasicEvents.h"
+#include "Player.hpp"
+#include "DemoLevel.hpp"
+#include "res.hpp"
+#include "Joystick.hpp"
+#include "BasisEvents.hpp"
 
 #include <iostream>
 
-b2Vec2 Player::_Convert(const Vector2& pos)
-{
-    return b2Vec2(pos.x / SCALE, pos.y / SCALE);
-}
-
-Vector2 Player::_Convert(const b2Vec2& pos)
-{
-    return Vector2(pos.x * SCALE, pos.y * SCALE);
-}
-
 Player::Player()
-    : _game(0)
-    , _bodyPair(ObjectType::Player, this)
+    : _bodyPair(ObjectType::Player, this)
     , _normal(0, 0)
 {
 }
-
-void Player::_Init(b2World* world)
+void Player::_Init(b2World* aWorld)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position = _Convert(_view->getPosition());
+    bodyDef.position = Service::Utils::Convert(_view->getPosition());
 
-    _body = world->CreateBody(&bodyDef);
+    _body = aWorld->CreateBody(&bodyDef);
 
     setUserData(_body);
 
     b2PolygonShape shape;
-    shape.SetAsBox(_box->getWidth() / SCALE / 2.0f, _box->getHeight() / SCALE / 2.0f);
+    float32 width = _box->getWidth() / Service::Constants::SCALE / 2.0f;
+    float32 height = _box->getHeight() / Service::Constants::SCALE / 2.0f;
+    shape.SetAsBox(width, height);
 
     b2Filter filter;
     filter.categoryBits = 0x0002;
@@ -52,12 +42,14 @@ void Player::_Init(b2World* world)
     _body->SetUserData(&_bodyPair);
 }
 
-void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)
+spActor Player::GetView() const
 {
-    _game = aGame;
+    return _view;
+}
 
+void Player::Init(b2World* aWorld, spEventProxy aEventProxy)
+{
     _view = new Actor;
-    _view->attachTo(_game);
     _view->setPosition(getStage()->getSize() / 2);
 
     _box = new Sprite;
@@ -65,7 +57,7 @@ void Player::Init(spDemoLevel aGame, spEventProxy aEventProxy)
     _box->attachTo(_view);
     _box->setAnchor(Vector2(0.5f, 0.5f));
 
-    _Init(_game->_world);
+    _Init(aWorld);
 
     _eventProxy = aEventProxy;
 
@@ -164,7 +156,7 @@ void Player::Update(const UpdateState& /*us*/)
     }
 
     b2Vec2 b2pos = _body->GetPosition();
-    Vector2 pos = _Convert(b2pos);
+    Vector2 pos = Service::Utils::Convert(b2pos);
     CameraMovementEvent event(pos - _view->getPosition());
     _view->setPosition(pos);
     _eventProxy->dispatchEvent(&event);

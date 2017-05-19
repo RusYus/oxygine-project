@@ -1,8 +1,8 @@
 #pragma once
 
 #include "BasisObject.hpp"
-#include "PlayerEventProxy.h"
-#include "DemoLevel.h"
+#include "BasisEventProxy.hpp"
+#include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
@@ -18,8 +18,9 @@ class Player: public Object, public BasisObject
 {
 public:
     Player();
-    void Init(spDemoLevel, spEventProxy);
+    void Init(b2World*, spEventProxy);
     void Update(const UpdateState&);
+    spActor GetView() const;
     void Move(Event*);
     void Jump(Event*);
     inline float GetX() const;
@@ -30,12 +31,9 @@ public:
 
 private:
     void _Init(b2World*);
-    b2Vec2 _Convert(const Vector2&);
-    Vector2 _Convert(const b2Vec2&);
 
 private:
     spEventProxy _eventProxy;
-    spDemoLevel _game;
     spActor _view;
     spSprite _box;
     b2Vec2 _direction;

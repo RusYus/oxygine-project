@@ -2,6 +2,7 @@
 
 #include "BasisObject.hpp"
 #include "Box2D/Box2D.h"
+#include "Utils.hpp"
 #include "oxygine-framework.h"
 
 #include <forward_list>
