@@ -59,6 +59,7 @@ add_executable(
 	${LAUNCHER}
 	${BOX2DSRC}
 )
+
 source_group(box2d FILES ${BOX2DSRC})
 include_directories(./box2d)
 
@@ -67,3 +68,32 @@ target_link_libraries(
 	ProjectLib
 	${OXYGINE_CORE_LIBS}
 )
+
+# === FOR TESTS ===
+set(INSTALED_DEPENDENCIES_DIR /usr)
+set(BOOST_INCLUDES ${INSTALED_DEPENDENCIES_DIR}/include)
+set(BOOST_LINK ${INSTALED_DEPENDENCIES_DIR}/lib)
+set(
+    BOOST_LIBS
+    boost_filesystem
+    boost_system
+    boost_thread
+    boost_log_setup
+    boost_log
+)
+
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${BOOST_INCLUDES}
+)
+
+link_directories(
+    ${BOOST_LINK}
+)
+
+set(
+	PROJECT_USED_LIBRARIES
+    ${BOOST_LIBS}
+)
+
+add_subdirectory(test)
