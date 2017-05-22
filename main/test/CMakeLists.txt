@@ -7,6 +7,7 @@ include_directories(
 set(
 	PROJECT_TESTS_SOURCES
 
+	JsonImporterTests.cpp
 	TestExample.cpp
 	Tests.cpp
 )
@@ -18,5 +19,6 @@ add_executable(
 
 target_link_libraries(
     ${PROJECT_TESTS}
+    ${PROJECT_LIB}
     ${PROJECT_USED_LIBRARIES}
 )
