@@ -1,10 +1,9 @@
 #include "DemoLevel.hpp"
-#include "Joystick.hpp"
 #include "res.hpp"
 #include <iostream>
 
 Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
-    : _bodyPair(ObjectType::DynamicBody, this)
+    : _bodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("circle"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -40,7 +39,7 @@ void Circle::Update()
 }
 
 Square::Square(b2World* world, const Vector2& pos, float scale = 1)
-    : _bodyPair(ObjectType::DynamicBody, this)
+    : _bodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -83,7 +82,7 @@ void Square::Update()
 }
 
 Static::Static(b2World* world, const RectF& rc)
-    : _bodyPair(ObjectType::Ground, this)
+    : _bodyPair(Service::ObjectType::Ground, this)
 {
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());

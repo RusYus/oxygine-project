@@ -62,17 +62,17 @@ class ContactListenerWrapper : public b2ContactListener
 {
     void BeginContact(b2Contact* contact)
     {
-        auto userDataA = static_cast<std::pair<ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
-        auto userDataB = static_cast<std::pair<ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
-        if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
-            || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
+        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
+            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
         {
-            if (userDataA->first == ObjectType::Player)
+            if (userDataA->first == Service::ObjectType::Player)
             {
                 static_cast<Player*>(userDataA->second)->SetNormal(contact->GetManifold()->localNormal);
             }
 
-            if (userDataB->first == ObjectType::Player)
+            if (userDataB->first == Service::ObjectType::Player)
             {
                 static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
             }
@@ -81,21 +81,21 @@ class ContactListenerWrapper : public b2ContactListener
 
     void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
     {
-        auto userDataA = static_cast<std::pair<ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
-        auto userDataB = static_cast<std::pair<ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
-        if ((userDataA->first == ObjectType::DynamicBody && userDataB->first == ObjectType::Player)
-            || (userDataA->first == ObjectType::Player && userDataB->first == ObjectType::DynamicBody))
+        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
+            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
         {
             contact->SetEnabled(false);
 
-            if (userDataA->first == ObjectType::DynamicBody)
+            if (userDataA->first == Service::ObjectType::DynamicBody)
             {
-                // For future use, need to add every ObjectType for each movable object
+                // For future use, need to add every Service::ObjectType for each movable object
                 // And cast it accordingly (move to function I think with a lot of switches).
                 static_cast<Circle*>(userDataA->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
             }
 
-            if (userDataB->first == ObjectType::DynamicBody)
+            if (userDataB->first == Service::ObjectType::DynamicBody)
             {
                 static_cast<Circle*>(userDataB->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
             }

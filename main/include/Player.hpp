@@ -42,5 +42,5 @@ private:
     const int _maxSpeed = PLAYER_MAX_SPEED;
     const int _jumpSpeed = PLAYER_JUMP_SPEED;
 
-    std::pair<ObjectType, Player*> _bodyPair;
+    std::pair<Service::ObjectType, Player*> _bodyPair;
 };

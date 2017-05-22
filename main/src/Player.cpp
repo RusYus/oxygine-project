@@ -1,13 +1,12 @@
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "res.hpp"
-#include "Joystick.hpp"
 #include "BasisEvents.hpp"
 
 #include <iostream>
 
 Player::Player()
-    : _bodyPair(ObjectType::Player, this)
+    : _bodyPair(Service::ObjectType::Player, this)
     , _normal(0, 0)
 {
 }
