@@ -23,7 +23,7 @@ public:
 
 public:
     b2Body* _body;
-    std::pair<ObjectType, Circle*> _bodyPair;
+    std::pair<Service::ObjectType, Circle*> _bodyPair;
 };
 
 class Square : public Sprite, public BasisObject
@@ -35,7 +35,7 @@ public:
 
 public:
     b2Body* _body;
-    std::pair<ObjectType, Square*> _bodyPair;
+    std::pair<Service::ObjectType, Square*> _bodyPair;
 };
 
 class Static : public Box9Sprite, public BasisObject
@@ -44,7 +44,7 @@ public:
     Static(b2World*, const RectF&);
 
 public:
-    std::pair<ObjectType, Static*> _bodyPair;
+    std::pair<Service::ObjectType, Static*> _bodyPair;
 };
 
 class DemoLevel: public Actor

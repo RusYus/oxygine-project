@@ -3,6 +3,14 @@
 namespace Service
 {
 
+enum class ObjectType
+{
+    Player,
+    DynamicBody,
+    Ground,
+    UNDEFINED,
+};
+
 struct Constants
 {
     // Scaling factor between project and box2d.
