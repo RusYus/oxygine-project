@@ -3,7 +3,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/optional.hpp>
-#include <iostream>
 
 namespace Service
 {
@@ -50,9 +49,8 @@ bool JsonImporter::LoadMap(const std::string& aMapPath)
     {
         boost::property_tree::read_json(aMapPath, root);
     }
-    catch(const boost::property_tree::json_parser_error& ex)
+    catch(const boost::property_tree::json_parser_error&)
     {
-        std::cout << "Message:" << ex.message() << std::endl;
         return false;
     }
 
