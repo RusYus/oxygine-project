@@ -82,7 +82,6 @@ BOOST_FIXTURE_TEST_CASE(ShouldProcessValidMapFile, JsonImporterFixture)
               "\"x\":0,\n"
               "\"y\":0\n"
              "}],\n"
-
         "\"nextobjectid\":1,\n"
         "\"orientation\":\"orthogonal\",\n"
         "\"renderorder\":\"left-up\",\n"
@@ -102,6 +101,84 @@ BOOST_FIXTURE_TEST_CASE(ShouldProcessValidMapFile, JsonImporterFixture)
 
     CreateMapFile(mapName, std::move(jsonText));
 
+    BOOST_CHECK(importer.LoadMap(mapName));
+
+    boost::filesystem::remove(mapName);
+
+    jsonText ="{ \"height\":6,\n"
+        "\"layers\":[\n"
+          "{\n"
+              "\"data\":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],\n"
+              "\"height\":6,\n"
+              "\"name\":\"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1\",\n"
+              "\"opacity\":1,\n"
+              "\"type\":\"tilelayer\",\n"
+              "\"visible\":true,\n"
+              "\"width\":4,\n"
+              "\"x\":0,\n"
+              "\"y\":0\n"
+             "},\n"
+            "{\n"
+            "\"draworder\":\"topdown\",\n"
+            "\"name\":\"\u0421\u043b\u043e\u0439 \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u0432 1\",\n"
+            "\"objects\":[\n"
+            "{\n"
+              "\"height\":25,\n"
+              "\"id\":1,\n"
+              "\"name\":\"name1\",\n"
+              "\"rotation\":0,\n"
+              "\"type\":\"\",\n"
+              "\"visible\":true,\n"
+              "\"width\":25,\n"
+              "\"x\":0,\n"
+              "\"y\":50\n"
+             "},\n"
+             "{\n"
+              "\"height\":25,\n"
+              "\"id\":2,\n"
+              "\"name\":\"name2\",\n"
+              "\"rotation\":0,\n"
+              "\"type\":\"\",\n"
+              "\"visible\":true,\n"
+              "\"width\":50,\n"
+              "\"x\":25,\n"
+              "\"y\":25\n"
+             "}, \n"
+             "{\n"
+              "\"height\":25,\n"
+              "\"id\":3,\n"
+              "\"name\":\"name3\",\n"
+              "\"rotation\":0,\n"
+              "\"type\":\"\",\n"
+              "\"visible\":true,\n"
+              "\"width\":25,\n"
+              "\"x\":75,\n"
+              "\"y\":100\n"
+             "}],\n"
+            "\"opacity\":1,\n"
+            "\"type\":\"objectgroup\",\n"
+            "\"visible\":true,\n"
+            "\"x\":0,\n"
+            "\"y\":0\n"
+            "}],\n"
+        "\"nextobjectid\":1,\n"
+        "\"orientation\":\"orthogonal\",\n"
+        "\"renderorder\":\"left-up\",\n"
+        "\"tileheight\":25,\n"
+        "\"tilesets\":[\n"
+        "{\n"
+              "\"firstgid\":1,\n"
+              "\"source\":\"untitled.tsx\"\n"
+             "}],\n"
+        "\"tilewidth\":25,\n"
+        "\"type\":\"map\",\n"
+        "\"version\":\"2017.05.16\",\n"
+        "\"width\":4\n"
+        "}\n";
+
+    CreateMapFile(mapName, std::move(jsonText));
+
+    // Json file with different layer order.
     BOOST_CHECK(importer.LoadMap(mapName));
 
     boost::filesystem::remove(mapName);
