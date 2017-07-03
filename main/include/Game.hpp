@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "MovementButton.hpp"
+#include "JsonImporter.hpp"
 
 #include <iostream>
 #include <vector>
@@ -113,13 +114,20 @@ public:
     {
         _world = new b2World(b2Vec2(0, 10));
 
+        _importer = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
+        if (!_importer->LoadMap("/home/ruslan/Work/Project/oxygine-project/build-proj.cmake-Desktop-Debug/1.json"))
+        {
+            std::cout << "Couldn't load map!" << std::endl;
+            return;
+        }
+
         _camera = new Camera(_eventProxy);
         _camera->attachTo(&content);
         _camera->setSize(getStage()->getSize());
         addChild(_camera);
 
         _levels.emplace_back(new DemoLevel);
-        _levels.back()->Init(_world);
+        _levels.back()->Init(_world, *_importer);
         addChild(_levels.back());
 
         _camera->setContent(_levels.back());
@@ -202,5 +210,6 @@ public:
     ContactFilterWrapper _cf;
     ContactListenerWrapper _cl;
     spBox2DDraw _debugDraw;
+    std::unique_ptr<Service::JsonImporter> _importer;
     std::vector<spDemoLevel> _levels;
 };

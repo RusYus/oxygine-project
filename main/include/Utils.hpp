@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Constants.hpp"
 #include "oxygine-framework.h"
+#include "Constants.hpp"
 #include "Box2D/Box2D.h"
 
 namespace Service

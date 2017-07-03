@@ -19,14 +19,31 @@ struct MapObject
 class JsonImporter
 {
 public:
+    JsonImporter() = default;
     bool LoadMap(const std::string&);
 
 public:
-    inline int GetMapHeight() const;
-    inline int GetMapWidth() const;
-    inline int GetTileHeight() const;
-    inline int GetTileWidth() const;
+    inline int GetMapHeight() const
+    {
+        return _mapHeight;
+    }
 
+    inline int GetMapWidth() const
+    {
+        return _mapWidth;
+    }
+
+    inline int GetTileHeight() const
+    {
+        return _tileHeight;
+    }
+
+    inline int GetTileWidth() const
+    {
+        return _tileWidth;
+    }
+
+    std::vector<int> _tilePositions;
 private:
     inline bool IsValidMap() const;
     inline bool IsValidTilesLayer() const;
@@ -41,7 +58,6 @@ private:
     int _mapWidth = -1;
     int _tileHeight = -1;
     int _tileWidth = -1;
-    std::vector<int> _tilePositions;
     std::vector<MapObject> _objects;
     std::string _orientation;
     std::string _renderorder;

@@ -7,26 +7,6 @@
 namespace Service
 {
 
-inline int JsonImporter::GetMapHeight() const
-{
-    return _mapHeight;
-}
-
-inline int JsonImporter::GetMapWidth() const
-{
-    return _mapWidth;
-}
-
-inline int JsonImporter::GetTileHeight() const
-{
-    return _tileHeight;
-}
-
-inline int JsonImporter::GetTileWidth() const
-{
-    return _tileWidth;
-}
-
 inline bool JsonImporter::IsValidTilesLayer() const
 {
     return (_mapHeight > 0 && _mapWidth > 0 && _tileHeight > 0 && _tileWidth > 0
@@ -116,6 +96,10 @@ bool JsonImporter::LoadMap(const std::string& aMapPath)
         boost::property_tree::read_json(aMapPath, root);
     }
     catch(const boost::property_tree::json_parser_error&)
+    {
+        return false;
+    }
+    catch (...)
     {
         return false;
     }
