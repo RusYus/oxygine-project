@@ -7,7 +7,6 @@
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-constexpr const float SCALE = 100.0f;
 constexpr const int PLAYER_MAX_SPEED = 900;
 constexpr const int PLAYER_JUMP_SPEED = 700;
 
@@ -29,6 +28,7 @@ public:
 
 private:
     void _Init(b2World*);
+    void ProcessKeyboard();
 
 private:
     spEventProxy mEventProxy;

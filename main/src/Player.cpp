@@ -1,3 +1,4 @@
+#include "SDL_keyboard.h"
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "res.hpp"
@@ -72,7 +73,7 @@ void Player::Jump(Event* /*aEvent*/)
     if (!mIsJumping)
     {
         mIsJumping = true;
-        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / SCALE));
+        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
 
         // This most likely not gonna work in bigger objects,
         // when jumping height less than their heights
@@ -93,7 +94,7 @@ void Player::Move(Event* aEvent)
         if (playerEvent->mIsMoving)
         {
             mDirection.x = playerEvent->mIsMovingRight ? mMaxSpeed : -mMaxSpeed;
-            mDirection.x /= SCALE;
+            mDirection.x /= Service::Constants::SCALE;
 
             // Moving opposing direction of collision
             // If collision more than one, need more normals
@@ -137,9 +138,34 @@ void Player::SetZeroNormal()
     mNormal.SetZero();
 }
 
+void Player::ProcessKeyboard()
+{
+    const Uint8* states = SDL_GetKeyboardState(nullptr);
+    const auto speed = mMaxSpeed / Service::Constants::SCALE;
+
+    if (states[SDL_SCANCODE_LEFT])
+    {
+        mDirection.x = -speed;
+    }
+    else if (states[SDL_SCANCODE_RIGHT])
+    {
+        mDirection.x = speed;
+    }
+    else
+    {
+        mDirection.x = 0;
+    }
+
+    if (states[SDL_SCANCODE_SPACE])
+    {
+        Jump(nullptr);
+    }
+}
+
 void Player::Update(const UpdateState& /*us*/)
 {
-//    std::cout << _direction.x << " : " << _direction.y << std::endl;
+    ProcessKeyboard();
+
     mDirection.y = _body->GetLinearVelocity().y;
 
     // Reseting direction, if collision in place.
@@ -147,6 +173,7 @@ void Player::Update(const UpdateState& /*us*/)
     {
         mDirection.x = 0;
     }
+
     _body->SetLinearVelocity(mDirection);
 
     if (_body->GetLinearVelocity().y == .0f)
