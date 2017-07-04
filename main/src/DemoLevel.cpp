@@ -111,6 +111,31 @@ Static::Static(b2World* world, const RectF& rc)
     groundBody->SetUserData(&mBodyPair);
 }
 
+Ground::Ground(b2World* world, const RectF& rc)
+    : mBodyPair(Service::ObjectType::Ground, this)
+{
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position = Service::Utils::Convert(rc.getCenter());
+
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+
+    b2PolygonShape groundBox;
+    b2Vec2 sz = Service::Utils::Convert(rc.getSize() / 2);
+    groundBox.SetAsBox(sz.x, sz.y);
+
+    b2Filter filter;
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0003;
+    filter.groupIndex = 3;
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = 0.0f;
+    fixtureDef.shape = &groundBox;
+    fixtureDef.filter = filter;
+    groundBody->CreateFixture(&fixtureDef);
+    groundBody->SetUserData(&mBodyPair);
+}
+
 void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 {
     mWorld = aWorld;
@@ -123,7 +148,7 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
-    spStatic ground = new Static(mWorld, RectF(getWidth() * 5, getHeight() - 10, getWidth() * 10, 30));
+    spStatic ground = new Static(mWorld, RectF(getWidth() * 5, getHeight() / 2, getWidth() * 10, 30));
     addChild(ground);
 
     spSquare square = new Square(mWorld, Vector2(200, 300));
@@ -151,6 +176,11 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     src.init(fb, true);
 
     CreateTileSetTexture(src);
+
+    for (const MapObject& object : mMapProperty.mObjects)
+    {
+        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+    }
 }
 
 void DemoLevel::doUpdate(const UpdateState& /*us*/)

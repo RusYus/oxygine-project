@@ -47,6 +47,15 @@ public:
     std::pair<Service::ObjectType, Static*> mBodyPair;
 };
 
+class Ground : public BasisObject
+{
+public:
+    Ground(b2World*, const RectF&);
+
+public:
+    std::pair<Service::ObjectType, Ground*> mBodyPair;
+};
+
 class DemoLevel: public Actor
 {
 public:
@@ -66,4 +75,5 @@ private:
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;
     std::forward_list<spSquare> mSquares;
+    std::vector<std::unique_ptr<Ground>> mObjects;
 };
