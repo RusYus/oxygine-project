@@ -1,14 +1,13 @@
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "res.hpp"
-#include "Joystick.hpp"
 #include "BasisEvents.hpp"
 
 #include <iostream>
 
 Player::Player()
-    : _bodyPair(ObjectType::Player, this)
-    , _normal(0, 0)
+    : mBodyPair(Service::ObjectType::Player, this)
+    , mNormal(0, 0)
 {
 }
 void Player::_Init(b2World* aWorld)
@@ -16,15 +15,15 @@ void Player::_Init(b2World* aWorld)
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position = Service::Utils::Convert(_view->getPosition());
+    bodyDef.position = Service::Utils::Convert(mView->getPosition());
 
     _body = aWorld->CreateBody(&bodyDef);
 
     setUserData(_body);
 
     b2PolygonShape shape;
-    float32 width = _box->getWidth() / Service::Constants::SCALE / 2.0f;
-    float32 height = _box->getHeight() / Service::Constants::SCALE / 2.0f;
+    float32 width = mBox->getWidth() / Service::Constants::SCALE / 2.0f;
+    float32 height = mBox->getHeight() / Service::Constants::SCALE / 2.0f;
     shape.SetAsBox(width, height);
 
     b2Filter filter;
@@ -39,41 +38,41 @@ void Player::_Init(b2World* aWorld)
     fixtureDef.filter = filter;
 
     _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(&_bodyPair);
+    _body->SetUserData(&mBodyPair);
 }
 
 spActor Player::GetView() const
 {
-    return _view;
+    return mView;
 }
 
 void Player::Init(b2World* aWorld, spEventProxy aEventProxy)
 {
-    _view = new Actor;
-    _view->setPosition(getStage()->getSize() / 2);
+    mView = new Actor;
+    mView->setPosition(getStage()->getSize() / 2);
 
-    _box = new Sprite;
-    _box->setResAnim(res::ui.getResAnim("player"));
-    _box->attachTo(_view);
-    _box->setAnchor(Vector2(0.5f, 0.5f));
+    mBox = new Sprite;
+    mBox->setResAnim(res::ui.getResAnim("player"));
+    mBox->attachTo(mView);
+    mBox->setAnchor(Vector2(0.5f, 0.5f));
 
     _Init(aWorld);
 
-    _eventProxy = aEventProxy;
+    mEventProxy = aEventProxy;
 
-    _eventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::Move));
+    mEventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::Move));
 
-    _eventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
+    mEventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
-    _direction = _body->GetLinearVelocity();
+    mDirection = _body->GetLinearVelocity();
 }
 
 void Player::Jump(Event* /*aEvent*/)
 {
-    if (!_isJumping)
+    if (!mIsJumping)
     {
-        _isJumping = true;
-        _body->SetLinearVelocity(b2Vec2(_direction.x, -_jumpSpeed / SCALE));
+        mIsJumping = true;
+        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / SCALE));
 
         // This most likely not gonna work in bigger objects,
         // when jumping height less than their heights
@@ -89,75 +88,75 @@ void Player::Move(Event* aEvent)
     {
         PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
 
-        _direction = _body->GetLinearVelocity();
+        mDirection = _body->GetLinearVelocity();
 
-        if (playerEvent->_isMoving)
+        if (playerEvent->mIsMoving)
         {
-            _direction.x = playerEvent->_isMovingRight ? _maxSpeed : -_maxSpeed;
-            _direction.x /= SCALE;
+            mDirection.x = playerEvent->mIsMovingRight ? mMaxSpeed : -mMaxSpeed;
+            mDirection.x /= SCALE;
 
             // Moving opposing direction of collision
             // If collision more than one, need more normals
             // Therefore, this is not gonna work
-            if ((playerEvent->_isMovingRight && _normal.x < 0)
-                || (!playerEvent->_isMovingRight && _normal.x > 0))
+            if ((playerEvent->mIsMovingRight && mNormal.x < 0)
+                || (!playerEvent->mIsMovingRight && mNormal.x > 0))
             {
                 SetZeroNormal();
             }
         }
 
         // Collision took place, or move button released.
-        if (!playerEvent->_isMoving
-            || (playerEvent->_isMovingRight && _normal.x > 0)
-            || (!playerEvent->_isMovingRight && _normal.x < 0))
+        if (!playerEvent->mIsMoving
+            || (playerEvent->mIsMovingRight && mNormal.x > 0)
+            || (!playerEvent->mIsMovingRight && mNormal.x < 0))
         {
-            _direction.x = 0;
+            mDirection.x = 0;
         }
 
-        _body->SetLinearVelocity(_direction);
+        _body->SetLinearVelocity(mDirection);
     }
 }
 
 float Player::GetX() const
 {
-    return (_view.get() ? _view->getX() : .0f);
+    return (mView.get() ? mView->getX() : .0f);
 }
 
 float Player::GetY() const
 {
-    return (_view.get() ? _view->getY() : .0f);
+    return (mView.get() ? mView->getY() : .0f);
 }
 
 void Player::SetNormal(const b2Vec2 aNormal)
 {
-    _normal = aNormal;
+    mNormal = aNormal;
 }
 
 void Player::SetZeroNormal()
 {
-    _normal.SetZero();
+    mNormal.SetZero();
 }
 
 void Player::Update(const UpdateState& /*us*/)
 {
 //    std::cout << _direction.x << " : " << _direction.y << std::endl;
-    _direction.y = _body->GetLinearVelocity().y;
+    mDirection.y = _body->GetLinearVelocity().y;
 
     // Reseting direction, if collision in place.
-    if (_normal.x != 0)
+    if (mNormal.x != 0)
     {
-        _direction.x = 0;
+        mDirection.x = 0;
     }
-    _body->SetLinearVelocity(_direction);
+    _body->SetLinearVelocity(mDirection);
 
     if (_body->GetLinearVelocity().y == .0f)
     {
-        _isJumping = false;
+        mIsJumping = false;
     }
 
     b2Vec2 b2pos = _body->GetPosition();
     Vector2 pos = Service::Utils::Convert(b2pos);
-    CameraMovementEvent event(pos - _view->getPosition());
-    _view->setPosition(pos);
-    _eventProxy->dispatchEvent(&event);
+    CameraMovementEvent event(pos - mView->getPosition());
+    mView->setPosition(pos);
+    mEventProxy->dispatchEvent(&event);
 }

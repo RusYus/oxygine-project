@@ -2,43 +2,41 @@
 
 #include "Event.h"
 
-using namespace oxygine;
-
-class CameraMovementEvent : public Event
+class CameraMovementEvent : public oxygine::Event
 {
 public:
-    CameraMovementEvent(Vector2 aMovement)
+    CameraMovementEvent(oxygine::Vector2 aMovement)
         : Event(EVENT)
-        , _movement(aMovement)
+        , mMovement(aMovement)
     {
     }
 
 public:
     enum { EVENT = eventID('C','a','m','M') };
-    Vector2 _movement;
+    oxygine::Vector2 mMovement;
 };
 
-class PlayerMoveEvent : public Event
+class PlayerMoveEvent : public oxygine::Event
 {
 public:
     PlayerMoveEvent(bool aMoving = false, bool aMovingRight = true)
         : Event(EVENT)
-        , _isMoving(aMoving)
-        , _isMovingRight(aMovingRight)
+        , mIsMoving(aMoving)
+        , mIsMovingRight(aMovingRight)
     {
     }
 
 public:
     enum { EVENT = eventID('P','l','a','M') };
-    bool _isMoving;
-    bool _isMovingRight;
+    bool mIsMoving;
+    bool mIsMovingRight;
 };
 
-class PlayerJumpEvent : public Event
+class PlayerJumpEvent : public oxygine::Event
 {
 public:
     PlayerJumpEvent()
-        : Event(EVENT)
+        : oxygine::Event(EVENT)
     {
     }
 

@@ -6,27 +6,25 @@
 
 #include <iostream>
 
-using namespace oxygine;
-
 DECLARE_SMART(MovementButton, spMoveButton);
-class MovementButton : public Button
+class MovementButton : public oxygine::Button
 {
 public:
     MovementButton(bool aRight, spEventProxy aEventProxy)
-        : _isRight(aRight)
+        : mIsRight(aRight)
     {
-        _eventProxy = aEventProxy;
+        mEventProxy = aEventProxy;
 
-        addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &MovementButton::Move));
-        addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &MovementButton::Stop));
+        addEventListener(oxygine::TouchEvent::TOUCH_DOWN, CLOSURE(this, &MovementButton::Move));
+        addEventListener(oxygine::TouchEvent::TOUCH_UP, CLOSURE(this, &MovementButton::Stop));
     }
 
 private:
     void Move(Event*)
     {
-        if (!_isMoving)
+        if (!mIsMoving)
         {
-            _isMoving = true;
+            mIsMoving = true;
         }
 
         SendEvent();
@@ -34,9 +32,9 @@ private:
 
     void Stop(Event*)
     {
-        if (_isMoving)
+        if (mIsMoving)
         {
-            _isMoving = false;
+            mIsMoving = false;
         }
 
         SendEvent();
@@ -45,25 +43,25 @@ private:
     void SendEvent()
     {
         std::cout << "Sending event..." << std::endl;
-        PlayerMoveEvent event(_isMoving, _isRight);
-        _eventProxy->dispatchEvent(&event);
+        PlayerMoveEvent event(mIsMoving, mIsRight);
+        mEventProxy->dispatchEvent(&event);
     }
 
 private:
-    spEventProxy _eventProxy;
-    bool _isMoving;
-    bool _isRight;
+    spEventProxy mEventProxy;
+    bool mIsMoving;
+    bool mIsRight;
 };
 
 DECLARE_SMART(JumpButton, spJumpButton);
-class JumpButton : public Button
+class JumpButton : public oxygine::Button
 {
 public:
     JumpButton(spEventProxy aEventProxy)
     {
-        _eventProxy = aEventProxy;
+        mEventProxy = aEventProxy;
 
-        addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &JumpButton::Jump));
+        addEventListener(oxygine::TouchEvent::TOUCH_DOWN, CLOSURE(this, &JumpButton::Jump));
     }
 
 private:
@@ -71,9 +69,9 @@ private:
     {
         std::cout << "Sending event..." << std::endl;
         PlayerJumpEvent event;
-        _eventProxy->dispatchEvent(&event);
+        mEventProxy->dispatchEvent(&event);
     }
 
 private:
-    spEventProxy _eventProxy;
+    spEventProxy mEventProxy;
 };

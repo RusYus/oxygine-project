@@ -17,31 +17,33 @@ set(PROJECT_LIB ProjectLib)
 
 set(
     PROJECT_HEADERS
-	include/BasisCamera.hpp
-	include/BasisEvents.hpp
-	include/BasisObject.hpp
+    include/BasisCamera.hpp
+    include/BasisEventProxy.hpp
+    include/BasisEvents.hpp
+    include/BasisObject.hpp
     include/Box2DDebugDraw.hpp
     include/Constants.hpp
-	include/DemoLevel.hpp
-	include/example.hpp
+    include/DemoLevel.hpp
+    include/example.hpp
     include/Game.hpp
+    include/JsonImporter.hpp
+    include/MapProperty.hpp
     include/MovementButton.hpp
-	include/Player.hpp
-    include/BasisEventProxy.hpp
-	include/Joystick.hpp
-	include/res.hpp
-	include/Utils.hpp
+    include/Player.hpp
+    include/res.hpp
+    include/Utils.hpp
 )
 
 set(
 	PROJECT_SOURCES
-	src/BasisCamera.cpp
-	src/Box2DDebugDraw.cpp
-	src/DemoLevel.cpp
-	src/example.cpp
-	src/main.cpp
-	src/Player.cpp
-	src/res.cpp
+    src/BasisCamera.cpp
+    src/Box2DDebugDraw.cpp
+    src/DemoLevel.cpp
+    src/example.cpp
+    src/JsonImporter.cpp
+    src/main.cpp
+    src/Player.cpp
+    src/res.cpp
 )
 
 add_library(
