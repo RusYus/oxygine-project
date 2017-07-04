@@ -27,6 +27,7 @@ set(
     include/example.hpp
     include/Game.hpp
     include/JsonImporter.hpp
+    include/MapProperty.hpp
     include/MovementButton.hpp
     include/Player.hpp
     include/res.hpp

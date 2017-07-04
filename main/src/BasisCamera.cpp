@@ -7,29 +7,29 @@ Camera::Camera(spEventProxy aEventProxy)
 {
     aEventProxy->addEventListener(CameraMovementEvent::EVENT, CLOSURE(this, &Camera::onEvent));
 
-    _transform.identity();
+    mTransform.identity();
 }
 
-void Camera::setContent(spActor content)
+void Camera::setContent(oxygine::spActor content)
 {
-    _content = content;
+    mContent = content;
     addChild(content);
 }
 
-void Camera::onEvent(Event* aEvent)
+void Camera::onEvent(oxygine::Event* aEvent)
 {
-    CameraMovementEvent* cameraEvent = safeCast<CameraMovementEvent*>(aEvent);
-    const Vector2& pos = cameraEvent->_movement;
-    _transform.translate(-Vector3(pos.x, pos.y, 0));
+    CameraMovementEvent* cameraEvent = oxygine::safeCast<CameraMovementEvent*>(aEvent);
+    const oxygine::Vector2& pos = cameraEvent->mMovement;
+    mTransform.translate(-oxygine::Vector3(pos.x, pos.y, 0));
     update();
 }
 
-void Camera::doUpdate(const UpdateState& /*us*/)
+void Camera::doUpdate(const oxygine::UpdateState& /*us*/)
 {
 }
 
 void Camera::update()
 {
-    Transform tr(_transform);
-    _content->setTransform(tr);
+    oxygine::Transform tr(mTransform);
+    mContent->setTransform(tr);
 }

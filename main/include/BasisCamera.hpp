@@ -5,27 +5,26 @@
 #include "oxygine-framework.h"
 
 #include <map>
-using namespace oxygine;
 
 DECLARE_SMART(Camera, spCamera);
-class Camera : public Actor
+class Camera : public oxygine::Actor
 {
 
 public:
     struct touch
     {
-        Vector2 current;
-        Vector2 previous;
+        oxygine::Vector2 current;
+        oxygine::Vector2 previous;
     };
 
     Camera(spEventProxy);
 
-    void setContent(spActor);
-    void onEvent(Event*);
-    void doUpdate(const UpdateState&);
+    void setContent(oxygine::spActor);
+    void onEvent(oxygine::Event*);
+    void doUpdate(const oxygine::UpdateState&);
     void update();
 
-    std::map<int, touch> _touches;
-    spActor _content;
-    Matrix _transform;
+    std::map<int, touch> mTouches;
+    oxygine::spActor mContent;
+    oxygine::Matrix mTransform;
 };

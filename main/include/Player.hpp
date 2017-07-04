@@ -7,22 +7,20 @@
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-using namespace oxygine;
-
 constexpr const float SCALE = 100.0f;
 constexpr const int PLAYER_MAX_SPEED = 900;
 constexpr const int PLAYER_JUMP_SPEED = 700;
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public Object, public BasisObject
+class Player: public oxygine::Object, public BasisObject
 {
 public:
     Player();
     void Init(b2World*, spEventProxy);
-    void Update(const UpdateState&);
-    spActor GetView() const;
-    void Move(Event*);
-    void Jump(Event*);
+    void Update(const oxygine::UpdateState&);
+    oxygine::spActor GetView() const;
+    void Move(oxygine::Event*);
+    void Jump(oxygine::Event*);
     inline float GetX() const;
     inline float GetY() const;
     void SetNormal(const b2Vec2);
@@ -33,14 +31,14 @@ private:
     void _Init(b2World*);
 
 private:
-    spEventProxy _eventProxy;
-    spActor _view;
-    spSprite _box;
-    b2Vec2 _direction;
-    b2Vec2 _normal;
-    bool _isJumping;
-    const int _maxSpeed = PLAYER_MAX_SPEED;
-    const int _jumpSpeed = PLAYER_JUMP_SPEED;
+    spEventProxy mEventProxy;
+    oxygine::spActor mView;
+    oxygine::spSprite mBox;
+    b2Vec2 mDirection;
+    b2Vec2 mNormal;
+    bool mIsJumping;
+    const int mMaxSpeed = PLAYER_MAX_SPEED;
+    const int mJumpSpeed = PLAYER_JUMP_SPEED;
 
-    std::pair<Service::ObjectType, Player*> _bodyPair;
+    std::pair<Service::ObjectType, Player*> mBodyPair;
 };

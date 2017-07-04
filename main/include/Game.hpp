@@ -7,11 +7,10 @@
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "MovementButton.hpp"
+#include "JsonImporter.hpp"
 
 #include <iostream>
 #include <vector>
-
-using namespace oxygine;
 
 class Content: public Actor
 {
@@ -92,12 +91,12 @@ class ContactListenerWrapper : public b2ContactListener
             {
                 // For future use, need to add every Service::ObjectType for each movable object
                 // And cast it accordingly (move to function I think with a lot of switches).
-                static_cast<Circle*>(userDataA->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+                static_cast<Circle*>(userDataA->second)->mBody->SetLinearVelocity(b2Vec2(0, 0));
             }
 
             if (userDataB->first == Service::ObjectType::DynamicBody)
             {
-                static_cast<Circle*>(userDataB->second)->_body->SetLinearVelocity(b2Vec2(0, 0));
+                static_cast<Circle*>(userDataB->second)->mBody->SetLinearVelocity(b2Vec2(0, 0));
             }
         }
     }
@@ -108,26 +107,34 @@ class Game: public Actor
 {
 public:
     Game()
-        : content()
-        , _eventProxy(new EventProxy)
+        : mContent()
+        , mEventProxy(new EventProxy)
     {
-        _world = new b2World(b2Vec2(0, 10));
+        mWorld = new b2World(b2Vec2(0, 10));
 
-        _camera = new Camera(_eventProxy);
-        _camera->attachTo(&content);
-        _camera->setSize(getStage()->getSize());
-        addChild(_camera);
+        MapProperty mapProperty;
+        mImporter = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
+        if (!mImporter->LoadMap("1.json", mapProperty))
+        {
+            std::cout << "Couldn't load map!" << std::endl;
+            return;
+        }
 
-        _levels.emplace_back(new DemoLevel);
-        _levels.back()->Init(_world);
-        addChild(_levels.back());
+        mCamera = new Camera(mEventProxy);
+        mCamera->attachTo(&mContent);
+        mCamera->setSize(getStage()->getSize());
+        addChild(mCamera);
 
-        _camera->setContent(_levels.back());
+        mLevels.emplace_back(new DemoLevel);
+        mLevels.back()->Init(mWorld, std::move(mapProperty));
+        addChild(mLevels.back());
+
+        mCamera->setContent(mLevels.back());
 
         //create player ship
-        _player = new Player;
-        _player->Init(_world, _eventProxy);
-        _levels.back()->addChild(_player->GetView());
+        mPlayer = new Player;
+        mPlayer->Init(mWorld, mEventProxy);
+        mLevels.back()->addChild(mPlayer->GetView());
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
@@ -140,36 +147,36 @@ public:
         btn->attachTo(this);
         btn->addEventListener(TouchEvent::CLICK, CLOSURE(this, &Game::ShowHideDebug));
 
-        _moveLeft = new MovementButton(false, _eventProxy);
-        _moveLeft->setWidth(100);
-        _moveLeft->setHeight(100);
-        _moveLeft->setX(10);
-        _moveLeft->setY(getStage()->getHeight() - _moveLeft->getHeight() - 10);
-        _moveLeft->attachTo(this);
+        mMoveLeft = new MovementButton(false, mEventProxy);
+        mMoveLeft->setWidth(100);
+        mMoveLeft->setHeight(100);
+        mMoveLeft->setX(10);
+        mMoveLeft->setY(getStage()->getHeight() - mMoveLeft->getHeight() - 10);
+        mMoveLeft->attachTo(this);
 
-        _moveRight = new MovementButton(true, _eventProxy);
-        _moveRight->setWidth(100);
-        _moveRight->setHeight(100);
-        _moveRight->setX(10 + _moveLeft->getX() + _moveLeft->getWidth());
-        _moveRight->setY(_moveLeft->getY());
-        _moveRight->attachTo(this);
+        mMoveRight = new MovementButton(true, mEventProxy);
+        mMoveRight->setWidth(100);
+        mMoveRight->setHeight(100);
+        mMoveRight->setX(10 + mMoveLeft->getX() + mMoveLeft->getWidth());
+        mMoveRight->setY(mMoveLeft->getY());
+        mMoveRight->attachTo(this);
 
-        _jump = new JumpButton(_eventProxy);
-        _jump->setWidth(100);
-        _jump->setHeight(100);
-        _jump->setX(getStage()->getWidth() - _jump->getWidth() - 10);
-        _jump->setY(getStage()->getHeight() - _jump->getHeight() - 10);
-        _jump->attachTo(this);
+        mJump = new JumpButton(mEventProxy);
+        mJump->setWidth(100);
+        mJump->setHeight(100);
+        mJump->setX(getStage()->getWidth() - mJump->getWidth() - 10);
+        mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
+        mJump->attachTo(this);
 
-        _world->SetContactFilter(&_cf);
-        _world->SetContactListener(&_cl);
+        mWorld->SetContactFilter(&mCf);
+        mWorld->SetContactListener(&mCl);
     }
 
     void doUpdate(const UpdateState& us)
     {
         //in real project you should make steps with fixed dt, check box2d documentation
-        _world->Step(us.dt / 1000.0f, 6, 2);
-        _player->Update(us);
+        mWorld->Step(us.dt / 1000.0f, 6, 2);
+        mPlayer->Update(us);
     }
 
     // TODO : Not working right now.
@@ -177,30 +184,31 @@ public:
     {
         TouchEvent* te = safeCast<TouchEvent*>(event);
         te->stopsImmediatePropagation = true;
-        if (_debugDraw)
+        if (mDebugDraw)
         {
-            _debugDraw->detach();
-            _debugDraw = 0;
+            mDebugDraw->detach();
+            mDebugDraw = 0;
             return;
         }
 
-        _debugDraw = new Box2DDraw;
-        _debugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
-        _debugDraw->attachTo(_levels.back());
-        _debugDraw->setWorld(100, _world);
-        _debugDraw->setPriority(1);
+        mDebugDraw = new Box2DDraw;
+        mDebugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+        mDebugDraw->attachTo(mLevels.back());
+        mDebugDraw->setWorld(100, mWorld);
+        mDebugDraw->setPriority(1);
     }
 
-    spEventProxy _eventProxy;
-    b2World* _world;
-    spPlayer _player;
-    spCamera _camera;
-    spMoveButton _moveLeft;
-    spMoveButton _moveRight;
-    spJumpButton _jump;
-    Content content;
-    ContactFilterWrapper _cf;
-    ContactListenerWrapper _cl;
-    spBox2DDraw _debugDraw;
-    std::vector<spDemoLevel> _levels;
+    spEventProxy mEventProxy;
+    b2World* mWorld;
+    spPlayer mPlayer;
+    spCamera mCamera;
+    spMoveButton mMoveLeft;
+    spMoveButton mMoveRight;
+    spJumpButton mJump;
+    Content mContent;
+    ContactFilterWrapper mCf;
+    ContactListenerWrapper mCl;
+    spBox2DDraw mDebugDraw;
+    std::unique_ptr<Service::JsonImporter> mImporter;
+    std::vector<spDemoLevel> mLevels;
 };

@@ -100,8 +100,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldProcessValidMapFile, JsonImporterFixture)
     const std::string mapName = "valid_map.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(mapName));
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty));
 
     boost::filesystem::remove(mapName);
 
@@ -179,7 +180,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldProcessValidMapFile, JsonImporterFixture)
     CreateMapFile(mapName, std::move(jsonText));
 
     // Json file with different layer order.
-    BOOST_CHECK(importer.LoadMap(mapName));
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty));
 
     boost::filesystem::remove(mapName);
 }
@@ -217,8 +218,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotProcessMapWithInvalidTilePositions, JsonImporte
     const std::string mapName = "invalid_tile_positions.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(mapName)== false);
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty)== false);
 
     boost::filesystem::remove(mapName);
 }
@@ -256,8 +258,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotProcessMapWithInvalidParams, JsonImporterFixtur
     const std::string mapName = "invalid_params.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(mapName) == false);
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty) == false);
 
     boost::filesystem::remove(mapName);
 }
@@ -269,8 +272,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotProcessMapWithInvalidJsonFormat, JsonImporterFi
     const std::string mapName = "invalid_json.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(mapName) == false);
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty) == false);
 
     boost::filesystem::remove(mapName);
 }
@@ -284,8 +288,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotProcessMapIfDoesntExist, JsonImporterFixture)
     const std::string noMapName = "no_file.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(noMapName) == false);
+    BOOST_CHECK(importer.LoadMap(noMapName, mapProperty) == false);
 
     boost::filesystem::remove(mapName);
 }
@@ -322,8 +327,9 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotProcessMapWithEmptyLayerOrTilePositions, JsonIm
     const std::string mapName = "layer-tile_pos-absent.json";
 
     CreateMapFile(mapName, std::move(jsonText));
+    MapProperty mapProperty;
 
-    BOOST_CHECK(importer.LoadMap(mapName) == false);
+    BOOST_CHECK(importer.LoadMap(mapName, mapProperty) == false);
 
     boost::filesystem::remove(mapName);
 }

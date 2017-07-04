@@ -2,9 +2,7 @@
 
 #include "Actor.h"
 
-using namespace oxygine;
-
 DECLARE_SMART(EventProxy, spEventProxy);
-class EventProxy : public Actor
+class EventProxy : public oxygine::Actor
 {
 };
