@@ -1,8 +1,9 @@
+#include "Material.h"
 #include "DemoLevel.hpp"
 #include <iostream>
 
 Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
-    : _bodyPair(Service::ObjectType::DynamicBody, this)
+    : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("circle"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -12,9 +13,9 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = Service::Utils::Convert(pos);
 
-    _body = world->CreateBody(&bodyDef);
+    mBody = world->CreateBody(&bodyDef);
 
-    setUserData(_body);
+    setUserData(mBody);
 
     setScale(scale);
 
@@ -26,19 +27,19 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
 
-    _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(&_bodyPair);
+    mBody->CreateFixture(&fixtureDef);
+    mBody->SetUserData(&mBodyPair);
 }
 
 void Circle::Update()
 {
-    const b2Vec2& pos = _body->GetPosition();
+    const b2Vec2& pos = mBody->GetPosition();
     setPosition(Vector2(pos.x * 100, pos.y * 100));
-    setRotation(_body->GetAngle());
+    setRotation(mBody->GetAngle());
 }
 
 Square::Square(b2World* world, const Vector2& pos, float scale = 1)
-    : _bodyPair(Service::ObjectType::DynamicBody, this)
+    : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -49,9 +50,9 @@ Square::Square(b2World* world, const Vector2& pos, float scale = 1)
     bodyDef.position = Service::Utils::Convert(pos);
     bodyDef.fixedRotation = true;
 
-    _body = world->CreateBody(&bodyDef);
+    mBody = world->CreateBody(&bodyDef);
 
-    setUserData(_body);
+    setUserData(mBody);
 
     setScale(scale);
 
@@ -69,19 +70,19 @@ Square::Square(b2World* world, const Vector2& pos, float scale = 1)
     fixtureDef.friction = 0.3f;
     fixtureDef.filter = filter;
 
-    _body->CreateFixture(&fixtureDef);
-    _body->SetUserData(&_bodyPair);
+    mBody->CreateFixture(&fixtureDef);
+    mBody->SetUserData(&mBodyPair);
 }
 
 void Square::Update()
 {
-    const b2Vec2& pos = _body->GetPosition();
+    const b2Vec2& pos = mBody->GetPosition();
     setPosition(Vector2(pos.x * 100, pos.y * 100));
-    setRotation(_body->GetAngle());
+    setRotation(mBody->GetAngle());
 }
 
 Static::Static(b2World* world, const RectF& rc)
-    : _bodyPair(Service::ObjectType::Ground, this)
+    : mBodyPair(Service::ObjectType::Ground, this)
 {
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());
@@ -107,16 +108,12 @@ Static::Static(b2World* world, const RectF& rc)
     fixtureDef.shape = &groundBox;
     fixtureDef.filter = filter;
     groundBody->CreateFixture(&fixtureDef);
-    groundBody->SetUserData(&_bodyPair);
+    groundBody->SetUserData(&mBodyPair);
 }
 
-DemoLevel::DemoLevel()
+void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 {
-}
-
-void DemoLevel::Init(b2World* aWorld, Service::JsonImporter& aImporter)
-{
-    _world = aWorld;
+    mWorld = aWorld;
     //create background
 //    spSprite sky = new Sprite;
 //    sky->setResAnim(res::ui.getResAnim("sky"));
@@ -125,29 +122,26 @@ void DemoLevel::Init(b2World* aWorld, Service::JsonImporter& aImporter)
 //    setSize(getStage()->getSize().x*3, getStage()->getSize().y*2);
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
-    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
+//    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
+    spStatic ground = new Static(mWorld, RectF(getWidth() * 5, getHeight() - 10, getWidth() * 10, 30));
     addChild(ground);
 
-    spSquare square = new Square(_world, Vector2(200, 300));
+    spSquare square = new Square(mWorld, Vector2(200, 300));
     square->attachTo(this);
-    _squares.emplace_front(std::move(square));
+    mSquares.emplace_front(std::move(square));
 
-    spSquare square2 = new Square(_world, Vector2(650, 300));
+    spSquare square2 = new Square(mWorld, Vector2(650, 300));
     square2->attachTo(this);
-    _squares.emplace_front(std::move(square2));
+    mSquares.emplace_front(std::move(square2));
 
-    spSquare square3 = new Square(_world, Vector2(1100, 300));
+    spSquare square3 = new Square(mWorld, Vector2(1100, 300));
     square3->attachTo(this);
-    _squares.emplace_front(std::move(square3));
+    mSquares.emplace_front(std::move(square3));
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
     // ------- TILED ---------
-    _tileWidth = aImporter.GetTileWidth();
-    _tileHeight = aImporter.GetTileHeight();
-    _mapWidth = aImporter.GetMapWidth();
-    _mapHeight = aImporter.GetMapHeight();
-    _tilePositions = aImporter._tilePositions;
+    mMapProperty = std::move(aMapProperty);
 
     file::buffer fb;
     const std::string pathToTexture = "buch-outdoor.png";
@@ -161,7 +155,7 @@ void DemoLevel::Init(b2World* aWorld, Service::JsonImporter& aImporter)
 
 void DemoLevel::doUpdate(const UpdateState& /*us*/)
 {
-    for(auto& circle : _circles)
+    for(auto& circle : mCircles)
     {
         assert(circle->IsAlive);
 
@@ -169,20 +163,20 @@ void DemoLevel::doUpdate(const UpdateState& /*us*/)
 
         if (circle->getY() > getHeight() + 50)
         {
-            circle->_body->SetUserData(0);
-            _world->DestroyBody(circle->_body);
+            circle->mBody->SetUserData(0);
+            mWorld->DestroyBody(circle->mBody);
 
             circle->detach();
             circle->IsAlive = false;
         }
     }
 
-    for(auto& square : _squares)
+    for(auto& square : mSquares)
     {
         square->Update();
     }
 
-    _circles.remove_if([](spCircle circle) { return !circle->IsAlive; });
+    mCircles.remove_if([](spCircle circle) { return !circle->IsAlive; });
 }
 
 void DemoLevel::click(Event* event)
@@ -196,27 +190,27 @@ void DemoLevel::click(Event* event)
 //    if (event->target.get() == this)
 //    {
         std::cout << "Creating circle!" << std::endl;
-        spCircle circle = new Circle(_world, te->localPosition);
+        spCircle circle = new Circle(mWorld, te->localPosition);
         circle->attachTo(this);
-        _circles.push_front(circle);
+        mCircles.push_front(circle);
 //    }
 }
 
 void DemoLevel::CreateTileSetTexture(Image& src)
 {
     // Size of batch file texture in tiles.
-    cols = src.getWidth() / _tileWidth;
-    rows = src.getHeight() / _tileHeight;
+    mMapProperty.mTilesetCols = src.getWidth() / mMapProperty.mTileWidth;
+    mMapProperty.mTilesetRows = src.getHeight() / mMapProperty.mTileHeight;
 
     Image dest;
-    dest.init(cols * (_tileWidth + 2), rows * (_tileHeight * 2), TF_R8G8B8A8);
+    dest.init(mMapProperty.mTilesetCols * (mMapProperty.mTileWidth + 2), mMapProperty.mTilesetRows * (mMapProperty.mTileHeight * 2), TF_R8G8B8A8);
 
     //http://stackoverflow.com/questions/19611745/opengl-black-lines-in-between-tiles
-    for (int y = 0; y < rows; ++y)
+    for (int y = 0; y < mMapProperty.mTilesetRows; ++y)
     {
-        for (int x = 0; x < cols; ++x)
+        for (int x = 0; x < mMapProperty.mTilesetCols; ++x)
         {
-            Rect srcRect(x * _tileWidth, y * _tileHeight, _tileWidth, _tileHeight);
+            Rect srcRect(x * mMapProperty.mTileWidth, y * mMapProperty.mTileHeight, mMapProperty.mTileWidth, mMapProperty.mTileHeight);
             Rect destRect = srcRect;
             destRect.pos.x += 2 * x + 1;
             destRect.pos.y += 2 * y + 1;
@@ -228,27 +222,27 @@ void DemoLevel::CreateTileSetTexture(Image& src)
             destRect.expand(Point(1, 1), Point(1, 1));
 
             operations::blit(
-                dest.lock(destRect.pos.x + 1, destRect.pos.y + 1, _tileWidth, 1),
-                dest.lock(destRect.pos.x + 1, destRect.pos.y, _tileWidth, 1));
+                dest.lock(destRect.pos.x + 1, destRect.pos.y + 1, mMapProperty.mTileWidth, 1),
+                dest.lock(destRect.pos.x + 1, destRect.pos.y, mMapProperty.mTileWidth, 1));
 
             operations::blit(
-                dest.lock(destRect.pos.x + 1, destRect.pos.y + _tileHeight, _tileWidth, 1),
-                dest.lock(destRect.pos.x + 1, destRect.pos.y + _tileHeight + 1, _tileWidth, 1));
+                dest.lock(destRect.pos.x + 1, destRect.pos.y + mMapProperty.mTileHeight, mMapProperty.mTileWidth, 1),
+                dest.lock(destRect.pos.x + 1, destRect.pos.y + mMapProperty.mTileHeight + 1, mMapProperty.mTileWidth, 1));
 
             operations::blit(
-                dest.lock(destRect.pos.x + 1, destRect.pos.y, 1, _tileHeight + 2),
-                dest.lock(destRect.pos.x, destRect.pos.y, 1, _tileHeight + 2));
+                dest.lock(destRect.pos.x + 1, destRect.pos.y, 1, mMapProperty.mTileHeight + 2),
+                dest.lock(destRect.pos.x, destRect.pos.y, 1, mMapProperty.mTileHeight + 2));
 
             operations::blit(
-                dest.lock(destRect.pos.x + _tileWidth, destRect.pos.y, 1, _tileHeight + 2),
-                dest.lock(destRect.pos.x + _tileWidth + 1, destRect.pos.y, 1, _tileHeight + 2));
+                dest.lock(destRect.pos.x + mMapProperty.mTileWidth, destRect.pos.y, 1, mMapProperty.mTileHeight + 2),
+                dest.lock(destRect.pos.x + mMapProperty.mTileWidth + 1, destRect.pos.y, 1, mMapProperty.mTileHeight + 2));
         }
     }
 
-    _texture = IVideoDriver::instance->createTexture();
-    _texture->init(dest.lock());
-    _texture->setClamp2Edge(true);
-    _texture->setLinearFilter(false);
+    mMapTexture = IVideoDriver::instance->createTexture();
+    mMapTexture->init(dest.lock());
+    mMapTexture->setClamp2Edge(true);
+    mMapTexture->setLinearFilter(false);
 }
 
 void DemoLevel::drawLayer(int startX, int startY, int endX, int endY)
@@ -257,23 +251,23 @@ void DemoLevel::drawLayer(int startX, int startY, int endX, int endY)
 
     STDRenderer* renderer = STDRenderer::instance;
 
-    float tw = 1.0f / _texture->getWidth();
-    float th = 1.0f / _texture->getHeight();
+    float tw = 1.0f / mMapTexture->getWidth();
+    float th = 1.0f / mMapTexture->getHeight();
 
     for (int y = startY; y < endY; ++y)
     {
         for (int x = startX; x < endX; ++x)
         {
-            unsigned int tile = _tilePositions[y * _mapWidth + x];
+            unsigned int tile = mMapProperty.mTilesPositions[y * mMapProperty.mMapWidth + x];
             if (!tile)
                 continue;
 
             tile = tile - 1;
 
-            int col = tile % cols;
-            int row = tile / cols;
+            int col = tile % mMapProperty.mTilesetCols;
+            int row = tile / mMapProperty.mTilesetCols;
 
-            Rect src(col * (_tileWidth + 2) + 1, row * (_tileHeight + 2) + 1, _tileWidth, _tileHeight);
+            Rect src(col * (mMapProperty.mTileWidth + 2) + 1, row * (mMapProperty.mTileHeight + 2) + 1, mMapProperty.mTileWidth, mMapProperty.mTileHeight);
 
             RectF srcUV = src.cast<RectF>();
             srcUV.pos.x *= tw;
@@ -281,7 +275,7 @@ void DemoLevel::drawLayer(int startX, int startY, int endX, int endY)
             srcUV.size.x *= tw;
             srcUV.size.y *= th;
 
-            Rect dest(x * _tileWidth, y * _tileHeight, _tileWidth, _tileHeight);
+            Rect dest(x * mMapProperty.mTileWidth, y * mMapProperty.mTileHeight, mMapProperty.mTileWidth, mMapProperty.mTileHeight);
             RectF destF = dest.cast<RectF>();
             renderer->draw(color, srcUV, destF);
         }
@@ -290,10 +284,10 @@ void DemoLevel::drawLayer(int startX, int startY, int endX, int endY)
 
 void DemoLevel::doRender(const RenderState& rs)
 {
-//        Material::setCurrent(rs.material);
+    Material::setCurrent(rs.material);
 
     STDRenderer* renderer = STDRenderer::instance;
-    renderer->setTexture(_texture);
+    renderer->setTexture(mMapTexture);
     renderer->setTransform(rs.transform);
     renderer->setBlendMode(blend_premultiplied_alpha);
 
@@ -308,10 +302,10 @@ void DemoLevel::doRender(const RenderState& rs)
     Vector2 bottomRight = world.transform(getSize());
 
     //we don't want to draw tiles outside of visible area
-    int startX = std::max(0,      int(topLeft.x / _tileWidth));
-    int startY = std::max(0,      int(topLeft.y / _tileHeight));
-    int endX   = std::min(_mapWidth,  int(bottomRight.x / _tileWidth) + 1);
-    int endY   = std::min(_mapHeight, int(bottomRight.y / _tileHeight) + 1);
+    int startX = std::max(0,      int(topLeft.x / mMapProperty.mTileWidth));
+    int startY = std::max(0,      int(topLeft.y / mMapProperty.mTileHeight));
+    int endX   = std::min(mMapProperty.mMapWidth,  int(bottomRight.x / mMapProperty.mTileWidth) + 1);
+    int endY   = std::min(mMapProperty.mMapHeight, int(bottomRight.y / mMapProperty.mTileHeight) + 1);
 
     drawLayer(startX, startY, endX, endY);
 }

@@ -2,11 +2,9 @@
 
 #include "oxygine-framework.h"
 #include "res.hpp"
-#include "core/file.h"
-#include "res/SingleResAnim.h"
 
 #include "BasisObject.hpp"
-#include "JsonImporter.hpp"
+#include "MapProperty.hpp"
 #include "Box2D/Box2D.h"
 #include "Utils.hpp"
 #include <forward_list>
@@ -24,8 +22,8 @@ public:
     bool IsAlive = true;
 
 public:
-    b2Body* _body;
-    std::pair<Service::ObjectType, Circle*> _bodyPair;
+    b2Body* mBody;
+    std::pair<Service::ObjectType, Circle*> mBodyPair;
 };
 
 class Square : public Sprite, public BasisObject
@@ -36,8 +34,8 @@ public:
     bool IsAlive = true;
 
 public:
-    b2Body* _body;
-    std::pair<Service::ObjectType, Square*> _bodyPair;
+    b2Body* mBody;
+    std::pair<Service::ObjectType, Square*> mBodyPair;
 };
 
 class Static : public Box9Sprite, public BasisObject
@@ -46,34 +44,26 @@ public:
     Static(b2World*, const RectF&);
 
 public:
-    std::pair<Service::ObjectType, Static*> _bodyPair;
+    std::pair<Service::ObjectType, Static*> mBodyPair;
 };
 
 class DemoLevel: public Actor
 {
 public:
-    DemoLevel();
-
-    void Init(b2World*, Service::JsonImporter&);
+    void Init(b2World*, MapProperty&&);
     void click(Event*);
     void showHideDebug(Event*);
-    void doRender(const RenderState&);
 
 private:
     friend class Player;
     void doUpdate(const UpdateState&);
+    void doRender(const RenderState&);
     void drawLayer(int, int, int, int);
     void CreateTileSetTexture(Image&);
 
-    b2World* _world;
-    spNativeTexture _texture;
-    int _mapHeight = -1;
-    int _mapWidth = -1;
-    int _tileHeight = -1;
-    int _tileWidth = -1;
-    std::vector<int> _tilePositions;
-    int cols;
-    int rows;
-    std::forward_list<spCircle> _circles;
-    std::forward_list<spSquare> _squares;
+    b2World* mWorld;
+    spNativeTexture mMapTexture;
+    MapProperty mMapProperty;
+    std::forward_list<spCircle> mCircles;
+    std::forward_list<spSquare> mSquares;
 };
