@@ -11,6 +11,7 @@
 
 DECLARE_SMART(Circle, spCircle);
 DECLARE_SMART(Square, spSquare);
+DECLARE_SMART(SquareMovable, spSquareMovable);
 DECLARE_SMART(Static, spStatic);
 DECLARE_SMART(DemoLevel, spDemoLevel);
 
@@ -36,6 +37,18 @@ public:
 public:
     b2Body* mBody;
     std::pair<Service::ObjectType, Square*> mBodyPair;
+};
+
+class SquareMovable : public Sprite, public BasisObject
+{
+public:
+    SquareMovable(b2World*, const Vector2&, float);
+    void Update();
+    bool IsAlive = true;
+
+public:
+    b2Body* mBody;
+    std::pair<Service::ObjectType, SquareMovable*> mBodyPair;
 };
 
 class Static : public Box9Sprite, public BasisObject
@@ -74,6 +87,6 @@ private:
     spNativeTexture mMapTexture;
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;
-    std::forward_list<spSquare> mSquares;
+    std::forward_list<spSquareMovable> mSquares;
     std::vector<std::unique_ptr<Ground>> mObjects;
 };

@@ -20,4 +20,67 @@ struct Utils
     }
 };
 
+struct Normal2: b2Vec2
+{
+    Normal2(float32 x, float32 y)
+        : b2Vec2(x, y)
+    {
+    }
+
+    /// Add a vector to this vector.
+    void operator += (const b2Vec2& aVector)
+    {
+        x += aVector.x;
+        y += aVector.y;
+        FixCoordinatesIfExceeds();
+    }
+
+    /// Add a vector to this vector.
+    void operator += (const Normal2& aVector)
+    {
+        x += aVector.x;
+        y += aVector.y;
+        FixCoordinatesIfExceeds();
+    }
+
+    /// Add a vector to this vector.
+    void operator -= (const b2Vec2& aVector)
+    {
+        x -= aVector.x;
+        y -= aVector.y;
+        FixCoordinatesIfExceeds();
+    }
+
+    /// Add a vector to this vector.
+    void operator -= (const Normal2& aVector)
+    {
+        x -= aVector.x;
+        y -= aVector.y;
+        FixCoordinatesIfExceeds();
+    }
+
+    inline void FixCoordinatesIfExceeds()
+    {
+        if (x < -1)
+        {
+            x = -1;
+        }
+
+        if (x > 1)
+        {
+            x = 1;
+        }
+
+        if (y < -1)
+        {
+            y = -1;
+        }
+
+        if (y > 1)
+        {
+            y = 1;
+        }
+    }
+};
+
 }

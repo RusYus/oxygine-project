@@ -40,7 +40,7 @@ private:
     oxygine::spSprite mBox;
     b2Vec2 mDirection;
     b2Vec2 mNormal;
-    b2Vec2 mGroundNormal;
+    Service::Normal2 mGroundNormal;
     bool mIsJumping;
     bool mIsButtonMoving;
     const int mMaxSpeed = PLAYER_MAX_SPEED;

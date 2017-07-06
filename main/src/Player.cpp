@@ -107,7 +107,7 @@ void Player::Move(bool aIsMovingRight)
     {
         mDirection = _body->GetLinearVelocity();
 
-        std::cout << "Moving!" << std::endl;
+//        std::cout << "Moving!" << "NORMALS:" << mNormal.x << ";" << mGroundNormal.x << std::endl;
         mDirection.x = aIsMovingRight ? mMaxSpeed : -mMaxSpeed;
         mDirection.x /= Service::Constants::SCALE;
 
@@ -121,7 +121,7 @@ void Player::Move(bool aIsMovingRight)
         }
 
         // Collision took place
-        if ((aIsMovingRight && mNormal.x > 0) || (!aIsMovingRight && mNormal.x < 0))
+        if ((aIsMovingRight && (mNormal.x > 0 || mGroundNormal.x < 0)) || (!aIsMovingRight && (mNormal.x < 0 || mGroundNormal.x > 0)))
         {
             std::cout << "Collision took place!" << std::endl;
             Stop();
@@ -154,7 +154,8 @@ void Player::SetNormal(const b2Vec2 aNormal)
 
 void Player::SetGroundNormal(const b2Vec2 aNormal)
 {
-    mGroundNormal = aNormal;
+    std::cout << "Setting ground normal; old=" << mGroundNormal.x << ":" << mGroundNormal.y << ";new=" << aNormal.x << ":" << aNormal.y << std::endl;
+    mGroundNormal += aNormal;
 }
 
 void Player::SetZeroNormal()
@@ -201,7 +202,7 @@ void Player::Update(const UpdateState& /*us*/)
     // Reseting direction, if collision in place.
     if (mNormal.x != 0)
     {
-        std::cout << "In Update: dir.x = 0" << std::endl;
+//        std::cout << "In Update: dir.x = 0" << std::endl;
         mDirection.x = 0;
     }
 
@@ -217,4 +218,6 @@ void Player::Update(const UpdateState& /*us*/)
     CameraMovementEvent event(pos - mView->getPosition());
     mView->setPosition(pos);
     mEventProxy->dispatchEvent(&event);
+
+    std::cout << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
 }

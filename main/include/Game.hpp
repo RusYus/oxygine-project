@@ -79,6 +79,7 @@ class ContactListenerWrapper : public b2ContactListener
         if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
         {
+            std::cout << "BeginCOntact;" << contact->GetManifold()->localNormal.x << ";" << contact->GetManifold()->localNormal.y << std::endl;
             if (userDataA->first == Service::ObjectType::Player)
             {
                 static_cast<Player*>(userDataA->second)->SetGroundNormal(contact->GetManifold()->localNormal);
@@ -100,17 +101,17 @@ class ContactListenerWrapper : public b2ContactListener
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->SetZeroGroundNormal();
+                static_cast<Player*>(userDataA->second)->SetGroundNormal(-contact->GetManifold()->localNormal);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->SetZeroGroundNormal();
+                static_cast<Player*>(userDataB->second)->SetGroundNormal(-contact->GetManifold()->localNormal);
             }
         }
     }
 
-    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+    void PostSolve(b2Contact* contact, const b2ContactImpulse* /*impulse*/)
     {
         auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
@@ -119,6 +120,7 @@ class ContactListenerWrapper : public b2ContactListener
         {
             contact->SetEnabled(false);
 
+            std::cout << "Setting 0" << std::endl;
             if (userDataA->first == Service::ObjectType::DynamicBody)
             {
                 // For future use, need to add every Service::ObjectType for each movable object
@@ -142,7 +144,7 @@ public:
         : mContent()
         , mEventProxy(new EventProxy)
     {
-        mWorld = new b2World(b2Vec2(0, 25));
+        mWorld = new b2World(b2Vec2(0, 10));
 
         MapProperty mapProperty;
         mImporter = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
