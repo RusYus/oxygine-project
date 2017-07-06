@@ -7,7 +7,7 @@
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-constexpr const int PLAYER_MAX_SPEED = 900;
+constexpr const int PLAYER_MAX_SPEED = 600;
 constexpr const int PLAYER_JUMP_SPEED = 700;
 
 DECLARE_SMART(Player, spPlayer);
@@ -18,16 +18,20 @@ public:
     void Init(b2World*, spEventProxy);
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
-    void Move(oxygine::Event*);
+    void ProcessMoveEvent(oxygine::Event*);
     void Jump(oxygine::Event*);
     inline float GetX() const;
     inline float GetY() const;
     void SetNormal(const b2Vec2);
+    void SetGroundNormal(const b2Vec2);
     void SetZeroNormal();
+    void SetZeroGroundNormal();
     b2Body* _body;
 
 private:
-    void _Init(b2World*);
+    void InitBody(b2World*);
+    void Move(bool /*aIsMovingRight*/);
+    inline void Stop();
     void ProcessKeyboard();
 
 private:
@@ -36,7 +40,9 @@ private:
     oxygine::spSprite mBox;
     b2Vec2 mDirection;
     b2Vec2 mNormal;
+    b2Vec2 mGroundNormal;
     bool mIsJumping;
+    bool mIsButtonMoving;
     const int mMaxSpeed = PLAYER_MAX_SPEED;
     const int mJumpSpeed = PLAYER_JUMP_SPEED;
 

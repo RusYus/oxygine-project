@@ -9,9 +9,12 @@
 Player::Player()
     : mBodyPair(Service::ObjectType::Player, this)
     , mNormal(0, 0)
+    , mGroundNormal(0, 0)
+    , mIsButtonMoving(false)
+    , mIsJumping(false)
 {
 }
-void Player::_Init(b2World* aWorld)
+void Player::InitBody(b2World* aWorld)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
@@ -34,7 +37,7 @@ void Player::_Init(b2World* aWorld)
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f;
+    fixtureDef.density = 100.0f;
     fixtureDef.friction = 0.3f;
     fixtureDef.filter = filter;
 
@@ -57,11 +60,11 @@ void Player::Init(b2World* aWorld, spEventProxy aEventProxy)
     mBox->attachTo(mView);
     mBox->setAnchor(Vector2(0.5f, 0.5f));
 
-    _Init(aWorld);
+    InitBody(aWorld);
 
     mEventProxy = aEventProxy;
 
-    mEventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::Move));
+    mEventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
 
     mEventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
@@ -83,40 +86,56 @@ void Player::Jump(Event* /*aEvent*/)
     }
 }
 
-void Player::Move(Event* aEvent)
+void Player::ProcessMoveEvent(Event* aEvent)
+{
+    PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
+    if (!playerEvent->mIsMoving)
+    {
+        mIsButtonMoving = false;
+        Stop();
+    }
+    else
+    {
+        mIsButtonMoving = true;
+        Move(playerEvent->mIsMovingRight);
+    }
+}
+
+void Player::Move(bool aIsMovingRight)
 {
     if (_body != nullptr)
     {
-        PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
-
         mDirection = _body->GetLinearVelocity();
 
-        if (playerEvent->mIsMoving)
-        {
-            mDirection.x = playerEvent->mIsMovingRight ? mMaxSpeed : -mMaxSpeed;
-            mDirection.x /= Service::Constants::SCALE;
+        std::cout << "Moving!" << std::endl;
+        mDirection.x = aIsMovingRight ? mMaxSpeed : -mMaxSpeed;
+        mDirection.x /= Service::Constants::SCALE;
 
-            // Moving opposing direction of collision
-            // If collision more than one, need more normals
-            // Therefore, this is not gonna work
-            if ((playerEvent->mIsMovingRight && mNormal.x < 0)
-                || (!playerEvent->mIsMovingRight && mNormal.x > 0))
-            {
-                SetZeroNormal();
-            }
+        // Moving opposing direction of collision
+        // If collision more than one, need more normals
+        // Therefore, this is not gonna work
+        if ((aIsMovingRight && mNormal.x < 0) || (!aIsMovingRight && mNormal.x > 0))
+        {
+            std::cout << "SetZeroNormal!" << std::endl;
+            SetZeroNormal();
         }
 
-        // Collision took place, or move button released.
-        if (!playerEvent->mIsMoving
-            || (playerEvent->mIsMovingRight && mNormal.x > 0)
-            || (!playerEvent->mIsMovingRight && mNormal.x < 0))
+        // Collision took place
+        if ((aIsMovingRight && mNormal.x > 0) || (!aIsMovingRight && mNormal.x < 0))
         {
-            mDirection.x = 0;
+            std::cout << "Collision took place!" << std::endl;
+            Stop();
         }
 
         _body->SetLinearVelocity(mDirection);
     }
 }
+
+inline void Player::Stop()
+{
+    mDirection.x = 0;
+}
+
 
 float Player::GetX() const
 {
@@ -133,27 +152,38 @@ void Player::SetNormal(const b2Vec2 aNormal)
     mNormal = aNormal;
 }
 
+void Player::SetGroundNormal(const b2Vec2 aNormal)
+{
+    mGroundNormal = aNormal;
+}
+
 void Player::SetZeroNormal()
 {
     mNormal.SetZero();
 }
 
+
+void Player::SetZeroGroundNormal()
+{
+    mGroundNormal.SetZero();
+}
+
 void Player::ProcessKeyboard()
 {
     const Uint8* states = SDL_GetKeyboardState(nullptr);
-    const auto speed = mMaxSpeed / Service::Constants::SCALE;
 
     if (states[SDL_SCANCODE_LEFT])
     {
-        mDirection.x = -speed;
+        Move(false);
     }
     else if (states[SDL_SCANCODE_RIGHT])
     {
-        mDirection.x = speed;
+        Move(true);
     }
-    else
+    // Might move on screen buttons.
+    else if (!mIsButtonMoving)
     {
-        mDirection.x = 0;
+        Stop();
     }
 
     if (states[SDL_SCANCODE_SPACE])
@@ -171,12 +201,13 @@ void Player::Update(const UpdateState& /*us*/)
     // Reseting direction, if collision in place.
     if (mNormal.x != 0)
     {
+        std::cout << "In Update: dir.x = 0" << std::endl;
         mDirection.x = 0;
     }
 
     _body->SetLinearVelocity(mDirection);
 
-    if (_body->GetLinearVelocity().y == .0f)
+    if (_body->GetLinearVelocity().y == .0f && mGroundNormal.y < 0)
     {
         mIsJumping = false;
     }

@@ -53,7 +53,6 @@ class ContactFilterWrapper : public b2ContactFilter
         bool collide = (filterA.maskBits & filterB.categoryBits) != 0 &&
                         (filterA.categoryBits & filterB.maskBits) != 0;
         return collide;
-//        return true;
     }
 };
 
@@ -74,6 +73,39 @@ class ContactListenerWrapper : public b2ContactListener
             if (userDataB->first == Service::ObjectType::Player)
             {
                 static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
+            }
+        }
+
+        if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
+            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
+        {
+            if (userDataA->first == Service::ObjectType::Player)
+            {
+                static_cast<Player*>(userDataA->second)->SetGroundNormal(contact->GetManifold()->localNormal);
+            }
+
+            if (userDataB->first == Service::ObjectType::Player)
+            {
+                static_cast<Player*>(userDataB->second)->SetGroundNormal(contact->GetManifold()->localNormal);
+            }
+        }
+    }
+
+    void EndContact(b2Contact* contact)
+    {
+        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+        if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
+            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
+        {
+            if (userDataA->first == Service::ObjectType::Player)
+            {
+                static_cast<Player*>(userDataA->second)->SetZeroGroundNormal();
+            }
+
+            if (userDataB->first == Service::ObjectType::Player)
+            {
+                static_cast<Player*>(userDataB->second)->SetZeroGroundNormal();
             }
         }
     }
@@ -110,7 +142,7 @@ public:
         : mContent()
         , mEventProxy(new EventProxy)
     {
-        mWorld = new b2World(b2Vec2(0, 10));
+        mWorld = new b2World(b2Vec2(0, 25));
 
         MapProperty mapProperty;
         mImporter = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
