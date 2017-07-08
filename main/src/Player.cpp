@@ -219,5 +219,5 @@ void Player::Update(const UpdateState& /*us*/)
     mView->setPosition(pos);
     mEventProxy->dispatchEvent(&event);
 
-    std::cout << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
+    std::cout << "Player: " << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
 }

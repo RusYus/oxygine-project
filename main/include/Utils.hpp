@@ -20,14 +20,33 @@ struct Utils
     }
 };
 
+class IdGenerator
+{
+public:
+    static inline int GetNextId()
+    {
+        return ++mId;
+    }
+
+private:
+    static int mId;
+};
+
 struct Normal2: b2Vec2
 {
+    Normal2() = default;
+
     Normal2(float32 x, float32 y)
         : b2Vec2(x, y)
     {
     }
 
-    /// Add a vector to this vector.
+    void operator =(const b2Vec2& aVector)
+    {
+        x = aVector.x;
+        y = aVector.y;
+    }
+
     void operator += (const b2Vec2& aVector)
     {
         x += aVector.x;
@@ -35,7 +54,6 @@ struct Normal2: b2Vec2
         FixCoordinatesIfExceeds();
     }
 
-    /// Add a vector to this vector.
     void operator += (const Normal2& aVector)
     {
         x += aVector.x;
@@ -43,7 +61,6 @@ struct Normal2: b2Vec2
         FixCoordinatesIfExceeds();
     }
 
-    /// Add a vector to this vector.
     void operator -= (const b2Vec2& aVector)
     {
         x -= aVector.x;
@@ -51,12 +68,21 @@ struct Normal2: b2Vec2
         FixCoordinatesIfExceeds();
     }
 
-    /// Add a vector to this vector.
     void operator -= (const Normal2& aVector)
     {
         x -= aVector.x;
         y -= aVector.y;
         FixCoordinatesIfExceeds();
+    }
+
+    bool operator == (const Normal2& aVector)
+    {
+        return x == aVector.x && y == aVector.y;
+    }
+
+    bool operator != (const Normal2& aVector)
+    {
+        return !this->operator ==(aVector);
     }
 
     inline void FixCoordinatesIfExceeds()
@@ -82,5 +108,7 @@ struct Normal2: b2Vec2
         }
     }
 };
+
+static Normal2 ZeroNormal = Normal2{0, 0};
 
 }

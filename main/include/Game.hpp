@@ -60,60 +60,87 @@ class ContactListenerWrapper : public b2ContactListener
 {
     void BeginContact(b2Contact* contact)
     {
-        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        // For some reason, expression: std::pair<Service::ObjectType, BasisObject*> doesn't work, so using void* for object type.
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+        const auto idA = static_cast<Static*>(userDataA->second)->GetId();
+        const auto idB = static_cast<Static*>(userDataB->second)->GetId();
+
+        // I shouldn't use normal to detect collision direction, coz normal points direction to resolve collision the shortest way.
+        // But as I use rectangles all the way, shortest path is the same as normal, so I should be okay.
+        b2WorldManifold worldManifold;
+        contact->GetWorldManifold(&worldManifold);
+
         if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->SetNormal(contact->GetManifold()->localNormal);
+                static_cast<Player*>(userDataA->second)->SetNormal(worldManifold.normal);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
+                static_cast<Player*>(userDataB->second)->SetNormal(worldManifold.normal);
             }
         }
 
         if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
         {
-            std::cout << "BeginCOntact;" << contact->GetManifold()->localNormal.x << ";" << contact->GetManifold()->localNormal.y << std::endl;
             if (userDataA->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->SetGroundNormal(contact->GetManifold()->localNormal);
+                static_cast<Player*>(userDataA->second)->SetGroundNormal(worldManifold.normal);
+                mGroundNormals[idB] = worldManifold.normal;
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->SetGroundNormal(contact->GetManifold()->localNormal);
+                static_cast<Player*>(userDataB->second)->SetGroundNormal(worldManifold.normal);
+                mGroundNormals[idA] = worldManifold.normal;
             }
         }
     }
 
     void EndContact(b2Contact* contact)
     {
-        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        // For some reason, expression: std::pair<Service::ObjectType, BasisObject*> doesn't work, so using void* for object type.
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+        // Unfortunately, by EndContact is called, manifold (not sure which one - local or world) is no longer valid,
+        // so I need to store every normal produced with object.
+        // Normal container stores as many normal as there are objects on a level (currently only ground, check out if dynamic count also).
+        const auto idA = static_cast<Static*>(userDataA->second)->GetId();
+        const auto idB = static_cast<Static*>(userDataB->second)->GetId();
+
         if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->SetGroundNormal(-contact->GetManifold()->localNormal);
+                if (mGroundNormals[idB] != Service::ZeroNormal)
+                {
+                    static_cast<Player*>(userDataA->second)->SetGroundNormal(-mGroundNormals[idB]);
+                    mGroundNormals[idB] = Service::ZeroNormal;
+                }
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->SetGroundNormal(-contact->GetManifold()->localNormal);
+                if (mGroundNormals[idA] != Service::ZeroNormal)
+                {
+                    static_cast<Player*>(userDataB->second)->SetGroundNormal(-mGroundNormals[idA]);
+                    mGroundNormals[idA] = Service::ZeroNormal;
+                }
             }
         }
     }
 
     void PostSolve(b2Contact* contact, const b2ContactImpulse* /*impulse*/)
     {
-        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
         if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
@@ -134,6 +161,9 @@ class ContactListenerWrapper : public b2ContactListener
             }
         }
     }
+
+private:
+    std::unordered_map<unsigned int, Service::Normal2> mGroundNormals;
 };
 
 DECLARE_SMART(Game, spGame);

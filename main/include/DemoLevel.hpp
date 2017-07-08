@@ -15,7 +15,7 @@ DECLARE_SMART(SquareMovable, spSquareMovable);
 DECLARE_SMART(Static, spStatic);
 DECLARE_SMART(DemoLevel, spDemoLevel);
 
-class Circle : public Sprite, public BasisObject
+class Circle : public Sprite, public Basis::BasisObject
 {
 public:
     Circle(b2World*, const Vector2&, float);
@@ -27,7 +27,7 @@ public:
     std::pair<Service::ObjectType, Circle*> mBodyPair;
 };
 
-class Square : public Sprite, public BasisObject
+class Square : public Sprite, public Basis::BasisObject
 {
 public:
     Square(b2World*, const Vector2&, float);
@@ -39,7 +39,7 @@ public:
     std::pair<Service::ObjectType, Square*> mBodyPair;
 };
 
-class SquareMovable : public Sprite, public BasisObject
+class SquareMovable : public Sprite, public Basis::BasisObject
 {
 public:
     SquareMovable(b2World*, const Vector2&, float);
@@ -51,7 +51,7 @@ public:
     std::pair<Service::ObjectType, SquareMovable*> mBodyPair;
 };
 
-class Static : public Box9Sprite, public BasisObject
+class Static : public Box9Sprite, public Basis::BasisObject
 {
 public:
     Static(b2World*, const RectF&);
@@ -60,7 +60,7 @@ public:
     std::pair<Service::ObjectType, Static*> mBodyPair;
 };
 
-class Ground : public BasisObject
+class Ground : public Basis::BasisObject
 {
 public:
     Ground(b2World*, const RectF&);
@@ -88,5 +88,6 @@ private:
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;
     std::forward_list<spSquareMovable> mSquares;
-    std::vector<std::unique_ptr<Ground>> mObjects;
+//    std::vector<std::unique_ptr<Ground>> mObjects;
+    std::vector<spStatic> mObjects;
 };

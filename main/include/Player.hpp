@@ -11,7 +11,7 @@ constexpr const int PLAYER_MAX_SPEED = 600;
 constexpr const int PLAYER_JUMP_SPEED = 700;
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public oxygine::Object, public BasisObject
+class Player: public oxygine::Object, public Basis::BasisObject
 {
 public:
     Player();

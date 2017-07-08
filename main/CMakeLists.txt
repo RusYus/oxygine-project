@@ -44,6 +44,7 @@ set(
     src/main.cpp
     src/Player.cpp
     src/res.cpp
+    src/Utils.cpp
 )
 
 add_library(

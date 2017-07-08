@@ -129,7 +129,8 @@ Static::Static(b2World* world, const RectF& rc)
 {
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());
-    setPosition(rc.getLeftTop());
+//    setPosition(rc.getLeftTop());
+    setPosition(rc.getCenter());
     setAnchor(Vector2(0.5f, 0.5f));
 
     b2BodyDef groundBodyDef;
@@ -191,8 +192,9 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
-    spStatic ground = new Static(mWorld, RectF(getWidth() * 5, getHeight() / 2, getWidth() * 10, 30));
+    spStatic ground = new Static(mWorld, RectF(0, getHeight()*0.5, getWidth() * 10, 30));
     addChild(ground);
+    mObjects.push_back(ground);
 
 //    spSquare square = new Square(mWorld, Vector2(200, 300));
 //    square->attachTo(this);
@@ -222,7 +224,8 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 
     for (const MapObject& object : mMapProperty.mObjects)
     {
-        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+//        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
     }
 }
 
