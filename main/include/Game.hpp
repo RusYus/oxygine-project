@@ -77,11 +77,13 @@ class ContactListenerWrapper : public b2ContactListener
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
+                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
                 static_cast<Player*>(userDataA->second)->SetNormal(worldManifold.normal);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
+                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
                 static_cast<Player*>(userDataB->second)->SetNormal(worldManifold.normal);
             }
         }
@@ -91,12 +93,14 @@ class ContactListenerWrapper : public b2ContactListener
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
+                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
                 static_cast<Player*>(userDataA->second)->SetGroundNormal(worldManifold.normal);
                 mGroundNormals[idB] = worldManifold.normal;
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
+                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
                 static_cast<Player*>(userDataB->second)->SetGroundNormal(worldManifold.normal);
                 mGroundNormals[idA] = worldManifold.normal;
             }

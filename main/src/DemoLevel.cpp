@@ -114,8 +114,9 @@ SquareMovable::SquareMovable(b2World* world, const Vector2& pos, float scale = 1
 
 void SquareMovable::Update()
 {
+    mBody->SetLinearVelocity(b2Vec2{-2, 0});
     const b2Vec2& pos = mBody->GetPosition();
-    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
+//    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
     setPosition(Vector2(pos.x * 100, pos.y * 100));
     setRotation(mBody->GetAngle());
 
