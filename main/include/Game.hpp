@@ -88,21 +88,28 @@ class ContactListenerWrapper : public b2ContactListener
             }
         }
 
+        auto normalSetter = [&worldManifold](auto& aGroundNormal, auto& aUserData, const auto aId, bool aPlayerIsA)
+        {
+            const b2Vec2 groundNormal = aPlayerIsA ? b2Vec2(worldManifold.normal.x, -worldManifold.normal.y) : b2Vec2(-worldManifold.normal.x, worldManifold.normal.y);
+            static_cast<Player*>(aUserData->second)->SetGroundNormal(groundNormal);
+            aGroundNormal[aId] = groundNormal;
+        };
+
+        // Normal points from A to B, although y is reversed.
+
         if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
-                static_cast<Player*>(userDataA->second)->SetGroundNormal(worldManifold.normal);
-                mGroundNormals[idB] = worldManifold.normal;
+                std::cout << "BeginA:" << worldManifold.normal.x << ":" << -worldManifold.normal.y << std::endl;
+                normalSetter(mGroundNormals, userDataA, idB, true);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
-                static_cast<Player*>(userDataB->second)->SetGroundNormal(-worldManifold.normal);
-                mGroundNormals[idA] = -worldManifold.normal;
+                std::cout << "BeginB:" << -worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
+                normalSetter(mGroundNormals, userDataB, idA, false);
             }
         }
     }

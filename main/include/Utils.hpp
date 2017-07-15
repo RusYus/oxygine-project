@@ -109,6 +109,6 @@ struct Normal2: b2Vec2
     }
 };
 
-static Normal2 ZeroNormal = Normal2{0, 0};
+static const Normal2 ZeroNormal = Normal2{0, 0};
 
 }

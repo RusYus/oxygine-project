@@ -121,7 +121,7 @@ void Player::Move(bool aIsMovingRight)
         }
 
         // Collision took place
-        if ((aIsMovingRight && (mNormal.x > 0 || mGroundNormal.x < 0)) || (!aIsMovingRight && (mNormal.x < 0 || mGroundNormal.x > 0)))
+        if ((aIsMovingRight && (mNormal.x > 0 || mGroundNormal.x > 0)) || (!aIsMovingRight && (mNormal.x < 0 || mGroundNormal.x < 0)))
         {
             std::cout << "Collision took place!" << std::endl;
             Stop();
@@ -156,6 +156,7 @@ void Player::SetGroundNormal(const b2Vec2 aNormal)
 {
     std::cout << "Setting ground normal; old=" << mGroundNormal.x << ":" << mGroundNormal.y << ";new=" << aNormal.x << ":" << aNormal.y << std::endl;
     mGroundNormal += aNormal;
+    std::cout << "Ground:" << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
 }
 
 void Player::SetZeroNormal()
