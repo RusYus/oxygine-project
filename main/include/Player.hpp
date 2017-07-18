@@ -22,10 +22,9 @@ public:
     void Jump(oxygine::Event*);
     inline float GetX() const;
     inline float GetY() const;
-    void SetNormal(const b2Vec2);
-    void SetGroundNormal(const b2Vec2);
-    void SetZeroNormal();
-    void SetZeroGroundNormal();
+    void SetCollisionNormal(const b2Vec2);
+    void SetZeroCollisionNormal();
+    // TODO : Move to private.
     b2Body* _body;
 
 private:
@@ -39,8 +38,7 @@ private:
     oxygine::spActor mView;
     oxygine::spSprite mBox;
     b2Vec2 mDirection;
-    b2Vec2 mNormal;
-    Service::Normal2 mGroundNormal;
+    Service::Normal2 mCollisionNormal;
     bool mIsJumping;
     bool mIsButtonMoving;
     const int mMaxSpeed = PLAYER_MAX_SPEED;

@@ -8,8 +8,7 @@
 
 Player::Player()
     : mBodyPair(Service::ObjectType::Player, this)
-    , mNormal(0, 0)
-    , mGroundNormal(0, 0)
+    , mCollisionNormal(0, 0)
     , mIsButtonMoving(false)
     , mIsJumping(false)
 {
@@ -75,6 +74,7 @@ void Player::Jump(Event* /*aEvent*/)
 {
     if (!mIsJumping)
     {
+        std::cout << "Jumping!" << std::endl;
         mIsJumping = true;
         _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
 
@@ -82,7 +82,7 @@ void Player::Jump(Event* /*aEvent*/)
         // when jumping height less than their heights
         // So collision is still intact
         // Need to check this, but far later.
-        SetZeroNormal();
+//        SetZeroCollisionNormal();
     }
 }
 
@@ -114,14 +114,14 @@ void Player::Move(bool aIsMovingRight)
         // Moving opposing direction of collision
         // If collision more than one, need more normals
         // Therefore, this is not gonna work
-        if ((aIsMovingRight && mNormal.x < 0) || (!aIsMovingRight && mNormal.x > 0))
-        {
-            std::cout << "SetZeroNormal!" << std::endl;
-            SetZeroNormal();
-        }
+//        if ((aIsMovingRight && mCollisionNormal.x < 0) || (!aIsMovingRight && mCollisionNormal.x > 0))
+//        {
+//            std::cout << "SetZeroNormal!" << std::endl;
+//            SetZeroCollisionNormal();
+//        }
 
         // Collision took place
-        if ((aIsMovingRight && (mNormal.x > 0 || mGroundNormal.x > 0)) || (!aIsMovingRight && (mNormal.x < 0 || mGroundNormal.x < 0)))
+        if ((aIsMovingRight && mCollisionNormal.x > 0) || (!aIsMovingRight && mCollisionNormal.x < 0))
         {
             std::cout << "Collision took place!" << std::endl;
             Stop();
@@ -147,27 +147,17 @@ float Player::GetY() const
     return (mView.get() ? mView->getY() : .0f);
 }
 
-void Player::SetNormal(const b2Vec2 aNormal)
+void Player::SetCollisionNormal(const b2Vec2 aNormal)
 {
-    mNormal = aNormal;
+    std::cout << "Setting ground normal; old=" << mCollisionNormal.x << ":" << mCollisionNormal.y << ";new=" << aNormal.x << ":" << aNormal.y << std::endl;
+    mCollisionNormal += aNormal;
+    std::cout << "Ground:" << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
 }
 
-void Player::SetGroundNormal(const b2Vec2 aNormal)
+void Player::SetZeroCollisionNormal()
 {
-    std::cout << "Setting ground normal; old=" << mGroundNormal.x << ":" << mGroundNormal.y << ";new=" << aNormal.x << ":" << aNormal.y << std::endl;
-    mGroundNormal += aNormal;
-    std::cout << "Ground:" << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
-}
-
-void Player::SetZeroNormal()
-{
-    mNormal.SetZero();
-}
-
-
-void Player::SetZeroGroundNormal()
-{
-    mGroundNormal.SetZero();
+    std::cout << "Set Zero" << std::endl;
+    mCollisionNormal.SetZero();
 }
 
 void Player::ProcessKeyboard()
@@ -201,7 +191,8 @@ void Player::Update(const UpdateState& /*us*/)
     mDirection.y = _body->GetLinearVelocity().y;
 
     // Reseting direction, if collision in place.
-    if (mNormal.x != 0)
+//    if (mCollisionNormal.x != 0)
+    if ((mDirection.x < 0 && mCollisionNormal.x < 0) || (mDirection.x > 0  && mCollisionNormal.x > 0))
     {
 //        std::cout << "In Update: dir.x = 0" << std::endl;
         mDirection.x = 0;
@@ -209,7 +200,7 @@ void Player::Update(const UpdateState& /*us*/)
 
     _body->SetLinearVelocity(mDirection);
 
-    if (_body->GetLinearVelocity().y == .0f && mGroundNormal.y < 0)
+    if (_body->GetLinearVelocity().y == .0f && mCollisionNormal.y < 0)
     {
         mIsJumping = false;
     }

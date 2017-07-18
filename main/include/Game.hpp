@@ -72,44 +72,26 @@ class ContactListenerWrapper : public b2ContactListener
         b2WorldManifold worldManifold;
         contact->GetWorldManifold(&worldManifold);
 
-        if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
-            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
-        {
-            if (userDataA->first == Service::ObjectType::Player)
-            {
-                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
-                static_cast<Player*>(userDataA->second)->SetNormal(worldManifold.normal);
-            }
-
-            if (userDataB->first == Service::ObjectType::Player)
-            {
-                std::cout << "Begin:" << worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
-                static_cast<Player*>(userDataB->second)->SetNormal(worldManifold.normal);
-            }
-        }
-
         auto normalSetter = [&worldManifold](auto& aGroundNormal, auto& aUserData, const auto aId, bool aPlayerIsA)
         {
             const b2Vec2 groundNormal = aPlayerIsA ? b2Vec2(worldManifold.normal.x, -worldManifold.normal.y) : b2Vec2(-worldManifold.normal.x, worldManifold.normal.y);
-            static_cast<Player*>(aUserData->second)->SetGroundNormal(groundNormal);
+            static_cast<Player*>(aUserData->second)->SetCollisionNormal(groundNormal);
             aGroundNormal[aId] = groundNormal;
         };
 
         // Normal points from A to B, although y is reversed.
-
-        if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
-            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
+        if (CheckCollision(userDataA->first, userDataB->first))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
                 std::cout << "BeginA:" << worldManifold.normal.x << ":" << -worldManifold.normal.y << std::endl;
-                normalSetter(mGroundNormals, userDataA, idB, true);
+                normalSetter(mCollisionNormals, userDataA, idB, true);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
                 std::cout << "BeginB:" << -worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
-                normalSetter(mGroundNormals, userDataB, idA, false);
+                normalSetter(mCollisionNormals, userDataB, idA, false);
             }
         }
     }
@@ -126,24 +108,27 @@ class ContactListenerWrapper : public b2ContactListener
         const auto idA = static_cast<Static*>(userDataA->second)->GetId();
         const auto idB = static_cast<Static*>(userDataB->second)->GetId();
 
-        if ((userDataA->first == Service::ObjectType::Ground && userDataB->first == Service::ObjectType::Player)
-            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::Ground))
+
+        // Normal points from A to B, although y is reversed.
+        if (CheckCollision(userDataA->first, userDataB->first))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                if (mGroundNormals[idB] != Service::ZeroNormal)
+                if (mCollisionNormals[idB] != Service::ZeroNormal)
                 {
-                    static_cast<Player*>(userDataA->second)->SetGroundNormal(mGroundNormals[idB]);
-                    mGroundNormals[idB] = Service::ZeroNormal;
+                    std::cout << "EndA:" << std::endl;
+                    static_cast<Player*>(userDataA->second)->SetCollisionNormal(-mCollisionNormals[idB]);
+                    mCollisionNormals[idB] = Service::ZeroNormal;
                 }
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                if (mGroundNormals[idA] != Service::ZeroNormal)
+                if (mCollisionNormals[idA] != Service::ZeroNormal)
                 {
-                    static_cast<Player*>(userDataB->second)->SetGroundNormal(-mGroundNormals[idA]);
-                    mGroundNormals[idA] = Service::ZeroNormal;
+                    std::cout << "EndB:" << std::endl;
+                    static_cast<Player*>(userDataB->second)->SetCollisionNormal(-mCollisionNormals[idA]);
+                    mCollisionNormals[idA] = Service::ZeroNormal;
                 }
             }
         }
@@ -174,7 +159,12 @@ class ContactListenerWrapper : public b2ContactListener
     }
 
 private:
-    std::unordered_map<unsigned int, Service::Normal2> mGroundNormals;
+    bool CheckCollision(Service::ObjectType aA, Service::ObjectType aB) const
+    {
+        return ((aB == Service::ObjectType::Player && (aA == Service::ObjectType::DynamicBody || aA == Service::ObjectType::Ground))
+            ||(aA == Service::ObjectType::Player && (aB == Service::ObjectType::DynamicBody || aB == Service::ObjectType::Ground)));
+    }
+    std::unordered_map<unsigned int, Service::Normal2> mCollisionNormals;
 };
 
 DECLARE_SMART(Game, spGame);
