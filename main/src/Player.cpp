@@ -200,9 +200,14 @@ void Player::Update(const UpdateState& /*us*/)
 
     _body->SetLinearVelocity(mDirection);
 
-    if (_body->GetLinearVelocity().y == .0f && mCollisionNormal.y < 0)
+    // If player doesn't stand on something, he can't jump.
+    if (mCollisionNormal.y == -1)
     {
         mIsJumping = false;
+    }
+    else
+    {
+        mIsJumping = true;
     }
 
     b2Vec2 b2pos = _body->GetPosition();
