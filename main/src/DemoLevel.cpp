@@ -34,6 +34,7 @@ Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
 void Circle::Update()
 {
     const b2Vec2& pos = mBody->GetPosition();
+    std::cout << "Circle:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
     setPosition(Vector2(pos.x * 100, pos.y * 100));
     setRotation(mBody->GetAngle());
 }
@@ -81,12 +82,56 @@ void Square::Update()
     setRotation(mBody->GetAngle());
 }
 
+SquareMovable::SquareMovable(b2World* world, const Vector2& pos, float scale = 1)
+    : mBodyPair(Service::ObjectType::DynamicBody, this)
+{
+    setResAnim(res::ui.getResAnim("square"));
+    setAnchor(Vector2(0.5f, 0.5f));
+    setTouchChildrenEnabled(false);
+
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = Service::Utils::Convert(pos);
+    bodyDef.fixedRotation = true;
+
+    mBody = world->CreateBody(&bodyDef);
+
+    setUserData(mBody);
+
+    setScale(scale);
+
+    b2PolygonShape shape;
+    shape.SetAsBox(getWidth() / Service::Constants::SCALE / 2.0f, getHeight() / Service::Constants::SCALE / 2.0f);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 100.0f;
+    fixtureDef.friction = 0.3f;
+
+    mBody->CreateFixture(&fixtureDef);
+    mBody->SetUserData(&mBodyPair);
+}
+
+void SquareMovable::Update()
+{
+    mBody->SetLinearVelocity(b2Vec2{-2, 0});
+    const b2Vec2& pos = mBody->GetPosition();
+//    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
+    setPosition(Vector2(pos.x * 100, pos.y * 100));
+    setRotation(mBody->GetAngle());
+
+//    b2MassData m;
+//    mBody->GetMassData(&m);
+//    std::cout << "Mass:" << m.center.x << ":" << m.center.y << ";" << m.mass << std::endl;
+}
+
 Static::Static(b2World* world, const RectF& rc)
     : mBodyPair(Service::ObjectType::Ground, this)
 {
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());
-    setPosition(rc.getLeftTop());
+//    setPosition(rc.getLeftTop());
+    setPosition(rc.getCenter());
     setAnchor(Vector2(0.5f, 0.5f));
 
     b2BodyDef groundBodyDef;
@@ -148,20 +193,21 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
-    spStatic ground = new Static(mWorld, RectF(getWidth() * 5, getHeight() / 2, getWidth() * 10, 30));
+    spStatic ground = new Static(mWorld, RectF(0, getHeight()*0.5, getWidth() * 10, 30));
     addChild(ground);
+    mObjects.push_back(ground);
 
-    spSquare square = new Square(mWorld, Vector2(200, 300));
-    square->attachTo(this);
-    mSquares.emplace_front(std::move(square));
+//    spSquare square = new Square(mWorld, Vector2(200, 300));
+//    square->attachTo(this);
+//    mSquares.emplace_front(std::move(square));
 
-    spSquare square2 = new Square(mWorld, Vector2(650, 300));
-    square2->attachTo(this);
-    mSquares.emplace_front(std::move(square2));
+//    spSquare square2 = new Square(mWorld, Vector2(650, 300));
+//    square2->attachTo(this);
+//    mSquares.emplace_front(std::move(square2));
 
-    spSquare square3 = new Square(mWorld, Vector2(1100, 300));
-    square3->attachTo(this);
-    mSquares.emplace_front(std::move(square3));
+//    spSquare square3 = new Square(mWorld, Vector2(1100, 300));
+//    square3->attachTo(this);
+//    mSquares.emplace_front(std::move(square3));
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
@@ -179,7 +225,8 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 
     for (const MapObject& object : mMapProperty.mObjects)
     {
-        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+//        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
     }
 }
 
@@ -220,9 +267,12 @@ void DemoLevel::click(Event* event)
 //    if (event->target.get() == this)
 //    {
         std::cout << "Creating circle!" << std::endl;
-        spCircle circle = new Circle(mWorld, te->localPosition);
-        circle->attachTo(this);
-        mCircles.push_front(circle);
+//        spCircle circle = new Circle(mWorld, te->localPosition);
+//        circle->attachTo(this);
+//        mCircles.push_front(circle);
+        spSquareMovable s = new SquareMovable(mWorld, te->localPosition);
+        s->attachTo(this);
+        mSquares.push_front(s);
 //    }
 }
 

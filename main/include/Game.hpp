@@ -53,7 +53,6 @@ class ContactFilterWrapper : public b2ContactFilter
         bool collide = (filterA.maskBits & filterB.categoryBits) != 0 &&
                         (filterA.categoryBits & filterB.maskBits) != 0;
         return collide;
-//        return true;
     }
 };
 
@@ -61,32 +60,90 @@ class ContactListenerWrapper : public b2ContactListener
 {
     void BeginContact(b2Contact* contact)
     {
-        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        // For some reason, expression: std::pair<Service::ObjectType, BasisObject*> doesn't work, so using void* for object type.
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
-        if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
-            || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
+
+        const auto idA = static_cast<Static*>(userDataA->second)->GetId();
+        const auto idB = static_cast<Static*>(userDataB->second)->GetId();
+
+        // I shouldn't use normal to detect collision direction, coz normal points direction to resolve collision the shortest way.
+        // But as I use rectangles all the way, shortest path is the same as normal, so I should be okay.
+        b2WorldManifold worldManifold;
+        contact->GetWorldManifold(&worldManifold);
+
+        auto normalSetter = [&worldManifold](auto& aGroundNormal, auto& aUserData, const auto aId, bool aPlayerIsA)
+        {
+            const b2Vec2 groundNormal = aPlayerIsA ? b2Vec2(worldManifold.normal.x, -worldManifold.normal.y) : b2Vec2(-worldManifold.normal.x, worldManifold.normal.y);
+            static_cast<Player*>(aUserData->second)->SetCollisionNormal(groundNormal);
+            aGroundNormal[aId] = groundNormal;
+        };
+
+        // Normal points from A to B, although y is reversed.
+        if (CheckCollision(userDataA->first, userDataB->first))
         {
             if (userDataA->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataA->second)->SetNormal(contact->GetManifold()->localNormal);
+                std::cout << "BeginA:" << worldManifold.normal.x << ":" << -worldManifold.normal.y << std::endl;
+                normalSetter(mCollisionNormals, userDataA, idB, true);
             }
 
             if (userDataB->first == Service::ObjectType::Player)
             {
-                static_cast<Player*>(userDataB->second)->SetNormal(contact->GetManifold()->localNormal);
+                std::cout << "BeginB:" << -worldManifold.normal.x << ":" << worldManifold.normal.y << std::endl;
+                normalSetter(mCollisionNormals, userDataB, idA, false);
             }
         }
     }
 
-    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+    void EndContact(b2Contact* contact)
     {
-        auto userDataA = static_cast<std::pair<Service::ObjectType, BasisObject*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        // For some reason, expression: std::pair<Service::ObjectType, BasisObject*> doesn't work, so using void* for object type.
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
+        auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+        // Unfortunately, by EndContact is called, manifold (not sure which one - local or world) is no longer valid,
+        // so I need to store every normal produced with object.
+        // Normal container stores as many normal as there are objects on a level (currently only ground, check out if dynamic count also).
+        const auto idA = static_cast<Static*>(userDataA->second)->GetId();
+        const auto idB = static_cast<Static*>(userDataB->second)->GetId();
+
+
+        // Normal points from A to B, although y is reversed.
+        if (CheckCollision(userDataA->first, userDataB->first))
+        {
+            if (userDataA->first == Service::ObjectType::Player)
+            {
+                if (mCollisionNormals[idB] != Service::ZeroNormal)
+                {
+                    std::cout << "EndA:" << std::endl;
+                    static_cast<Player*>(userDataA->second)->SetCollisionNormal(-mCollisionNormals[idB]);
+                    mCollisionNormals[idB] = Service::ZeroNormal;
+                }
+            }
+
+            if (userDataB->first == Service::ObjectType::Player)
+            {
+                if (mCollisionNormals[idA] != Service::ZeroNormal)
+                {
+                    std::cout << "EndB:" << std::endl;
+                    static_cast<Player*>(userDataB->second)->SetCollisionNormal(-mCollisionNormals[idA]);
+                    mCollisionNormals[idA] = Service::ZeroNormal;
+                }
+            }
+        }
+    }
+
+    void PostSolve(b2Contact* contact, const b2ContactImpulse* /*impulse*/)
+    {
+        auto userDataA = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureA()->GetBody()->GetUserData());
         auto userDataB = static_cast<std::pair<Service::ObjectType, void*>*>(contact->GetFixtureB()->GetBody()->GetUserData());
         if ((userDataA->first == Service::ObjectType::DynamicBody && userDataB->first == Service::ObjectType::Player)
             || (userDataA->first == Service::ObjectType::Player && userDataB->first == Service::ObjectType::DynamicBody))
         {
             contact->SetEnabled(false);
 
+            std::cout << "Setting 0" << std::endl;
             if (userDataA->first == Service::ObjectType::DynamicBody)
             {
                 // For future use, need to add every Service::ObjectType for each movable object
@@ -100,6 +157,14 @@ class ContactListenerWrapper : public b2ContactListener
             }
         }
     }
+
+private:
+    bool CheckCollision(Service::ObjectType aA, Service::ObjectType aB) const
+    {
+        return ((aB == Service::ObjectType::Player && (aA == Service::ObjectType::DynamicBody || aA == Service::ObjectType::Ground))
+            ||(aA == Service::ObjectType::Player && (aB == Service::ObjectType::DynamicBody || aB == Service::ObjectType::Ground)));
+    }
+    std::unordered_map<unsigned int, Service::Normal2> mCollisionNormals;
 };
 
 DECLARE_SMART(Game, spGame);

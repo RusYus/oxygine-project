@@ -2,7 +2,10 @@ cmake_minimum_required (VERSION 2.6)
 project (MyDemo)
 
 add_subdirectory(../oxygine-framework oxygine-framework)
-add_definitions(${OXYGINE_DEFINITIONS})
+add_definitions(
+    -std=gnu++14    
+    ${OXYGINE_DEFINITIONS}
+)
 include_directories(${OXYGINE_INCLUDE_DIRS})
 link_directories(${OXYGINE_LIBRARY_DIRS})
 
@@ -44,6 +47,7 @@ set(
     src/main.cpp
     src/Player.cpp
     src/res.cpp
+    src/Utils.cpp
 )
 
 add_library(
