@@ -33,6 +33,7 @@ set(
     include/MapProperty.hpp
     include/MovementButton.hpp
     include/Player.hpp
+    include/Platform.hpp
     include/res.hpp
     include/Utils.hpp
 )
@@ -46,6 +47,7 @@ set(
     src/JsonImporter.cpp
     src/main.cpp
     src/Player.cpp
+    src/Platform.cpp
     src/res.cpp
     src/Utils.cpp
 )

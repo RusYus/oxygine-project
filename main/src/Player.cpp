@@ -1,10 +1,11 @@
+#include <iostream>
+
 #include "SDL_keyboard.h"
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "res.hpp"
 #include "BasisEvents.hpp"
 
-#include <iostream>
 
 Player::Player()
     : mBodyPair(Service::ObjectType::Player, this)

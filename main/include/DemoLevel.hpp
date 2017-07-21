@@ -1,13 +1,14 @@
 #pragma once
 
-#include "oxygine-framework.h"
+#include <forward_list>
+
 #include "res.hpp"
 
 #include "BasisObject.hpp"
+#include "Platform.hpp"
 #include "MapProperty.hpp"
 #include "Box2D/Box2D.h"
 #include "Utils.hpp"
-#include <forward_list>
 
 DECLARE_SMART(Circle, spCircle);
 DECLARE_SMART(Square, spSquare);
@@ -88,6 +89,7 @@ private:
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;
     std::forward_list<spSquareMovable> mSquares;
+    spPlatform m_Platform;
 //    std::vector<std::unique_ptr<Ground>> mObjects;
     std::vector<spStatic> mObjects;
 };

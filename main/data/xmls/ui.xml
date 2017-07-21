@@ -17,6 +17,8 @@
 		<image file="circle.png"/>
 		<image file="square.png"/>
 		<image file="pen.png" />				
-		<image file="shot.png" />	
+		<image file="shot.png" />
+		<image file="tile1.png"/>
+		<image file="platform.png" />
 	</atlas>
 </resources>

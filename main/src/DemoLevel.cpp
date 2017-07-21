@@ -228,6 +228,10 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 //        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
         mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
     }
+
+    spPlatform platform = new Platform(mWorld, RectF(1900, 150, 300, 40));
+    addChild(platform);
+    m_Platform = platform;
 }
 
 void DemoLevel::doUpdate(const UpdateState& /*us*/)
@@ -254,6 +258,15 @@ void DemoLevel::doUpdate(const UpdateState& /*us*/)
     }
 
     mCircles.remove_if([](spCircle circle) { return !circle->IsAlive; });
+
+    if (m_Platform)
+    {
+        b2Vec2 dir;
+        dir.y = 0;
+        dir.x = 50 / Service::Constants::SCALE;
+
+        m_Platform->Move(dir);
+    }
 }
 
 void DemoLevel::click(Event* event)
