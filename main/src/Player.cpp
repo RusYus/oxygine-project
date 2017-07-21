@@ -77,12 +77,6 @@ void Player::Jump(Event* /*aEvent*/)
         std::cout << "Jumping!" << std::endl;
         mIsJumping = true;
         _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
-
-        // This most likely not gonna work in bigger objects,
-        // when jumping height less than their heights
-        // So collision is still intact
-        // Need to check this, but far later.
-//        SetZeroCollisionNormal();
     }
 }
 
@@ -111,15 +105,6 @@ void Player::Move(bool aIsMovingRight)
         mDirection.x = aIsMovingRight ? mMaxSpeed : -mMaxSpeed;
         mDirection.x /= Service::Constants::SCALE;
 
-        // Moving opposing direction of collision
-        // If collision more than one, need more normals
-        // Therefore, this is not gonna work
-//        if ((aIsMovingRight && mCollisionNormal.x < 0) || (!aIsMovingRight && mCollisionNormal.x > 0))
-//        {
-//            std::cout << "SetZeroNormal!" << std::endl;
-//            SetZeroCollisionNormal();
-//        }
-
         // Collision took place
         if ((aIsMovingRight && mCollisionNormal.x > 0) || (!aIsMovingRight && mCollisionNormal.x < 0))
         {
@@ -135,7 +120,6 @@ inline void Player::Stop()
 {
     mDirection.x = 0;
 }
-
 
 float Player::GetX() const
 {
@@ -191,7 +175,6 @@ void Player::Update(const UpdateState& /*us*/)
     mDirection.y = _body->GetLinearVelocity().y;
 
     // Reseting direction, if collision in place.
-//    if (mCollisionNormal.x != 0)
     if ((mDirection.x < 0 && mCollisionNormal.x < 0) || (mDirection.x > 0  && mCollisionNormal.x > 0))
     {
 //        std::cout << "In Update: dir.x = 0" << std::endl;
