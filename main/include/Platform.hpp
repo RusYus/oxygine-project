@@ -12,18 +12,18 @@ enum class PointToPointMode
     BackToBack,
 };
 
-struct PlatformPoint
+struct PathNode
 {
     using TId = unsigned short;
 
-    PlatformPoint(unsigned short aId, int aX, int aY)
+    PathNode(unsigned short aId, int aX, int aY)
     {
         Id = aId;
         X = aX;
         Y = aY;
     }
 
-    PlatformPoint(unsigned short aId, const b2Vec2& aPosition)
+    PathNode(unsigned short aId, const b2Vec2& aPosition)
     {
         Id = aId;
         Position = aPosition;
@@ -43,12 +43,12 @@ public:
     void Move();
 
 private:
-    PointToPointMode m_RunningMode = PointToPointMode::Cycle;
-    typename PlatformPoint::TId m_CurrentPointId = 0;
-    typename PlatformPoint::TId m_NextPointId = 1;
+    PointToPointMode m_RunningMode = PointToPointMode::BackToBack;
+    typename PathNode::TId m_CurrentPointId = 0;
+    typename PathNode::TId m_NextPointId = 1;
     bool m_IsMovingReverse = false;
     b2Vec2 m_Direction;
-    std::unordered_map<PlatformPoint::TId, PlatformPoint> m_Points;
+    std::unordered_map<PathNode::TId, PathNode> m_Points;
     std::pair<Service::ObjectType, Platform*> m_BodyPair;
     b2Body* m_Body;
 };
