@@ -23,14 +23,14 @@ struct PlatformPoint
         Y = aY;
     }
 
-    PlatformPoint(unsigned short aId, const Vector2& aPosition)
+    PlatformPoint(unsigned short aId, const b2Vec2& aPosition)
     {
         Id = aId;
         Position = aPosition;
     }
 
     TId Id;
-    oxygine::Vector2 Position;
+    b2Vec2 Position;
     int X;
     int Y;
 };

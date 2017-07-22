@@ -18,11 +18,11 @@ Platform::Platform(b2World* aWorld, const oxygine::RectF& aRect)
 //        m_Points.emplace(std::make_pair(newPoint.Id, newPoint));
 //    }
 
-    PlatformPoint newPoint = PlatformPoint(0, Vector2(400, 170));
+    PlatformPoint newPoint = PlatformPoint(0, b2Vec2(4, 1.7));
     m_Points.emplace(std::make_pair(newPoint.Id, newPoint));
-    PlatformPoint newPoint2 = PlatformPoint(1, Vector2(700, 170));
+    PlatformPoint newPoint2 = PlatformPoint(1, b2Vec2(7, 1.7));
     m_Points.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PlatformPoint newPoint3 = PlatformPoint(2, Vector2(700, 10));
+    PlatformPoint newPoint3 = PlatformPoint(2, b2Vec2(7, 0.1));
     m_Points.emplace(std::make_pair(newPoint3.Id, newPoint3));
 
 
@@ -54,9 +54,9 @@ Platform::Platform(b2World* aWorld, const oxygine::RectF& aRect)
 
 void Platform::Move()
 {
-    const Vector2 currentPosition = getPosition();
-    if (std::round(getPosition().x) == std::round( m_Points.at(m_NextPointId).Position.x)
-        && std::round(getPosition().y) == std::round( m_Points.at(m_NextPointId).Position.y))
+    const b2Vec2 currentPosition = m_Body->GetPosition();
+    if (std::round(currentPosition.x) == std::round( m_Points.at(m_NextPointId).Position.x)
+        && std::round(currentPosition.y) == std::round( m_Points.at(m_NextPointId).Position.y))
     {
         auto currentId = m_NextPointId;
 
@@ -98,23 +98,23 @@ void Platform::Move()
             }
         }
 
-        Vector2 newDirection = Vector2(m_Points.at(m_NextPointId).Position - m_Points.at(currentId).Position);
-        newDirection.normalize();
-        newDirection *= 60;
-        m_Direction = Service::Utils::Convert(newDirection);
+        m_Direction = b2Vec2(m_Points.at(m_NextPointId).Position - m_Points.at(currentId).Position);
+        m_Direction.Normalize();
+        m_Direction *= 0.6;
+
         m_Body->SetLinearVelocity(m_Direction);
-        setPosition(newDirection);
+        setPosition(Vector2(Service::Utils::Convert(m_Body->GetPosition())));
     }
     else
     {
         m_Body->SetLinearVelocity(m_Direction);
         setPosition(Vector2(Service::Utils::Convert(m_Body->GetPosition())));
-//        std::cout << "Platform:" << m_Direction.x << std::endl;
-        std::cout << "Platform:" << std::round(getPosition().x) << ", " << std::round(getPosition().y)
-                     <<":"
-                  <<  std::round( m_Points.at(m_NextPointId).Position.x)
-                   << ", "  <<  std::round( m_Points.at(m_NextPointId).Position.y)
-                  << std::endl;
+        std::cout << "Platform:" << m_Body->GetPosition().x << std::endl;
+//        std::cout << "Platform:" << std::round(getPosition().x) << ", " << std::round(getPosition().y)
+//                     <<":"
+//                  <<  std::round( m_Points.at(m_NextPointId).Position.x)
+//                   << ", "  <<  std::round( m_Points.at(m_NextPointId).Position.y)
+//                  << std::endl;
     }
 
 }
