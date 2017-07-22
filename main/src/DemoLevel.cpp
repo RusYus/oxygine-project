@@ -223,13 +223,13 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 
     CreateTileSetTexture(src);
 
-    for (const MapObject& object : mMapProperty.mObjects)
-    {
-//        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
-        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
-    }
+//    for (const MapObject& object : mMapProperty.mObjects)
+//    {
+////        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
+//        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
+//    }
 
-    spPlatform platform = new Platform(mWorld, RectF(1900, 150, 300, 40));
+    spPlatform platform = new Platform(mWorld, RectF(400, 150, 300, 40));
     addChild(platform);
     m_Platform = platform;
 }
@@ -263,9 +263,9 @@ void DemoLevel::doUpdate(const UpdateState& /*us*/)
     {
         b2Vec2 dir;
         dir.y = 0;
-        dir.x = 50 / Service::Constants::SCALE;
+        dir.x = 20 / Service::Constants::SCALE;
 
-        m_Platform->Move(dir);
+        m_Platform->Move();
     }
 }
 

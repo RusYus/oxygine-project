@@ -6,14 +6,49 @@
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 
+enum class PointToPointMode
+{
+    Cycle,
+    BackToBack,
+};
+
+struct PlatformPoint
+{
+    using TId = unsigned short;
+
+    PlatformPoint(unsigned short aId, int aX, int aY)
+    {
+        Id = aId;
+        X = aX;
+        Y = aY;
+    }
+
+    PlatformPoint(unsigned short aId, const Vector2& aPosition)
+    {
+        Id = aId;
+        Position = aPosition;
+    }
+
+    TId Id;
+    oxygine::Vector2 Position;
+    int X;
+    int Y;
+};
+
 DECLARE_SMART(Platform, spPlatform);
 class Platform: public oxygine::Box9Sprite, public Basis::BasisObject
 {
 public:
     Platform(b2World*, const oxygine::RectF&);
-    void Move(b2Vec2);
-    b2Body* m_Body;
+    void Move();
 
 private:
+    PointToPointMode m_RunningMode = PointToPointMode::Cycle;
+    typename PlatformPoint::TId m_CurrentPointId = 0;
+    typename PlatformPoint::TId m_NextPointId = 1;
+    bool m_IsMovingReverse = false;
+    b2Vec2 m_Direction;
+    std::unordered_map<PlatformPoint::TId, PlatformPoint> m_Points;
     std::pair<Service::ObjectType, Platform*> m_BodyPair;
+    b2Body* m_Body;
 };
