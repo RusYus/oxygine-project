@@ -48,12 +48,18 @@ Platform::Platform(b2World* aWorld, const oxygine::RectF& aRect)
     m_Body->SetUserData(&m_BodyPair);
 }
 
+bool Platform::IsAroundNode()
+{
+    const b2Vec2 currentPosition = m_Body->GetPosition();
+
+    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) < m_Speed * NODE_SLIPPAGE)
+        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) < m_Speed * NODE_SLIPPAGE);
+}
+
 void Platform::Move()
 {
     const b2Vec2 currentPosition = m_Body->GetPosition();
-    // TODO : Use slippage (in relation with speed maybe)
-    if (std::round(currentPosition.x) == std::round( m_Nodes.at(m_NextNodeId).Position.x)
-        && std::round(currentPosition.y) == std::round( m_Nodes.at(m_NextNodeId).Position.y))
+    if (IsAroundNode())
     {
         auto currentId = m_NextNodeId;
 

@@ -45,10 +45,14 @@ public:
     void Move();
 
 private:
+    bool IsAroundNode();
+
+private:
     PointToPointMode m_RunningMode = PointToPointMode::BackToBack;
     typename PathNode::TId m_NextNodeId = 1;
     bool m_IsMovingReverse = false;
     b2Vec2 m_Direction;
+    const int m_Speed = 4;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
     std::pair<Service::ObjectType, Platform*> m_BodyPair;
     b2Body* m_Body;

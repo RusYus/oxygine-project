@@ -41,6 +41,8 @@ private:
     Service::Normal2 mCollisionNormal;
     bool mIsJumping;
     bool mIsButtonMoving;
+    // TODO : in box2d terms (float32?).
+    // as now every time it's being divided by scale.
     const int mMaxSpeed = PLAYER_MAX_SPEED;
     const int mJumpSpeed = PLAYER_JUMP_SPEED;
 
