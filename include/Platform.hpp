@@ -35,7 +35,7 @@ struct PathNode
     int Y;
 };
 
-static const constexpr float32 NODE_SLIPPAGE = 0.0001;
+static const constexpr float32 NODE_SLIPPAGE = 0.08;
 
 DECLARE_SMART(Platform, spPlatform);
 class Platform: public oxygine::Box9Sprite, public Basis::BasisObject
@@ -52,7 +52,7 @@ private:
     typename PathNode::TId m_NextNodeId = 1;
     bool m_IsMovingReverse = false;
     b2Vec2 m_Direction;
-    const int m_Speed = 4;
+    const int m_Speed = 10;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
     std::pair<Service::ObjectType, Platform*> m_BodyPair;
     b2Body* m_Body;

@@ -9,20 +9,21 @@ Platform::Platform(b2World* aWorld, const oxygine::RectF& aRect)
 {
     setResAnim(res::ui.getResAnim("platform"));
     setSize(aRect.getSize());
-    setPosition(aRect.getCenter());
+//    setPosition(aRect.getCenter());
+    setPosition(aRect.getLeftTop());
     setAnchor(Vector2(0.5f, 0.5f));
 
     // TODO : Read from config.
 
-    PathNode newPoint = PathNode(0, b2Vec2(4, 1.7));
+    PathNode newPoint = PathNode(0, b2Vec2(4, 1.5));
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, b2Vec2(7, 1.7));
+    PathNode newPoint2 = PathNode(1, b2Vec2(7, 1.5));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, b2Vec2(7, 0.1));
+    PathNode newPoint3 = PathNode(2, b2Vec2(7, 0));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
 
 
-    m_Direction = b2Vec2(4, 0);
+    m_Direction = b2Vec2(m_Speed, 0);
 
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
@@ -52,13 +53,14 @@ bool Platform::IsAroundNode()
 {
     const b2Vec2 currentPosition = m_Body->GetPosition();
 
-    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) < m_Speed * NODE_SLIPPAGE)
-        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) < m_Speed * NODE_SLIPPAGE);
+    // TODO : better compare mechanism for high velocity.
+//    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) <= NODE_SLIPPAGE)
+//        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) <= NODE_SLIPPAGE);
+    return std::abs(b2Distance(currentPosition, m_Nodes.at(m_NextNodeId).Position)) < NODE_SLIPPAGE;
 }
 
 void Platform::Move()
 {
-    const b2Vec2 currentPosition = m_Body->GetPosition();
     if (IsAroundNode())
     {
         auto currentId = m_NextNodeId;
@@ -103,12 +105,12 @@ void Platform::Move()
 
         m_Direction = b2Vec2(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position);
         m_Direction.Normalize();
-        m_Direction *= 4;
+        m_Direction *= m_Speed;
     }
 
     m_Body->SetLinearVelocity(m_Direction);
     setPosition(Vector2(Service::Utils::Convert(m_Body->GetPosition())));
-    std::cout << "Platform:" << m_Body->GetPosition().x << std::endl;
+    std::cout << "Platform:" << m_Body->GetPosition().x << ":" << m_Body->GetPosition().y << std::endl;
 //        std::cout << "Platform:" << std::round(getPosition().x) << ", " << std::round(getPosition().y)
 //                     <<":"
 //                  <<  std::round( m_Points.at(m_NextPointId).Position.x)
