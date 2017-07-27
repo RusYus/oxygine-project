@@ -15,12 +15,14 @@ Platform::Platform(b2World* aWorld, const oxygine::RectF& aRect)
 
     // TODO : Read from config.
 
-    PathNode newPoint = PathNode(0, b2Vec2(4, 1.5));
+    PathNode newPoint = PathNode(0, b2Vec2(4, 2));
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, b2Vec2(7, 1.5));
+    PathNode newPoint2 = PathNode(1, b2Vec2(6, 2));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, b2Vec2(7, 0));
+    PathNode newPoint3 = PathNode(2, b2Vec2(6, 0.5));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
+    PathNode newPoint4 = PathNode(3, b2Vec2(9, 0.5));
+    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
 
 
     m_Direction = b2Vec2(m_Speed, 0);
@@ -66,7 +68,7 @@ void Platform::Move()
         auto currentId = m_NextNodeId;
 
         // Last node (by id).
-        if (m_NextNodeId == 2)
+        if (m_NextNodeId == static_cast<PathNode::TId>(m_Nodes.size() - 1))
         {
             if (m_RunningMode == PointToPointMode::BackToBack)
             {
