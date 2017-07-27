@@ -16,13 +16,6 @@ struct PathNode
 {
     using TId = unsigned short;
 
-    PathNode(unsigned short aId, int aX, int aY)
-    {
-        Id = aId;
-        X = aX;
-        Y = aY;
-    }
-
     PathNode(unsigned short aId, const b2Vec2& aPosition)
     {
         Id = aId;
@@ -31,8 +24,6 @@ struct PathNode
 
     TId Id;
     b2Vec2 Position;
-    int X;
-    int Y;
 };
 
 static const constexpr float32 NODE_SLIPPAGE = 0.08;
