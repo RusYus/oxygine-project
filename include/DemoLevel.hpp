@@ -7,7 +7,6 @@
 #include "BasisObject.hpp"
 #include "Platform.hpp"
 #include "MapProperty.hpp"
-#include "Box2D/Box2D.h"
 #include "Utils.hpp"
 
 DECLARE_SMART(Circle, spCircle);
@@ -19,43 +18,40 @@ DECLARE_SMART(DemoLevel, spDemoLevel);
 class Circle : public Sprite, public Basis::BasisObject
 {
 public:
-    Circle(b2World*, const Vector2&, float);
+    Circle(const Vector2&, float);
     void Update();
     bool IsAlive = true;
 
 public:
-    b2Body* mBody;
     std::pair<Service::ObjectType, Circle*> mBodyPair;
 };
 
 class Square : public Sprite, public Basis::BasisObject
 {
 public:
-    Square(b2World*, const Vector2&, float);
+    Square(const Vector2&, float);
     void Update();
     bool IsAlive = true;
 
 public:
-    b2Body* mBody;
     std::pair<Service::ObjectType, Square*> mBodyPair;
 };
 
 class SquareMovable : public Sprite, public Basis::BasisObject
 {
 public:
-    SquareMovable(b2World*, const Vector2&, float);
+    SquareMovable(const Vector2&, float);
     void Update();
     bool IsAlive = true;
 
 public:
-    b2Body* mBody;
     std::pair<Service::ObjectType, SquareMovable*> mBodyPair;
 };
 
 class Static : public Box9Sprite, public Basis::BasisObject
 {
 public:
-    Static(b2World*, const RectF&);
+    Static(const RectF&);
 
 public:
     std::pair<Service::ObjectType, Static*> mBodyPair;
@@ -64,7 +60,7 @@ public:
 class Ground : public Basis::BasisObject
 {
 public:
-    Ground(b2World*, const RectF&);
+    Ground(const RectF&);
 
 public:
     std::pair<Service::ObjectType, Ground*> mBodyPair;
@@ -73,7 +69,7 @@ public:
 class DemoLevel: public Actor
 {
 public:
-    void Init(b2World*, MapProperty&&);
+    void Init(MapProperty&&);
     void click(Event*);
     void showHideDebug(Event*);
 
@@ -84,7 +80,6 @@ private:
     void drawLayer(int, int, int, int);
     void CreateTileSetTexture(Image&);
 
-    b2World* mWorld;
     spNativeTexture mMapTexture;
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;

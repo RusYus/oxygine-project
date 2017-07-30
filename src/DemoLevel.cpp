@@ -2,130 +2,58 @@
 #include "DemoLevel.hpp"
 #include <iostream>
 
-Circle::Circle(b2World* world, const Vector2& pos, float scale = 1)
+Circle::Circle(const Vector2& pos, float scale = 1)
     : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("circle"));
     setAnchor(Vector2(0.5f, 0.5f));
     setTouchChildrenEnabled(false);
 
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Service::Utils::Convert(pos);
-
-    mBody = world->CreateBody(&bodyDef);
-
-    setUserData(mBody);
-
     setScale(scale);
-
-    b2CircleShape shape;
-    shape.m_radius = getWidth() / Service::Constants::SCALE / 2 * scale;
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-
-    mBody->CreateFixture(&fixtureDef);
-    mBody->SetUserData(&mBodyPair);
 }
 
 void Circle::Update()
 {
-    const b2Vec2& pos = mBody->GetPosition();
-    std::cout << "Circle:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
-    setPosition(Vector2(pos.x * 100, pos.y * 100));
-    setRotation(mBody->GetAngle());
 }
 
-Square::Square(b2World* world, const Vector2& pos, float scale = 1)
+Square::Square(const Vector2& pos, float scale = 1)
     : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
     setTouchChildrenEnabled(false);
 
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Service::Utils::Convert(pos);
-    bodyDef.fixedRotation = true;
-
-    mBody = world->CreateBody(&bodyDef);
-
-    setUserData(mBody);
-
-    setScale(scale);
-
-    b2PolygonShape shape;
-    shape.SetAsBox(getWidth() / Service::Constants::SCALE / 2.0f, getHeight() / Service::Constants::SCALE / 2.0f);
-
-    b2Filter filter;
-    filter.categoryBits = 0x0003;
-    filter.maskBits = 0x0001;
-    filter.groupIndex = 2;
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 100.0f;
-    fixtureDef.friction = 0.3f;
-    fixtureDef.filter = filter;
-
-    mBody->CreateFixture(&fixtureDef);
-    mBody->SetUserData(&mBodyPair);
+   setScale(scale);
 }
 
 void Square::Update()
 {
-    const b2Vec2& pos = mBody->GetPosition();
-    setPosition(Vector2(pos.x * 100, pos.y * 100));
-    setRotation(mBody->GetAngle());
 }
 
-SquareMovable::SquareMovable(b2World* world, const Vector2& pos, float scale = 1)
+SquareMovable::SquareMovable(const Vector2& pos, float scale = 1)
     : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
     setTouchChildrenEnabled(false);
 
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Service::Utils::Convert(pos);
-    bodyDef.fixedRotation = true;
-
-    mBody = world->CreateBody(&bodyDef);
-
-    setUserData(mBody);
-
     setScale(scale);
-
-    b2PolygonShape shape;
-    shape.SetAsBox(getWidth() / Service::Constants::SCALE / 2.0f, getHeight() / Service::Constants::SCALE / 2.0f);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 100.0f;
-    fixtureDef.friction = 0.3f;
-
-    mBody->CreateFixture(&fixtureDef);
-    mBody->SetUserData(&mBodyPair);
 }
 
 void SquareMovable::Update()
 {
-    mBody->SetLinearVelocity(b2Vec2{-2, 0});
-    const b2Vec2& pos = mBody->GetPosition();
-//    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
-    setPosition(Vector2(pos.x * 100, pos.y * 100));
-    setRotation(mBody->GetAngle());
+//    mBody->SetLinearVelocity(b2Vec2{-2, 0});
+//    const b2Vec2& pos = mBody->GetPosition();
+////    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
+//    setPosition(Vector2(pos.x * 100, pos.y * 100));
+//    setRotation(mBody->GetAngle());
 
 //    b2MassData m;
 //    mBody->GetMassData(&m);
 //    std::cout << "Mass:" << m.center.x << ":" << m.center.y << ";" << m.mass << std::endl;
 }
 
-Static::Static(b2World* world, const RectF& rc)
+Static::Static(const RectF& rc)
     : mBodyPair(Service::ObjectType::Ground, this)
 {
     setResAnim(res::ui.getResAnim("pen"));
@@ -134,56 +62,35 @@ Static::Static(b2World* world, const RectF& rc)
     setPosition(rc.getCenter());
     setAnchor(Vector2(0.5f, 0.5f));
 
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position = Service::Utils::Convert(getPosition());
+//    b2BodyDef groundBodyDef;
+//    groundBodyDef.position = Service::Utils::Convert(getPosition());
 
-    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+//    b2Body* groundBody = world->CreateBody(&groundBodyDef);
 
-    b2PolygonShape groundBox;
-    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
-    groundBox.SetAsBox(sz.x, sz.y);
+//    b2PolygonShape groundBox;
+//    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
+//    groundBox.SetAsBox(sz.x, sz.y);
 
-    b2Filter filter;
-    filter.categoryBits = 0x0001;
-    filter.maskBits = 0x0003;
-    filter.groupIndex = 3;
+//    b2Filter filter;
+//    filter.categoryBits = 0x0001;
+//    filter.maskBits = 0x0003;
+//    filter.groupIndex = 3;
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 0.0f;
-    fixtureDef.shape = &groundBox;
-    fixtureDef.filter = filter;
-    groundBody->CreateFixture(&fixtureDef);
-    groundBody->SetUserData(&mBodyPair);
+//    b2FixtureDef fixtureDef;
+//    fixtureDef.density = 0.0f;
+//    fixtureDef.shape = &groundBox;
+//    fixtureDef.filter = filter;
+//    groundBody->CreateFixture(&fixtureDef);
+//    groundBody->SetUserData(&mBodyPair);
 }
 
-Ground::Ground(b2World* world, const RectF& rc)
+Ground::Ground(const RectF& rc)
     : mBodyPair(Service::ObjectType::Ground, this)
 {
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position = Service::Utils::Convert(rc.getCenter());
-
-    b2Body* groundBody = world->CreateBody(&groundBodyDef);
-
-    b2PolygonShape groundBox;
-    b2Vec2 sz = Service::Utils::Convert(rc.getSize() / 2);
-    groundBox.SetAsBox(sz.x, sz.y);
-
-    b2Filter filter;
-    filter.categoryBits = 0x0001;
-    filter.maskBits = 0x0003;
-    filter.groupIndex = 3;
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 0.0f;
-    fixtureDef.shape = &groundBox;
-    fixtureDef.filter = filter;
-    groundBody->CreateFixture(&fixtureDef);
-    groundBody->SetUserData(&mBodyPair);
 }
 
-void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
+void DemoLevel::Init(MapProperty&& aMapProperty)
 {
-    mWorld = aWorld;
     //create background
 //    spSprite sky = new Sprite;
 //    sky->setResAnim(res::ui.getResAnim("sky"));
@@ -193,7 +100,7 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
-    spStatic ground = new Static(mWorld, RectF(0, getHeight()*0.5, getWidth() * 10, 30));
+    spStatic ground = new Static(RectF(0, getHeight()*0.5, getWidth() * 10, 30));
     addChild(ground);
     mObjects.push_back(ground);
 
@@ -229,7 +136,7 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
 
-    spPlatform platform = new Platform(mWorld, RectF(400, 200, 300, 40));
+    spPlatform platform = new Platform(RectF(400, 200, 300, 40));
     addChild(platform);
     m_Platform = platform;
 }
@@ -244,9 +151,6 @@ void DemoLevel::doUpdate(const UpdateState& /*us*/)
 
         if (circle->getY() > getHeight() + 50)
         {
-            circle->mBody->SetUserData(0);
-            mWorld->DestroyBody(circle->mBody);
-
             circle->detach();
             circle->IsAlive = false;
         }
@@ -261,10 +165,6 @@ void DemoLevel::doUpdate(const UpdateState& /*us*/)
 
     if (m_Platform)
     {
-        b2Vec2 dir;
-        dir.y = 0;
-        dir.x = 20 / Service::Constants::SCALE;
-
         m_Platform->Move();
     }
 }
@@ -283,7 +183,7 @@ void DemoLevel::click(Event* event)
 //        spCircle circle = new Circle(mWorld, te->localPosition);
 //        circle->attachTo(this);
 //        mCircles.push_front(circle);
-        spSquareMovable s = new SquareMovable(mWorld, te->localPosition);
+        spSquareMovable s = new SquareMovable(te->localPosition);
         s->attachTo(this);
         mSquares.push_front(s);
 //    }
