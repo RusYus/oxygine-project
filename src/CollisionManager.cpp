@@ -33,45 +33,79 @@ oxygine::Vector2 des = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(),
 
 
     oxygine::Vector2 intersectionPoint;
-    if (Intersection(
-        oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
-        oxygine::Vector2(m_Static->getX() + m_Static->getWidth(), m_Static->getY()),
-//        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()),
-//        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()) + m_Player->GetDirection(),
-        m_Player->GetRayOriginal(),
-        m_Player->GetRayDestination(),
-        intersectionPoint))
+
+    for(auto& ray : m_Player->GetRays())
     {
-        std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
-        float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
-        std::cout << "NewPosY:" << newPosY << std::endl;
-        m_Player->SetY(newPosY);
-        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-    }
-
-
-
-//    if (m_Player->GetX() < m_Static->getX() + m_Static->getWidth()
-//        && m_Player->GetX() + m_Player->GetWidth() > m_Static->getX()
-//        && m_Player->GetY() < m_Static->getY() + m_Static->getHeight()
-//        && m_Player->GetY() + m_Player->GetHeight() > m_Static->getY())
-//    {
-//        // Collision.
-//        std::cout << "Collision took place!" << std::endl;
-//        m_Player->SetY(0);
-//    }
-    else
-    {
-        std::cout << m_Player->GetX() << ":" << m_Player->GetY() << " | " << m_Player->GetWidth() << ":" << m_Player->GetHeight()
-                  << ";   " << m_Static->getX() << ":" << m_Static->getY() << " | " << m_Static->getWidth() << ":" << m_Static->getHeight()
-                  << std::endl;
-
-        // TODO : "proper" unsetting collision normal.
-        if (m_Player->GetCollisionNormal().y == -1)
+        intersectionPoint.setZero();
+        if (Intersection(
+            oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
+            oxygine::Vector2(m_Static->getX() + m_Static->getWidth(), m_Static->getY()),
+    //        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()),
+    //        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()) + m_Player->GetDirection(),
+            ray.Original,
+            ray.Destination,
+            intersectionPoint))
         {
-            m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+            std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
+            float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
+            std::cout << "NewPosY:" << newPosY << std::endl;
+            m_Player->SetY(newPosY);
+            m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
+        }
+        else
+        {
+            std::cout << m_Player->GetX() << ":" << m_Player->GetY() << " | " << m_Player->GetWidth() << ":" << m_Player->GetHeight()
+                      << ";   " << m_Static->getX() << ":" << m_Static->getY() << " | " << m_Static->getWidth() << ":" << m_Static->getHeight()
+                      << std::endl;
+
+            // TODO : "proper" unsetting collision normal.
+            if (m_Player->GetCollisionNormal().y == -1)
+            {
+                m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+            }
         }
     }
+
+
+//    if (Intersection(
+//        oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
+//        oxygine::Vector2(m_Static->getX() + m_Static->getWidth(), m_Static->getY()),
+////        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()),
+////        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()) + m_Player->GetDirection(),
+//        m_Player->GetRayOriginal(),
+//        m_Player->GetRayDestination(),
+//        intersectionPoint))
+//    {
+//        std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
+//        float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
+//        std::cout << "NewPosY:" << newPosY << std::endl;
+//        m_Player->SetY(newPosY);
+//        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
+//    }
+
+
+
+////    if (m_Player->GetX() < m_Static->getX() + m_Static->getWidth()
+////        && m_Player->GetX() + m_Player->GetWidth() > m_Static->getX()
+////        && m_Player->GetY() < m_Static->getY() + m_Static->getHeight()
+////        && m_Player->GetY() + m_Player->GetHeight() > m_Static->getY())
+////    {
+////        // Collision.
+////        std::cout << "Collision took place!" << std::endl;
+////        m_Player->SetY(0);
+////    }
+//    else
+//    {
+//        std::cout << m_Player->GetX() << ":" << m_Player->GetY() << " | " << m_Player->GetWidth() << ":" << m_Player->GetHeight()
+//                  << ";   " << m_Static->getX() << ":" << m_Static->getY() << " | " << m_Static->getWidth() << ":" << m_Static->getHeight()
+//                  << std::endl;
+
+//        // TODO : "proper" unsetting collision normal.
+//        if (m_Player->GetCollisionNormal().y == -1)
+//        {
+//            m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+//        }
+//    }
 }
 
 bool CollisionManager::Intersection(

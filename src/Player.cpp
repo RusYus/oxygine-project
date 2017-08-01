@@ -42,15 +42,27 @@ void Player::Init(spEventProxy aEventProxy)
 
     mDirection = oxygine::Vector2();
 
-    float rawRaysNumber = GetWidth() / RAYCAST_INTERVAL;
-    rawRaysNumber--;
-    if (static_cast<int>(GetWidth()) % RAYCAST_INTERVAL == 0)
+    int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / RAYCAST_INTERVAL));
+    float actualIntervalLength = GetWidth() / actualIntervalsNumber;
+    actualIntervalsNumber--;
+    for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
-        for (int i = 0; i < rawRaysNumber + 2; ++i)
-        {
-            mRays.push_back(Ray(oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight())));
-        }
+        // Bottom
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight())));
+        // Top
+//        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY())));
     }
+
+//    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
+//    actualIntervalLength = GetHeight() / actualIntervalsNumber;
+//    actualIntervalsNumber--;
+//    for (int i = 0; i < actualIntervalsNumber + 2; ++i)
+//    {
+//        // Right
+//        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength)));
+//        // Left
+//        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength)));
+//    }
 }
 
 void Player::Jump(Event* /*aEvent*/)
@@ -138,6 +150,10 @@ oxygine::Vector2 Player::GetRayOriginal() const
 oxygine::Vector2 Player::GetRayDestination() const
 {
     return mRays.back().Destination;
+}
+std::vector<Ray>& Player::GetRays()
+{
+    return mRays;
 }
 
 void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)

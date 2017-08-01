@@ -39,6 +39,7 @@ public:
      float GetWidth() const;
      float GetHeight() const;
      oxygine::Vector2 GetRayOriginal() const;
+     std::vector<Ray>& GetRays();
      oxygine::Vector2 GetRayDestination() const;
      void SetPosition();
      oxygine::Vector2 GetPosition() const;
