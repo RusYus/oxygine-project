@@ -72,6 +72,7 @@ public:
     void Init(MapProperty&&);
     void click(Event*);
     void showHideDebug(Event*);
+    Static* mStatic;
 
 private:
     friend class Player;

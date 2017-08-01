@@ -59,8 +59,8 @@ Static::Static(const RectF& rc)
     setResAnim(res::ui.getResAnim("pen"));
     setSize(rc.getSize());
 //    setPosition(rc.getLeftTop());
-    setPosition(rc.getCenter());
-    setAnchor(Vector2(0.5f, 0.5f));
+    setPosition(rc.getLeftTop());
+//    setAnchor(Vector2(0.5f, 0.5f));
 
 //    b2BodyDef groundBodyDef;
 //    groundBodyDef.position = Service::Utils::Convert(getPosition());
@@ -100,8 +100,10 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     setSize(getStage()->getSize().x, getStage()->getSize().y);
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
-    spStatic ground = new Static(RectF(0, getHeight()*0.5, getWidth() * 10, 30));
+//    spStatic ground = new Static(RectF(0, getHeight()*0.5, getWidth() * 10, 30));
+    spStatic ground = new Static(RectF(0, 500, 800, 30));
     addChild(ground);
+    mStatic = ground.get();
     mObjects.push_back(ground);
 
 //    spSquare square = new Square(mWorld, Vector2(200, 300));

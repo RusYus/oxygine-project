@@ -41,13 +41,13 @@ struct Normal2: b2Vec2
     {
     }
 
-    void operator =(const b2Vec2& aVector)
+    void operator =(const oxygine::Vector2& aVector)
     {
         x = aVector.x;
         y = aVector.y;
     }
 
-    void operator += (const b2Vec2& aVector)
+    void operator += (const oxygine::Vector2& aVector)
     {
         x += aVector.x;
         y += aVector.y;
@@ -61,7 +61,7 @@ struct Normal2: b2Vec2
         FixCoordinatesIfExceeds();
     }
 
-    void operator -= (const b2Vec2& aVector)
+    void operator -= (const oxygine::Vector2& aVector)
     {
         x -= aVector.x;
         y -= aVector.y;

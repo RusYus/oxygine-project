@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 
 #include "Actor.h"
 #include "CollisionManager.hpp"
@@ -114,7 +114,8 @@ public:
         mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
         mJump->attachTo(this);
 
-        m_CollisionManager.AddBody(static_cast<void*>(mPlayer.get()));
+//        m_CollisionManager.AddBody(static_cast<void*>(mPlayer.get()));
+        m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic);
     }
 
     void doUpdate(const UpdateState& us)
@@ -122,6 +123,8 @@ public:
         //in real project you should make steps with fixed dt, check box2d documentation
 //        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
+        m_CollisionManager.CheckCollisions();
+        mPlayer->SetPosition();
     }
 
     // TODO : Not working right now.
