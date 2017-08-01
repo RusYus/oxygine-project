@@ -7,9 +7,21 @@
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-constexpr const int PLAYER_MAX_SPEED = 6;
+constexpr const int PLAYER_MAX_SPEED =4;
 constexpr const int PLAYER_JUMP_SPEED = 5;
 constexpr const float GRAVITY = 50;
+constexpr const int RAYCAST_INTERVAL = 50;
+
+struct Ray
+{
+    Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination)
+        : Original(aOriginal)
+        , Destination(aDestination)
+    {}
+
+    oxygine::Vector2 Original;
+    oxygine::Vector2 Destination;
+};
 
 DECLARE_SMART(Player, spPlayer);
 class Player: public oxygine::Object, public Basis::BasisObject
@@ -26,12 +38,14 @@ public:
      float GetY() const;
      float GetWidth() const;
      float GetHeight() const;
+     oxygine::Vector2 GetRayOriginal() const;
+     oxygine::Vector2 GetRayDestination() const;
      void SetPosition();
      oxygine::Vector2 GetPosition() const;
      oxygine::Vector2 GetDirection() const;
+     Service::Normal2 GetCollisionNormal() const;
     void SetCollisionNormal(const oxygine::Vector2);
     void SetZeroCollisionNormal();
-    // TODO : Move to private.
 
 private:
     void Move(bool /*aIsMovingRight*/);
@@ -44,11 +58,9 @@ private:
     oxygine::spSprite mBox;
     oxygine::Vector2 mDirection;
     Service::Normal2 mCollisionNormal;
-    oxygine::Matrix mTransform;
+    std::vector<Ray> mRays;
     bool mIsJumping;
     bool mIsButtonMoving;
-    // TODO : in box2d terms (float32?).
-    // as now every time it's being divided by scale.
     const int mMaxSpeed = PLAYER_MAX_SPEED;
     const int mJumpSpeed = PLAYER_JUMP_SPEED;
 

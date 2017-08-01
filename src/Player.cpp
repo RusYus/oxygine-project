@@ -13,7 +13,6 @@ Player::Player()
     , mIsButtonMoving(false)
     , mIsJumping(false)
 {
-    mTransform.identity();
 }
 
 spActor Player::GetView() const
@@ -42,6 +41,16 @@ void Player::Init(spEventProxy aEventProxy)
     mEventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
     mDirection = oxygine::Vector2();
+
+    float rawRaysNumber = GetWidth() / RAYCAST_INTERVAL;
+    rawRaysNumber--;
+    if (static_cast<int>(GetWidth()) % RAYCAST_INTERVAL == 0)
+    {
+        for (int i = 0; i < rawRaysNumber + 2; ++i)
+        {
+            mRays.push_back(Ray(oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight())));
+        }
+    }
 }
 
 void Player::Jump(Event* /*aEvent*/)
@@ -99,7 +108,6 @@ inline void Player::Stop()
 void Player::SetY(float newPosY)
 {
     mDirection.y = newPosY;
-//    mTransform.translate(oxygine::Vector3(mDirection.x, 0, 0));
 }
 
 float Player::GetX() const
@@ -120,6 +128,16 @@ float Player::GetWidth() const
 float Player::GetHeight() const
 {
     return (mView.get() ? mView->getHeight() : .0f);
+}
+
+oxygine::Vector2 Player::GetRayOriginal() const
+{
+    return mRays.back().Original;
+}
+
+oxygine::Vector2 Player::GetRayDestination() const
+{
+    return mRays.back().Destination;
 }
 
 void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
@@ -164,8 +182,14 @@ void Player::ProcessKeyboard()
 void Player::SetPosition()
 {
     Vector2 newPos = mView->getPosition() + mDirection;
+
     std::cout << "Pos: " << newPos.x << " : " << newPos.y << std::endl;
     mView->setPosition(newPos);
+
+    for(int i = 0; i < mRays.size(); ++i)
+    {
+        mRays.at(i).Original = oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight());
+    }
 }
 
 oxygine::Vector2 Player::GetPosition() const
@@ -176,6 +200,11 @@ oxygine::Vector2 Player::GetPosition() const
 oxygine::Vector2 Player::GetDirection() const
 {
     return mDirection;
+}
+
+Service::Normal2 Player::GetCollisionNormal() const
+{
+    return mCollisionNormal;
 }
 
 void Player::Update(const UpdateState& us)
@@ -195,6 +224,11 @@ void Player::Update(const UpdateState& us)
 
     mDirection.y += us.dt / GRAVITY;
 
+    for (auto& ray : mRays)
+    {
+        ray.Destination = ray.Original + mDirection;
+    }
+
     std::cout << "Dt:" << us.dt << std::endl;
 
 
@@ -208,7 +242,9 @@ void Player::Update(const UpdateState& us)
         mIsJumping = true;
     }
 
-    std::cout << "Player:" << mView->getX() << ":" << mView->getY() << std::endl;
+    std::cout << "Player:"
+              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
+//              << mView->getX() << ":" << mView->getY() << std::endl;
 
 //    b2Vec2 b2pos = _body->GetPosition();
 //    Vector2 pos = Service::Utils::Convert(b2pos);
