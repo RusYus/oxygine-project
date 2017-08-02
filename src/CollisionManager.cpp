@@ -37,6 +37,12 @@ void CollisionManager::CheckCollisions()
     for(auto& ray : m_Player->GetRays())
     {
         ray.IsHitInLastStep = ray.IsHitInCurrentStep;
+        if (ray.Original == ray.Destination)
+        {
+            ray.IsHitInCurrentStep = false;
+            continue;
+        }
+
         intersectionPoint.setZero();
         if (Intersection(
             oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),

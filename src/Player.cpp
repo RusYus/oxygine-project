@@ -85,16 +85,16 @@ void Player::Init(spEventProxy aEventProxy)
         mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY())));
     }
 
-//    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
-//    actualIntervalLength = GetHeight() / actualIntervalsNumber;
-//    actualIntervalsNumber--;
-//    for (int i = 0; i < actualIntervalsNumber + 2; ++i)
-//    {
-//        // Right
-//        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength)));
-//        // Left
-//        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength)));
-//    }
+    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
+    actualIntervalLength = GetHeight() / actualIntervalsNumber;
+    actualIntervalsNumber--;
+    for (int i = 0; i < actualIntervalsNumber + 2; ++i)
+    {
+        // Right
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength)));
+        // Left
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength)));
+    }
 }
 
 void Player::Jump(Event* /*aEvent*/)
