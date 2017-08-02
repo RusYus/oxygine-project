@@ -47,7 +47,7 @@ void Box2DDraw::setRays(const std::vector<Ray>& aRays)
     for (auto& ray : aRays)
     {
         mRays.push_back(ray);
-        std::cout << ray.Original.x << ":" << ray.Original.y << std::endl;
+//        std::cout << ray.Original.x << ":" << ray.Original.y << std::endl;
     }
 }
 
@@ -70,7 +70,7 @@ void Box2DDraw::doRender(const RenderState& rs)
     {
 //        mVertices[0] = ray.Original;
 //        mVertices[1] = ray.Destination;
-        std::cout << ray.Original.x << ":" << ray.Original.y << std::endl;
+//        std::cout << ray.Original.x << ":" << ray.Original.y << std::endl;
 //               << "D:" << mVertices[1].x << ":" << mVertices[1].y << std::endl;
         drawPrimitives(false, true, 2, b2Color(0, 1, 0));
         DrawCircle(Service::Utils::Convert(ray.Original), 0.08, b2Color(0,1,0));
