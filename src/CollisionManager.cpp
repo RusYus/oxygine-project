@@ -8,30 +8,15 @@ void CollisionManager::AddBody(void* aBody)
     m_Bodies.push_back(aBody);
 }
 
-void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic)
+void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic, Static* aStatic2)
 {
     m_Player = aPlayer;
     m_Static = aStatic;
+    m_Static2 = aStatic2;
 }
 
 void CollisionManager::CheckCollisions()
 {
-//    oxygine::Vector2 o = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight());
-//    if (o.x != m_Player->GetRayOriginal().x || o.y != m_Player->GetRayOriginal().y)
-//    {
-//            std::cout << "Original doens't match)" << o.x << ":" << o.y << "  -  "
-//                      <<  m_Player->GetRayOriginal().x << ":" <<  m_Player->GetRayOriginal().y <<  std::endl;
-//    }
-//oxygine::Vector2 des = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()) + m_Player->GetDirection();
-
-//            if (des.x != m_Player->GetRayDestination().x || des.y != m_Player->GetRayDestination().y)
-//    {
-//            std::cout << "Destination doens't match" << des.x << ":" << des.y << "  -  "
-//                      <<  m_Player->GetRayDestination().x << ":" <<  m_Player->GetRayDestination().y <<  std::endl;
-//    }
-
-
-
     oxygine::Vector2 intersectionPoint;
 
     for(auto& ray : m_Player->GetRays())
@@ -47,8 +32,6 @@ void CollisionManager::CheckCollisions()
         if (Intersection(
             oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
             oxygine::Vector2(m_Static->getX() + m_Static->getWidth(), m_Static->getY()),
-    //        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()),
-    //        oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(), m_Player->GetY() + m_Player->GetHeight()) + m_Player->GetDirection(),
             ray.Original,
             ray.Destination,
             intersectionPoint))
@@ -64,16 +47,42 @@ void CollisionManager::CheckCollisions()
         }
         else
         {
-//            std::cout << m_Player->GetX() << ":" << m_Player->GetY() << " | " << m_Player->GetWidth() << ":" << m_Player->GetHeight()
-//                      << ";   " << m_Static->getX() << ":" << m_Static->getY() << " | " << m_Static->getWidth() << ":" << m_Static->getHeight()
-//                      << std::endl;
-
             ray.IsHitInCurrentStep = false;
             // TODO : "proper" unsetting collision normal.
             if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
                     && m_Player->GetCollisionNormal().y == -1)
             {
                 m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
+            }
+        }
+
+        intersectionPoint.setZero();
+
+        if (Intersection(
+            oxygine::Vector2(m_Static2->getX(), m_Static2->getY() + m_Static2->getHeight()),
+            oxygine::Vector2(m_Static2->getX() + m_Static2->getWidth(), m_Static2->getY()),
+            ray.Original,
+            ray.Destination,
+            intersectionPoint))
+        {
+//            std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
+            float newPosX = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
+//            std::cout << "NewPosY:" << newPosY << std::endl;
+
+            ray.IsHitInCurrentStep = true;
+
+            m_Player->SetX(newPosX);
+            m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
+        }
+        else
+        {
+            ray.IsHitInCurrentStep = false;
+            // TODO : "proper" unsetting collision normal.
+            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
+                    && m_Player->GetCollisionNormal().x == 1)
+            {
+                m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
                 std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
             }
         }

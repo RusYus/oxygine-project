@@ -154,6 +154,11 @@ void Player::SetY(float newPosY)
     mDirection.y = newPosY;
 }
 
+void Player::SetX(float newPosX)
+{
+    mDirection.x = newPosX;
+}
+
 float Player::GetX() const
 {
     return (mView.get() ? mView->getX() : .0f);

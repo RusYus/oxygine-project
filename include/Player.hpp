@@ -43,6 +43,7 @@ public:
     void ProcessMoveEvent(oxygine::Event*);
     void Jump(oxygine::Event*);
      void SetY(float);
+     void SetX(float);
      float GetX() const;
      float GetY() const;
      float GetWidth() const;

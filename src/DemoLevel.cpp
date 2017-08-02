@@ -128,8 +128,13 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     mStatic = ground.get();
     mObjects.push_back(ground);
 
-    spGround ground2 = new Ground(mWorld, RectF(800, 200, 400, 50));
+    spStatic ground2 = new Static(RectF(700, 100, 50, 400));
     addChild(ground2);
+    mStatic2 = ground2.get();
+    mObjects.push_back(ground2);
+
+    spGround groundW = new Ground(mWorld, RectF(800, 200, 400, 50));
+    addChild(groundW);
 
 //    spSquare square = new Square(mWorld, Vector2(200, 300));
 //    square->attachTo(this);

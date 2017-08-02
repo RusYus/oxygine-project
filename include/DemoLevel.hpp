@@ -74,6 +74,8 @@ public:
     void click(Event*);
     void showHideDebug(Event*);
     Static* mStatic;
+    Static* mStatic2;
+    Static* mStatic3;
 
 private:
     friend class Player;

@@ -115,7 +115,7 @@ public:
         mJump->attachTo(this);
 
 //        m_CollisionManager.AddBody(static_cast<void*>(mPlayer.get()));
-        m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic);
+        m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic, mLevels.back()->mStatic2);
     }
 
     void doUpdate(const UpdateState& us)

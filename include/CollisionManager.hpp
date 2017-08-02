@@ -9,7 +9,7 @@ class CollisionManager
 {
 public:
     void AddBody(void*);
-    void AddBodies(Player*, Static*);
+    void AddBodies(Player*, Static*, Static*);
     void CheckCollisions();
 
 private:
@@ -22,4 +22,5 @@ private:
     std::vector<void*> m_Bodies;
     Player* m_Player;
     Static* m_Static;
+    Static* m_Static2;
 };
