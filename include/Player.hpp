@@ -17,10 +17,14 @@ struct Ray
     Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination)
         : Original(aOriginal)
         , Destination(aDestination)
+        , IsHitInLastStep(false)
+        , IsHitInCurrentStep(false)
     {}
 
     oxygine::Vector2 Original;
     oxygine::Vector2 Destination;
+    bool IsHitInLastStep;
+    bool IsHitInCurrentStep;
 };
 
 DECLARE_SMART(Player, spPlayer);

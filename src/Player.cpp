@@ -50,7 +50,7 @@ void Player::Init(spEventProxy aEventProxy)
         // Bottom
         mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight())));
         // Top
-//        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY())));
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY())));
     }
 
 //    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
@@ -200,12 +200,14 @@ void Player::SetPosition()
     Vector2 newPos = mView->getPosition() + mDirection;
 
     std::cout << "Pos: " << newPos.x << " : " << newPos.y << std::endl;
+
+    for(auto& ray : mRays)
+    {
+        ray.Original += mDirection;
+    }
+
     mView->setPosition(newPos);
 
-    for(int i = 0; i < mRays.size(); ++i)
-    {
-        mRays.at(i).Original = oxygine::Vector2(GetX() + i * RAYCAST_INTERVAL, GetY() + GetHeight());
-    }
 }
 
 oxygine::Vector2 Player::GetPosition() const

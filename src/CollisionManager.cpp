@@ -36,6 +36,7 @@ oxygine::Vector2 des = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(),
 
     for(auto& ray : m_Player->GetRays())
     {
+        ray.IsHitInLastStep = ray.IsHitInCurrentStep;
         intersectionPoint.setZero();
         if (Intersection(
             oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
@@ -49,6 +50,9 @@ oxygine::Vector2 des = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(),
             std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
             float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
             std::cout << "NewPosY:" << newPosY << std::endl;
+
+            ray.IsHitInCurrentStep = true;
+
             m_Player->SetY(newPosY);
             m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
         }
@@ -58,8 +62,9 @@ oxygine::Vector2 des = oxygine::Vector2(m_Player->GetX() + m_Player->GetWidth(),
                       << ";   " << m_Static->getX() << ":" << m_Static->getY() << " | " << m_Static->getWidth() << ":" << m_Static->getHeight()
                       << std::endl;
 
+            ray.IsHitInCurrentStep = false;
             // TODO : "proper" unsetting collision normal.
-            if (m_Player->GetCollisionNormal().y == -1)
+            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep)
             {
                 m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
             }
