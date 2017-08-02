@@ -72,7 +72,7 @@ public:
         addChild(mCamera);
 
         mLevels.emplace_back(new DemoLevel);
-        mLevels.back()->Init(std::move(mapProperty));
+        mLevels.back()->Init(mWorld, std::move(mapProperty));
         addChild(mLevels.back());
 
         mCamera->setContent(mLevels.back());
@@ -125,6 +125,11 @@ public:
         mPlayer->Update(us);
         m_CollisionManager.CheckCollisions();
         mPlayer->SetPosition();
+
+        if (mDebugDraw)
+        {
+            mDebugDraw->setRays(mPlayer->GetRays());
+        }
     }
 
     // TODO : Not working right now.
@@ -141,6 +146,7 @@ public:
 
         mDebugDraw = new Box2DDraw;
         mDebugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+        mDebugDraw->setRays(mPlayer->GetRays());
         mDebugDraw->attachTo(mLevels.back());
         mDebugDraw->setWorld(100, mWorld);
         mDebugDraw->setPriority(1);

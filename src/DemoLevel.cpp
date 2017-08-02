@@ -84,13 +84,35 @@ Static::Static(const RectF& rc)
 //    groundBody->SetUserData(&mBodyPair);
 }
 
-Ground::Ground(const RectF& rc)
+Ground::Ground(b2World* world, const RectF& rc)
     : mBodyPair(Service::ObjectType::Ground, this)
 {
+    b2BodyDef groundBodyDef;
+    groundBodyDef.type = b2_staticBody;
+    groundBodyDef.position = Service::Utils::Convert(rc.getLeftTop());
+
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+
+    b2PolygonShape groundBox;
+    b2Vec2 sz = Service::Utils::Convert(rc.getSize() / 2);
+    groundBox.SetAsBox(sz.x, sz.y);
+
+    b2Filter filter;
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0003;
+    filter.groupIndex = 3;
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = 0.0f;
+    fixtureDef.shape = &groundBox;
+    fixtureDef.filter = filter;
+    groundBody->CreateFixture(&fixtureDef);
+    groundBody->SetUserData(&mBodyPair);
 }
 
-void DemoLevel::Init(MapProperty&& aMapProperty)
+void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 {
+    mWorld = aWorld;
     //create background
 //    spSprite sky = new Sprite;
 //    sky->setResAnim(res::ui.getResAnim("sky"));
@@ -105,6 +127,9 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     addChild(ground);
     mStatic = ground.get();
     mObjects.push_back(ground);
+
+    spGround ground2 = new Ground(mWorld, RectF(800, 200, 400, 50));
+    addChild(ground2);
 
 //    spSquare square = new Square(mWorld, Vector2(200, 300));
 //    square->attachTo(this);

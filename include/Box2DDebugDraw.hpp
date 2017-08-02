@@ -2,6 +2,8 @@
 #include "Actor.h"
 #include "Box2D/Box2D.h"
 
+#include "Player.hpp"
+
 using namespace oxygine;
 namespace oxygine
 {
@@ -37,6 +39,9 @@ public:
     /// @param xf a transform.
     void DrawTransform(const b2Transform& xf);
 
+
+    void setRays(const std::vector<Ray>&);
+
 protected:
     b2World* _world;
     float _worldScale;
@@ -51,4 +56,6 @@ protected:
     void drawPrimitives(bool drawTriangles, bool drawLines, int aCount, const b2Color& aColor);
 
     ShaderProgramGL* _program;
+
+    std::vector<Ray> mRays;
 };
