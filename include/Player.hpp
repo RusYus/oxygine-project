@@ -12,23 +12,33 @@
 #include "oxygine-framework.h"
 
 constexpr const int PLAYER_MAX_SPEED =4;
-constexpr const int PLAYER_JUMP_SPEED = 5;
-constexpr const float GRAVITY = 50;
+constexpr const int PLAYER_JUMP_SPEED = 8;
+constexpr const float GRAVITY = 80;
 constexpr const int RAYCAST_INTERVAL = 50;
+
+enum class RayDirection
+{
+    Up,
+    Down,
+    Left,
+    Right,
+};
 
 struct Ray
 {
-    Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination)
+    Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination, RayDirection aDirection)
         : Original(aOriginal)
         , Destination(aDestination)
         , IsHitInLastStep(false)
         , IsHitInCurrentStep(false)
+        , Direction(aDirection)
     {}
 
     oxygine::Vector2 Original;
     oxygine::Vector2 Destination;
     bool IsHitInLastStep;
     bool IsHitInCurrentStep;
+    RayDirection Direction;
 };
 
 DECLARE_SMART(Player, spPlayer);

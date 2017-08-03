@@ -125,11 +125,11 @@ public:
         mPlayer->Update(us);
         m_CollisionManager.CheckCollisions();
         mPlayer->SetPosition();
-
         if (mDebugDraw)
         {
             mDebugDraw->setRays(mPlayer->GetRays());
         }
+
     }
 
     // TODO : Not working right now.

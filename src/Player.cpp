@@ -80,9 +80,9 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight())));
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), RayDirection::Down));
         // Top
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY())));
+//        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), RayDirection::Up));
     }
 
     actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
@@ -91,14 +91,15 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength)));
+        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), RayDirection::Right));
         // Left
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength)));
+//        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), RayDirection::Left));
     }
 }
 
 void Player::Jump(Event* /*aEvent*/)
 {
+    std::cout << mCollisionNormal.y << std::endl;
     if (!mIsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
@@ -199,7 +200,10 @@ void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
 //    mCollisionNormal += aNormal;
 //    std::cout << "Ground:" << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
 
+    std::cout << "C:" << mCollisionNormal.y;
     mCollisionNormal += aNormal;
+    std::cout << " : " << mCollisionNormal.y << std::endl;
+
 }
 
 void Player::SetZeroCollisionNormal()
@@ -241,13 +245,77 @@ void Player::SetPosition()
     for(auto& ray : mRays)
     {
         ray.Original += mDirection;
+
+        switch (ray.Direction)
+        {
+            case RayDirection::Up:
+                if (mDirection.y < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Down:
+                if (mDirection.y > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Right:
+                if (mDirection.x > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+
+            case RayDirection::Left:
+                if (mDirection.x < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+        }
     }
+
+//    std::cout << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y
+//              << "  |  " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
 
     mView->setPosition(newPos);
 
+    if (mCollisionNormal.y == -1)
+    {
+        mIsJumping = false;
+    }
+    else
+    {
+        mIsJumping = true;
+    }
 
-        std::cout << "Player:"
-                  << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
+    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
+
+
+//        std::cout << "Player:"
+//                  << mDirection.x << ":" << mDirection.y << "  |  "
+//                  << mCollisionNormal.x << ":" << mCollisionNormal.y
+//                  << std::endl;
+
+//        std::cout << "O: " << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y << std::endl;
+//        std::cout << "D: " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
 
 }
 
@@ -285,21 +353,87 @@ void Player::Update(const UpdateState& us)
 
     for (auto& ray : mRays)
     {
-        ray.Destination = ray.Original + mDirection;
+        // Down  : y
+        // Up    : y
+        // Right : x
+        // Left  : x
+
+        switch (ray.Direction)
+        {
+            case RayDirection::Up:
+                if (mDirection.y < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Down:
+                if (mDirection.y > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Right:
+                if (mDirection.x > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+
+            case RayDirection::Left:
+                if (mDirection.x < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+        }
+
+
+//        if (((ray.Direction == RayDirection::Left || ray.Direction == RayDirection::Right)
+//            && mDirection.x == 0)
+//            || ((ray.Direction == RayDirection::Up || ray.Direction == RayDirection::Down)
+//                && mDirection.y == 0))
+//        {
+//            ray.Destination = ray.Original;
+//        }
+//        else
+//        {
+//            ray.Destination = ray.Original + mDirection;
+//        }
     }
+
+
+
+
 
 //    std::cout << "Dt:" << us.dt << std::endl;
 
 
     // If player doesn't stand on something, he can't jump.
-    if (mCollisionNormal.y == -1)
-    {
-        mIsJumping = false;
-    }
-    else
-    {
-        mIsJumping = true;
-    }
+// Move to SetPosition
+    //    if (mCollisionNormal.y == -1)
+//    {
+//        mIsJumping = false;
+//    }
+//    else
+//    {
+//        mIsJumping = true;
+//    }
 
 //    std::cout << "Player:"
 //              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
@@ -336,7 +470,7 @@ void Player::doRender(const oxygine::RenderState& rs)
 //        mVertices[1] = ray.Original + oxygine::Vector2(0, 50);
 //        drawPrimitives(true, 2, oxygine::Color::Green);
 
-        createCircleVertices(ray.Original, 20);
+        createCircleVertices(ray.Original, 5);
         drawPrimitives(true, CIRCLE_SEGMENTS, oxygine::Color::Green);
     }
 }
