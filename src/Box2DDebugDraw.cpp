@@ -88,6 +88,10 @@ drawPrimitives(false, true, 2, b2Color(0, 1, 0));
         DrawCircle(Service::Utils::Convert(ray.Original), 0.03, b2Color(0,1,0));
         }
     }
+
+//    std::cout << "--O: " << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y << std::endl;
+//    std::cout << "--D: " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
+
     _world->DrawDebugData();
     _world->SetDebugDraw(0);
 

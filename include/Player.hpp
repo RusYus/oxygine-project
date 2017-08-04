@@ -12,8 +12,8 @@
 #include "oxygine-framework.h"
 
 constexpr const int PLAYER_MAX_SPEED =4;
-constexpr const int PLAYER_JUMP_SPEED = 8;
-constexpr const float GRAVITY = 80;
+constexpr const int PLAYER_JUMP_SPEED = 10;
+constexpr const float GRAVITY = 150;
 constexpr const int RAYCAST_INTERVAL = 50;
 
 enum class RayDirection
@@ -34,6 +34,7 @@ struct Ray
         , Direction(aDirection)
     {}
 
+    // Change to Point (VectorT2<int> - don't need such precise, no to forget change in other places!!!).
     oxygine::Vector2 Original;
     oxygine::Vector2 Destination;
     bool IsHitInLastStep;

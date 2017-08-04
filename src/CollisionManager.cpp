@@ -45,8 +45,8 @@ void CollisionManager::CheckCollisions()
         {
 //            std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
             float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
-            if (newPosY < 0.1 && newPosY > 0)
-            std::cout << "NewPosY:" << newPosY << std::endl;
+//            if (newPosY < 0.1 && newPosY > 0)
+//            std::cout << "NewPosY:" << newPosY << std::endl;
 
             ray.IsHitInCurrentStep = true;
 
@@ -82,9 +82,9 @@ void CollisionManager::CheckCollisions()
 
     }
 
-    if (!isHitDown)
+    if (!isHitDown && m_Player->GetCollisionNormal().y == -1)
         m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-    if (!isHitRight)
+    if (!isHitRight && m_Player->GetCollisionNormal().x == 1)
         m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
 }
 
@@ -182,7 +182,18 @@ bool CollisionManager::Intersection(
 
     oxygine::Vector2 b = aEndRay - aStartRay;
 
+
     outIntersection = aStartRay + b * f_low;
+    // Check if outIntersection == aStartRay. In this case aEndRay must be outside of aabb (not even on the border)
+    // For example, when jumping, end ray points outside of aabb (so there will be no collision).
+    // As opposite of when standing still, where end ray points in aabb.
+
+    if (outIntersection == aStartRay)
+    {
+        return
+                (std::round(aBottomLeftAABB.x) < std::round(aEndRay.x) && std::round(aEndRay.x) < std::round(aTopRightAABB.x)
+                 && std::round(aTopRightAABB.y) < std::round(aEndRay.y) && std::round(aEndRay.y) < std::round(aBottomLeftAABB.y));
+    }
 
     return true;
 
