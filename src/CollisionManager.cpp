@@ -18,21 +18,22 @@ void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic, Static* aStat
 void CollisionManager::CheckCollisions()
 {
     oxygine::Vector2 intersectionPoint;
-
+    bool isHitDown = false;
+    bool isHitRight = false;
     for(auto& ray : m_Player->GetRays())
     {
-        ray.IsHitInLastStep = ray.IsHitInCurrentStep;
-        if (ray.Original == ray.Destination)
-        {
-            ray.IsHitInCurrentStep = false;
-            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
-                    && m_Player->GetCollisionNormal().y == -1)
-            {
-                m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
-            }
-            continue;
-        }
+//        ray.IsHitInLastStep = ray.IsHitInCurrentStep;
+//        if (ray.Original == ray.Destination)
+//        {
+//            ray.IsHitInCurrentStep = false;
+//            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
+//                    && m_Player->GetCollisionNormal().y == -1)
+//            {
+//                m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+//                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
+//            }
+//            continue;
+//        }
 
         intersectionPoint.setZero();
         if (Intersection(
@@ -51,53 +52,40 @@ void CollisionManager::CheckCollisions()
 
             m_Player->SetY(newPosY > 0.01 ? newPosY : 0);
             m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-        }
-        else
-        {
-            std::cout << "else" << std::endl;
-            ray.IsHitInCurrentStep = false;
-            // TODO : "proper" unsetting collision normal.
-            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
-                    && m_Player->GetCollisionNormal().y == -1)
+
+            if (ray.Direction == RayDirection::Down)
             {
-                m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
+                isHitDown = true;
+            }
+            if (ray.Direction == RayDirection::Right)
+            {
+                isHitRight = true;
             }
         }
+//        else
+//        {
+//            std::cout << "else" << std::endl;
+//            ray.IsHitInCurrentStep = false;
+//            // TODO : "proper" unsetting collision normal.
+//            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
+//                    && m_Player->GetCollisionNormal().y == -1)
+//            {
+//                m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+//                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
+//            }
+//        }
 
         // These flags: IsHitInCurrentStep not gonna work in current realisation
         // beacause next bodyies (now only m_static2) overwrites it, so ray never hit anything.
 
 //        intersectionPoint.setZero();
 
-//        if (Intersection(
-//            oxygine::Vector2(m_Static2->getX(), m_Static2->getY() + m_Static2->getHeight()),
-//            oxygine::Vector2(m_Static2->getX() + m_Static2->getWidth(), m_Static2->getY()),
-//            ray.Original,
-//            ray.Destination,
-//            intersectionPoint))
-//        {
-////            std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
-//            float newPosX = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
-////            std::cout << "NewPosY:" << newPosY << std::endl;
-
-//            ray.IsHitInCurrentStep = true;
-
-//            m_Player->SetX(newPosX);
-//            m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
-//        }
-//        else
-//        {
-//            ray.IsHitInCurrentStep = false;
-//            // TODO : "proper" unsetting collision normal.
-//            if (ray.IsHitInLastStep && !ray.IsHitInCurrentStep
-//                    && m_Player->GetCollisionNormal().x == 1)
-//            {
-//                m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-//                std::cout << "Unsetting normal)" << ray.Original.x << ":" << ray.Original.y << std::endl;
-//            }
-//        }
     }
+
+    if (!isHitDown)
+        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+    if (!isHitRight)
+        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
 }
 
 bool CollisionManager::Intersection(
