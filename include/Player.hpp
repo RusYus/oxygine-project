@@ -12,8 +12,8 @@
 #include "oxygine-framework.h"
 
 constexpr const int PLAYER_MAX_SPEED =4;
-constexpr const int PLAYER_JUMP_SPEED = 10;
-constexpr const float GRAVITY = 150;
+constexpr const int PLAYER_JUMP_SPEED = 9;
+constexpr const float GRAVITY = 80;
 constexpr const int RAYCAST_INTERVAL = 50;
 
 enum class RayDirection

@@ -80,6 +80,34 @@ void CollisionManager::CheckCollisions()
 
 //        intersectionPoint.setZero();
 
+        intersectionPoint.setZero();
+        if (Intersection(
+            oxygine::Vector2(m_Static2->getX(), m_Static2->getY() + m_Static2->getHeight()),
+            oxygine::Vector2(m_Static2->getX() + m_Static2->getWidth(), m_Static2->getY()),
+            ray.Original,
+            ray.Destination,
+            intersectionPoint))
+        {
+//            std::cout << "Collision took place! " << intersectionPoint.x << ":" << intersectionPoint.y << std::endl;
+            float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
+//            if (newPosY < 0.1 && newPosY > 0)
+//            std::cout << "NewPosY:" << newPosY << std::endl;
+
+            ray.IsHitInCurrentStep = true;
+
+            m_Player->SetY(newPosY > 0.01 ? newPosY : 0);
+            m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
+
+            if (ray.Direction == RayDirection::Down)
+            {
+                isHitDown = true;
+            }
+            if (ray.Direction == RayDirection::Right)
+            {
+                isHitRight = true;
+            }
+        }
+
     }
 
     if (!isHitDown && m_Player->GetCollisionNormal().y == -1)

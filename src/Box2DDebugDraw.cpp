@@ -73,19 +73,25 @@ void Box2DDraw::doRender(const RenderState& rs)
         mVertices[0] = ray.Original;
         // actual difference is to small, so I need to increase it visually.
 //        mVertices[1] = ray.Destination + (ray.Destination - ray.Original) * 70;
-        mVertices[1] = ray.Destination;
+        switch (ray.Direction)
+        {
+        case RayDirection::Down:
+        case RayDirection::Up:
+            mVertices[1] = oxygine::Vector2(ray.Destination.x, ray.Destination.y * 1.05);
+            break;
+        case RayDirection::Right:
+        case RayDirection::Left:
+            mVertices[1] = oxygine::Vector2(ray.Destination.x * 1.05, ray.Destination.y);
+            break;
+        }
+
+//        mVertices[1] = ray.Destination;
 drawPrimitives(false, true, 2, b2Color(0, 1, 0));
         }
         else
         {
-//            if (ray.Direction == RayDirection::Down)
-//            {
-//                std::cout << ray.Original.x << ":" << ray.Original.y << std::endl
-//                       << "D:" << mVertices[1].x << ":" << mVertices[1].y << std::endl;
-//            }
-
             drawPrimitives(false, true, 2, b2Color(0, 1, 0));
-        DrawCircle(Service::Utils::Convert(ray.Original), 0.03, b2Color(0,1,0));
+            DrawCircle(Service::Utils::Convert(ray.Original), 0.03, b2Color(0,1,0));
         }
     }
 
