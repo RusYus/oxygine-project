@@ -4,32 +4,6 @@
 #include "Constants.hpp"
 #include "Box2D/Box2D.h"
 
-enum class RayDirection
-{
-    Up,
-    Down,
-    Left,
-    Right,
-};
-
-struct Ray
-{
-    Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination, RayDirection aDirection)
-        : Original(aOriginal)
-        , Destination(aDestination)
-        , IsHitInLastStep(false)
-        , IsHitInCurrentStep(false)
-        , Direction(aDirection)
-    {}
-
-    // Change to Point (VectorT2<int> - don't need such precise, no to forget change in other places!!!).
-    oxygine::Vector2 Original;
-    oxygine::Vector2 Destination;
-    bool IsHitInLastStep;
-    bool IsHitInCurrentStep;
-    RayDirection Direction;
-};
-
 namespace Service
 {
 

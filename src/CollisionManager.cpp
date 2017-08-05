@@ -44,25 +44,25 @@ void CollisionManager::CheckCollisions()
                 float newPos = 0;
                 switch (ray.Direction)
                 {
-                case RayDirection::Down:
+                case Collision::RayDirection::Down:
                     newPos = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
                     newPoint.y = newPos > 0.01 ? newPos : 0;
                     isHitDown = true;
                     break;
 
-                case RayDirection::Up:
+                case Collision::RayDirection::Up:
                     newPos = intersectionPoint.y - m_Player->GetY();
                     newPoint.y = newPos > 0.01 ? newPos : 0;
                     isHitUp = true;
                     break;
 
-                case RayDirection::Right:
+                case Collision::RayDirection::Right:
                     newPos = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
                     newPoint.x = newPos > 0.01 ? newPos : 0;
                     isHitRight = true;
                     break;
 
-                case RayDirection::Left:
+                case Collision::RayDirection::Left:
                     newPos = intersectionPoint.x - m_Player->GetX();
                     newPoint.x = newPos > 0.01 ? newPos : 0;
                     isHitLeft = true;

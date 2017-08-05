@@ -40,7 +40,7 @@ public:
     void DrawTransform(const b2Transform& xf);
 
 
-    void setRays(const std::vector<Ray>&);
+    void setRays(const std::vector<Collision::Ray>&);
 
 protected:
     b2World* _world;
@@ -57,5 +57,5 @@ protected:
 
     ShaderProgramGL* _program;
 
-    std::vector<Ray> mRays;
+    std::vector<Collision::Ray> mRays;
 };

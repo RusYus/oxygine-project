@@ -80,9 +80,13 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()), RayDirection::Down));
+        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+                                          oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+                                          Collision::RayDirection::Down));
         // Top
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()), RayDirection::Up));
+        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+                                          oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+                                          Collision::RayDirection::Up));
     }
 
     actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
@@ -91,9 +95,13 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength), RayDirection::Right));
+        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+                                          oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+                                          Collision::RayDirection::Right));
         // Left
-        mRays.emplace_back(Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength), RayDirection::Left));
+        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
+                                          oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
+                                          Collision::RayDirection::Left));
     }
 }
 
@@ -194,7 +202,7 @@ oxygine::Vector2 Player::GetRayDestination() const
 {
     return mRays.back().Destination;
 }
-std::vector<Ray>& Player::GetRays()
+std::vector<Collision::Ray>& Player::GetRays()
 {
     return mRays;
 }
@@ -253,7 +261,7 @@ void Player::SetPosition()
 
         switch (ray.Direction)
         {
-            case RayDirection::Up:
+            case Collision::RayDirection::Up:
                 if (mDirection.y < 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
@@ -263,7 +271,7 @@ void Player::SetPosition()
                     ray.Destination = ray.Original;
                 }
                 break;
-            case RayDirection::Down:
+            case Collision::RayDirection::Down:
                 if (mDirection.y > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
@@ -273,7 +281,7 @@ void Player::SetPosition()
                     ray.Destination = ray.Original;
                 }
                 break;
-            case RayDirection::Right:
+            case Collision::RayDirection::Right:
                 if (mDirection.x > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
@@ -284,7 +292,7 @@ void Player::SetPosition()
                 }
                 break;
 
-            case RayDirection::Left:
+            case Collision::RayDirection::Left:
                 if (mDirection.x < 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
@@ -365,7 +373,7 @@ void Player::Update(const UpdateState& us)
 
         switch (ray.Direction)
         {
-            case RayDirection::Up:
+            case Collision::RayDirection::Up:
                 if (mDirection.y < 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
@@ -375,7 +383,7 @@ void Player::Update(const UpdateState& us)
                     ray.Destination = ray.Original;
                 }
                 break;
-            case RayDirection::Down:
+            case Collision::RayDirection::Down:
                 if (mDirection.y > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
@@ -385,7 +393,7 @@ void Player::Update(const UpdateState& us)
                     ray.Destination = ray.Original;
                 }
                 break;
-            case RayDirection::Right:
+            case Collision::RayDirection::Right:
                 if (mDirection.x > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
@@ -396,7 +404,7 @@ void Player::Update(const UpdateState& us)
                 }
                 break;
 
-            case RayDirection::Left:
+            case Collision::RayDirection::Left:
                 if (mDirection.x < 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);

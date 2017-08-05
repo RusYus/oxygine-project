@@ -6,6 +6,7 @@
 
 #include "BasisObject.hpp"
 #include "BasisEventProxy.hpp"
+#include "CollisionInfo.hpp"
 #include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
@@ -35,7 +36,7 @@ public:
      float GetWidth() const;
      float GetHeight() const;
      oxygine::Vector2 GetRayOriginal() const;
-     std::vector<Ray>& GetRays();
+     std::vector<Collision::Ray>& GetRays();
      oxygine::Vector2 GetRayDestination() const;
      void SetPosition();
      oxygine::Vector2 GetPosition() const;
@@ -57,7 +58,7 @@ private:
     oxygine::spSprite mBox;
     oxygine::Vector2 mDirection;
     Service::Normal2 mCollisionNormal;
-    std::vector<Ray> mRays;
+    std::vector<Collision::Ray> mRays;
     bool mIsJumping;
     bool mIsButtonMoving;
     const int mMaxSpeed = PLAYER_MAX_SPEED;

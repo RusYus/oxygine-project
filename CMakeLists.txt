@@ -25,6 +25,7 @@ set(
     include/BasisEvents.hpp
     include/BasisObject.hpp
     include/Box2DDebugDraw.hpp
+    include/CollisionInfo.hpp
     include/CollisionManager.hpp
     include/Constants.hpp
     include/DemoLevel.hpp

@@ -41,7 +41,7 @@ Box2DDraw::~Box2DDraw()
     delete _program;
 }
 
-void Box2DDraw::setRays(const std::vector<Ray>& aRays)
+void Box2DDraw::setRays(const std::vector<Collision::Ray>& aRays)
 {
     mRays.clear();
     for (auto& ray : aRays)
@@ -72,18 +72,6 @@ void Box2DDraw::doRender(const RenderState& rs)
         {
         mVertices[0] = ray.Original;
         // actual difference is to small, so I need to increase it visually.
-//        mVertices[1] = ray.Destination + (ray.Destination - ray.Original) * 70;
-//        switch (ray.Direction)
-//        {
-//        case RayDirection::Down:
-//        case RayDirection::Up:
-//            mVertices[0] = oxygine::Vector2(ray.Destination.x, ray.Destination.y * 1.05);
-//            break;
-//        case RayDirection::Right:
-//        case RayDirection::Left:
-//            mVertices[0] = oxygine::Vector2(ray.Destination.x * 1.05, ray.Destination.y);
-//            break;
-//        }
         oxygine::Vector2 diff = ray.Destination - ray.Original;
         if (diff.x > 0)
             diff.x += 20;
