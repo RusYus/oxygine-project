@@ -22,93 +22,93 @@ void CollisionManager::AddStatic(Static* aStatic2)
 
 void CollisionManager::CheckCollisions()
 {
-//    oxygine::Vector2 intersectionPoint;
-//    oxygine::Vector2 newPoint = m_Player->GetDirection();
-//    bool isHitDown = false;
-//    bool isHitRight = false;
-//    bool isHitUp = false;
-//    bool isHitLeft = false;
+    oxygine::Vector2 intersectionPoint;
+    oxygine::Vector2 newPoint = m_Player->GetDirection();
+    bool isHitDown = false;
+    bool isHitRight = false;
+    bool isHitUp = false;
+    bool isHitLeft = false;
 
-//    for (auto& st : m_Statics)
-//    {
-//        for(auto& ray : m_Player->GetRays())
-//        {
-//            intersectionPoint.setZero();
-//            if (Intersection(
-//                    oxygine::Vector2(st->getX(), st->getY() + st->getHeight()),
-//                    oxygine::Vector2(st->getX() + st->getWidth(), st->getY()),
-//                    ray.Original,
-//                    ray.Destination,
-//                    intersectionPoint))
-//            {
-//                float newPos = 0;
-//                switch (ray.Direction)
-//                {
-//                case RayDirection::Down:
-//                    newPos = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
-//                    newPoint.y = newPos > 0.01 ? newPos : 0;
-//                    isHitDown = true;
-//                    break;
+    for (auto& st : m_Statics)
+    {
+        for(auto& ray : m_Player->GetRays())
+        {
+            intersectionPoint.setZero();
+            if (Intersection(
+                    oxygine::Vector2(st->getX(), st->getY() + st->getHeight()),
+                    oxygine::Vector2(st->getX() + st->getWidth(), st->getY()),
+                    ray.Original,
+                    ray.Destination,
+                    intersectionPoint))
+            {
+                float newPos = 0;
+                switch (ray.Direction)
+                {
+                case RayDirection::Down:
+                    newPos = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
+                    newPoint.y = newPos > 0.01 ? newPos : 0;
+                    isHitDown = true;
+                    break;
 
-//                case RayDirection::Up:
-//                    newPos = intersectionPoint.y - m_Player->GetY();
-//                    newPoint.y = newPos > 0.01 ? newPos : 0;
-//                    isHitUp = true;
-//                    break;
+                case RayDirection::Up:
+                    newPos = intersectionPoint.y - m_Player->GetY();
+                    newPoint.y = newPos > 0.01 ? newPos : 0;
+                    isHitUp = true;
+                    break;
 
-//                case RayDirection::Right:
-//                    newPos = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
-//                    newPoint.x = newPos > 0.01 ? newPos : 0;
-//                    isHitRight = true;
-//                    break;
+                case RayDirection::Right:
+                    newPos = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
+                    newPoint.x = newPos > 0.01 ? newPos : 0;
+                    isHitRight = true;
+                    break;
 
-//                case RayDirection::Left:
-//                    newPos = intersectionPoint.x - m_Player->GetX();
-//                    newPoint.x = newPos > 0.01 ? newPos : 0;
-//                    isHitLeft = true;
-//                    break;
-//                }
-//            }
-//        }
-//    }
+                case RayDirection::Left:
+                    newPos = intersectionPoint.x - m_Player->GetX();
+                    newPoint.x = newPos > 0.01 ? newPos : 0;
+                    isHitLeft = true;
+                    break;
+                }
+            }
+        }
+    }
 
-//    m_Player->SetDirection(newPoint);
+    m_Player->SetDirection(newPoint);
 
-//    if (isHitDown)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-//    }
-//    else if (m_Player->GetCollisionNormal().y == -1)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-//    }
+    if (isHitDown)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
+    }
+    else if (m_Player->GetCollisionNormal().y == -1)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+    }
 
-//    if (isHitUp)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-//    }
-//    else if (m_Player->GetCollisionNormal().y == 1)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-//    }
+    if (isHitUp)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
+    }
+    else if (m_Player->GetCollisionNormal().y == 1)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
+    }
 
-//    if (isHitRight)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
-//    }
-//    else if (m_Player->GetCollisionNormal().x == 1)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-//    }
+    if (isHitRight)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
+    }
+    else if (m_Player->GetCollisionNormal().x == 1)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
+    }
 
-//    if (isHitLeft)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-//    }
-//    else if (m_Player->GetCollisionNormal().x == -1)
-//    {
-//        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
-//    }
+    if (isHitLeft)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
+    }
+    else if (m_Player->GetCollisionNormal().x == -1)
+    {
+        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
+    }
 }
 
 bool CollisionManager::Intersection(

@@ -3,7 +3,7 @@ project (MyDemo)
 
 add_subdirectory(../oxygine-framework oxygine-framework)
 add_definitions(
-    -std=gnu++14    
+    -std=gnu++14
     ${OXYGINE_DEFINITIONS}
 )
 include_directories(${OXYGINE_INCLUDE_DIRS})
@@ -75,7 +75,7 @@ include_directories(./box2d)
 
 target_link_libraries(
 	${LAUNCHER}
-	ProjectLib
+	${PROJECT_LIB}
 	${OXYGINE_CORE_LIBS}
 )
 

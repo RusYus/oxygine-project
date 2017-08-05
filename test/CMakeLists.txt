@@ -21,5 +21,6 @@ add_executable(
 target_link_libraries(
     ${PROJECT_TESTS}
     ${PROJECT_LIB}
+    ${OXYGINE_CORE_LIBS}
     ${PROJECT_USED_LIBRARIES}
 )
