@@ -160,6 +160,11 @@ void Player::SetX(float newPosX)
     mDirection.x = newPosX;
 }
 
+void Player::SetDirection(const oxygine::Vector2& aNewDirection)
+{
+    mDirection = aNewDirection;
+}
+
 float Player::GetX() const
 {
     return (mView.get() ? mView->getX() : .0f);
@@ -297,6 +302,7 @@ void Player::SetPosition()
 
     mView->setPosition(newPos);
 
+    // If player doesn't stand on something, he can't jump.
     if (mCollisionNormal.y == -1)
     {
         mIsJumping = false;
@@ -306,15 +312,15 @@ void Player::SetPosition()
         mIsJumping = true;
     }
 
-        std::cout << "O: " << mRays.at(0).Destination.x - mRays.at(0).Original.x << ":" << mRays.at(0).Destination.y - mRays.at(0).Original.y << std::endl;
+//        std::cout << "O: " << mRays.at(0).Destination.x - mRays.at(0).Original.x << ":" << mRays.at(0).Destination.y - mRays.at(0).Original.y << std::endl;
 
 //    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
 
 
-//        std::cout << "Player:"
-//                  << mDirection.x << ":" << mDirection.y << "  |  "
-//                  << mCollisionNormal.x << ":" << mCollisionNormal.y
-//                  << std::endl;
+        std::cout << "Player:"
+                  << mDirection.x << ":" << mDirection.y << "  |  "
+                  << mCollisionNormal.x << ":" << mCollisionNormal.y
+                  << std::endl;
 
 }
 
@@ -401,19 +407,6 @@ void Player::Update(const UpdateState& us)
                 }
                 break;
         }
-
-
-//        if (((ray.Direction == RayDirection::Left || ray.Direction == RayDirection::Right)
-//            && mDirection.x == 0)
-//            || ((ray.Direction == RayDirection::Up || ray.Direction == RayDirection::Down)
-//                && mDirection.y == 0))
-//        {
-//            ray.Destination = ray.Original;
-//        }
-//        else
-//        {
-//            ray.Destination = ray.Original + mDirection;
-//        }
     }
 
 //    std::cout << "O: " << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y << std::endl;
@@ -422,18 +415,6 @@ void Player::Update(const UpdateState& us)
 
 
 //    std::cout << "Dt:" << us.dt << std::endl;
-
-
-    // If player doesn't stand on something, he can't jump.
-// Move to SetPosition
-    //    if (mCollisionNormal.y == -1)
-//    {
-//        mIsJumping = false;
-//    }
-//    else
-//    {
-//        mIsJumping = true;
-//    }
 
 //    std::cout << "Player:"
 //              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;

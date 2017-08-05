@@ -55,6 +55,7 @@ public:
     void Jump(oxygine::Event*);
      void SetY(float);
      void SetX(float);
+     void SetDirection(const oxygine::Vector2&);
      float GetX() const;
      float GetY() const;
      float GetWidth() const;
