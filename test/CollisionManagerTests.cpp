@@ -123,6 +123,7 @@ struct CollisionManagerFixture
 
     TestAabb Aabb;
     TestRay ray;
+    oxygine::Vector2 OutIntersection;
     CollisionManager Manager;
 
     CollisionManagerFixture()
@@ -133,24 +134,118 @@ struct CollisionManagerFixture
 
 BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisAlligned, CollisionManagerFixture)
 {
-    oxygine::Vector2 outIntersection;
     // Left side.
-    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), outIntersection));
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
     // Right side.
     ray = ray.SetOriginal(200, 60);
     ray = ray.SetDestination(110, 60);
-    ray = ray.SetDirection(RayDirection::Left);
-    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), outIntersection));
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
     // Up side.
     ray = ray.SetOriginal(110, 80);
     ray = ray.SetDestination(110, 60);
-    ray = ray.SetDirection(RayDirection::Up);
-    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), outIntersection));
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
     // Down side.
     ray = ray.SetOriginal(110, 40);
     ray = ray.SetDestination(110, 60);
-    ray = ray.SetDirection(RayDirection::Down);
-    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), outIntersection));
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+}
+
+BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngled, CollisionManagerFixture)
+{
+    // Left side.
+    ray = ray.SetDestination(110, 50);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Right side.
+    ray = ray.SetOriginal(200, 30);
+    ray = ray.SetDestination(110, 70);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Up side.
+    ray = ray.SetOriginal(50, 80);
+    ray = ray.SetDestination(120, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Down side.
+    ray = ray.SetOriginal(0, 40);
+    ray = ray.SetDestination(150, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+}
+
+BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxisAlligned, CollisionManagerFixture)
+{
+    // Left side.
+    ray = ray.SetDestination(100, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Right side.
+    ray = ray.SetOriginal(200, 60);
+    ray = ray.SetDestination(130, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Up side.
+    ray = ray.SetOriginal(110, 80);
+    ray = ray.SetDestination(110, 70);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Down side.
+    ray = ray.SetOriginal(110, 40);
+    ray = ray.SetDestination(110, 50);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+}
+
+BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxisAlligned, CollisionManagerFixture)
+{
+    // Left side.
+    ray = ray.SetOriginal(100, 60);
+    ray = ray.SetDestination(110, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Right side.
+    ray = ray.SetOriginal(130, 60);
+    ray = ray.SetDestination(110, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Up side.
+    ray = ray.SetOriginal(110, 50);
+    ray = ray.SetDestination(110, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Down side.
+    ray = ray.SetOriginal(110, 70);
+    ray = ray.SetDestination(110, 60);
+    BOOST_CHECK(Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+}
+
+BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOutsideAxisAlligned, CollisionManagerFixture)
+{
+    // Left side.
+    ray = ray.SetOriginal(100, 60);
+    ray = ray.SetDestination(80, 60);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Right side.
+    ray = ray.SetOriginal(130, 60);
+    ray = ray.SetDestination(150, 60);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Up side.
+    ray = ray.SetOriginal(110, 50);
+    ray = ray.SetDestination(110, 30);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Down side.
+    ray = ray.SetOriginal(110, 70);
+    ray = ray.SetDestination(110, 90);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+}
+
+BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOnBorderAxisAlligned, CollisionManagerFixture)
+{
+    // Left side.
+    ray = ray.SetOriginal(100, 50);
+    ray = ray.SetDestination(100, 60);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Right side.
+    ray = ray.SetOriginal(130, 60);
+    ray = ray.SetDestination(130, 50);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Up side.
+    ray = ray.SetOriginal(110, 50);
+    ray = ray.SetDestination(120, 50);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
+    // Down side.
+    ray = ray.SetOriginal(120, 70);
+    ray = ray.SetDestination(110, 70);
+    BOOST_CHECK(!Manager.Intersection(Aabb.GetBottomLeft(), Aabb.GetTopRight(), ray.GetOriginal(), ray.GetDestination(), OutIntersection));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
