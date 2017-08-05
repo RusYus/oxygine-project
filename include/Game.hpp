@@ -122,15 +122,16 @@ public:
 
     void doUpdate(const UpdateState& us)
     {
+        std::cout << "Update:" << mPlayer->GetRays().at(0).Original.y << std::endl;
         //in real project you should make steps with fixed dt, check box2d documentation
 //        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
+        m_CollisionManager.CheckCollisions();
+        mPlayer->SetPosition();
         if (mDebugDraw)
         {
             mDebugDraw->setRays(mPlayer->GetRays());
         }
-        m_CollisionManager.CheckCollisions();
-        mPlayer->SetPosition();
 
     }
 

@@ -53,6 +53,8 @@ void Box2DDraw::setRays(const std::vector<Ray>& aRays)
 
 void Box2DDraw::doRender(const RenderState& rs)
 {
+    std::cout << "Render:" << mRays.at(0).Original.y << std::endl;
+
     Material::setCurrent(0);
 
     IVideoDriver* driver = IVideoDriver::instance;
@@ -73,19 +75,28 @@ void Box2DDraw::doRender(const RenderState& rs)
         mVertices[0] = ray.Original;
         // actual difference is to small, so I need to increase it visually.
 //        mVertices[1] = ray.Destination + (ray.Destination - ray.Original) * 70;
-        switch (ray.Direction)
-        {
-        case RayDirection::Down:
-        case RayDirection::Up:
-            mVertices[1] = oxygine::Vector2(ray.Destination.x, ray.Destination.y * 1.05);
-            break;
-        case RayDirection::Right:
-        case RayDirection::Left:
-            mVertices[1] = oxygine::Vector2(ray.Destination.x * 1.05, ray.Destination.y);
-            break;
-        }
-
+//        switch (ray.Direction)
+//        {
+//        case RayDirection::Down:
+//        case RayDirection::Up:
+//            mVertices[0] = oxygine::Vector2(ray.Destination.x, ray.Destination.y * 1.05);
+//            break;
+//        case RayDirection::Right:
+//        case RayDirection::Left:
+//            mVertices[0] = oxygine::Vector2(ray.Destination.x * 1.05, ray.Destination.y);
+//            break;
+//        }
+        oxygine::Vector2 diff = ray.Destination - ray.Original;
+        if (diff.x > 0)
+            diff.x += 20;
+        if (diff.x < 0)
+            diff.x -= 20;
+        if (diff.y > 0)
+            diff.y += 20;
+        if (diff.y < 0)
+            diff.y -= 20;
 //        mVertices[1] = ray.Destination;
+        mVertices[1] = ray.Original + diff;
 drawPrimitives(false, true, 2, b2Color(0, 1, 0));
         }
         else

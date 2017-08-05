@@ -251,50 +251,50 @@ void Player::SetPosition()
     {
         ray.Original += mDirection;
 
-//        switch (ray.Direction)
-//        {
-//            case RayDirection::Up:
-//                if (mDirection.y < 0)
-//                {
-//                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
-//                }
-//                else
-//                {
-//                    ray.Destination = ray.Original;
-//                }
-//                break;
-//            case RayDirection::Down:
-//                if (mDirection.y > 0)
-//                {
-//                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
-//                }
-//                else
-//                {
-//                    ray.Destination = ray.Original;
-//                }
-//                break;
-//            case RayDirection::Right:
-//                if (mDirection.x > 0)
-//                {
-//                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
-//                }
-//                else
-//                {
-//                    ray.Destination = ray.Original;
-//                }
-//                break;
+        switch (ray.Direction)
+        {
+            case RayDirection::Up:
+                if (mDirection.y < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Down:
+                if (mDirection.y > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+            case RayDirection::Right:
+                if (mDirection.x > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
 
-//            case RayDirection::Left:
-//                if (mDirection.x < 0)
-//                {
-//                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
-//                }
-//                else
-//                {
-//                    ray.Destination = ray.Original;
-//                }
-//                break;
-//        }
+            case RayDirection::Left:
+                if (mDirection.x < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                }
+                else
+                {
+                    ray.Destination = ray.Original;
+                }
+                break;
+        }
     }
 
 //    std::cout << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y
@@ -317,10 +317,10 @@ void Player::SetPosition()
 //    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
 
 
-        std::cout << "Player:"
-                  << mDirection.x << ":" << mDirection.y << "  |  "
-                  << mCollisionNormal.x << ":" << mCollisionNormal.y
-                  << std::endl;
+//        std::cout << "Player:"
+//                  << mDirection.x << ":" << mDirection.y << "  |  "
+//                  << mCollisionNormal.x << ":" << mCollisionNormal.y
+//                  << std::endl;
 
 }
 

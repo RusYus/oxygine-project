@@ -13,7 +13,7 @@
 
 constexpr const int PLAYER_MAX_SPEED =4;
 constexpr const int PLAYER_JUMP_SPEED = 9;
-constexpr const float GRAVITY = 80;
+constexpr const float GRAVITY = 170;
 constexpr const int RAYCAST_INTERVAL = 50;
 
 enum class RayDirection
