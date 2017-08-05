@@ -76,6 +76,7 @@ public:
     Static* mStatic;
     Static* mStatic2;
     Static* mStatic3;
+    Static* mStatic4;
 
 private:
     friend class Player;

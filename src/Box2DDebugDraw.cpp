@@ -53,8 +53,6 @@ void Box2DDraw::setRays(const std::vector<Ray>& aRays)
 
 void Box2DDraw::doRender(const RenderState& rs)
 {
-    std::cout << "Render:" << mRays.at(0).Original.y << std::endl;
-
     Material::setCurrent(0);
 
     IVideoDriver* driver = IVideoDriver::instance;

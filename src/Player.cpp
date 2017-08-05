@@ -317,10 +317,10 @@ void Player::SetPosition()
 //    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
 
 
-//        std::cout << "Player:"
-//                  << mDirection.x << ":" << mDirection.y << "  |  "
-//                  << mCollisionNormal.x << ":" << mCollisionNormal.y
-//                  << std::endl;
+        std::cout << "Player:"
+                  << mDirection.x << ":" << mDirection.y << "  |  "
+                  << mCollisionNormal.x << ":" << mCollisionNormal.y
+                  << std::endl;
 
 }
 

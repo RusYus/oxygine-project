@@ -12,35 +12,9 @@
 #include "oxygine-framework.h"
 
 constexpr const int PLAYER_MAX_SPEED =4;
-constexpr const int PLAYER_JUMP_SPEED = 9;
-constexpr const float GRAVITY = 170;
-constexpr const int RAYCAST_INTERVAL = 50;
-
-enum class RayDirection
-{
-    Up,
-    Down,
-    Left,
-    Right,
-};
-
-struct Ray
-{
-    Ray(const oxygine::Vector2& aOriginal, const oxygine::Vector2& aDestination, RayDirection aDirection)
-        : Original(aOriginal)
-        , Destination(aDestination)
-        , IsHitInLastStep(false)
-        , IsHitInCurrentStep(false)
-        , Direction(aDirection)
-    {}
-
-    // Change to Point (VectorT2<int> - don't need such precise, no to forget change in other places!!!).
-    oxygine::Vector2 Original;
-    oxygine::Vector2 Destination;
-    bool IsHitInLastStep;
-    bool IsHitInCurrentStep;
-    RayDirection Direction;
-};
+constexpr const int PLAYER_JUMP_SPEED = 10;
+constexpr const float GRAVITY = 50;
+constexpr const int RAYCAST_INTERVAL = 25;
 
 DECLARE_SMART(Player, spPlayer);
 class Player: public oxygine::Object, public Basis::BasisObject

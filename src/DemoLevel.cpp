@@ -123,15 +123,25 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
 //    spStatic ground = new Static(RectF(0, getHeight()*0.5, getWidth() * 10, 30));
-    spStatic ground = new Static(RectF(0, 500, 800, 30));
+    spStatic ground = new Static(RectF(0, 600, 1000, 30));
     addChild(ground);
     mStatic = ground.get();
     mObjects.push_back(ground);
 
-    spStatic ground2 = new Static(RectF(700, 100, 50, 400));
+    spStatic ground2 = new Static(RectF(900, 0, 50, 700));
     addChild(ground2);
     mStatic2 = ground2.get();
     mObjects.push_back(ground2);
+
+    spStatic ground3 = new Static(RectF(0, 0, 50, 700));
+    addChild(ground3);
+    mStatic3 = ground3.get();
+    mObjects.push_back(ground3);
+
+    spStatic ground4 = new Static(RectF(300, 500, 400, 30));
+    addChild(ground4);
+    mStatic4 = ground4.get();
+    mObjects.push_back(ground4);
 
     spGround groundW = new Ground(mWorld, RectF(800, 200, 400, 50));
     addChild(groundW);
@@ -168,9 +178,9 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
 
-    spPlatform platform = new Platform(RectF(400, 200, 300, 40));
-    addChild(platform);
-    m_Platform = platform;
+//    spPlatform platform = new Platform(RectF(400, 200, 300, 40));
+//    addChild(platform);
+//    m_Platform = platform;
 }
 
 void DemoLevel::doUpdate(const UpdateState& /*us*/)

@@ -7,7 +7,8 @@ include_directories(
 set(
 	PROJECT_TESTS_SOURCES
 
-	JsonImporterTests.cpp
+	CollisionManagerTests.cpp
+    JsonImporterTests.cpp
 	TestExample.cpp
 	Tests.cpp
 )

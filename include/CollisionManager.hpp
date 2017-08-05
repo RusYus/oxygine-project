@@ -13,7 +13,7 @@ public:
     void AddStatic(Static*);
     void CheckCollisions();
 
-private:
+//private:
     bool Intersection(
         const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
         const oxygine::Vector2& /*startRay*/, const oxygine::Vector2& /*endRay*/,

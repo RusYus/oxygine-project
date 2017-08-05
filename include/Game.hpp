@@ -118,11 +118,12 @@ public:
         m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic, mLevels.back()->mStatic2);
         m_CollisionManager.AddStatic(mLevels.back()->mStatic);
         m_CollisionManager.AddStatic(mLevels.back()->mStatic2);
+        m_CollisionManager.AddStatic(mLevels.back()->mStatic3);
+        m_CollisionManager.AddStatic(mLevels.back()->mStatic4);
     }
 
     void doUpdate(const UpdateState& us)
     {
-        std::cout << "Update:" << mPlayer->GetRays().at(0).Original.y << std::endl;
         //in real project you should make steps with fixed dt, check box2d documentation
 //        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
