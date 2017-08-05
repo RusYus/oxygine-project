@@ -15,58 +15,61 @@ void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic, Static* aStat
     m_Static2 = aStatic2;
 }
 
+void CollisionManager::AddStatic(Static* aStatic2)
+{
+    m_Statics.push_back(aStatic2);
+}
+
 void CollisionManager::CheckCollisions()
 {
     oxygine::Vector2 intersectionPoint;
     oxygine::Vector2 newPoint = m_Player->GetDirection();
     bool isHitDown = false;
     bool isHitRight = false;
-    for(auto& ray : m_Player->GetRays())
+    bool isHitUp = false;
+    bool isHitLeft = false;
+
+    for (auto& st : m_Statics)
     {
-        intersectionPoint.setZero();
-        if (Intersection(
-            oxygine::Vector2(m_Static->getX(), m_Static->getY() + m_Static->getHeight()),
-            oxygine::Vector2(m_Static->getX() + m_Static->getWidth(), m_Static->getY()),
-            ray.Original,
-            ray.Destination,
-            intersectionPoint))
+        for(auto& ray : m_Player->GetRays())
         {
-            float newPosY = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
-
-            newPoint.y = newPosY > 0.01 ? newPosY : 0;
-
-            if (ray.Direction == RayDirection::Down)
+            intersectionPoint.setZero();
+            if (Intersection(
+                oxygine::Vector2(st->getX(), st->getY() + st->getHeight()),
+                oxygine::Vector2(st->getX() + st->getWidth(), st->getY()),
+                ray.Original,
+                ray.Destination,
+                intersectionPoint))
             {
-                isHitDown = true;
-            }
-            if (ray.Direction == RayDirection::Right)
-            {
-                isHitRight = true;
+                float newPos = 0;
+                switch (ray.Direction)
+                {
+                case RayDirection::Down:
+                    newPos = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
+                    newPoint.y = newPos > 0.01 ? newPos : 0;
+                    isHitDown = true;
+                    break;
+
+                case RayDirection::Up:
+                    newPos = intersectionPoint.y - m_Player->GetY();
+                    newPoint.y = newPos > 0.01 ? newPos : 0;
+                    isHitUp = true;
+                    break;
+
+                case RayDirection::Right:
+                    newPos = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
+                    newPoint.x = newPos > 0.01 ? newPos : 0;
+                    isHitRight = true;
+                    break;
+
+                case RayDirection::Left:
+                    newPos = intersectionPoint.x - m_Player->GetX();
+                    newPoint.x = newPos > 0.01 ? newPos : 0;
+                    isHitLeft = true;
+                    break;
+                }
             }
         }
-
-        intersectionPoint.setZero();
-        if (Intersection(
-            oxygine::Vector2(m_Static2->getX(), m_Static2->getY() + m_Static2->getHeight()),
-            oxygine::Vector2(m_Static2->getX() + m_Static2->getWidth(), m_Static2->getY()),
-            ray.Original,
-            ray.Destination,
-            intersectionPoint))
-        {
-            float newPosX = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
-
-            newPoint.x = newPosX > 0.01 ? newPosX : 0;
-
-            if (ray.Direction == RayDirection::Down)
-            {
-                isHitDown = true;
-            }
-            if (ray.Direction == RayDirection::Right)
-            {
-                isHitRight = true;
-            }
-        }
-
     }
 
     m_Player->SetDirection(newPoint);

@@ -116,6 +116,8 @@ public:
 
 //        m_CollisionManager.AddBody(static_cast<void*>(mPlayer.get()));
         m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic, mLevels.back()->mStatic2);
+        m_CollisionManager.AddStatic(mLevels.back()->mStatic);
+        m_CollisionManager.AddStatic(mLevels.back()->mStatic2);
     }
 
     void doUpdate(const UpdateState& us)
