@@ -1,9 +1,8 @@
- #pragma once
+#pragma once
 
 #include "Actor.h"
 #include "CollisionManager.hpp"
 #include "BasisObject.hpp"
-#include "Box2DDebugDraw.hpp"
 #include "BasisCamera.hpp"
 #include "Player.hpp"
 #include "DemoLevel.hpp"
@@ -80,7 +79,8 @@ public:
         //create player ship
         mPlayer = new Player;
         mPlayer->Init(mEventProxy);
-        mLevels.back()->addChild(mPlayer->GetView());
+//        mLevels.back()->addChild(mPlayer->GetView());
+        mLevels.back()->addChild(mPlayer);
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
@@ -129,31 +129,12 @@ public:
         mPlayer->Update(us);
         m_CollisionManager.CheckCollisions();
         mPlayer->SetPosition();
-        if (mDebugDraw)
-        {
-            mDebugDraw->setRays(mPlayer->GetRays());
-        }
-
     }
 
     // TODO : Not working right now.
-    void ShowHideDebug(Event* event)
+    void ShowHideDebug(Event* /*event*/)
     {
-        TouchEvent* te = safeCast<TouchEvent*>(event);
-        te->stopsImmediatePropagation = true;
-        if (mDebugDraw)
-        {
-            mDebugDraw->detach();
-            mDebugDraw = 0;
-            return;
-        }
-
-        mDebugDraw = new Box2DDraw;
-        mDebugDraw->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
-        mDebugDraw->setRays(mPlayer->GetRays());
-        mDebugDraw->attachTo(mLevels.back());
-        mDebugDraw->setWorld(100, mWorld);
-        mDebugDraw->setPriority(1);
+        mPlayer->SetDebugDraw(!mPlayer->GetDebugDraw());
     }
 
     spEventProxy mEventProxy;
@@ -165,7 +146,6 @@ public:
     spMoveButton mMoveRight;
     spJumpButton mJump;
     Content mContent;
-    spBox2DDraw mDebugDraw;
     std::unique_ptr<Service::JsonImporter> mImporter;
     std::vector<spDemoLevel> mLevels;
 };

@@ -18,7 +18,7 @@ constexpr const float GRAVITY = 50;
 constexpr const int RAYCAST_INTERVAL = 25;
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public oxygine::Object, public Basis::BasisObject
+class Player: public oxygine::Actor /*public oxygine::Object*/, public Basis::BasisObject
 {
 public:
     Player();
@@ -44,6 +44,8 @@ public:
      Service::Normal2 GetCollisionNormal() const;
     void SetCollisionNormal(const oxygine::Vector2);
     void SetZeroCollisionNormal();
+    void SetDebugDraw(bool);
+    bool GetDebugDraw() const;
 
     void doRender(const oxygine::RenderState& rs);
 
@@ -59,6 +61,7 @@ private:
     oxygine::Vector2 mDirection;
     Service::Normal2 mCollisionNormal;
     std::vector<Collision::Ray> mRays;
+    bool m_DebugDraw = false;
     bool mIsJumping;
     bool mIsButtonMoving;
     const int mMaxSpeed = PLAYER_MAX_SPEED;
@@ -69,9 +72,9 @@ private:
     static const int MAX_VERTICES = 64;
     static const int CIRCLE_SEGMENTS = 16;
 
-    void createCircleVertices(const oxygine::Vector2& aCenter, float aRadius);
+    void createCircleVertices(const oxygine::Vector2& aCenter, int aRadius);
     oxygine::Vector2 mVertices[MAX_VERTICES];
-    void drawPrimitives(bool drawLines, int aCount, const oxygine::Color& aColor);
+    void drawPrimitives(int aCount, const oxygine::Color& aColor);
 
     typename oxygine::ShaderProgramGL* _program;
 };

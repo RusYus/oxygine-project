@@ -24,7 +24,6 @@ set(
     include/BasisEventProxy.hpp
     include/BasisEvents.hpp
     include/BasisObject.hpp
-    include/Box2DDebugDraw.hpp
     include/CollisionInfo.hpp
     include/CollisionManager.hpp
     include/Constants.hpp
@@ -43,7 +42,6 @@ set(
 set(
 	PROJECT_SOURCES
     src/BasisCamera.cpp
-    src/Box2DDebugDraw.cpp
     src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp

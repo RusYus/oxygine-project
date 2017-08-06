@@ -18,27 +18,27 @@ Player::Player()
     , mIsButtonMoving(false)
     , mIsJumping(false)
 {
-//    const char* vertexShaderData = "\
-//        uniform mediump mat4 projection;\
-//        attribute vec2 a_position;\
-//        void main() {\
-//        vec4 position = vec4(a_position, 0.0, 1.0);\
-//        gl_Position = projection * position;\
-//        }\
-//        ";
+    const char* vertexShaderData = "\
+        uniform mediump mat4 projection;\
+        attribute vec2 a_position;\
+        void main() {\
+        vec4 position = vec4(a_position, 0.0, 1.0);\
+        gl_Position = projection * position;\
+        }\
+        ";
 
-//    const char* fragmentShaderData = "\
-//        uniform mediump vec4 color;\
-//        void main() { \
-//        gl_FragColor = color; \
-//        } \
-//        ";
+    const char* fragmentShaderData = "\
+        uniform mediump vec4 color;\
+        void main() { \
+        gl_FragColor = color; \
+        } \
+        ";
 
-//    int vs = ShaderProgramGL::createShader(GL_VERTEX_SHADER, vertexShaderData, 0, 0);
-//    int fs = ShaderProgramGL::createShader(GL_FRAGMENT_SHADER, fragmentShaderData, 0, 0);
+    int vs = ShaderProgramGL::createShader(GL_VERTEX_SHADER, vertexShaderData, 0, 0);
+    int fs = ShaderProgramGL::createShader(GL_FRAGMENT_SHADER, fragmentShaderData, 0, 0);
 
-//    int pr = ShaderProgramGL::createProgram(vs, fs, (VertexDeclarationGL*)IVideoDriver::instance->getVertexDeclaration(VERTEX_POSITION));
-//    _program = new ShaderProgramGL(pr);
+    int pr = ShaderProgramGL::createProgram(vs, fs, (VertexDeclarationGL*)IVideoDriver::instance->getVertexDeclaration(VERTEX_POSITION));
+    _program = new ShaderProgramGL(pr);
 }
 
 Player::~Player()
@@ -65,6 +65,8 @@ void Player::Init(spEventProxy aEventProxy)
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
     mView->setPosition(100, 100);
     mView->setSize(mBox->getSize());
+
+    addChild(mView);
 
     mEventProxy = aEventProxy;
 
@@ -437,8 +439,23 @@ void Player::Update(const UpdateState& us)
 //    std::cout << "Player: " << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
 }
 
+void Player::SetDebugDraw(bool a_Value)
+{
+    m_DebugDraw = a_Value;
+}
+
+bool Player::GetDebugDraw() const
+{
+    return m_DebugDraw;
+}
+
 void Player::doRender(const oxygine::RenderState& rs)
 {
+    if (!m_DebugDraw)
+    {
+        return;
+    }
+
     Material::setCurrent(0);
 
     IVideoDriver* driver = IVideoDriver::instance;
@@ -450,21 +467,34 @@ void Player::doRender(const oxygine::RenderState& rs)
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-    for (const auto& ray : mRays)
+    for (auto& ray : mRays)
     {
-//        mVertices[0] = ray.Original;
-////        mVertices[1] = ray.Destination;
-//        mVertices[1] = ray.Original + oxygine::Vector2(0, 50);
-//        drawPrimitives(true, 2, oxygine::Color::Green);
-
-        createCircleVertices(ray.Original, 5);
-        drawPrimitives(true, CIRCLE_SEGMENTS, oxygine::Color::Green);
+        if (ray.Original != ray.Destination)
+        {
+            mVertices[0] = ray.Original;
+            // actual difference is to small, so I need to increase it visually.
+            oxygine::Vector2 diff = ray.Destination - ray.Original;
+            if (diff.x > 0)
+                diff.x += 20;
+            if (diff.x < 0)
+                diff.x -= 20;
+            if (diff.y > 0)
+                diff.y += 20;
+            if (diff.y < 0)
+                diff.y -= 20;
+    //        mVertices[1] = ray.Destination;
+            mVertices[1] = ray.Original + diff;
+            drawPrimitives(2, oxygine::Color::Green);
+        }
+        else
+        {
+            createCircleVertices(ray.Original, 3);
+            drawPrimitives(CIRCLE_SEGMENTS, oxygine::Color::Green);
+        }
     }
 }
 
-void Player::createCircleVertices(const oxygine::Vector2& center, float aRadius)
+void Player::createCircleVertices(const oxygine::Vector2& center, int aRadius)
 {
     int vertexCount = 16;
     const float k_increment = 2.0f * b2_pi / CIRCLE_SEGMENTS;
@@ -473,23 +503,21 @@ void Player::createCircleVertices(const oxygine::Vector2& center, float aRadius)
     for (int32 i = 0; i < CIRCLE_SEGMENTS; ++i)
     {
         oxygine::Vector2 v  = oxygine::Vector2(scalar::cos(theta), scalar::sin(theta));
-        v *= aRadius;
-        mVertices[i] = center + v;
+        v *=aRadius;
+        v += center;
+        mVertices[i] = v;
         theta += k_increment;
     }
 }
 
-void Player::drawPrimitives(bool drawLines, int count, const oxygine::Color& color)
+void Player::drawPrimitives(int count, const oxygine::Color& color)
 {
     oxglEnableVertexAttribArray(0);
     oxglVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLfloat*)mVertices);
 
-    if (drawLines)
-    {
-        Vector4 c(color.r, color.g, color.b, 1.0f);
-        IVideoDriver::instance->setUniform("color", &c, 1);
-        glDrawArrays(GL_LINE_LOOP, 0, count);
-    }
+    Vector4 c(color.r, color.g, color.b, 1.0f);
+    IVideoDriver::instance->setUniform("color", &c, 1);
+    glDrawArrays(GL_LINE_LOOP, 0, count);
 
     oxglDisableVertexAttribArray(0);
 }
