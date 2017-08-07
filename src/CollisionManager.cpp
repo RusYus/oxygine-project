@@ -18,22 +18,53 @@ void CollisionManager::CheckCollisions()
 {
     for (const auto& body : m_Bodies)
     {
-        if (dynamic_cast<Player*>(body.first))
+        // Not movable.
+        if (!body.second)
         {
-            std::cout << "Can:" << body.second << std::endl;
+            continue;
         }
-        else
+
+        if (!dynamic_cast<Player*>(body.first))
         {
-            std::cout << "Can't:" << body.second << std::endl;
+            std::cout << "Can't cast movable body to Player!" << body.second << std::endl;
+            continue;
         }
+
+
+        oxygine::Vector2 intersectionPoint;
+        oxygine::Vector2 newPoint = m_Player->GetDirection();
+        bool isHitDown = false;
+        bool isHitRight = false;
+        bool isHitUp = false;
+        bool isHitLeft = false;
+
+        for (const auto& secondBody : m_Bodies)
+        {
+            // Same body
+            if (body.first->GetId() == secondBody.first->GetId())
+            {
+                continue;
+            }
+
+            if (!dynamic_cast<Static*>(secondBody.first))
+            {
+                std::cout << "Can't cast second body to Static!" << body.second << std::endl;
+                continue;
+            }
+
+//            std::cout << "Checking body " << body.first->GetId() << " with " << secondBody.first->GetId() << std::endl;
+        }
+
+//        if (dynamic_cast<Player*>(body.first))
+//        {
+//            std::cout << "Can:" << body.second << std::endl;
+//        }
+//        else
+//        {
+//            std::cout << "Can't:" << body.second << std::endl;
+//        }
     }
 
-    oxygine::Vector2 intersectionPoint;
-    oxygine::Vector2 newPoint = m_Player->GetDirection();
-    bool isHitDown = false;
-    bool isHitRight = false;
-    bool isHitUp = false;
-    bool isHitLeft = false;
 
     for (auto& st : m_Statics)
     {
