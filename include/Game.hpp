@@ -114,15 +114,11 @@ public:
         mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
         mJump->attachTo(this);
 
-//        m_CollisionManager.AddBody(static_cast<void*>(mPlayer.get()));
         m_CollisionManager.AddBody(mPlayer.get());
         m_CollisionManager.AddBody(mLevels.back()->mStatic);
         m_CollisionManager.AddBody(mLevels.back()->mStatic2);
-        m_CollisionManager.AddBodies(mPlayer.get(), mLevels.back()->mStatic, mLevels.back()->mStatic2);
-        m_CollisionManager.AddStatic(mLevels.back()->mStatic);
-        m_CollisionManager.AddStatic(mLevels.back()->mStatic2);
-        m_CollisionManager.AddStatic(mLevels.back()->mStatic3);
-        m_CollisionManager.AddStatic(mLevels.back()->mStatic4);
+        m_CollisionManager.AddBody(mLevels.back()->mStatic3);
+        m_CollisionManager.AddBody(mLevels.back()->mStatic4);
     }
 
     void doUpdate(const UpdateState& us)

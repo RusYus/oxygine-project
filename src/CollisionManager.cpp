@@ -2,20 +2,9 @@
 
 #include "CollisionManager.hpp"
 
-void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic, Static* aStatic2)
-{
-    m_Player = aPlayer;
-    m_Static = aStatic;
-    m_Static2 = aStatic2;
-}
-
-void CollisionManager::AddStatic(Static* aStatic2)
-{
-    m_Statics.push_back(aStatic2);
-}
-
 void CollisionManager::CheckCollisions()
 {
+    // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
     for (const auto& body : m_Bodies)
     {
         // Not movable.
@@ -24,7 +13,8 @@ void CollisionManager::CheckCollisions()
             continue;
         }
 
-        if (!dynamic_cast<Player*>(body.first))
+        Player* player = dynamic_cast<Player*>(body.first);
+        if (!player)
         {
             std::cout << "Can't cast movable body to Player!" << body.second << std::endl;
             continue;
@@ -32,7 +22,7 @@ void CollisionManager::CheckCollisions()
 
 
         oxygine::Vector2 intersectionPoint;
-        oxygine::Vector2 newPoint = m_Player->GetDirection();
+        oxygine::Vector2 newPoint = player->GetDirection();
         bool isHitDown = false;
         bool isHitRight = false;
         bool isHitUp = false;
@@ -46,13 +36,92 @@ void CollisionManager::CheckCollisions()
                 continue;
             }
 
-            if (!dynamic_cast<Static*>(secondBody.first))
+            Static* ground = dynamic_cast<Static*>(secondBody.first);
+            if (!ground)
             {
                 std::cout << "Can't cast second body to Static!" << body.second << std::endl;
                 continue;
             }
 
+            for(auto& ray : player->GetRays())
+            {
+                intersectionPoint.setZero();
+                if (Intersection(
+                        oxygine::Vector2(ground->getX(), ground->getY() + ground->getHeight()),
+                        oxygine::Vector2(ground->getX() + ground->getWidth(), ground->getY()),
+                        ray.Original,
+                        ray.Destination,
+                        intersectionPoint))
+                {
+                    float newPos = 0;
+                    switch (ray.Direction)
+                    {
+                    case Collision::RayDirection::Down:
+                        newPos = intersectionPoint.y - (player->GetY() + player->GetHeight());
+                        newPoint.y = newPos > 0.01 ? newPos : 0;
+                        isHitDown = true;
+                        break;
+
+                    case Collision::RayDirection::Up:
+                        newPos = intersectionPoint.y - player->GetY();
+                        newPoint.y = newPos > 0.01 ? newPos : 0;
+                        isHitUp = true;
+                        break;
+
+                    case Collision::RayDirection::Right:
+                        newPos = intersectionPoint.x - (player->GetX() + player->GetWidth());
+                        newPoint.x = newPos > 0.01 ? newPos : 0;
+                        isHitRight = true;
+                        break;
+
+                    case Collision::RayDirection::Left:
+                        newPos = intersectionPoint.x - player->GetX();
+                        newPoint.x = newPos > 0.01 ? newPos : 0;
+                        isHitLeft = true;
+                        break;
+                    }
+                }
+            }
+
 //            std::cout << "Checking body " << body.first->GetId() << " with " << secondBody.first->GetId() << std::endl;
+        }
+
+        player->SetDirection(newPoint);
+
+        if (isHitDown)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(0, -1));
+        }
+        else if (player->GetCollisionNormal().y == -1)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(0, 1));
+        }
+
+        if (isHitUp)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(0, 1));
+        }
+        else if (player->GetCollisionNormal().y == 1)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(0, -1));
+        }
+
+        if (isHitRight)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(1, 0));
+        }
+        else if (player->GetCollisionNormal().x == 1)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
+        }
+
+        if (isHitLeft)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
+        }
+        else if (player->GetCollisionNormal().x == -1)
+        {
+            player->SetCollisionNormal(oxygine::Vector2(1, 0));
         }
 
 //        if (dynamic_cast<Player*>(body.first))
@@ -64,90 +133,9 @@ void CollisionManager::CheckCollisions()
 //            std::cout << "Can't:" << body.second << std::endl;
 //        }
     }
-
-
-    for (auto& st : m_Statics)
-    {
-        for(auto& ray : m_Player->GetRays())
-        {
-            intersectionPoint.setZero();
-            if (Intersection(
-                    oxygine::Vector2(st->getX(), st->getY() + st->getHeight()),
-                    oxygine::Vector2(st->getX() + st->getWidth(), st->getY()),
-                    ray.Original,
-                    ray.Destination,
-                    intersectionPoint))
-            {
-                float newPos = 0;
-                switch (ray.Direction)
-                {
-                case Collision::RayDirection::Down:
-                    newPos = intersectionPoint.y - (m_Player->GetY() + m_Player->GetHeight());
-                    newPoint.y = newPos > 0.01 ? newPos : 0;
-                    isHitDown = true;
-                    break;
-
-                case Collision::RayDirection::Up:
-                    newPos = intersectionPoint.y - m_Player->GetY();
-                    newPoint.y = newPos > 0.01 ? newPos : 0;
-                    isHitUp = true;
-                    break;
-
-                case Collision::RayDirection::Right:
-                    newPos = intersectionPoint.x - (m_Player->GetX() + m_Player->GetWidth());
-                    newPoint.x = newPos > 0.01 ? newPos : 0;
-                    isHitRight = true;
-                    break;
-
-                case Collision::RayDirection::Left:
-                    newPos = intersectionPoint.x - m_Player->GetX();
-                    newPoint.x = newPos > 0.01 ? newPos : 0;
-                    isHitLeft = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    m_Player->SetDirection(newPoint);
-
-    if (isHitDown)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-    }
-    else if (m_Player->GetCollisionNormal().y == -1)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-    }
-
-    if (isHitUp)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(0, 1));
-    }
-    else if (m_Player->GetCollisionNormal().y == 1)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(0, -1));
-    }
-
-    if (isHitRight)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
-    }
-    else if (m_Player->GetCollisionNormal().x == 1)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-    }
-
-    if (isHitLeft)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-    }
-    else if (m_Player->GetCollisionNormal().x == -1)
-    {
-        m_Player->SetCollisionNormal(oxygine::Vector2(1, 0));
-    }
 }
 
+// TODO : Use better names, more comments.
 bool CollisionManager::Intersection(
         const oxygine::Vector2& aBottomLeftAABB, const oxygine::Vector2& aTopRightAABB,
         const oxygine::Vector2& aStartRay, const oxygine::Vector2& aEndRay,

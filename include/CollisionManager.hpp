@@ -14,6 +14,7 @@ public:
     void AddBody(BodyType* aBody)
     {
         Body body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
+        // Check whether it MovableObject or not (derived from BasisObject?)
         if (std::is_base_of<Player, BodyType>::value)
         {
             std::cout << "Base or same type " << std::endl;
@@ -28,10 +29,8 @@ public:
         m_Bodies.emplace_back(std::move(body));
     }
 
-    void AddBodies(Player*, Static*, Static*);
-    void AddStatic(Static*);
     void CheckCollisions();
-
+// TODO : move to private, figure out how to test this.
 //private:
     bool Intersection(
         const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
@@ -40,8 +39,4 @@ public:
 
 private:
     std::vector<Body> m_Bodies;
-    Player* m_Player;
-    std::vector<Static*> m_Statics;
-    Static* m_Static;
-    Static* m_Static2;
 };
