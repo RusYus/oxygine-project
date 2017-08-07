@@ -1,12 +1,6 @@
-#include <iostream>
 #include <limits>
 
 #include "CollisionManager.hpp"
-
-void CollisionManager::AddBody(void* aBody)
-{
-    m_Bodies.push_back(aBody);
-}
 
 void CollisionManager::AddBodies(Player* aPlayer, Static* aStatic, Static* aStatic2)
 {
@@ -22,6 +16,18 @@ void CollisionManager::AddStatic(Static* aStatic2)
 
 void CollisionManager::CheckCollisions()
 {
+    for (const auto& body : m_Bodies)
+    {
+        if (dynamic_cast<Player*>(body.first))
+        {
+            std::cout << "Can:" << body.second << std::endl;
+        }
+        else
+        {
+            std::cout << "Can't:" << body.second << std::endl;
+        }
+    }
+
     oxygine::Vector2 intersectionPoint;
     oxygine::Vector2 newPoint = m_Player->GetDirection();
     bool isHitDown = false;
