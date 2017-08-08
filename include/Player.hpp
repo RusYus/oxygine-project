@@ -1,34 +1,55 @@
 #pragma once
 
+#include "RenderState.h"
+#include "core/gl/ShaderProgramGL.h"
+
+
 #include "BasisObject.hpp"
 #include "BasisEventProxy.hpp"
+#include "CollisionInfo.hpp"
 #include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-constexpr const int PLAYER_MAX_SPEED = 600;
-constexpr const int PLAYER_JUMP_SPEED = 700;
+constexpr const int PLAYER_MAX_SPEED =4;
+constexpr const int PLAYER_JUMP_SPEED = 10;
+constexpr const float GRAVITY = 50;
+constexpr const int RAYCAST_INTERVAL = 25;
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public oxygine::Object, public Basis::BasisObject
+class Player: public oxygine::Actor /*public oxygine::Object*/, public Basis::BasisObject
 {
 public:
     Player();
-    void Init(b2World*, spEventProxy);
+    ~Player();
+    void Init(spEventProxy);
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
     void ProcessMoveEvent(oxygine::Event*);
     void Jump(oxygine::Event*);
-    inline float GetX() const;
-    inline float GetY() const;
-    void SetCollisionNormal(const b2Vec2);
+     void SetY(float);
+     void SetX(float);
+     void SetDirection(const oxygine::Vector2&);
+     float GetX() const;
+     float GetY() const;
+     float GetWidth() const;
+     float GetHeight() const;
+     oxygine::Vector2 GetRayOriginal() const;
+     std::vector<Collision::Ray>& GetRays();
+     oxygine::Vector2 GetRayDestination() const;
+     void SetPosition();
+     oxygine::Vector2 GetPosition() const;
+     oxygine::Vector2 GetDirection() const;
+     Service::Normal2 GetCollisionNormal() const;
+    void SetCollisionNormal(const oxygine::Vector2);
     void SetZeroCollisionNormal();
-    // TODO : Move to private.
-    b2Body* _body;
+    void SetDebugDraw(bool);
+    bool GetDebugDraw() const;
+
+    void doRender(const oxygine::RenderState& rs);
 
 private:
-    void InitBody(b2World*);
     void Move(bool /*aIsMovingRight*/);
     inline void Stop();
     void ProcessKeyboard();
@@ -37,14 +58,23 @@ private:
     spEventProxy mEventProxy;
     oxygine::spActor mView;
     oxygine::spSprite mBox;
-    b2Vec2 mDirection;
+    oxygine::Vector2 mDirection;
     Service::Normal2 mCollisionNormal;
+    std::vector<Collision::Ray> mRays;
+    bool m_DebugDraw = false;
     bool mIsJumping;
     bool mIsButtonMoving;
-    // TODO : in box2d terms (float32?).
-    // as now every time it's being divided by scale.
     const int mMaxSpeed = PLAYER_MAX_SPEED;
     const int mJumpSpeed = PLAYER_JUMP_SPEED;
 
     std::pair<Service::ObjectType, Player*> mBodyPair;
+
+    static const int MAX_VERTICES = 64;
+    static const int CIRCLE_SEGMENTS = 16;
+
+    void createCircleVertices(const oxygine::Vector2& aCenter, int aRadius);
+    oxygine::Vector2 mVertices[MAX_VERTICES];
+    void drawPrimitives(int aCount, const oxygine::Color& aColor);
+
+    typename oxygine::ShaderProgramGL* _program;
 };

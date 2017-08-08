@@ -12,6 +12,8 @@ public:
         mId = Service::IdGenerator::GetNextId();
     }
 
+    virtual ~BasisObject() = default;
+
     int GetId() const
     {
         return mId;

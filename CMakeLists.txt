@@ -3,7 +3,7 @@ project (MyDemo)
 
 add_subdirectory(../oxygine-framework oxygine-framework)
 add_definitions(
-    -std=gnu++14    
+    -std=gnu++14
     ${OXYGINE_DEFINITIONS}
 )
 include_directories(${OXYGINE_INCLUDE_DIRS})
@@ -24,7 +24,8 @@ set(
     include/BasisEventProxy.hpp
     include/BasisEvents.hpp
     include/BasisObject.hpp
-    include/Box2DDebugDraw.hpp
+    include/CollisionInfo.hpp
+    include/CollisionManager.hpp
     include/Constants.hpp
     include/DemoLevel.hpp
     include/example.hpp
@@ -41,7 +42,7 @@ set(
 set(
 	PROJECT_SOURCES
     src/BasisCamera.cpp
-    src/Box2DDebugDraw.cpp
+    src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp
     src/JsonImporter.cpp
@@ -73,7 +74,7 @@ include_directories(./box2d)
 
 target_link_libraries(
 	${LAUNCHER}
-	ProjectLib
+	${PROJECT_LIB}
 	${OXYGINE_CORE_LIBS}
 )
 

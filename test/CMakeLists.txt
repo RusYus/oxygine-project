@@ -7,7 +7,8 @@ include_directories(
 set(
 	PROJECT_TESTS_SOURCES
 
-	JsonImporterTests.cpp
+	CollisionManagerTests.cpp
+    JsonImporterTests.cpp
 	TestExample.cpp
 	Tests.cpp
 )
@@ -20,5 +21,6 @@ add_executable(
 target_link_libraries(
     ${PROJECT_TESTS}
     ${PROJECT_LIB}
+    ${OXYGINE_CORE_LIBS}
     ${PROJECT_USED_LIBRARIES}
 )
