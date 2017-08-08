@@ -30,6 +30,7 @@ set(
     include/DemoLevel.hpp
     include/example.hpp
     include/Game.hpp
+    include/IMovable.hpp
     include/JsonImporter.hpp
     include/MapProperty.hpp
     include/MovementButton.hpp

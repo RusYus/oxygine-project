@@ -76,7 +76,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     mDirection = oxygine::Vector2();
 
-    int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / RAYCAST_INTERVAL));
+    int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));
     float actualIntervalLength = GetWidth() / actualIntervalsNumber;
     actualIntervalsNumber--;
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
@@ -91,7 +91,7 @@ void Player::Init(spEventProxy aEventProxy)
                                           Collision::RayDirection::Up));
     }
 
-    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / RAYCAST_INTERVAL));
+    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / Service::Constants::RAYCAST_INTERVAL));
     actualIntervalLength = GetHeight() / actualIntervalsNumber;
     actualIntervalsNumber--;
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
@@ -364,7 +364,7 @@ void Player::Update(const UpdateState& us)
 
 //    _body->SetLinearVelocity(mDirection);
 
-    mDirection.y += us.dt / GRAVITY;
+    mDirection.y += us.dt / Service::Constants::GRAVITY;
 
     for (auto& ray : mRays)
     {

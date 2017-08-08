@@ -12,11 +12,6 @@
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
-constexpr const int PLAYER_MAX_SPEED =4;
-constexpr const int PLAYER_JUMP_SPEED = 10;
-constexpr const float GRAVITY = 50;
-constexpr const int RAYCAST_INTERVAL = 25;
-
 DECLARE_SMART(Player, spPlayer);
 class Player: public oxygine::Actor /*public oxygine::Object*/, public Basis::BasisObject
 {
@@ -64,8 +59,8 @@ private:
     bool m_DebugDraw = false;
     bool mIsJumping;
     bool mIsButtonMoving;
-    const int mMaxSpeed = PLAYER_MAX_SPEED;
-    const int mJumpSpeed = PLAYER_JUMP_SPEED;
+    const int mMaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
+    const int mJumpSpeed = Service::Constants::PLAYER_JUMP_SPEED;
 
     std::pair<Service::ObjectType, Player*> mBodyPair;
 
