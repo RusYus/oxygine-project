@@ -4,6 +4,8 @@
 
 void CollisionManager::CheckCollisions()
 {
+    Collision::CollisionInfo collisionSides;
+
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
     for (const auto& body : m_Bodies)
     {
@@ -13,6 +15,8 @@ void CollisionManager::CheckCollisions()
             continue;
         }
 
+        collisionSides.Reset();
+
         Player* player = dynamic_cast<Player*>(body.first);
         if (!player)
         {
@@ -20,13 +24,8 @@ void CollisionManager::CheckCollisions()
             continue;
         }
 
-
         oxygine::Vector2 intersectionPoint;
         oxygine::Vector2 newPoint = player->GetDirection();
-        bool isHitDown = false;
-        bool isHitRight = false;
-        bool isHitUp = false;
-        bool isHitLeft = false;
 
         for (const auto& secondBody : m_Bodies)
         {
@@ -59,25 +58,25 @@ void CollisionManager::CheckCollisions()
                     case Collision::RayDirection::Down:
                         newPos = intersectionPoint.y - (player->GetY() + player->GetHeight());
                         newPoint.y = newPos > 0.01 ? newPos : 0;
-                        isHitDown = true;
+                        collisionSides.Down = true;
                         break;
 
                     case Collision::RayDirection::Up:
                         newPos = intersectionPoint.y - player->GetY();
                         newPoint.y = newPos > 0.01 ? newPos : 0;
-                        isHitUp = true;
+                        collisionSides.Up = true;
                         break;
 
                     case Collision::RayDirection::Right:
                         newPos = intersectionPoint.x - (player->GetX() + player->GetWidth());
                         newPoint.x = newPos > 0.01 ? newPos : 0;
-                        isHitRight = true;
+                        collisionSides.Right = true;
                         break;
 
                     case Collision::RayDirection::Left:
                         newPos = intersectionPoint.x - player->GetX();
                         newPoint.x = newPos > 0.01 ? newPos : 0;
-                        isHitLeft = true;
+                        collisionSides.Left = true;
                         break;
                     }
                 }
@@ -87,42 +86,7 @@ void CollisionManager::CheckCollisions()
         }
 
         player->SetDirection(newPoint);
-
-        if (isHitDown)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, -1));
-        }
-        else if (player->GetCollisionNormal().y == -1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, 1));
-        }
-
-        if (isHitUp)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, 1));
-        }
-        else if (player->GetCollisionNormal().y == 1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, -1));
-        }
-
-        if (isHitRight)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(1, 0));
-        }
-        else if (player->GetCollisionNormal().x == 1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-        }
-
-        if (isHitLeft)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-        }
-        else if (player->GetCollisionNormal().x == -1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(1, 0));
-        }
+        player->ResetCollisionNormal(collisionSides);
 
 //        if (dynamic_cast<Player*>(body.first))
 //        {

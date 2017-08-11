@@ -38,7 +38,7 @@ public:
      oxygine::Vector2 GetDirection() const;
      Service::Normal2 GetCollisionNormal() const;
     void SetCollisionNormal(const oxygine::Vector2);
-    void SetZeroCollisionNormal();
+    void ResetCollisionNormal(const Collision::CollisionInfo&);
     void SetDebugDraw(bool);
     bool GetDebugDraw() const;
 

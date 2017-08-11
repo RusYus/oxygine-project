@@ -221,10 +221,29 @@ void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
 
 }
 
-void Player::SetZeroCollisionNormal()
+void Player::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
-    std::cout << "Set Zero" << std::endl;
     mCollisionNormal.SetZero();
+
+    if (a_Sides.Down)
+    {
+        mCollisionNormal.y = -1;
+    }
+
+    if (a_Sides.Up)
+    {
+        mCollisionNormal.y = 1;
+    }
+
+    if (a_Sides.Right)
+    {
+        mCollisionNormal.x = 1;
+    }
+
+    if (a_Sides.Left)
+    {
+        mCollisionNormal.x = -1;
+    }
 }
 
 void Player::ProcessKeyboard()

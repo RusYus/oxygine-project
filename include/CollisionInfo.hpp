@@ -5,6 +5,23 @@
 namespace Collision
 {
 
+struct CollisionInfo
+{
+public:
+    inline void Reset()
+    {
+        Up = false;
+        Down = false;
+        Right = false;
+        Left = false;
+    }
+
+    bool Up = false;
+    bool Down = false;
+    bool Right = false;
+    bool Left = false;
+};
+
 enum class RayDirection
 {
     Up,

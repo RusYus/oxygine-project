@@ -10,9 +10,16 @@
 
 class IMovable
 {
-private:
-    oxygine::Vector2 mDirection;
-    Service::Normal2 mCollisionNormal;
-    std::vector<Collision::Ray> mRays;
-    const int mMaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
+public:
+    void SetCollisionNormal(const oxygine::Vector2);
+    void SetDebugDraw(bool);
+    bool GetDebugDraw() const;
+
+    ~IMovable() = default;
+protected:
+    oxygine::Vector2 m_Direction;
+    Service::Normal2 m_CollisionNormal;
+    std::vector<Collision::Ray> m_Rays;
+    bool m_DebugDraw = false;
+    const int m_MaxSpeed = Service::Constants::MAX_SPEED;
 };
