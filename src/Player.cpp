@@ -14,7 +14,6 @@
 
 Player::Player()
     : mBodyPair(Service::ObjectType::Player, this)
-    , mCollisionNormal(0, 0)
     , mIsButtonMoving(false)
     , mIsJumping(false)
 {
@@ -44,7 +43,7 @@ Player::Player()
 Player::~Player()
 {
     delete _program;
-    mRays.clear();
+    m_Rays.clear();
 }
 
 spActor Player::GetView() const
@@ -74,7 +73,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     mEventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
-    mDirection = oxygine::Vector2();
+    m_Direction = oxygine::Vector2();
 
     int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));
     float actualIntervalLength = GetWidth() / actualIntervalsNumber;
@@ -82,11 +81,11 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
                                           oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
                                           Collision::RayDirection::Down));
         // Top
-        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           Collision::RayDirection::Up));
     }
@@ -97,11 +96,11 @@ void Player::Init(spEventProxy aEventProxy)
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
                                           oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Right));
         // Left
-        mRays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
+        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
                                           oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Left));
     }
@@ -109,12 +108,12 @@ void Player::Init(spEventProxy aEventProxy)
 
 void Player::Jump(Event* /*aEvent*/)
 {
-    std::cout << mCollisionNormal.y << std::endl;
+    std::cout << m_CollisionNormal.y << std::endl;
     if (!mIsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
         mIsJumping = true;
-        mDirection.y -= mJumpSpeed;
+        m_Direction.y -= mJumpSpeed;
 //        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
     }
 }
@@ -141,7 +140,7 @@ void Player::Move(bool aIsMovingRight)
 //        mDirection = _body->GetLinearVelocity();
 
 ////        std::cout << "Moving!" << "NORMALS:" << mNormal.x << ";" << mGroundNormal.x << std::endl;
-        mDirection.x = aIsMovingRight ? mMaxSpeed : -mMaxSpeed;
+        m_Direction.x = aIsMovingRight ? m_MaxSpeed : -m_MaxSpeed;
 //        mDirection.x /= Service::Constants::SCALE;
 
 //        // Collision took place
@@ -157,22 +156,22 @@ void Player::Move(bool aIsMovingRight)
 
 inline void Player::Stop()
 {
-    mDirection.x = 0;
+    m_Direction.x = 0;
 }
 
 void Player::SetY(float newPosY)
 {
-    mDirection.y = newPosY;
+    m_Direction.y = newPosY;
 }
 
 void Player::SetX(float newPosX)
 {
-    mDirection.x = newPosX;
+    m_Direction.x = newPosX;
 }
 
 void Player::SetDirection(const oxygine::Vector2& aNewDirection)
 {
-    mDirection = aNewDirection;
+    m_Direction = aNewDirection;
 }
 
 float Player::GetX() const
@@ -197,16 +196,16 @@ float Player::GetHeight() const
 
 oxygine::Vector2 Player::GetRayOriginal() const
 {
-    return mRays.back().Original;
+    return m_Rays.back().Original;
 }
 
 oxygine::Vector2 Player::GetRayDestination() const
 {
-    return mRays.back().Destination;
+    return m_Rays.back().Destination;
 }
 std::vector<Collision::Ray>& Player::GetRays()
 {
-    return mRays;
+    return m_Rays;
 }
 
 void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
@@ -216,33 +215,33 @@ void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
 //    std::cout << "Ground:" << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
 
 //    std::cout << "C:" << mCollisionNormal.y;
-    mCollisionNormal += aNormal;
+    m_CollisionNormal += aNormal;
 //    std::cout << " : " << mCollisionNormal.y << std::endl;
 
 }
 
 void Player::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
-    mCollisionNormal.SetZero();
+    m_CollisionNormal.SetZero();
 
     if (a_Sides.Down)
     {
-        mCollisionNormal.y = -1;
+        m_CollisionNormal.y = -1;
     }
 
     if (a_Sides.Up)
     {
-        mCollisionNormal.y = 1;
+        m_CollisionNormal.y = 1;
     }
 
     if (a_Sides.Right)
     {
-        mCollisionNormal.x = 1;
+        m_CollisionNormal.x = 1;
     }
 
     if (a_Sides.Left)
     {
-        mCollisionNormal.x = -1;
+        m_CollisionNormal.x = -1;
     }
 }
 
@@ -272,20 +271,20 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-    Vector2 newPos = mView->getPosition() + mDirection;
+    Vector2 newPos = mView->getPosition() + m_Direction;
 
 //    std::cout << "Pos: " << newPos.x << " : " << newPos.y << std::endl;
 
-    for(auto& ray : mRays)
+    for(auto& ray : m_Rays)
     {
-        ray.Original += mDirection;
+        ray.Original += m_Direction;
 
         switch (ray.Direction)
         {
             case Collision::RayDirection::Up:
-                if (mDirection.y < 0)
+                if (m_Direction.y < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 else
                 {
@@ -293,9 +292,9 @@ void Player::SetPosition()
                 }
                 break;
             case Collision::RayDirection::Down:
-                if (mDirection.y > 0)
+                if (m_Direction.y > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 else
                 {
@@ -303,9 +302,9 @@ void Player::SetPosition()
                 }
                 break;
             case Collision::RayDirection::Right:
-                if (mDirection.x > 0)
+                if (m_Direction.x > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 else
                 {
@@ -314,9 +313,9 @@ void Player::SetPosition()
                 break;
 
             case Collision::RayDirection::Left:
-                if (mDirection.x < 0)
+                if (m_Direction.x < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 else
                 {
@@ -332,7 +331,7 @@ void Player::SetPosition()
     mView->setPosition(newPos);
 
     // If player doesn't stand on something, he can't jump.
-    if (mCollisionNormal.y == -1)
+    if (m_CollisionNormal.y == -1)
     {
         mIsJumping = false;
     }
@@ -360,12 +359,12 @@ oxygine::Vector2 Player::GetPosition() const
 
 oxygine::Vector2 Player::GetDirection() const
 {
-    return mDirection;
+    return m_Direction;
 }
 
 Service::Normal2 Player::GetCollisionNormal() const
 {
-    return mCollisionNormal;
+    return m_CollisionNormal;
 }
 
 void Player::Update(const UpdateState& us)
@@ -375,17 +374,17 @@ void Player::Update(const UpdateState& us)
 //    mDirection.y = _body->GetLinearVelocity().y;
 
     // Reseting direction, if collision in place.
-    if ((mDirection.x < 0 && mCollisionNormal.x < 0) || (mDirection.x > 0  && mCollisionNormal.x > 0))
+    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
 //        std::cout << "In Update: dir.x = 0" << std::endl;
-        mDirection.x = 0;
+        m_Direction.x = 0;
     }
 
 //    _body->SetLinearVelocity(mDirection);
 
-    mDirection.y += us.dt / Service::Constants::GRAVITY;
+    m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
 
-    for (auto& ray : mRays)
+    for (auto& ray : m_Rays)
     {
         // Down  : y
         // Up    : y
@@ -395,9 +394,9 @@ void Player::Update(const UpdateState& us)
         switch (ray.Direction)
         {
             case Collision::RayDirection::Up:
-                if (mDirection.y < 0)
+                if (m_Direction.y < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 else
                 {
@@ -405,9 +404,9 @@ void Player::Update(const UpdateState& us)
                 }
                 break;
             case Collision::RayDirection::Down:
-                if (mDirection.y > 0)
+                if (m_Direction.y > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + mDirection.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 else
                 {
@@ -415,9 +414,9 @@ void Player::Update(const UpdateState& us)
                 }
                 break;
             case Collision::RayDirection::Right:
-                if (mDirection.x > 0)
+                if (m_Direction.x > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 else
                 {
@@ -426,9 +425,9 @@ void Player::Update(const UpdateState& us)
                 break;
 
             case Collision::RayDirection::Left:
-                if (mDirection.x < 0)
+                if (m_Direction.x < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + mDirection.x, ray.Original.y);
+                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 else
                 {
@@ -486,7 +485,7 @@ void Player::doRender(const oxygine::RenderState& rs)
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto& ray : mRays)
+    for (auto& ray : m_Rays)
     {
         if (ray.Original != ray.Destination)
         {

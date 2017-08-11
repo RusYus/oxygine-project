@@ -7,13 +7,14 @@
 #include "BasisObject.hpp"
 #include "BasisEventProxy.hpp"
 #include "CollisionInfo.hpp"
+#include "IMovable.hpp"
 #include "Utils.hpp"
 #include "Box2D/Box2D.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "oxygine-framework.h"
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public oxygine::Actor /*public oxygine::Object*/, public Basis::BasisObject
+class Player: public oxygine::Actor /*public oxygine::Object*/, public Basis::BasisObject, public IMovable
 {
 public:
     Player();
@@ -25,20 +26,20 @@ public:
     void Jump(oxygine::Event*);
      void SetY(float);
      void SetX(float);
-     void SetDirection(const oxygine::Vector2&);
+     void SetDirection(const oxygine::Vector2&) override;
      float GetX() const;
      float GetY() const;
      float GetWidth() const;
      float GetHeight() const;
-     oxygine::Vector2 GetRayOriginal() const;
-     std::vector<Collision::Ray>& GetRays();
-     oxygine::Vector2 GetRayDestination() const;
+     oxygine::Vector2 GetRayOriginal() const override;
+     std::vector<Collision::Ray>& GetRays() override;
+     oxygine::Vector2 GetRayDestination() const override;
      void SetPosition();
      oxygine::Vector2 GetPosition() const;
-     oxygine::Vector2 GetDirection() const;
-     Service::Normal2 GetCollisionNormal() const;
-    void SetCollisionNormal(const oxygine::Vector2);
-    void ResetCollisionNormal(const Collision::CollisionInfo&);
+     oxygine::Vector2 GetDirection() const override;
+     Service::Normal2 GetCollisionNormal() const override;
+    void SetCollisionNormal(const oxygine::Vector2) override;
+    void ResetCollisionNormal(const Collision::CollisionInfo&) override;
     void SetDebugDraw(bool);
     bool GetDebugDraw() const;
 
@@ -53,10 +54,6 @@ private:
     spEventProxy mEventProxy;
     oxygine::spActor mView;
     oxygine::spSprite mBox;
-    oxygine::Vector2 mDirection;
-    Service::Normal2 mCollisionNormal;
-    std::vector<Collision::Ray> mRays;
-    bool m_DebugDraw = false;
     bool mIsJumping;
     bool mIsButtonMoving;
     const int mMaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
