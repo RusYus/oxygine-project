@@ -241,65 +241,7 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-    Vector2 newPos = m_View->getPosition() + m_Direction;
-
-//    std::cout << "Pos: " << newPos.x << " : " << newPos.y << std::endl;
-
-    for(auto& ray : m_Rays)
-    {
-        ray.Original += m_Direction;
-
-        switch (ray.Direction)
-        {
-            case Collision::RayDirection::Up:
-                if (m_Direction.y < 0)
-                {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
-                }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
-                break;
-            case Collision::RayDirection::Down:
-                if (m_Direction.y > 0)
-                {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
-                }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
-                break;
-            case Collision::RayDirection::Right:
-                if (m_Direction.x > 0)
-                {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
-                }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
-                break;
-
-            case Collision::RayDirection::Left:
-                if (m_Direction.x < 0)
-                {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
-                }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
-                break;
-        }
-    }
-
-//    std::cout << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y
-//              << "  |  " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
-
-    m_View->setPosition(newPos);
-
+    IMovable::SetPosition();
     // If player doesn't stand on something, he can't jump.
     if (m_CollisionNormal.y == -1)
     {

@@ -28,8 +28,7 @@ public:
     Service::Normal2 GetCollisionNormal() const override;
     void SetCollisionNormal(const oxygine::Vector2) override;
     void ResetCollisionNormal(const Collision::CollisionInfo&) override;
-
-    void SetPosition();
+    void SetPosition() override;
 
     void Init(spEventProxy);
     void Update(const oxygine::UpdateState&);

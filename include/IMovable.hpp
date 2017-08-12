@@ -26,6 +26,62 @@ public:
     virtual Service::Normal2 GetCollisionNormal() const = 0;
     virtual void SetCollisionNormal(const oxygine::Vector2) = 0;
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&) = 0;
+    virtual void SetPosition()
+    {
+        oxygine::Vector2 newPos = m_View->getPosition() + m_Direction;
+
+        for(auto& ray : m_Rays)
+        {
+            ray.Original += m_Direction;
+
+            switch (ray.Direction)
+            {
+                case Collision::RayDirection::Up:
+                    if (m_Direction.y < 0)
+                    {
+                        ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
+                    }
+                    else
+                    {
+                        ray.Destination = ray.Original;
+                    }
+                    break;
+                case Collision::RayDirection::Down:
+                    if (m_Direction.y > 0)
+                    {
+                        ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
+                    }
+                    else
+                    {
+                        ray.Destination = ray.Original;
+                    }
+                    break;
+                case Collision::RayDirection::Right:
+                    if (m_Direction.x > 0)
+                    {
+                        ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
+                    }
+                    else
+                    {
+                        ray.Destination = ray.Original;
+                    }
+                    break;
+
+                case Collision::RayDirection::Left:
+                    if (m_Direction.x < 0)
+                    {
+                        ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
+                    }
+                    else
+                    {
+                        ray.Destination = ray.Original;
+                    }
+                    break;
+            }
+        }
+
+        m_View->setPosition(newPos);
+    }
 
 protected:
     oxygine::Vector2 m_Direction;

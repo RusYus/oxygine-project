@@ -21,8 +21,6 @@ public:
     inline float GetY() const { return (m_View.get() ? m_View->getY() : .0f); }
     inline float GetWidth() const { return (m_View.get() ? m_View->getWidth() : .0f); }
     inline float GetHeight() const { return (m_View.get() ? m_View->getHeight() : .0f); }
-    // TODO : what to do.
-    //    void SetPosition();
     inline oxygine::Vector2 GetPosition() const { return m_View->getPosition(); }
 
     inline int GetId() const
