@@ -13,16 +13,15 @@ struct CollisionManagerFixture
 {
     PlayerFake m_Player;
     Static m_Ground;
-    const int m_Distance;
-    const int m_Threshold;
+    static const constexpr int m_Distance = 10;
+    static const constexpr int m_Threshold = 5;
     CollisionManager m_Manager;
 
     CollisionManagerFixture()
         : m_Player(100, 100)
         , m_Ground(oxygine::RectF(300, 100, 200, 50))
-        , m_Distance(10)
-        , m_Threshold(5)
     {
+        static_assert(m_Distance > m_Threshold, "Distance should be bigger than threshold!");
         m_Manager.AddBody(&m_Player);
         m_Manager.AddBody(&m_Ground);
     }
@@ -273,7 +272,40 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnSurfaceWithForceTowardsIt, Co
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
-// TODO : Tests for corner case.
+BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFixture)
+{
+    // Up Left side.
+    m_Player.SetupValues(
+        m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
+        m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
+        oxygine::Vector2(m_Distance, m_Distance));
+    m_Manager.CheckCollisions();
+    BOOST_CHECK(m_Player.CollisionTookPlace());
+
+    // Up Right side.
+    m_Player.SetupValues(
+        m_Ground.GetX() + m_Ground.GetWidth() + m_Ground.GetWidth() + m_Threshold,
+        m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
+        oxygine::Vector2(-m_Distance, m_Distance));
+    m_Manager.CheckCollisions();
+    BOOST_CHECK(m_Player.CollisionTookPlace());
+
+    // Down Left side.
+    m_Player.SetupValues(
+        m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
+        m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
+        oxygine::Vector2(m_Distance, -m_Distance));
+    m_Manager.CheckCollisions();
+    BOOST_CHECK(m_Player.CollisionTookPlace());
+
+    // Down right side.
+    m_Player.SetupValues(
+        m_Ground.GetX() + m_Ground.GetWidth() + m_Ground.GetWidth() + m_Threshold,
+        m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
+        oxygine::Vector2(-m_Distance, -m_Distance));
+    m_Manager.CheckCollisions();
+    BOOST_CHECK(m_Player.CollisionTookPlace());
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 
