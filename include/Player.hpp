@@ -20,14 +20,14 @@ public:
     Player();
     ~Player();
     // IMovable.
-    void SetDirection(const oxygine::Vector2&) override;
-    oxygine::Vector2 GetRayOriginal() const override;
-    std::vector<Collision::Ray>& GetRays() override;
-    oxygine::Vector2 GetRayDestination() const override;
-    oxygine::Vector2 GetDirection() const override;
-    Service::Normal2 GetCollisionNormal() const override;
-    void SetCollisionNormal(const oxygine::Vector2) override;
-    void ResetCollisionNormal(const Collision::CollisionInfo&) override;
+//    void SetDirection(const oxygine::Vector2&) override;
+//    oxygine::Vector2 GetRayOriginal() const override;
+//    std::vector<Collision::Ray>& GetRays() override;
+//    oxygine::Vector2 GetRayDestination() const override;
+//    oxygine::Vector2 GetDirection() const override;
+//    Service::Normal2 GetCollisionNormal() const override;
+//    void SetCollisionNormal(const oxygine::Vector2) override;
+//    void ResetCollisionNormal(const Collision::CollisionInfo&) override;
     void SetPosition() override;
 
     void Init(spEventProxy);

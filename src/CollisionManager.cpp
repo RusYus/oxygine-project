@@ -17,7 +17,7 @@ void CollisionManager::CheckCollisions()
 
         collisionSides.Reset();
 
-        Player* player = dynamic_cast<Player*>(body.first);
+        IMovable* player = dynamic_cast<IMovable*>(body.first);
         if (!player)
         {
             std::cout << "Can't cast movable body to Player!" << body.second << std::endl;
@@ -46,8 +46,8 @@ void CollisionManager::CheckCollisions()
             {
                 intersectionPoint.setZero();
                 if (Intersection(
-                        oxygine::Vector2(ground->getX(), ground->getY() + ground->getHeight()),
-                        oxygine::Vector2(ground->getX() + ground->getWidth(), ground->getY()),
+                        oxygine::Vector2(ground->GetX(), ground->GetY() + ground->GetHeight()),
+                        oxygine::Vector2(ground->GetX() + ground->GetWidth(), ground->GetY()),
                         ray.Original,
                         ray.Destination,
                         intersectionPoint))
@@ -81,8 +81,6 @@ void CollisionManager::CheckCollisions()
                     }
                 }
             }
-
-//            std::cout << "Checking body " << body.first->GetId() << " with " << secondBody.first->GetId() << std::endl;
         }
 
         player->SetDirection(newPoint);

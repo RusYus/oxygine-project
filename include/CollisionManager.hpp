@@ -15,7 +15,7 @@ public:
     {
         Body body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
         // Check whether it MovableObject or not (derived from BasisObject?)
-        if (std::is_base_of<Player, BodyType>::value)
+        if (std::is_base_of<IMovable, BodyType>::value)
         {
             std::cout << "Base or same type " << std::endl;
             body.second = true;
@@ -30,8 +30,7 @@ public:
     }
 
     void CheckCollisions();
-// TODO : move to private, figure out how to test this.
-//private:
+private:
     bool Intersection(
         const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
         const oxygine::Vector2& /*startRay*/, const oxygine::Vector2& /*endRay*/,

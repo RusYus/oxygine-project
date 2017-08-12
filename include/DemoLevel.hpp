@@ -4,7 +4,7 @@
 
 #include "res.hpp"
 
-#include "BasisObject.hpp"
+#include "Ground.hpp"
 #include "Platform.hpp"
 #include "MapProperty.hpp"
 #include "Utils.hpp"
@@ -12,9 +12,9 @@
 DECLARE_SMART(Circle, spCircle);
 DECLARE_SMART(Square, spSquare);
 DECLARE_SMART(SquareMovable, spSquareMovable);
-DECLARE_SMART(Static, spStatic);
 DECLARE_SMART(Ground, spGround);
 DECLARE_SMART(DemoLevel, spDemoLevel);
+DECLARE_SMART(Static, spStatic);
 
 class Circle : public Sprite, public Basis::BasisObject
 {
@@ -47,15 +47,6 @@ public:
 
 public:
     std::pair<Service::ObjectType, SquareMovable*> mBodyPair;
-};
-
-class Static : public Box9Sprite, public Basis::BasisObject
-{
-public:
-    Static(const RectF&);
-
-public:
-    std::pair<Service::ObjectType, Static*> mBodyPair;
 };
 
 class Ground : public Box9Sprite, public Basis::BasisObject

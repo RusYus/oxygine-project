@@ -30,6 +30,7 @@ set(
     include/DemoLevel.hpp
     include/example.hpp
     include/Game.hpp
+    include/Ground.hpp
     include/IMovable.hpp
     include/JsonImporter.hpp
     include/MapProperty.hpp
@@ -46,6 +47,7 @@ set(
     src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp
+    src/IMovable.cpp
     src/JsonImporter.cpp
     src/main.cpp
     src/Player.cpp

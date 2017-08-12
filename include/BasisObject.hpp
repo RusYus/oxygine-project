@@ -13,6 +13,7 @@ public:
     BasisObject()
     {
         m_Id = Service::IdGenerator::GetNextId();
+        m_View = new oxygine::Actor;
     }
 
     virtual ~BasisObject() = default;

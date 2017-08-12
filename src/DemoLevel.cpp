@@ -53,36 +53,36 @@ void SquareMovable::Update()
 //    std::cout << "Mass:" << m.center.x << ":" << m.center.y << ";" << m.mass << std::endl;
 }
 
-Static::Static(const RectF& rc)
-    : mBodyPair(Service::ObjectType::Ground, this)
-{
-    setResAnim(res::ui.getResAnim("pen"));
-    setSize(rc.getSize());
+//Static::Static(const RectF& rc)
+//    : mBodyPair(Service::ObjectType::Ground, this)
+//{
+//    setResAnim(res::ui.getResAnim("pen"));
+//    setSize(rc.getSize());
+////    setPosition(rc.getLeftTop());
 //    setPosition(rc.getLeftTop());
-    setPosition(rc.getLeftTop());
-//    setAnchor(Vector2(0.5f, 0.5f));
+////    setAnchor(Vector2(0.5f, 0.5f));
 
-//    b2BodyDef groundBodyDef;
-//    groundBodyDef.position = Service::Utils::Convert(getPosition());
+////    b2BodyDef groundBodyDef;
+////    groundBodyDef.position = Service::Utils::Convert(getPosition());
 
-//    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+////    b2Body* groundBody = world->CreateBody(&groundBodyDef);
 
-//    b2PolygonShape groundBox;
-//    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
-//    groundBox.SetAsBox(sz.x, sz.y);
+////    b2PolygonShape groundBox;
+////    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
+////    groundBox.SetAsBox(sz.x, sz.y);
 
-//    b2Filter filter;
-//    filter.categoryBits = 0x0001;
-//    filter.maskBits = 0x0003;
-//    filter.groupIndex = 3;
+////    b2Filter filter;
+////    filter.categoryBits = 0x0001;
+////    filter.maskBits = 0x0003;
+////    filter.groupIndex = 3;
 
-//    b2FixtureDef fixtureDef;
-//    fixtureDef.density = 0.0f;
-//    fixtureDef.shape = &groundBox;
-//    fixtureDef.filter = filter;
-//    groundBody->CreateFixture(&fixtureDef);
-//    groundBody->SetUserData(&mBodyPair);
-}
+////    b2FixtureDef fixtureDef;
+////    fixtureDef.density = 0.0f;
+////    fixtureDef.shape = &groundBox;
+////    fixtureDef.filter = filter;
+////    groundBody->CreateFixture(&fixtureDef);
+////    groundBody->SetUserData(&mBodyPair);
+//}
 
 Ground::Ground(b2World* world, const RectF& rc)
     : mBodyPair(Service::ObjectType::Ground, this)
@@ -128,23 +128,23 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     mStatic = ground.get();
     mObjects.push_back(ground);
 
-    spStatic ground2 = new Static(RectF(900, 0, 50, 700));
-    addChild(ground2);
-    mStatic2 = ground2.get();
-    mObjects.push_back(ground2);
+//    spStatic ground2 = new Static(RectF(900, 0, 50, 700));
+//    addChild(ground2);
+//    mStatic2 = ground2.get();
+//    mObjects.push_back(ground2);
 
-    spStatic ground3 = new Static(RectF(0, 0, 50, 700));
-    addChild(ground3);
-    mStatic3 = ground3.get();
-    mObjects.push_back(ground3);
+//    spStatic ground3 = new Static(RectF(0, 0, 50, 700));
+//    addChild(ground3);
+//    mStatic3 = ground3.get();
+//    mObjects.push_back(ground3);
 
-    spStatic ground4 = new Static(RectF(300, 500, 400, 30));
-    addChild(ground4);
-    mStatic4 = ground4.get();
-    mObjects.push_back(ground4);
+//    spStatic ground4 = new Static(RectF(300, 500, 400, 30));
+//    addChild(ground4);
+//    mStatic4 = ground4.get();
+//    mObjects.push_back(ground4);
 
-    spGround groundW = new Ground(mWorld, RectF(800, 200, 400, 50));
-    addChild(groundW);
+//    spGround groundW = new Ground(mWorld, RectF(800, 200, 400, 50));
+//    addChild(groundW);
 
 //    spSquare square = new Square(mWorld, Vector2(200, 300));
 //    square->attachTo(this);
