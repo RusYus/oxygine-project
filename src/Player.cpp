@@ -48,24 +48,24 @@ Player::~Player()
 
 spActor Player::GetView() const
 {
-    return mView;
+    return m_View;
 }
 
 void Player::Init(spEventProxy aEventProxy)
 {
-    mView = new Actor;
+    m_View = new Actor;
     oxygine::Vector2 pos = getStage()->getSize() / 2;
 
 
 
     mBox = new Sprite;
     mBox->setResAnim(res::ui.getResAnim("player"));
-    mBox->attachTo(mView);
+    mBox->attachTo(m_View);
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    mView->setPosition(100, 100);
-    mView->setSize(mBox->getSize());
+    m_View->setPosition(100, 100);
+    m_View->setSize(mBox->getSize());
 
-    addChild(mView);
+    addChild(m_View);
 
     mEventProxy = aEventProxy;
 
@@ -159,39 +159,9 @@ inline void Player::Stop()
     m_Direction.x = 0;
 }
 
-void Player::SetY(float newPosY)
-{
-    m_Direction.y = newPosY;
-}
-
-void Player::SetX(float newPosX)
-{
-    m_Direction.x = newPosX;
-}
-
 void Player::SetDirection(const oxygine::Vector2& aNewDirection)
 {
     m_Direction = aNewDirection;
-}
-
-float Player::GetX() const
-{
-    return (mView.get() ? mView->getX() : .0f);
-}
-
-float Player::GetY() const
-{
-    return (mView.get() ? mView->getY() : .0f);
-}
-
-float Player::GetWidth() const
-{
-    return (mView.get() ? mView->getWidth() : .0f);
-}
-
-float Player::GetHeight() const
-{
-    return (mView.get() ? mView->getHeight() : .0f);
 }
 
 oxygine::Vector2 Player::GetRayOriginal() const
@@ -271,7 +241,7 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-    Vector2 newPos = mView->getPosition() + m_Direction;
+    Vector2 newPos = m_View->getPosition() + m_Direction;
 
 //    std::cout << "Pos: " << newPos.x << " : " << newPos.y << std::endl;
 
@@ -328,7 +298,7 @@ void Player::SetPosition()
 //    std::cout << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y
 //              << "  |  " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
 
-    mView->setPosition(newPos);
+    m_View->setPosition(newPos);
 
     // If player doesn't stand on something, he can't jump.
     if (m_CollisionNormal.y == -1)
@@ -345,16 +315,11 @@ void Player::SetPosition()
 //    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
 
 
-//        std::cout << "Player:"
-//                  << mDirection.x << ":" << mDirection.y << "  |  "
-//                  << mCollisionNormal.x << ":" << mCollisionNormal.y
-//                  << std::endl;
+        std::cout << "Player:"
+                  << m_Direction.x << ":" << m_Direction.y << "  |  "
+                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+                  << std::endl;
 
-}
-
-oxygine::Vector2 Player::GetPosition() const
-{
-    return mView->getPosition();
 }
 
 oxygine::Vector2 Player::GetDirection() const
@@ -383,6 +348,8 @@ void Player::Update(const UpdateState& us)
 //    _body->SetLinearVelocity(mDirection);
 
     m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
+
+    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
     for (auto& ray : m_Rays)
     {
@@ -446,12 +413,12 @@ void Player::Update(const UpdateState& us)
 
 //    std::cout << "Player:"
 //              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
-//              << mView->getX() << ":" << mView->getY() << std::endl;
+//              << m_View->getX() << ":" << m_View->getY() << std::endl;
 
 //    b2Vec2 b2pos = _body->GetPosition();
 //    Vector2 pos = Service::Utils::Convert(b2pos);
-//    CameraMovementEvent event(pos - mView->getPosition());
-//    mView->setPosition(pos);
+//    CameraMovementEvent event(pos - m_View->getPosition());
+//    m_View->setPosition(pos);
 //    mEventProxy->dispatchEvent(&event);
 
 //    std::cout << "Player: " << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;

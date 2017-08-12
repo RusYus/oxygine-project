@@ -4,11 +4,12 @@
 
 #include "math/Vector2.h"
 
+#include "BasisObject.hpp"
 #include "CollisionInfo.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 
-class IMovable
+class IMovable : public Basis::BasisObject
 {
 public:
     IMovable()
