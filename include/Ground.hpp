@@ -2,10 +2,10 @@
 
 #include "math/Rect.h"
 
-#include "BasisObject.hpp"
+#include "IDrawable.hpp"
 
 DECLARE_SMART(Static, spStatic);
-class Static : public oxygine::Actor, public Basis::BasisObject
+class Static : public oxygine::Actor, public IDrawable
 {
 public:
     Static(const oxygine::RectF& a_Rc)

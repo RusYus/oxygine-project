@@ -225,9 +225,9 @@ void DemoLevel::click(Event* event)
 //        spCircle circle = new Circle(mWorld, te->localPosition);
 //        circle->attachTo(this);
 //        mCircles.push_front(circle);
-        spSquareMovable s = new SquareMovable(te->localPosition);
-        s->attachTo(this);
-        mSquares.push_front(s);
+//        spSquareMovable s = new SquareMovable(te->localPosition);
+//        s->attachTo(this);
+//        mSquares.push_front(s);
 //    }
 }
 

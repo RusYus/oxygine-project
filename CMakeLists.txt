@@ -31,6 +31,7 @@ set(
     include/example.hpp
     include/Game.hpp
     include/Ground.hpp
+    include/IDrawable.hpp
     include/IMovable.hpp
     include/JsonImporter.hpp
     include/MapProperty.hpp
