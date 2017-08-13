@@ -82,73 +82,73 @@ void CollisionManager::CheckCollisions()
                     // TODO : Refactor!
                     case Collision::RayDirection::UpRight:
                         // If exactly on corner, considering it under (have to choose between under and right).
-                        if (intersectionPoint.x >= ground->GetX())
-                        {
-                            // From up
-                            float y = intersectionPoint.y - player->GetY();
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Up = true;
-                        }
-                        else
+                        if (intersectionPoint.x == ground->GetX())
                         {
                             // From Right
                             float x = intersectionPoint.x - (player->GetX() + player->GetWidth());
                             newPoint.x = x > 0.01 ? x : 0;
                             collisionSides.Right = true;
+                        }
+                        else
+                        {
+                            // From up
+                            float y = intersectionPoint.y - player->GetY();
+                            newPoint.y = y > 0.01 ? y : 0;
+                            collisionSides.Up = true;
                         }
                         break;
 
                     case Collision::RayDirection::UpLeft:
                         // If exactly on corner, considering it under (have to choose between under and left).
-                        if (intersectionPoint.x <= ground->GetX() + ground->GetWidth())
+                        if (intersectionPoint.x == ground->GetX() + ground->GetWidth())
+                        {
+                            // From Left
+                            float x = intersectionPoint.x - player->GetX();
+                            newPoint.x = x > 0.01 ? x : 0;
+                            collisionSides.Left = true;
+                        }
+                        else
                         {
                             // From up
                             float y = intersectionPoint.y - player->GetY();
                             newPoint.y = y > 0.01 ? y : 0;
                             collisionSides.Up = true;
                         }
-                        else
-                        {
-                            // From Left
-                            float x = intersectionPoint.x - player->GetX();
-                            newPoint.x = x > 0.01 ? x : 0;
-                            collisionSides.Left = true;
-                        }
                         break;
 
                     case Collision::RayDirection::DownRight:
                         // If exactly on corner, considering it on top (have to choose between on top and right).
-                        if (intersectionPoint.x >= ground->GetX())
-                        {
-                            // From down
-                            float y = intersectionPoint.y - (player->GetY() + player->GetHeight());
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Down = true;
-                        }
-                        else
+                        if (intersectionPoint.x == ground->GetX())
                         {
                             // From Right
                             float x = intersectionPoint.x - (player->GetX() + player->GetWidth());
                             newPoint.x = x > 0.01 ? x : 0;
                             collisionSides.Right = true;
                         }
-                        break;
-
-                    case Collision::RayDirection::DownLeft:
-                        // If exactly on corner, considering it on top (have to choose between on top and left).
-                        if (intersectionPoint.x <= ground->GetX() + ground->GetWidth())
+                        else
                         {
                             // From down
                             float y = intersectionPoint.y - (player->GetY() + player->GetHeight());
                             newPoint.y = y > 0.01 ? y : 0;
                             collisionSides.Down = true;
                         }
-                        else
+                        break;
+
+                    case Collision::RayDirection::DownLeft:
+                        // If exactly on corner, considering it on top (have to choose between on top and left).
+                        if (intersectionPoint.x == ground->GetX() + ground->GetWidth())
                         {
                             // From Left
                             float x = intersectionPoint.x - player->GetX();
                             newPoint.x = x > 0.01 ? x : 0;
                             collisionSides.Left = true;
+                        }
+                        else
+                        {
+                            // From down
+                            float y = intersectionPoint.y - (player->GetY() + player->GetHeight());
+                            newPoint.y = y > 0.01 ? y : 0;
+                            collisionSides.Down = true;
                         }
                         break;
                     }
