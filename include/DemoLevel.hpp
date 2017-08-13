@@ -14,7 +14,6 @@ DECLARE_SMART(Square, spSquare);
 DECLARE_SMART(SquareMovable, spSquareMovable);
 DECLARE_SMART(Ground, spGround);
 DECLARE_SMART(DemoLevel, spDemoLevel);
-DECLARE_SMART(Static, spStatic);
 
 class Circle : public Sprite, public Basis::BasisObject
 {

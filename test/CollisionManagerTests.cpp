@@ -284,7 +284,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
 
     // Up Right side.
     m_Player.SetupValues(
-        m_Ground.GetX() + m_Ground.GetWidth() + m_Ground.GetWidth() + m_Threshold,
+        m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
         m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
         oxygine::Vector2(-m_Distance, m_Distance));
     m_Manager.CheckCollisions();
@@ -300,7 +300,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
 
     // Down right side.
     m_Player.SetupValues(
-        m_Ground.GetX() + m_Ground.GetWidth() + m_Ground.GetWidth() + m_Threshold,
+        m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
         m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
         oxygine::Vector2(-m_Distance, -m_Distance));
     m_Manager.CheckCollisions();

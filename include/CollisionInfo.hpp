@@ -28,6 +28,10 @@ enum class RayDirection
     Down,
     Left,
     Right,
+    UpLeft,
+    UpRight,
+    DownLeft,
+    DownRight,
 };
 
 struct Ray

@@ -229,10 +229,10 @@ void Player::SetPosition()
 //    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
 
 
-        std::cout << "Player:"
-                  << m_Direction.x << ":" << m_Direction.y << "  |  "
-                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
-                  << std::endl;
+//        std::cout << "Player:"
+//                  << m_Direction.x << ":" << m_Direction.y << "  |  "
+//                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+//                  << std::endl;
 
 }
 
@@ -253,7 +253,7 @@ void Player::Update(const UpdateState& us)
 
     m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
 
-    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+//    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
     UpdateRays(false);
 

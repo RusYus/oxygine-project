@@ -58,7 +58,18 @@ void IMovable::SetPosition()
 {
     oxygine::Vector2 newPos = GetPosition() + m_Direction;
 
-    UpdateRays(true);
+    // TODO : Refactor!
+    if (m_DebugDraw)
+    {
+        UpdateRays(true);
+    }
+    else
+    {
+        for(auto& ray : m_Rays)
+        {
+            ray.Original += m_Direction;
+        }
+    }
 
     m_View->setPosition(newPos);
 }
@@ -72,6 +83,9 @@ void IMovable::UpdateRays(bool aOriginal)
             ray.Original += m_Direction;
         }
 
+        ray.Destination = ray.Original;
+
+        // TODO : Consider refactoring.
         switch (ray.Direction)
         {
             case Collision::RayDirection::Up:
@@ -79,29 +93,17 @@ void IMovable::UpdateRays(bool aOriginal)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
                 break;
             case Collision::RayDirection::Down:
                 if (m_Direction.y > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
-                else
-                {
-                    ray.Destination = ray.Original;
-                }
                 break;
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
-                }
-                else
-                {
-                    ray.Destination = ray.Original;
                 }
                 break;
 
@@ -110,9 +112,29 @@ void IMovable::UpdateRays(bool aOriginal)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
-                else
+                break;
+            case Collision::RayDirection::UpLeft:
+                if (m_Direction.x < 0 && m_Direction.y < 0)
                 {
-                    ray.Destination = ray.Original;
+                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                }
+                break;
+            case Collision::RayDirection::UpRight:
+                if (m_Direction.x > 0 && m_Direction.y < 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                }
+                break;
+            case Collision::RayDirection::DownLeft:
+                if (m_Direction.x < 0 && m_Direction.y > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                }
+                break;
+            case Collision::RayDirection::DownRight:
+                if (m_Direction.x > 0 && m_Direction.y > 0)
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
                 }
                 break;
         }
@@ -152,4 +174,21 @@ void IMovable::SetRays()
                                           oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Left));
     }
+
+    // UpLeft diagonal.
+    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY()),
+                                       oxygine::Vector2(GetX(), GetY()),
+                                       Collision::RayDirection::UpLeft));
+    // UpRight diagonal.
+    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY()),
+                                       oxygine::Vector2(GetX() + GetWidth(), GetY()),
+                                       Collision::RayDirection::UpRight));
+    // DownLeft diagonal.
+    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + GetHeight()),
+                                       oxygine::Vector2(GetX(), GetY() + GetHeight()),
+                                       Collision::RayDirection::DownLeft));
+    // DownRight diagonal.
+    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
+                                       oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
+                                       Collision::RayDirection::DownRight));
 }
