@@ -67,6 +67,7 @@ public:
     Static* mStatic2;
     Static* mStatic3;
     Static* mStatic4;
+    spPlatform m_Platform;
 
 private:
     friend class Player;
@@ -80,7 +81,6 @@ private:
     MapProperty mMapProperty;
     std::forward_list<spCircle> mCircles;
     std::forward_list<spSquareMovable> mSquares;
-    spPlatform m_Platform;
 //    std::vector<std::unique_ptr<Ground>> mObjects;
     std::vector<spStatic> mObjects;
 };

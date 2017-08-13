@@ -13,12 +13,12 @@ public:
     {
 //        setResAnim(res::ui.getResAnim("pen"));
 //        setPosition(a_Rc.getLeftTop());
-        mBox = new Sprite;
-        mBox->setResAnim(res::ui.getResAnim("pen"));
-        mBox->setSize(a_Rc.getSize());
-        mBox->attachTo(m_View);
+        m_Box = new Sprite;
+        m_Box->setResAnim(res::ui.getResAnim("pen"));
+        m_Box->setSize(a_Rc.getSize());
+        m_Box->attachTo(m_View);
 
-        m_View->setSize(mBox->getSize());
+        m_View->setSize(m_Box->getSize());
         m_View->setPosition(a_Rc.getLeftTop());
 
         addChild(m_View);
@@ -33,5 +33,4 @@ public:
 
 public:
     std::pair<Service::ObjectType, Static*> mBodyPair;
-    oxygine::spSprite mBox;
 };

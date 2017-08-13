@@ -178,9 +178,9 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
 
-//    spPlatform platform = new Platform(RectF(400, 200, 300, 40));
-//    addChild(platform);
-//    m_Platform = platform;
+    spPlatform platform = new Platform(RectF(400, 200, 50, 20));
+    addChild(platform);
+    m_Platform = platform;
 }
 
 void DemoLevel::doUpdate(const UpdateState& /*us*/)

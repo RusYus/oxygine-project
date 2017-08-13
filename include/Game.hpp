@@ -119,6 +119,7 @@ public:
         m_CollisionManager.AddBody(mLevels.back()->mStatic2);
         m_CollisionManager.AddBody(mLevels.back()->mStatic3);
         m_CollisionManager.AddBody(mLevels.back()->mStatic4);
+        m_CollisionManager.AddBody(mLevels.back()->m_Platform.get());
     }
 
     void doUpdate(const UpdateState& us)

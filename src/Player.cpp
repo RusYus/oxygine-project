@@ -56,14 +56,10 @@ void Player::Init(spEventProxy aEventProxy)
 //    m_View = new Actor;
     oxygine::Vector2 pos = getStage()->getSize() / 2;
 
-
-
-    mBox = new Sprite;
-    mBox->setResAnim(res::ui.getResAnim("player"));
-    mBox->attachTo(m_View);
+    m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
     m_View->setPosition(100, 100);
-    m_View->setSize(mBox->getSize());
+    m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
 

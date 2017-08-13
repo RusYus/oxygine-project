@@ -7,40 +7,46 @@
 Platform::Platform(const oxygine::RectF& aRect)
     : m_BodyPair(Service::ObjectType::Ground, this)
 {
-    setResAnim(res::ui.getResAnim("platform"));
-    setSize(aRect.getSize());
-//    setPosition(aRect.getCenter());
-    setPosition(aRect.getLeftTop());
-    setAnchor(Vector2(0.5f, 0.5f));
+    m_Box->setResAnim(res::ui.getResAnim("platform"));
+    m_View->setPosition(210, 200);
+    m_Box->setSize(aRect.getSize());
+    m_View->setSize(m_Box->getSize());
+
+    addChild(m_View);
+//    setAnchor(Vector2(0.5f, 0.5f));
 
     // TODO : Read from config.
 
-    PathNode newPoint = PathNode(0, oxygine::Vector2(4, 2));
+    // TODO : local coordinates, first node is setPosition location.
+
+    PathNode newPoint = PathNode(0, oxygine::Vector2(350, 200));
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, oxygine::Vector2(6, 2));
+    PathNode newPoint2 = PathNode(1, oxygine::Vector2(500, 200));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, oxygine::Vector2(6, 0.5));
+    PathNode newPoint3 = PathNode(2, oxygine::Vector2(500, 50));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, oxygine::Vector2(9, 0.5));
+    PathNode newPoint4 = PathNode(3, oxygine::Vector2(800, 50));
     m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
 
+    m_Direction = oxygine::Vector2(m_MaxSpeed, 0);
 
-    m_Direction = oxygine::Vector2(m_Speed, 0);
+    SetRays();
 }
 
 bool Platform::IsAroundNode()
 {
-//    const b2Vec2 currentPosition = m_Body->GetPosition();
+    const oxygine::Vector2 currentPosition = GetPosition();
 
 //    // TODO : better compare mechanism for high velocity.
-////    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) <= NODE_SLIPPAGE)
-////        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) <= NODE_SLIPPAGE);
+    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) <= NODE_SLIPPAGE)
+        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) <= NODE_SLIPPAGE);
 //    return std::abs(b2Distance(currentPosition, m_Nodes.at(m_NextNodeId).Position)) < NODE_SLIPPAGE;
-    return true;
 }
 
 void Platform::Move()
 {
+    UpdateRays(false);
+
     if (IsAroundNode())
     {
         auto currentId = m_NextNodeId;
@@ -83,8 +89,12 @@ void Platform::Move()
             }
         }
 
-//        m_Direction = b2Vec2(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position);
-//        m_Direction.Normalize();
-//        m_Direction *= m_Speed;
+        m_Direction = m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position;
+        m_Direction.normalize();
+        m_Direction *= m_MaxSpeed;
     }
+
+    SetPosition();
+
+    std::cout << GetPosition().x << ":" << GetPosition().y << std::endl;
 }

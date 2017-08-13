@@ -11,7 +11,10 @@ class IDrawable : public Basis::BasisObject
 public:
     IDrawable()
         : m_View(new oxygine::Actor)
-    {}
+        , m_Box(new oxygine::Sprite)
+    {
+        m_Box->attachTo(m_View);
+    }
 
     virtual ~IDrawable() = default;
 
@@ -23,4 +26,5 @@ public:
 
 protected:
     oxygine::spActor m_View;
+    oxygine::spSprite m_Box;
 };
