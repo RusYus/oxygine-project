@@ -32,6 +32,9 @@ class Platform: public oxygine::Actor, public IMovable
 public:
     Platform(const oxygine::RectF&);
     void Move();
+    void SetDirection(const oxygine::Vector2&) override;
+
+    void doRender(const oxygine::RenderState&);
 
 private:
     bool IsAroundNode();

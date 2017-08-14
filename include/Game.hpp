@@ -135,6 +135,7 @@ public:
     void ShowHideDebug(Event* /*event*/)
     {
         mPlayer->SetDebugDraw(!mPlayer->GetDebugDraw());
+        mLevels.back()->m_Platform->SetDebugDraw(!mLevels.back()->m_Platform->GetDebugDraw());
     }
 
     spEventProxy mEventProxy;

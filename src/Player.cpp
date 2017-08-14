@@ -1,10 +1,5 @@
 #include <iostream>
 
-#include "core/VideoDriver.h"
-#include "core/gl/VideoDriverGLES20.h"
-#include "Material.h"
-#include "STDMaterial.h"
-
 #include "SDL_keyboard.h"
 #include "Player.hpp"
 #include "DemoLevel.hpp"
@@ -14,35 +9,13 @@
 
 Player::Player()
     : mBodyPair(Service::ObjectType::Player, this)
-    , mIsButtonMoving(false)
-    , mIsJumping(false)
+    , m_IsButtonMoving(false)
+    , m_IsJumping(false)
 {
-    const char* vertexShaderData = "\
-        uniform mediump mat4 projection;\
-        attribute vec2 a_position;\
-        void main() {\
-        vec4 position = vec4(a_position, 0.0, 1.0);\
-        gl_Position = projection * position;\
-        }\
-        ";
-
-    const char* fragmentShaderData = "\
-        uniform mediump vec4 color;\
-        void main() { \
-        gl_FragColor = color; \
-        } \
-        ";
-
-    int vs = ShaderProgramGL::createShader(GL_VERTEX_SHADER, vertexShaderData, 0, 0);
-    int fs = ShaderProgramGL::createShader(GL_FRAGMENT_SHADER, fragmentShaderData, 0, 0);
-
-    int pr = ShaderProgramGL::createProgram(vs, fs, (VertexDeclarationGL*)IVideoDriver::instance->getVertexDeclaration(VERTEX_POSITION));
-    _program = new ShaderProgramGL(pr);
 }
 
 Player::~Player()
 {
-    delete _program;
     m_Rays.clear();
 }
 
@@ -63,11 +36,11 @@ void Player::Init(spEventProxy aEventProxy)
 
     addChild(m_View);
 
-    mEventProxy = aEventProxy;
+    m_EventProxy = aEventProxy;
 
-    mEventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
+    m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
 
-    mEventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
+    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
     m_Direction = oxygine::Vector2();
 
@@ -77,11 +50,11 @@ void Player::Init(spEventProxy aEventProxy)
 void Player::Jump(Event* /*aEvent*/)
 {
     std::cout << m_CollisionNormal.y << std::endl;
-    if (!mIsJumping)
+    if (!m_IsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
-        mIsJumping = true;
-        m_Direction.y -= mJumpSpeed;
+        m_IsJumping = true;
+        m_Direction.y -= m_JumpSpeed;
 //        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
     }
 }
@@ -91,12 +64,12 @@ void Player::ProcessMoveEvent(Event* aEvent)
     PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
     if (!playerEvent->mIsMoving)
     {
-        mIsButtonMoving = false;
+        m_IsButtonMoving = false;
         Stop();
     }
     else
     {
-        mIsButtonMoving = true;
+        m_IsButtonMoving = true;
         Move(playerEvent->mIsMovingRight);
     }
 }
@@ -196,7 +169,7 @@ void Player::ProcessKeyboard()
         Move(true);
     }
     // Might move by onscreen buttons.
-    else if (!mIsButtonMoving)
+    else if (!m_IsButtonMoving)
     {
         Stop();
     }
@@ -213,11 +186,11 @@ void Player::SetPosition()
     // If player doesn't stand on something, he can't jump.
     if (m_CollisionNormal.y == -1)
     {
-        mIsJumping = false;
+        m_IsJumping = false;
     }
     else
     {
-        mIsJumping = true;
+        m_IsJumping = true;
     }
 
 //        std::cout << "O: " << mRays.at(0).Destination.x - mRays.at(0).Original.x << ":" << mRays.at(0).Destination.y - mRays.at(0).Original.y << std::endl;
@@ -236,27 +209,17 @@ void Player::Update(const UpdateState& us)
 {
     ProcessKeyboard();
 
-//    mDirection.y = _body->GetLinearVelocity().y;
-
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
-//        std::cout << "In Update: dir.x = 0" << std::endl;
         m_Direction.x = 0;
     }
-
-//    _body->SetLinearVelocity(mDirection);
 
     m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
     UpdateRays(false);
-
-//    std::cout << "O: " << mRays.at(0).Original.x << ":" << mRays.at(0).Original.y << std::endl;
-//    std::cout << "D: " << mRays.at(0).Destination.x << ":" << mRays.at(0).Destination.y << std::endl;
-
-
 
 //    std::cout << "Dt:" << us.dt << std::endl;
 
@@ -273,85 +236,7 @@ void Player::Update(const UpdateState& us)
 //    std::cout << "Player: " << mGroundNormal.x << ":" << mGroundNormal.y << std::endl;
 }
 
-void Player::SetDebugDraw(bool a_Value)
+void Player::doRender(const oxygine::RenderState& a_State)
 {
-    m_DebugDraw = a_Value;
-}
-
-bool Player::GetDebugDraw() const
-{
-    return m_DebugDraw;
-}
-
-void Player::doRender(const oxygine::RenderState& rs)
-{
-    if (!m_DebugDraw)
-    {
-        return;
-    }
-
-    Material::setCurrent(0);
-
-    IVideoDriver* driver = IVideoDriver::instance;
-
-    driver->setShaderProgram(_program);
-
-    Matrix m = Matrix(rs.transform) * STDMaterial::instance->getRenderer()->getViewProjection();
-    driver->setUniform("projection", &m);
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto& ray : m_Rays)
-    {
-        if (ray.Original != ray.Destination)
-        {
-            mVertices[0] = ray.Original;
-            // actual difference is to small, so I need to increase it visually.
-            oxygine::Vector2 diff = ray.Destination - ray.Original;
-            if (diff.x > 0)
-                diff.x += 20;
-            if (diff.x < 0)
-                diff.x -= 20;
-            if (diff.y > 0)
-                diff.y += 20;
-            if (diff.y < 0)
-                diff.y -= 20;
-    //        mVertices[1] = ray.Destination;
-            mVertices[1] = ray.Original + diff;
-            drawPrimitives(2, oxygine::Color::Green);
-        }
-        else
-        {
-            createCircleVertices(ray.Original, 3);
-            drawPrimitives(CIRCLE_SEGMENTS, oxygine::Color::Green);
-        }
-    }
-}
-
-void Player::createCircleVertices(const oxygine::Vector2& center, int aRadius)
-{
-    int vertexCount = 16;
-    const float k_increment = 2.0f * b2_pi / CIRCLE_SEGMENTS;
-    float theta = 0.0f;
-
-    for (int32 i = 0; i < CIRCLE_SEGMENTS; ++i)
-    {
-        oxygine::Vector2 v  = oxygine::Vector2(scalar::cos(theta), scalar::sin(theta));
-        v *=aRadius;
-        v += center;
-        mVertices[i] = v;
-        theta += k_increment;
-    }
-}
-
-void Player::drawPrimitives(int count, const oxygine::Color& color)
-{
-    oxglEnableVertexAttribArray(0);
-    oxglVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLfloat*)mVertices);
-
-    Vector4 c(color.r, color.g, color.b, 1.0f);
-    IVideoDriver::instance->setUniform("color", &c, 1);
-    glDrawArrays(GL_LINE_LOOP, 0, count);
-
-    oxglDisableVertexAttribArray(0);
+    DrawDebugRays(a_State.transform);
 }

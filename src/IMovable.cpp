@@ -192,3 +192,74 @@ void IMovable::SetRays()
                                        oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownRight));
 }
+
+void IMovable::CreateCircleVertices(const oxygine::Vector2& a_Center, int a_Radius)
+{
+    const float k_increment = 2.0f * b2_pi / CIRCLE_SEGMENTS;
+    float theta = 0.0f;
+
+    for (int32 i = 0; i < CIRCLE_SEGMENTS; ++i)
+    {
+        oxygine::Vector2 v  = oxygine::Vector2(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
+        v *=a_Radius;
+        v += a_Center;
+        m_Vertices[i] = v;
+        theta += k_increment;
+    }
+}
+
+void IMovable::DrawPrimitives(int a_Count, const oxygine::Color& a_Color)
+{
+    oxglEnableVertexAttribArray(0);
+    oxglVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLfloat*)m_Vertices);
+
+    oxygine::Vector4 c(a_Color.r, a_Color.g, a_Color.b, 1.0f);
+    oxygine::IVideoDriver::instance->setUniform("color", &c, 1);
+    glDrawArrays(GL_LINE_LOOP, 0, a_Count);
+
+    oxglDisableVertexAttribArray(0);
+}
+
+void IMovable::DrawDebugRays(const oxygine::Transform& a_Transform)
+{
+    if (!m_DebugDraw || !m_ShaderProgram)
+    {
+        return;
+    }
+
+    oxygine::Material::setCurrent(0);
+
+    oxygine::IVideoDriver* driver = oxygine::IVideoDriver::instance;
+
+    driver->setShaderProgram(m_ShaderProgram);
+
+    oxygine::Matrix m = oxygine::Matrix(a_Transform) * oxygine::STDMaterial::instance->getRenderer()->getViewProjection();
+    driver->setUniform("projection", &m);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    for (auto& ray : m_Rays)
+    {
+        if (ray.Original != ray.Destination)
+        {
+            m_Vertices[0] = ray.Original;
+            // actual difference is to small, so I need to increase it visually.
+            oxygine::Vector2 diff = ray.Destination - ray.Original;
+            if (diff.x > 0)
+                diff.x += 20;
+            if (diff.x < 0)
+                diff.x -= 20;
+            if (diff.y > 0)
+                diff.y += 20;
+            if (diff.y < 0)
+                diff.y -= 20;
+            m_Vertices[1] = ray.Original + diff;
+            DrawPrimitives(2, oxygine::Color::Green);
+        }
+        else
+        {
+            CreateCircleVertices(ray.Original, 3);
+            DrawPrimitives(CIRCLE_SEGMENTS, oxygine::Color::Green);
+        }
+    }
+}

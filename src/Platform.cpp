@@ -19,16 +19,16 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     // TODO : local coordinates, first node is setPosition location.
 
-    PathNode newPoint = PathNode(0, oxygine::Vector2(350, 200));
+    PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, oxygine::Vector2(500, 200));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, oxygine::Vector2(500, 50));
+    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, oxygine::Vector2(800, 50));
+    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
     m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
 
-    m_Direction = oxygine::Vector2(m_MaxSpeed, 0);
+    SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
     SetRays();
 }
@@ -89,12 +89,20 @@ void Platform::Move()
             }
         }
 
-        m_Direction = m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position;
-        m_Direction.normalize();
-        m_Direction *= m_MaxSpeed;
+        SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position);
     }
 
     SetPosition();
+}
 
-    std::cout << GetPosition().x << ":" << GetPosition().y << std::endl;
+void Platform::doRender(const oxygine::RenderState& a_State)
+{
+    DrawDebugRays(a_State.transform);
+}
+
+void Platform::SetDirection(const Vector2& a_NewDirection)
+{
+    IMovable::SetDirection(a_NewDirection);
+    m_Direction.normalize();
+    m_Direction *= m_MaxSpeed;
 }
