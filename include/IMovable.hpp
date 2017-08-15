@@ -9,7 +9,7 @@
 #include "IDrawable.hpp"
 #include "Utils.hpp"
 
-class IMovable : public IDrawable
+class IMovable : public virtual IDrawable
 {
 public:
     IMovable()
@@ -19,9 +19,7 @@ public:
     virtual ~IMovable() = default;
 
     virtual void SetDirection(const oxygine::Vector2&);
-    virtual oxygine::Vector2 GetRayOriginal() const;
     virtual std::vector<Collision::Ray>& GetRays();
-    virtual oxygine::Vector2 GetRayDestination() const;
     virtual oxygine::Vector2 GetDirection() const;
     virtual void SetCollisionNormal(const oxygine::Vector2);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
@@ -30,14 +28,11 @@ public:
 protected:
     void UpdateRays(bool aOriginal);
     void SetRays();
-    void DrawDebugRays(const oxygine::Transform&);
-
-    void CreateCircleVertices(const oxygine::Vector2& a_Center, int a_Radius);
-    void DrawPrimitives(int a_Count, const oxygine::Color& a_Color);
 
 protected:
     oxygine::Vector2 m_Direction;
     Service::Normal2 m_CollisionNormal;
+    // TODO : store shared_ptr to vector
     std::vector<Collision::Ray> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
 };

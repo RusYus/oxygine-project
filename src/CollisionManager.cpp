@@ -6,158 +6,133 @@ void CollisionManager::CheckCollisions()
 {
     Collision::CollisionInfo collisionSides;
 
+    std::for_each(m_Bodies.begin(), m_Bodies.end(), [] (CollisionBody& a_Body) { a_Body.m_CheckedObjects.clear(); });
+    m_Rectangle.X = 0;
+    m_Rectangle.Y = 0;
+    m_Rectangle.Width = -1;
+    m_Rectangle.Height = -1;
+
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
-    for (const auto& body : m_Bodies)
+    for (auto& body : m_Bodies)
     {
         // Not movable.
-        if (!body.second)
+        if (!body.m_IsMovable)
         {
             continue;
         }
 
         collisionSides.Reset();
 
-        IMovable* player = dynamic_cast<IMovable*>(body.first);
-        if (!player)
+        IMovable* firstBody = dynamic_cast<IMovable*>(body.m_Object);
+        if (!firstBody)
         {
-            std::cout << "Can't cast movable body to Player!" << body.second << std::endl;
+            std::cout << "Can't cast to movable body!" << std::endl;
             continue;
         }
 
         oxygine::Vector2 intersectionPoint;
-        oxygine::Vector2 newPoint = player->GetDirection();
+        oxygine::Vector2 newPoint = firstBody->GetDirection();
 
-        for (const auto& secondBody : m_Bodies)
+        auto bodyId = body.m_Object->GetId();
+
+        for (auto& secondBody : m_Bodies)
         {
             // Same body
-            if (body.first->GetId() == secondBody.first->GetId())
+            if (bodyId == secondBody.m_Object->GetId())
             {
                 continue;
             }
 
-            Static* ground = dynamic_cast<Static*>(secondBody.first);
-            if (!ground)
-            {
-                std::cout << "Can't cast second body to Static!" << body.second << std::endl;
-                continue;
-            }
+//            if (firstBody->GetX() > 546 && firstBody->GetX() < 554)
+//                std::cout << std::endl;
 
-            for(auto& ray : player->GetRays())
+            // Collided before.
+//            if (std::find(secondBody.m_CheckedObjects.cbegin(), secondBody.m_CheckedObjects.cend(), bodyId)
+//                 != secondBody.m_CheckedObjects.cend())
+//            {
+//                continue;
+//            }
+
+            body.m_CheckedObjects.push_back(secondBody.m_Object->GetId());
+            secondBody.m_CheckedObjects.push_back(bodyId);
+
+            if (dynamic_cast<Static*>(secondBody.m_Object))
             {
-                intersectionPoint.setZero();
-                if (Intersection(
-                        oxygine::Vector2(ground->GetX(), ground->GetY() + ground->GetHeight()),
-                        oxygine::Vector2(ground->GetX() + ground->GetWidth(), ground->GetY()),
-                        ray.Original,
-                        ray.Destination,
-                        intersectionPoint))
+                Static* ground = dynamic_cast<Static*>(secondBody.m_Object);
+                m_Rectangle.X = ground->GetX();
+                m_Rectangle.Y = ground->GetY();
+                m_Rectangle.Width = ground->GetWidth();
+                m_Rectangle.Height = ground->GetHeight();
+            }
+            else if (dynamic_cast<IMovable*>(secondBody.m_Object))
+            {
+                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.m_Object);
+                oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
+                oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
+
+                for (const auto& ray : movableBody->GetRays())
                 {
-                    float newPos = 0;
-                    switch (ray.Direction)
+                    if (ray.Original.x < minCoords.x)
                     {
-                    case Collision::RayDirection::Down:
-                        newPos = intersectionPoint.y - (player->GetY() + player->GetHeight());
-                        newPoint.y = newPos > 0.01 ? newPos : 0;
-                        collisionSides.Down = true;
-                        break;
+                        minCoords.x = ray.Original.x;
+                    }
 
-                    case Collision::RayDirection::Up:
-                        newPos = intersectionPoint.y - player->GetY();
-                        newPoint.y = newPos > 0.01 ? newPos : 0;
-                        collisionSides.Up = true;
-                        break;
+                    if (ray.Original.y < minCoords.y)
+                    {
+                        minCoords.y = ray.Original.y;
+                    }
 
-                    case Collision::RayDirection::Right:
-                        newPos = intersectionPoint.x - (player->GetX() + player->GetWidth());
-                        newPoint.x = newPos > 0.01 ? newPos : 0;
-                        collisionSides.Right = true;
-                        break;
+                    if (ray.Destination.x < minCoords.x)
+                    {
+                        minCoords.x = ray.Destination.x;
+                    }
 
-                    case Collision::RayDirection::Left:
-                        newPos = intersectionPoint.x - player->GetX();
-                        newPoint.x = newPos > 0.01 ? newPos : 0;
-                        collisionSides.Left = true;
-                        break;
+                    if (ray.Destination.y < minCoords.y)
+                    {
+                        minCoords.y = ray.Destination.y;
+                    }
 
-                    // TODO : Refactor!
-                    case Collision::RayDirection::UpRight:
-                        // If exactly on corner, considering it under (have to choose between under and right).
-                        if (intersectionPoint.x == ground->GetX())
-                        {
-                            // From Right
-                            float x = intersectionPoint.x - (player->GetX() + player->GetWidth());
-                            newPoint.x = x > 0.01 ? x : 0;
-                            collisionSides.Right = true;
-                        }
-                        else
-                        {
-                            // From up
-                            float y = intersectionPoint.y - player->GetY();
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Up = true;
-                        }
-                        break;
+                    if (ray.Original.x > maxCoords.x)
+                    {
+                        maxCoords.x = ray.Original.x;
+                    }
 
-                    case Collision::RayDirection::UpLeft:
-                        // If exactly on corner, considering it under (have to choose between under and left).
-                        if (intersectionPoint.x == ground->GetX() + ground->GetWidth())
-                        {
-                            // From Left
-                            float x = intersectionPoint.x - player->GetX();
-                            newPoint.x = x > 0.01 ? x : 0;
-                            collisionSides.Left = true;
-                        }
-                        else
-                        {
-                            // From up
-                            float y = intersectionPoint.y - player->GetY();
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Up = true;
-                        }
-                        break;
+                    if (ray.Original.y > maxCoords.y)
+                    {
+                        maxCoords.y = ray.Original.y;
+                    }
 
-                    case Collision::RayDirection::DownRight:
-                        // If exactly on corner, considering it on top (have to choose between on top and right).
-                        if (intersectionPoint.x == ground->GetX())
-                        {
-                            // From Right
-                            float x = intersectionPoint.x - (player->GetX() + player->GetWidth());
-                            newPoint.x = x > 0.01 ? x : 0;
-                            collisionSides.Right = true;
-                        }
-                        else
-                        {
-                            // From down
-                            float y = intersectionPoint.y - (player->GetY() + player->GetHeight());
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Down = true;
-                        }
-                        break;
+                    if (ray.Destination.x > maxCoords.x)
+                    {
+                        maxCoords.x = ray.Destination.x;
+                    }
 
-                    case Collision::RayDirection::DownLeft:
-                        // If exactly on corner, considering it on top (have to choose between on top and left).
-                        if (intersectionPoint.x == ground->GetX() + ground->GetWidth())
-                        {
-                            // From Left
-                            float x = intersectionPoint.x - player->GetX();
-                            newPoint.x = x > 0.01 ? x : 0;
-                            collisionSides.Left = true;
-                        }
-                        else
-                        {
-                            // From down
-                            float y = intersectionPoint.y - (player->GetY() + player->GetHeight());
-                            newPoint.y = y > 0.01 ? y : 0;
-                            collisionSides.Down = true;
-                        }
-                        break;
+                    if (ray.Destination.y > maxCoords.y)
+                    {
+                        maxCoords.y = ray.Destination.y;
                     }
                 }
+
+                m_Rectangle.X = minCoords.x;
+                m_Rectangle.Y = minCoords.y;
+                m_Rectangle.Width = maxCoords.x - minCoords.x;
+                m_Rectangle.Height = maxCoords.y - minCoords.y;
+
+//                std::cout << "P:" << m_Rectangle.X << ":" << m_Rectangle.Y
+//                          << " | " << m_Rectangle.Width << ":" << m_Rectangle.Height
+//                          << std::endl;
             }
+            else
+            {
+                std::cout << "Can't cast second body!" << std::endl;
+                continue;
+            }
+
+            HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 
-        player->SetDirection(newPoint);
-        player->ResetCollisionNormal(collisionSides);
+        firstBody->SetDirection(newPoint);
+        firstBody->ResetCollisionNormal(collisionSides);
 
 //        if (dynamic_cast<Player*>(body.first))
 //        {

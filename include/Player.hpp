@@ -1,16 +1,13 @@
 #pragma once
 
-#include "BasisObject.hpp"
 #include "BasisEventProxy.hpp"
 #include "CollisionInfo.hpp"
 #include "IMovable.hpp"
+#include "IDebugDrawable.hpp"
 #include "Utils.hpp"
-#include "Box2D/Box2D.h"
-#include "Box2D/Dynamics/b2Body.h"
-#include "oxygine-framework.h"
 
 DECLARE_SMART(Player, spPlayer);
-class Player: public oxygine::Actor, public IMovable
+class Player: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
 {
 public:
     Player();

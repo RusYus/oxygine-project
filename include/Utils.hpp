@@ -23,13 +23,14 @@ struct Utils
 class IdGenerator
 {
 public:
-    static inline int GetNextId()
+    using TId = int;
+    static inline TId GetNextId()
     {
         return ++mId;
     }
 
 private:
-    static int mId;
+    static TId mId;
 };
 
 struct Normal2: b2Vec2

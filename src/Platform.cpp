@@ -6,9 +6,10 @@
 
 Platform::Platform(const oxygine::RectF& aRect)
     : m_BodyPair(Service::ObjectType::Ground, this)
+    , m_DirectionUntilStop(m_Direction)
 {
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_View->setPosition(210, 200);
+    m_View->setPosition(150, 450);
     m_Box->setSize(aRect.getSize());
     m_View->setSize(m_Box->getSize());
 
@@ -21,12 +22,16 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(500, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
-    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
-    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
+//    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
+//    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
+//    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
+//    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
+//    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
+//    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
     SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
@@ -93,16 +98,45 @@ void Platform::Move()
     }
 
     SetPosition();
+
+    // TODO : Refactor!
+    if (m_DebugDraw)
+    {
+        UpdateRays(false);
+    }
 }
 
 void Platform::doRender(const oxygine::RenderState& a_State)
 {
-    DrawDebugRays(a_State.transform);
+    DrawCollisionRays(std::make_shared<decltype(m_Rays)>(m_Rays), a_State.transform);
 }
 
 void Platform::SetDirection(const Vector2& a_NewDirection)
 {
-    IMovable::SetDirection(a_NewDirection);
-    m_Direction.normalize();
-    m_Direction *= m_MaxSpeed;
+    if (a_NewDirection != oxygine::Vector2(0, 0))
+    {
+        IMovable::SetDirection(a_NewDirection);
+        m_Direction.normalize();
+        m_Direction *= m_MaxSpeed;
+        m_DirectionUntilStop = m_Direction;
+    }
+    else
+    {
+        m_Direction.setZero();
+    }
+}
+
+void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
+{
+    IMovable::ResetCollisionNormal(a_Sides);
+
+    if (m_CollisionNormal.x == 0 && m_DirectionUntilStop.x != 0)
+    {
+        m_Direction.x = m_DirectionUntilStop.x;
+    }
+
+    if (m_CollisionNormal.y == 0 && m_DirectionUntilStop.y != 0)
+    {
+        m_Direction.y = m_DirectionUntilStop.y;
+    }
 }

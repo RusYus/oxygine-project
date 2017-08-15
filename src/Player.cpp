@@ -31,7 +31,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_View->setPosition(100, 100);
+    m_View->setPosition(600, 100);
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -49,7 +49,8 @@ void Player::Init(spEventProxy aEventProxy)
 
 void Player::Jump(Event* /*aEvent*/)
 {
-    std::cout << m_CollisionNormal.y << std::endl;
+//    std::cout << m_CollisionNormal.y << std::endl;
+    std::cout << "Jumping" << std::endl;
     if (!m_IsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
@@ -100,62 +101,6 @@ inline void Player::Stop()
     m_Direction.x = 0;
 }
 
-//void Player::SetDirection(const oxygine::Vector2& aNewDirection)
-//{
-//    m_Direction = aNewDirection;
-//}
-
-//oxygine::Vector2 Player::GetRayOriginal() const
-//{
-//    return m_Rays.back().Original;
-//}
-
-//oxygine::Vector2 Player::GetRayDestination() const
-//{
-//    return m_Rays.back().Destination;
-//}
-//std::vector<Collision::Ray>& Player::GetRays()
-//{
-//    return m_Rays;
-//}
-
-//void Player::SetCollisionNormal(const oxygine::Vector2 aNormal)
-//{
-////    std::cout << "Setting ground normal; old=" << mCollisionNormal.x << ":" << mCollisionNormal.y << ";new=" << aNormal.x << ":" << aNormal.y << std::endl;
-////    mCollisionNormal += aNormal;
-////    std::cout << "Ground:" << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
-
-////    std::cout << "C:" << mCollisionNormal.y;
-//    m_CollisionNormal += aNormal;
-////    std::cout << " : " << mCollisionNormal.y << std::endl;
-
-//}
-
-//void Player::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
-//{
-//    m_CollisionNormal.SetZero();
-
-//    if (a_Sides.Down)
-//    {
-//        m_CollisionNormal.y = -1;
-//    }
-
-//    if (a_Sides.Up)
-//    {
-//        m_CollisionNormal.y = 1;
-//    }
-
-//    if (a_Sides.Right)
-//    {
-//        m_CollisionNormal.x = 1;
-//    }
-
-//    if (a_Sides.Left)
-//    {
-//        m_CollisionNormal.x = -1;
-//    }
-//}
-
 void Player::ProcessKeyboard()
 {
     const Uint8* states = SDL_GetKeyboardState(nullptr);
@@ -182,7 +127,15 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
+
     IMovable::SetPosition();
+
+    // TODO : Refactor!
+    if (m_DebugDraw)
+    {
+        UpdateRays(false);
+    }
+
     // If player doesn't stand on something, he can't jump.
     if (m_CollisionNormal.y == -1)
     {
@@ -199,8 +152,9 @@ void Player::SetPosition()
 
 
 //        std::cout << "Player:"
-//                  << m_Direction.x << ":" << m_Direction.y << "  |  "
-//                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
+//                     << GetX() << ":" << GetY() << "  |  "
+////                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
 //                  << std::endl;
 
 }
@@ -238,5 +192,5 @@ void Player::Update(const UpdateState& us)
 
 void Player::doRender(const oxygine::RenderState& a_State)
 {
-    DrawDebugRays(a_State.transform);
+    DrawCollisionRays(std::make_shared<decltype(m_Rays)>(m_Rays), a_State.transform);
 }

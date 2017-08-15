@@ -23,13 +23,13 @@ public:
     virtual inline float GetHeight() const = 0;
     virtual inline oxygine::Vector2 GetPosition() const = 0;
 
-    inline int GetId() const
+    inline Service::IdGenerator::TId GetId() const
     {
         return m_Id;
     }
 
 protected:
-    int m_Id;
+    Service::IdGenerator::TId m_Id;
 };
 
 }

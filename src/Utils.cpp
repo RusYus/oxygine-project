@@ -3,6 +3,6 @@
 namespace Service
 {
 
-int IdGenerator::mId = 0;
+IdGenerator::TId IdGenerator::mId = 0;
 
 }
