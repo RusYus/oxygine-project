@@ -1,6 +1,9 @@
 #pragma once
 
+#include "SDL_keyboard.h"
+
 #include "Actor.h"
+#include "key.h"
 #include "CollisionManager.hpp"
 #include "BasisObject.hpp"
 #include "BasisCamera.hpp"
@@ -55,6 +58,8 @@ public:
         : mContent()
         , mEventProxy(new EventProxy)
     {
+        oxygine::key::init();
+
         mWorld = new b2World(b2Vec2(0, 10));
 
         MapProperty mapProperty;
@@ -127,8 +132,10 @@ public:
         //in real project you should make steps with fixed dt, check box2d documentation
 //        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
+        mLevels.back()->Update(us);
         m_CollisionManager.CheckCollisions();
         mPlayer->SetPosition();
+        mLevels.back()->m_Platform->SetPosition();
     }
 
     // TODO : Not working right now.

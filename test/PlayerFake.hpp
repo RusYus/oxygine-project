@@ -24,10 +24,10 @@ public:
         m_View->setPosition(a_X, a_Y);
         m_Direction = a_Direction;
         SetRays();
-        UpdateRays(false);
+        UpdateRays();
     }
 
-    void SetDirection(const oxygine::Vector2& a_NewDirection) override
+    void SetDirection(const oxygine::Vector2& a_NewDirection, bool a_SetExact = false) override
     {
         m_NewDirection = a_NewDirection;
     }

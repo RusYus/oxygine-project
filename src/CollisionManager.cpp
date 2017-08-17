@@ -33,7 +33,12 @@ void CollisionManager::CheckCollisions()
         oxygine::Vector2 intersectionPoint;
         oxygine::Vector2 newPoint = firstBody->GetDirection();
 
-        auto bodyId = body.m_Object->GetId();
+        const auto bodyId = firstBody->GetId();
+
+//        if (bodyId == 5 && newPoint.x != 0 && newPoint.x != 3)
+//        {
+//            std::cout << std::endl;
+//        }
 
         for (auto& secondBody : m_Bodies)
         {
@@ -42,9 +47,6 @@ void CollisionManager::CheckCollisions()
             {
                 continue;
             }
-
-//            if (firstBody->GetX() > 546 && firstBody->GetX() < 554)
-//                std::cout << std::endl;
 
             // Collided before.
 //            if (std::find(secondBody.m_CheckedObjects.cbegin(), secondBody.m_CheckedObjects.cend(), bodyId)
@@ -131,17 +133,23 @@ void CollisionManager::CheckCollisions()
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 
+//        if (bodyId == 6)
+//        {
+//            std::cout << "Player:" << newPoint.x << ":" << newPoint.y <<
+//                          " | " << firstBody->GetX() << ":" << firstBody->GetY() <<
+//                         "; CN:" << collisionSides.Up << ":" << collisionSides.Right << ":"
+//                      << collisionSides.Down << ":" << collisionSides.Left << std::endl;
+//        }
+//        if (bodyId == 5)
+//        {
+//            std::cout << "Platform:" << newPoint.x << ":" << newPoint.y <<
+//                         " | " << firstBody->GetX() << ":" << firstBody->GetY() <<
+//                         "; CN:" << collisionSides.Up << ":" << collisionSides.Right << ":"
+//                      << collisionSides.Down << ":" << collisionSides.Left << std::endl;
+//        }
+
         firstBody->SetDirection(newPoint);
         firstBody->ResetCollisionNormal(collisionSides);
-
-//        if (dynamic_cast<Player*>(body.first))
-//        {
-//            std::cout << "Can:" << body.second << std::endl;
-//        }
-//        else
-//        {
-//            std::cout << "Can't:" << body.second << std::endl;
-//        }
     }
 }
 
@@ -235,7 +243,7 @@ bool CollisionManager::Intersection(
     f_low = std::max(f_dim_low, f_low);
     f_high = std::min(f_dim_high, f_high);
 
-    if (f_low > f_high)
+    if (f_low >= f_high)
         return false;
 
     oxygine::Vector2 b = aEndRay - aStartRay;

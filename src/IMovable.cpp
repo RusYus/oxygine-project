@@ -1,6 +1,7 @@
+#include <iostream>
 #include "IMovable.hpp"
 
-void IMovable::SetDirection(const oxygine::Vector2& aNewDirection)
+void IMovable::SetDirection(const oxygine::Vector2& aNewDirection, bool /*a_SetExact*/)
 {
     m_Direction = aNewDirection;
 }
@@ -57,15 +58,10 @@ void IMovable::SetPosition()
     m_View->setPosition(newPos);
 }
 
-void IMovable::UpdateRays(bool aOriginal)
+void IMovable::UpdateRays()
 {
     for(auto& ray : m_Rays)
     {
-        if (aOriginal)
-        {
-            ray.Original += m_Direction;
-        }
-
         ray.Destination = ray.Original;
 
         // TODO : Consider refactoring.

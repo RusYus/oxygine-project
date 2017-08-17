@@ -18,7 +18,7 @@ public:
 
     virtual ~IMovable() = default;
 
-    virtual void SetDirection(const oxygine::Vector2&);
+    virtual void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false);
     virtual std::vector<Collision::Ray>& GetRays();
     virtual oxygine::Vector2 GetDirection() const;
     virtual void SetCollisionNormal(const oxygine::Vector2);
@@ -26,7 +26,7 @@ public:
     virtual void SetPosition();
 
 protected:
-    void UpdateRays(bool aOriginal);
+    void UpdateRays();
     void SetRays();
 
 protected:

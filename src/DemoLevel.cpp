@@ -183,7 +183,7 @@ void DemoLevel::Init(b2World* aWorld, MapProperty&& aMapProperty)
     m_Platform = platform;
 }
 
-void DemoLevel::doUpdate(const UpdateState& /*us*/)
+void DemoLevel::Update(const UpdateState& /*us*/)
 {
     for(auto& circle : mCircles)
     {

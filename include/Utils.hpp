@@ -112,4 +112,8 @@ struct Normal2: b2Vec2
 
 static const Normal2 ZeroNormal = Normal2{0, 0};
 
+float RoundToOneDigit(float);
+
+void RoundToOneDigit(oxygine::Vector2&);
+
 }

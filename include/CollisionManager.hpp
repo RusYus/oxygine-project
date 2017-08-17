@@ -61,7 +61,14 @@ private:
 
         for(auto& ray : a_First->GetRays())
         {
+
             a_IntersectionPoint.setZero();
+            // Don't need to check in that direction, since I assume, that if coords is the same
+            // means no moving there.
+            if (ray.Original == ray.Destination)
+            {
+                continue;
+            }
             if (Intersection(
                     oxygine::Vector2(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
                     oxygine::Vector2(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
@@ -74,7 +81,7 @@ private:
                 {
                 case Collision::RayDirection::Down:
                     newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-                    a_NewPoint.y = newPos > 0.01 ? newPos : 0;
+                    a_NewPoint.y = newPos > 0.1 ? newPos : 0;
                     a_Sides.Down = true;
                     break;
 

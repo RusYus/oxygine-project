@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "SDL_keyboard.h"
 #include "Player.hpp"
 #include "DemoLevel.hpp"
 #include "res.hpp"
@@ -50,7 +49,6 @@ void Player::Init(spEventProxy aEventProxy)
 void Player::Jump(Event* /*aEvent*/)
 {
 //    std::cout << m_CollisionNormal.y << std::endl;
-    std::cout << "Jumping" << std::endl;
     if (!m_IsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
@@ -103,13 +101,11 @@ inline void Player::Stop()
 
 void Player::ProcessKeyboard()
 {
-    const Uint8* states = SDL_GetKeyboardState(nullptr);
-
-    if (states[SDL_SCANCODE_LEFT])
+    if (oxygine::key::isPressed(SDL_SCANCODE_LEFT))
     {
         Move(false);
     }
-    else if (states[SDL_SCANCODE_RIGHT])
+    else if (oxygine::key::isPressed(SDL_SCANCODE_RIGHT))
     {
         Move(true);
     }
@@ -119,7 +115,7 @@ void Player::ProcessKeyboard()
         Stop();
     }
 
-    if (states[SDL_SCANCODE_SPACE])
+    if (oxygine::key::wasPressed(SDL_SCANCODE_SPACE))
     {
         Jump(nullptr);
     }
@@ -127,13 +123,12 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-
     IMovable::SetPosition();
 
     // TODO : Refactor!
     if (m_DebugDraw)
     {
-        UpdateRays(false);
+        UpdateRays();
     }
 
     // If player doesn't stand on something, he can't jump.
@@ -173,7 +168,7 @@ void Player::Update(const UpdateState& us)
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
-    UpdateRays(false);
+    UpdateRays();
 
 //    std::cout << "Dt:" << us.dt << std::endl;
 

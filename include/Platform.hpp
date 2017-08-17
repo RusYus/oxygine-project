@@ -25,7 +25,7 @@ struct PathNode
     oxygine::Vector2 Position;
 };
 
-static const constexpr float32 NODE_SLIPPAGE = 4;
+static const constexpr float32 NODE_SLIPPAGE = 1;
 
 DECLARE_SMART(Platform, spPlatform);
 class Platform: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
@@ -33,7 +33,8 @@ class Platform: public oxygine::Actor, public virtual IMovable, public virtual I
 public:
     Platform(const oxygine::RectF&);
     void Move();
-    void SetDirection(const oxygine::Vector2&) override;
+    void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false) override;
+    void SetPosition() override;
     void ResetCollisionNormal(const Collision::CollisionInfo&) override;
 
     void doRender(const oxygine::RenderState&);

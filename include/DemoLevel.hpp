@@ -62,6 +62,7 @@ class DemoLevel: public Actor
 public:
     void Init(b2World*, MapProperty&&);
     void click(Event*);
+    void Update(const UpdateState&);
     void showHideDebug(Event*);
     Static* mStatic;
     Static* mStatic2;
@@ -71,7 +72,6 @@ public:
 
 private:
     friend class Player;
-    void doUpdate(const UpdateState&);
     void doRender(const RenderState&);
     void drawLayer(int, int, int, int);
     void CreateTileSetTexture(Image&);
