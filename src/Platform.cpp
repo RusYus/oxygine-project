@@ -26,8 +26,8 @@ Platform::Platform(const oxygine::RectF& aRect)
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
     PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
     m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
-//    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
-//    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
+    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
+    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
     SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
@@ -36,22 +36,12 @@ Platform::Platform(const oxygine::RectF& aRect)
 
 bool Platform::IsAroundNode()
 {
-
-//    // TODO : better compare mechanism for high velocity.
-//    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) <= NODE_SLIPPAGE)
-//        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) <= NODE_SLIPPAGE);
-
     const oxygine::Vector2 nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
-//    const oxygine::Vector2 currentPosition = GetPosition() + GetDirection();
-    return (nodeDirection.length() <= GetDirection().length());
-
-//    return std::abs(b2Distance(currentPosition, m_Nodes.at(m_NextNodeId).Position)) < NODE_SLIPPAGE;
-
+    return nodeDirection.length() <= GetDirection().length();
 }
 
 void Platform::Move()
 {
-
     if (IsAroundNode())
     {
         SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition(), true);
@@ -119,11 +109,6 @@ void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
             m_Direction *= m_MaxSpeed;
 //            Service::RoundToOneDigit(m_Direction);
             m_DirectionUntilStop = m_Direction;
-        }
-
-        if (m_Direction.x != 0 && m_Direction.x != 3)
-        {
-            std::cout << std::endl;
         }
     }
     else

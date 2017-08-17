@@ -6,7 +6,6 @@ void CollisionManager::CheckCollisions()
 {
     Collision::CollisionInfo collisionSides;
 
-    std::for_each(m_Bodies.begin(), m_Bodies.end(), [] (CollisionBody& a_Body) { a_Body.m_CheckedObjects.clear(); });
     m_Rectangle.X = 0;
     m_Rectangle.Y = 0;
     m_Rectangle.Width = -1;
@@ -35,11 +34,6 @@ void CollisionManager::CheckCollisions()
 
         const auto bodyId = firstBody->GetId();
 
-//        if (bodyId == 5 && newPoint.x != 0 && newPoint.x != 3)
-//        {
-//            std::cout << std::endl;
-//        }
-
         for (auto& secondBody : m_Bodies)
         {
             // Same body
@@ -47,16 +41,6 @@ void CollisionManager::CheckCollisions()
             {
                 continue;
             }
-
-            // Collided before.
-//            if (std::find(secondBody.m_CheckedObjects.cbegin(), secondBody.m_CheckedObjects.cend(), bodyId)
-//                 != secondBody.m_CheckedObjects.cend())
-//            {
-//                continue;
-//            }
-
-            body.m_CheckedObjects.push_back(secondBody.m_Object->GetId());
-            secondBody.m_CheckedObjects.push_back(bodyId);
 
             if (dynamic_cast<Static*>(secondBody.m_Object))
             {
@@ -119,10 +103,6 @@ void CollisionManager::CheckCollisions()
                 m_Rectangle.Y = minCoords.y;
                 m_Rectangle.Width = maxCoords.x - minCoords.x;
                 m_Rectangle.Height = maxCoords.y - minCoords.y;
-
-//                std::cout << "P:" << m_Rectangle.X << ":" << m_Rectangle.Y
-//                          << " | " << m_Rectangle.Width << ":" << m_Rectangle.Height
-//                          << std::endl;
             }
             else
             {
@@ -132,21 +112,6 @@ void CollisionManager::CheckCollisions()
 
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
-
-//        if (bodyId == 6)
-//        {
-//            std::cout << "Player:" << newPoint.x << ":" << newPoint.y <<
-//                          " | " << firstBody->GetX() << ":" << firstBody->GetY() <<
-//                         "; CN:" << collisionSides.Up << ":" << collisionSides.Right << ":"
-//                      << collisionSides.Down << ":" << collisionSides.Left << std::endl;
-//        }
-//        if (bodyId == 5)
-//        {
-//            std::cout << "Platform:" << newPoint.x << ":" << newPoint.y <<
-//                         " | " << firstBody->GetX() << ":" << firstBody->GetY() <<
-//                         "; CN:" << collisionSides.Up << ":" << collisionSides.Right << ":"
-//                      << collisionSides.Down << ":" << collisionSides.Left << std::endl;
-//        }
 
         firstBody->SetDirection(newPoint);
         firstBody->ResetCollisionNormal(collisionSides);

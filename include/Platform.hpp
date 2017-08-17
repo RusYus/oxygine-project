@@ -40,7 +40,7 @@ public:
     void doRender(const oxygine::RenderState&);
 
 private:
-    bool IsAroundNode();
+    inline bool IsAroundNode();
 
 private:
     PointToPointMode m_RunningMode = PointToPointMode::BackToBack;

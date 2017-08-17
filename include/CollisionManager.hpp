@@ -6,11 +6,11 @@
 #include "DemoLevel.hpp"
 #include "Player.hpp"
 
+// TODO : bring back pair.
 struct CollisionBody
 {
     Basis::BasisObject* m_Object = nullptr;
     bool m_IsMovable = false;
-    std::vector<Service::IdGenerator::TId> m_CheckedObjects;
 };
 
 struct CollisionRectangle
