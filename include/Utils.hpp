@@ -2,87 +2,74 @@
 
 #include "oxygine-framework.h"
 #include "Constants.hpp"
-#include "Box2D/Box2D.h"
 
 namespace Service
 {
 
-struct Utils
-{
-    static b2Vec2 Convert(const oxygine::Vector2& aPos)
-    {
-        return b2Vec2(aPos.x / Constants::SCALE, aPos.y / Constants::SCALE);
-    }
-
-    static oxygine::Vector2 Convert(const b2Vec2& aPos)
-    {
-        return oxygine::Vector2(aPos.x * Constants::SCALE, aPos.y * Constants::SCALE);
-    }
-};
-
 class IdGenerator
 {
 public:
-    static inline int GetNextId()
+    using TId = int;
+    static inline TId GetNextId()
     {
         return ++mId;
     }
 
 private:
-    static int mId;
+    static TId mId;
 };
 
-struct Normal2: b2Vec2
+struct Normal2: oxygine::Vector2
 {
     Normal2() = default;
 
-    Normal2(float32 x, float32 y)
-        : b2Vec2(x, y)
+    Normal2(float x, float y)
+        : oxygine::Vector2(x, y)
     {
     }
 
-    void operator =(const oxygine::Vector2& aVector)
+    void operator =(const oxygine::Vector2& a_Vector)
     {
-        x = aVector.x;
-        y = aVector.y;
+        x = a_Vector.x;
+        y = a_Vector.y;
     }
 
-    void operator += (const oxygine::Vector2& aVector)
+    void operator += (const oxygine::Vector2& a_Vector)
     {
-        x += aVector.x;
-        y += aVector.y;
+        x += a_Vector.x;
+        y += a_Vector.y;
         FixCoordinatesIfExceeds();
     }
 
-    void operator += (const Normal2& aVector)
+    void operator += (const Normal2& a_Vector)
     {
-        x += aVector.x;
-        y += aVector.y;
+        x += a_Vector.x;
+        y += a_Vector.y;
         FixCoordinatesIfExceeds();
     }
 
-    void operator -= (const oxygine::Vector2& aVector)
+    void operator -= (const oxygine::Vector2& a_Vector)
     {
-        x -= aVector.x;
-        y -= aVector.y;
+        x -= a_Vector.x;
+        y -= a_Vector.y;
         FixCoordinatesIfExceeds();
     }
 
-    void operator -= (const Normal2& aVector)
+    void operator -= (const Normal2& a_Vector)
     {
-        x -= aVector.x;
-        y -= aVector.y;
+        x -= a_Vector.x;
+        y -= a_Vector.y;
         FixCoordinatesIfExceeds();
     }
 
-    bool operator == (const Normal2& aVector)
+    bool operator == (const Normal2& a_Vector)
     {
-        return x == aVector.x && y == aVector.y;
+        return x == a_Vector.x && y == a_Vector.y;
     }
 
-    bool operator != (const Normal2& aVector)
+    bool operator != (const Normal2& a_Vector)
     {
-        return !this->operator ==(aVector);
+        return !this->operator ==(a_Vector);
     }
 
     inline void FixCoordinatesIfExceeds()
@@ -110,5 +97,9 @@ struct Normal2: b2Vec2
 };
 
 static const Normal2 ZeroNormal = Normal2{0, 0};
+
+float RoundToOneDigit(float);
+
+void RoundToOneDigit(oxygine::Vector2&);
 
 }

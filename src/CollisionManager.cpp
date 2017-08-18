@@ -4,8 +4,15 @@
 
 void CollisionManager::CheckCollisions()
 {
+    Collision::CollisionInfo collisionSides;
+
+    m_Rectangle.X = 0;
+    m_Rectangle.Y = 0;
+    m_Rectangle.Width = -1;
+    m_Rectangle.Height = -1;
+
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
-    for (const auto& body : m_Bodies)
+    for (auto& body : m_Bodies)
     {
         // Not movable.
         if (!body.second)
@@ -13,125 +20,109 @@ void CollisionManager::CheckCollisions()
             continue;
         }
 
-        Player* player = dynamic_cast<Player*>(body.first);
-        if (!player)
+        collisionSides.Reset();
+
+        IMovable* firstBody = dynamic_cast<IMovable*>(body.first);
+        if (!firstBody)
         {
-            std::cout << "Can't cast movable body to Player!" << body.second << std::endl;
+            std::cout << "Can't cast to movable body!" << std::endl;
             continue;
         }
 
-
         oxygine::Vector2 intersectionPoint;
-        oxygine::Vector2 newPoint = player->GetDirection();
-        bool isHitDown = false;
-        bool isHitRight = false;
-        bool isHitUp = false;
-        bool isHitLeft = false;
+        oxygine::Vector2 newPoint = firstBody->GetDirection();
 
-        for (const auto& secondBody : m_Bodies)
+        const auto bodyId = firstBody->GetId();
+
+        for (auto& secondBody : m_Bodies)
         {
             // Same body
-            if (body.first->GetId() == secondBody.first->GetId())
+            if (bodyId == secondBody.first->GetId())
             {
                 continue;
             }
 
-            Static* ground = dynamic_cast<Static*>(secondBody.first);
-            if (!ground)
+            if (dynamic_cast<Static*>(secondBody.first))
             {
-                std::cout << "Can't cast second body to Static!" << body.second << std::endl;
-                continue;
+                Static* ground = dynamic_cast<Static*>(secondBody.first);
+                m_Rectangle.X = ground->GetX();
+                m_Rectangle.Y = ground->GetY();
+                m_Rectangle.Width = ground->GetWidth();
+                m_Rectangle.Height = ground->GetHeight();
             }
-
-            for(auto& ray : player->GetRays())
+            else if (dynamic_cast<IMovable*>(secondBody.first))
             {
-                intersectionPoint.setZero();
-                if (Intersection(
-                        oxygine::Vector2(ground->getX(), ground->getY() + ground->getHeight()),
-                        oxygine::Vector2(ground->getX() + ground->getWidth(), ground->getY()),
-                        ray.Original,
-                        ray.Destination,
-                        intersectionPoint))
+                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.first);
+                oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
+                oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
+
+                // Calculating boundaries of the object out of it's rays (including destination).
+                // It's gonna be aabb for first body to check collision with.
+                auto checkMin = [&minCoords] (const auto& a_Ray)
                 {
-                    float newPos = 0;
-                    switch (ray.Direction)
+                    if (a_Ray.Original.x < minCoords.x)
                     {
-                    case Collision::RayDirection::Down:
-                        newPos = intersectionPoint.y - (player->GetY() + player->GetHeight());
-                        newPoint.y = newPos > 0.01 ? newPos : 0;
-                        isHitDown = true;
-                        break;
-
-                    case Collision::RayDirection::Up:
-                        newPos = intersectionPoint.y - player->GetY();
-                        newPoint.y = newPos > 0.01 ? newPos : 0;
-                        isHitUp = true;
-                        break;
-
-                    case Collision::RayDirection::Right:
-                        newPos = intersectionPoint.x - (player->GetX() + player->GetWidth());
-                        newPoint.x = newPos > 0.01 ? newPos : 0;
-                        isHitRight = true;
-                        break;
-
-                    case Collision::RayDirection::Left:
-                        newPos = intersectionPoint.x - player->GetX();
-                        newPoint.x = newPos > 0.01 ? newPos : 0;
-                        isHitLeft = true;
-                        break;
+                        minCoords.x = a_Ray.Original.x;
                     }
-                }
+
+                    if (a_Ray.Original.y < minCoords.y)
+                    {
+                        minCoords.y = a_Ray.Original.y;
+                    }
+
+                    if (a_Ray.Destination.x < minCoords.x)
+                    {
+                        minCoords.x = a_Ray.Destination.x;
+                    }
+
+                    if (a_Ray.Destination.y < minCoords.y)
+                    {
+                        minCoords.y = a_Ray.Destination.y;
+                    }
+                };
+
+                auto checkMax = [&maxCoords] (const auto& a_Ray)
+                {
+                    if (a_Ray.Original.x > maxCoords.x)
+                    {
+                        maxCoords.x = a_Ray.Original.x;
+                    }
+
+                    if (a_Ray.Original.y > maxCoords.y)
+                    {
+                        maxCoords.y = a_Ray.Original.y;
+                    }
+
+                    if (a_Ray.Destination.x > maxCoords.x)
+                    {
+                        maxCoords.x = a_Ray.Destination.x;
+                    }
+
+                    if (a_Ray.Destination.y > maxCoords.y)
+                    {
+                        maxCoords.y = a_Ray.Destination.y;
+                    }
+                };
+
+                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMin);
+                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMax);
+
+                m_Rectangle.X = minCoords.x;
+                m_Rectangle.Y = minCoords.y;
+                m_Rectangle.Width = maxCoords.x - minCoords.x;
+                m_Rectangle.Height = maxCoords.y - minCoords.y;
+            }
+            else
+            {
+                std::cout << "Can't cast second body!" << std::endl;
+                continue;
             }
 
-//            std::cout << "Checking body " << body.first->GetId() << " with " << secondBody.first->GetId() << std::endl;
+            HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 
-        player->SetDirection(newPoint);
-
-        if (isHitDown)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, -1));
-        }
-        else if (player->GetCollisionNormal().y == -1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, 1));
-        }
-
-        if (isHitUp)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, 1));
-        }
-        else if (player->GetCollisionNormal().y == 1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(0, -1));
-        }
-
-        if (isHitRight)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(1, 0));
-        }
-        else if (player->GetCollisionNormal().x == 1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-        }
-
-        if (isHitLeft)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(-1, 0));
-        }
-        else if (player->GetCollisionNormal().x == -1)
-        {
-            player->SetCollisionNormal(oxygine::Vector2(1, 0));
-        }
-
-//        if (dynamic_cast<Player*>(body.first))
-//        {
-//            std::cout << "Can:" << body.second << std::endl;
-//        }
-//        else
-//        {
-//            std::cout << "Can't:" << body.second << std::endl;
-//        }
+        firstBody->SetDirection(newPoint);
+        firstBody->ResetCollisionNormal(collisionSides);
     }
 }
 

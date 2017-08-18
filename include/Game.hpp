@@ -1,6 +1,9 @@
 #pragma once
 
+#include "SDL_keyboard.h"
+
 #include "Actor.h"
+#include "key.h"
 #include "CollisionManager.hpp"
 #include "BasisObject.hpp"
 #include "BasisCamera.hpp"
@@ -55,7 +58,7 @@ public:
         : mContent()
         , mEventProxy(new EventProxy)
     {
-        mWorld = new b2World(b2Vec2(0, 10));
+        oxygine::key::init();
 
         MapProperty mapProperty;
         mImporter = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
@@ -71,7 +74,7 @@ public:
         addChild(mCamera);
 
         mLevels.emplace_back(new DemoLevel);
-        mLevels.back()->Init(mWorld, std::move(mapProperty));
+        mLevels.back()->Init(std::move(mapProperty));
         addChild(mLevels.back());
 
         mCamera->setContent(mLevels.back());
@@ -119,25 +122,25 @@ public:
         m_CollisionManager.AddBody(mLevels.back()->mStatic2);
         m_CollisionManager.AddBody(mLevels.back()->mStatic3);
         m_CollisionManager.AddBody(mLevels.back()->mStatic4);
+        m_CollisionManager.AddBody(mLevels.back()->m_Platform.get());
     }
 
     void doUpdate(const UpdateState& us)
     {
-        //in real project you should make steps with fixed dt, check box2d documentation
-//        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
+        mLevels.back()->Update(us);
         m_CollisionManager.CheckCollisions();
         mPlayer->SetPosition();
+        mLevels.back()->m_Platform->SetPosition();
     }
 
-    // TODO : Not working right now.
     void ShowHideDebug(Event* /*event*/)
     {
         mPlayer->SetDebugDraw(!mPlayer->GetDebugDraw());
+        mLevels.back()->m_Platform->SetDebugDraw(!mLevels.back()->m_Platform->GetDebugDraw());
     }
 
     spEventProxy mEventProxy;
-    b2World* mWorld;
     CollisionManager m_CollisionManager;
     spPlayer mPlayer;
     spCamera mCamera;

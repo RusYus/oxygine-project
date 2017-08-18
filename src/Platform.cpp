@@ -6,44 +6,45 @@
 
 Platform::Platform(const oxygine::RectF& aRect)
     : m_BodyPair(Service::ObjectType::Ground, this)
+    , m_DirectionUntilStop(m_Direction)
 {
-    setResAnim(res::ui.getResAnim("platform"));
-    setSize(aRect.getSize());
-//    setPosition(aRect.getCenter());
-    setPosition(aRect.getLeftTop());
-    setAnchor(Vector2(0.5f, 0.5f));
+    m_Box->setResAnim(res::ui.getResAnim("platform"));
+    m_View->setPosition(350, 450);
+    m_Box->setSize(aRect.getSize());
+    m_View->setSize(m_Box->getSize());
+
+    addChild(m_View);
+//    setAnchor(Vector2(0.5f, 0.5f));
 
     // TODO : Read from config.
 
-    PathNode newPoint = PathNode(0, oxygine::Vector2(4, 2));
+    PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, oxygine::Vector2(6, 2));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, oxygine::Vector2(6, 0.5));
+    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, oxygine::Vector2(9, 0.5));
+    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
     m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
+    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
+    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
+    SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
-    m_Direction = oxygine::Vector2(m_Speed, 0);
+    SetRays();
 }
 
 bool Platform::IsAroundNode()
 {
-//    const b2Vec2 currentPosition = m_Body->GetPosition();
-
-//    // TODO : better compare mechanism for high velocity.
-////    return (std::abs(currentPosition.x - m_Nodes.at(m_NextNodeId).Position.x) <= NODE_SLIPPAGE)
-////        && (std::abs(currentPosition.y - m_Nodes.at(m_NextNodeId).Position.y) <= NODE_SLIPPAGE);
-//    return std::abs(b2Distance(currentPosition, m_Nodes.at(m_NextNodeId).Position)) < NODE_SLIPPAGE;
-    return true;
+    const oxygine::Vector2 nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
+    return nodeDirection.length() <= GetDirection().length();
 }
 
 void Platform::Move()
 {
     if (IsAroundNode())
     {
-        auto currentId = m_NextNodeId;
+        SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition(), true);
 
         // Last node (by id).
         if (m_NextNodeId == static_cast<PathNode::TId>(m_Nodes.size() - 1))
@@ -82,9 +83,63 @@ void Platform::Move()
                 m_NextNodeId++;
             }
         }
-
-//        m_Direction = b2Vec2(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(currentId).Position);
-//        m_Direction.Normalize();
-//        m_Direction *= m_Speed;
     }
+    else
+    {
+        SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
+    }
+
+    UpdateRays();
+}
+
+void Platform::doRender(const oxygine::RenderState& a_State)
+{
+    DrawCollisionRays(m_Rays, a_State.transform);
+}
+
+void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
+{
+    if (a_NewDirection != oxygine::Vector2(0, 0))
+    {
+        IMovable::SetDirection(a_NewDirection);
+
+        if (!a_SetExact)
+        {
+            m_Direction.normalize();
+            m_Direction *= m_MaxSpeed;
+//            Service::RoundToOneDigit(m_Direction);
+            m_DirectionUntilStop = m_Direction;
+        }
+    }
+    else
+    {
+        m_Direction.setZero();
+    }
+}
+
+void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
+{
+    IMovable::ResetCollisionNormal(a_Sides);
+
+    if (m_CollisionNormal.x == 0 && m_DirectionUntilStop.x != 0)
+    {
+        m_Direction.x = m_DirectionUntilStop.x;
+    }
+
+    if (m_CollisionNormal.y == 0 && m_DirectionUntilStop.y != 0)
+    {
+        m_Direction.y = m_DirectionUntilStop.y;
+    }
+}
+
+void Platform::SetPosition()
+{
+    IMovable::SetPosition();
+
+    if (m_DebugDraw)
+    {
+        UpdateRays();
+    }
+
+    std::cout << m_Direction.x << ":" << m_Direction.y << std::endl;
 }

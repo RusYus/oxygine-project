@@ -5,10 +5,15 @@ include_directories(
 )
 
 set(
-	PROJECT_TESTS_SOURCES
+    PROJECT_TESTS_HEADERS
+    PlayerFake.hpp
+)
 
+set(
+	PROJECT_TESTS_SOURCES
 	CollisionManagerTests.cpp
     JsonImporterTests.cpp
+    PlayerFake.cpp
 	TestExample.cpp
 	Tests.cpp
 )
