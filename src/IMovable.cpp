@@ -11,7 +11,7 @@ void IMovable::SetDirection(const oxygine::Vector2& aNewDirection, bool /*a_SetE
     m_Direction = aNewDirection;
 }
 
-std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays()
+std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const
 {
     return m_Rays;
 }
@@ -64,7 +64,6 @@ void IMovable::UpdateRays()
     {
         ray.Destination = ray.Original;
 
-        // TODO : Consider refactoring.
         switch (ray.Direction)
         {
             case Collision::RayDirection::Up:

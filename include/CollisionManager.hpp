@@ -21,16 +21,9 @@ public:
     void AddBody(BodyType* aBody)
     {
         TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
-        // Check whether it MovableObject or not (derived from BasisObject?)
         if (std::is_base_of<IMovable, BodyType>::value)
         {
-            std::cout << "Base or same type " << std::endl;
             body.second = true;
-        }
-        else
-        {
-            std::cout << "Not the same type " << std::endl;
-            body.second = false;
         }
 
         m_Bodies.emplace_back(std::move(body));
@@ -51,11 +44,38 @@ private:
             return;
         }
 
-        for(auto& ray : *(a_First->GetRays()))
+        auto handleRight = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            float newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
+            a_NewPoint.x = newPos > 0.01 ? newPos : 0;
+            a_Sides.Right = true;
+        };
 
+        auto handleLeft = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
+        {
+            float newPos = a_IntersectionPoint.x - a_First->GetX();
+            a_NewPoint.x = newPos > 0.01 ? newPos : 0;
+            a_Sides.Left = true;
+        };
+
+        auto handleUp = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
+        {
+            float newPos = a_IntersectionPoint.y - a_First->GetY();
+            a_NewPoint.y = newPos > 0.01 ? newPos : 0;
+            a_Sides.Up = true;
+        };
+
+        auto handleDown = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
+        {
+            float newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
+            a_NewPoint.y = newPos > 0.01 ? newPos : 0;
+            a_Sides.Down = true;
+        };
+
+        for(const auto& ray : *(a_First->GetRays()))
+        {
             a_IntersectionPoint.setZero();
-            // Don't need to check in that direction, since I assume, that if coords is the same
+            // Don't need to check in that direction, since I assume, that if coords are the same
             // means no moving there.
             if (ray.Original == ray.Destination)
             {
@@ -68,49 +88,33 @@ private:
                     ray.Destination,
                     a_IntersectionPoint))
             {
-                float newPos = 0;
                 switch (ray.Direction)
                 {
                 case Collision::RayDirection::Down:
-                    newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-                    a_NewPoint.y = newPos > 0.01 ? newPos : 0;
-                    a_Sides.Down = true;
+                    handleDown();
                     break;
 
                 case Collision::RayDirection::Up:
-                    newPos = a_IntersectionPoint.y - a_First->GetY();
-                    a_NewPoint.y = newPos > 0.01 ? newPos : 0;
-                    a_Sides.Up = true;
+                    handleUp();
                     break;
 
                 case Collision::RayDirection::Right:
-                    newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-                    a_NewPoint.x = newPos > 0.01 ? newPos : 0;
-                    a_Sides.Right = true;
+                    handleRight();
                     break;
 
                 case Collision::RayDirection::Left:
-                    newPos = a_IntersectionPoint.x - a_First->GetX();
-                    a_NewPoint.x = newPos > 0.01 ? newPos : 0;
-                    a_Sides.Left = true;
+                    handleLeft();
                     break;
 
-                // TODO : Refactor!
                 case Collision::RayDirection::UpRight:
                     // If exactly on corner, considering it under (have to choose between under and right).
                     if (a_IntersectionPoint.x == m_Rectangle.X)
                     {
-                        // From Right
-                        float x = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-                        a_NewPoint.x = x > 0.01 ? x : 0;
-                        a_Sides.Right = true;
+                        handleRight();
                     }
                     else
                     {
-                        // From up
-                        float y = a_IntersectionPoint.y - a_First->GetY();
-                        a_NewPoint.y = y > 0.01 ? y : 0;
-                        a_Sides.Up = true;
+                        handleUp();
                     }
                     break;
 
@@ -118,17 +122,11 @@ private:
                     // If exactly on corner, considering it under (have to choose between under and left).
                     if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
                     {
-                        // From Left
-                        float x = a_IntersectionPoint.x - a_First->GetX();
-                        a_NewPoint.x = x > 0.01 ? x : 0;
-                        a_Sides.Left = true;
+                        handleLeft();
                     }
                     else
                     {
-                        // From up
-                        float y = a_IntersectionPoint.y - a_First->GetY();
-                        a_NewPoint.y = y > 0.01 ? y : 0;
-                        a_Sides.Up = true;
+                        handleUp();
                     }
                     break;
 
@@ -136,17 +134,11 @@ private:
                     // If exactly on corner, considering it on top (have to choose between on top and right).
                     if (a_IntersectionPoint.x == m_Rectangle.X)
                     {
-                        // From Right
-                        float x = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-                        a_NewPoint.x = x > 0.01 ? x : 0;
-                        a_Sides.Right = true;
+                        handleRight();
                     }
                     else
                     {
-                        // From down
-                        float y = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-                        a_NewPoint.y = y > 0.01 ? y : 0;
-                        a_Sides.Down = true;
+                        handleDown();
                     }
                     break;
 
@@ -154,17 +146,11 @@ private:
                     // If exactly on corner, considering it on top (have to choose between on top and left).
                     if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
                     {
-                        // From Left
-                        float x = a_IntersectionPoint.x - a_First->GetX();
-                        a_NewPoint.x = x > 0.01 ? x : 0;
-                        a_Sides.Left = true;
+                        handleLeft();
                     }
                     else
                     {
-                        // From down
-                        float y = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-                        a_NewPoint.y = y > 0.01 ? y : 0;
-                        a_Sides.Down = true;
+                        handleDown();
                     }
                     break;
                 }

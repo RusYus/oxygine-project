@@ -56,48 +56,56 @@ void CollisionManager::CheckCollisions()
                 oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
                 oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
 
-                for (const auto& ray : *(movableBody->GetRays()))
+                // Calculating boundaries of the object out of it's rays (including destination).
+                // It's gonna be aabb for first body to check collision with.
+                auto checkMin = [&minCoords] (const auto& a_Ray)
                 {
-                    if (ray.Original.x < minCoords.x)
+                    if (a_Ray.Original.x < minCoords.x)
                     {
-                        minCoords.x = ray.Original.x;
+                        minCoords.x = a_Ray.Original.x;
                     }
 
-                    if (ray.Original.y < minCoords.y)
+                    if (a_Ray.Original.y < minCoords.y)
                     {
-                        minCoords.y = ray.Original.y;
+                        minCoords.y = a_Ray.Original.y;
                     }
 
-                    if (ray.Destination.x < minCoords.x)
+                    if (a_Ray.Destination.x < minCoords.x)
                     {
-                        minCoords.x = ray.Destination.x;
+                        minCoords.x = a_Ray.Destination.x;
                     }
 
-                    if (ray.Destination.y < minCoords.y)
+                    if (a_Ray.Destination.y < minCoords.y)
                     {
-                        minCoords.y = ray.Destination.y;
+                        minCoords.y = a_Ray.Destination.y;
+                    }
+                };
+
+                auto checkMax = [&maxCoords] (const auto& a_Ray)
+                {
+                    if (a_Ray.Original.x > maxCoords.x)
+                    {
+                        maxCoords.x = a_Ray.Original.x;
                     }
 
-                    if (ray.Original.x > maxCoords.x)
+                    if (a_Ray.Original.y > maxCoords.y)
                     {
-                        maxCoords.x = ray.Original.x;
+                        maxCoords.y = a_Ray.Original.y;
                     }
 
-                    if (ray.Original.y > maxCoords.y)
+                    if (a_Ray.Destination.x > maxCoords.x)
                     {
-                        maxCoords.y = ray.Original.y;
+                        maxCoords.x = a_Ray.Destination.x;
                     }
 
-                    if (ray.Destination.x > maxCoords.x)
+                    if (a_Ray.Destination.y > maxCoords.y)
                     {
-                        maxCoords.x = ray.Destination.x;
+                        maxCoords.y = a_Ray.Destination.y;
                     }
+                };
 
-                    if (ray.Destination.y > maxCoords.y)
-                    {
-                        maxCoords.y = ray.Destination.y;
-                    }
-                }
+                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMin);
+                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMax);
 
                 m_Rectangle.X = minCoords.x;
                 m_Rectangle.Y = minCoords.y;
