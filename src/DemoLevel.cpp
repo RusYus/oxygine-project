@@ -3,7 +3,6 @@
 #include <iostream>
 
 Square::Square(const Vector2& pos, float scale = 1)
-    : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -15,60 +14,6 @@ Square::Square(const Vector2& pos, float scale = 1)
 void Square::Update()
 {
 }
-
-SquareMovable::SquareMovable(const Vector2& pos, float scale = 1)
-    : mBodyPair(Service::ObjectType::DynamicBody, this)
-{
-    setResAnim(res::ui.getResAnim("square"));
-    setAnchor(Vector2(0.5f, 0.5f));
-    setTouchChildrenEnabled(false);
-
-    setScale(scale);
-}
-
-void SquareMovable::Update()
-{
-//    mBody->SetLinearVelocity(b2Vec2{-2, 0});
-//    const b2Vec2& pos = mBody->GetPosition();
-////    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
-//    setPosition(Vector2(pos.x * 100, pos.y * 100));
-//    setRotation(mBody->GetAngle());
-
-//    b2MassData m;
-//    mBody->GetMassData(&m);
-//    std::cout << "Mass:" << m.center.x << ":" << m.center.y << ";" << m.mass << std::endl;
-}
-
-//Static::Static(const RectF& rc)
-//    : mBodyPair(Service::ObjectType::Ground, this)
-//{
-//    setResAnim(res::ui.getResAnim("pen"));
-//    setSize(rc.getSize());
-////    setPosition(rc.getLeftTop());
-//    setPosition(rc.getLeftTop());
-////    setAnchor(Vector2(0.5f, 0.5f));
-
-////    b2BodyDef groundBodyDef;
-////    groundBodyDef.position = Service::Utils::Convert(getPosition());
-
-////    b2Body* groundBody = world->CreateBody(&groundBodyDef);
-
-////    b2PolygonShape groundBox;
-////    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
-////    groundBox.SetAsBox(sz.x, sz.y);
-
-////    b2Filter filter;
-////    filter.categoryBits = 0x0001;
-////    filter.maskBits = 0x0003;
-////    filter.groupIndex = 3;
-
-////    b2FixtureDef fixtureDef;
-////    fixtureDef.density = 0.0f;
-////    fixtureDef.shape = &groundBox;
-////    fixtureDef.filter = filter;
-////    groundBody->CreateFixture(&fixtureDef);
-////    groundBody->SetUserData(&mBodyPair);
-//}
 
 void DemoLevel::Init(MapProperty&& aMapProperty)
 {
@@ -102,18 +47,6 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     mStatic4 = ground4.get();
     mObjects.push_back(ground4);
 
-//    spSquare square = new Square(mWorld, Vector2(200, 300));
-//    square->attachTo(this);
-//    mSquares.emplace_front(std::move(square));
-
-//    spSquare square2 = new Square(mWorld, Vector2(650, 300));
-//    square2->attachTo(this);
-//    mSquares.emplace_front(std::move(square2));
-
-//    spSquare square3 = new Square(mWorld, Vector2(1100, 300));
-//    square3->attachTo(this);
-//    mSquares.emplace_front(std::move(square3));
-
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
     // ------- TILED ---------
@@ -141,11 +74,6 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 
 void DemoLevel::Update(const UpdateState& /*us*/)
 {
-    for(auto& square : mSquares)
-    {
-        square->Update();
-    }
-
     if (m_Platform)
     {
         m_Platform->Move();

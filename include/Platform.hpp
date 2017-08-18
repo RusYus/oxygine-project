@@ -32,6 +32,7 @@ class Platform: public oxygine::Actor, public virtual IMovable, public virtual I
 {
 public:
     Platform(const oxygine::RectF&);
+    ~Platform();
     void Move();
     void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false) override;
     void SetPosition() override;
@@ -48,5 +49,5 @@ private:
     bool m_IsMovingReverse = false;
     oxygine::Vector2 m_DirectionUntilStop;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
-    std::pair<Service::ObjectType, Platform*> m_BodyPair;
+    std::unique_ptr<std::vector<IMovable*>> m_Passengers;
 };

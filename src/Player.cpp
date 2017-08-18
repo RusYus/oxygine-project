@@ -7,8 +7,7 @@
 
 
 Player::Player()
-    : mBodyPair(Service::ObjectType::Player, this)
-    , m_IsButtonMoving(false)
+    : m_IsButtonMoving(false)
     , m_IsJumping(false)
 {
 }

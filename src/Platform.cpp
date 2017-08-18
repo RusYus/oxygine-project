@@ -5,8 +5,8 @@
 #include "Platform.hpp"
 
 Platform::Platform(const oxygine::RectF& aRect)
-    : m_BodyPair(Service::ObjectType::Ground, this)
-    , m_DirectionUntilStop(m_Direction)
+    : m_DirectionUntilStop(m_Direction)
+    , m_Passengers(std::make_unique<std::vector<IMovable*>>())
 {
     m_Box->setResAnim(res::ui.getResAnim("platform"));
     m_View->setPosition(350, 450);
@@ -20,18 +20,25 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(0, -300));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
-    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
-    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
-    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
-    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
+//    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
+//    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
+//    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
+//    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
+//    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
+//    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
     SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
     SetRays();
+}
+
+Platform::~Platform()
+{
+    m_Passengers->clear();
 }
 
 bool Platform::IsAroundNode()
@@ -42,6 +49,8 @@ bool Platform::IsAroundNode()
 
 void Platform::Move()
 {
+    m_Passengers->clear();
+
     if (IsAroundNode())
     {
         SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition(), true);

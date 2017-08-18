@@ -9,10 +9,7 @@ class Static : public oxygine::Actor, public IDrawable
 {
 public:
     Static(const oxygine::RectF& a_Rc)
-        : mBodyPair(Service::ObjectType::Ground, this)
     {
-//        setResAnim(res::ui.getResAnim("pen"));
-//        setPosition(a_Rc.getLeftTop());
         m_Box = new Sprite;
         m_Box->setResAnim(res::ui.getResAnim("pen"));
         m_Box->setSize(a_Rc.getSize());
@@ -22,7 +19,6 @@ public:
         m_View->setPosition(a_Rc.getLeftTop());
 
         addChild(m_View);
-
     }
 
     spActor GetView() const
@@ -30,7 +26,4 @@ public:
         return m_View;
     }
     void doRender(const oxygine::RenderState& rs) {}
-
-public:
-    std::pair<Service::ObjectType, Static*> mBodyPair;
 };

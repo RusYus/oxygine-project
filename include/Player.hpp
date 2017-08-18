@@ -33,6 +33,4 @@ private:
     bool m_IsButtonMoving;
     const int m_MaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
     const int m_JumpSpeed = Service::Constants::PLAYER_JUMP_SPEED;
-
-    std::pair<Service::ObjectType, Player*> mBodyPair;
 };
