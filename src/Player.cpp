@@ -15,7 +15,6 @@ Player::Player()
 
 Player::~Player()
 {
-    m_Rays.clear();
 }
 
 spActor Player::GetView() const
@@ -124,7 +123,6 @@ void Player::SetPosition()
 {
     IMovable::SetPosition();
 
-    // TODO : Refactor!
     if (m_DebugDraw)
     {
         UpdateRays();
@@ -139,11 +137,6 @@ void Player::SetPosition()
     {
         m_IsJumping = true;
     }
-
-//        std::cout << "O: " << mRays.at(0).Destination.x - mRays.at(0).Original.x << ":" << mRays.at(0).Destination.y - mRays.at(0).Original.y << std::endl;
-
-//    std::cout << "Hit: " << mRays.at(0).IsHitInLastStep << ":" << mRays.at(0).IsHitInCurrentStep << std::endl;
-
 
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
@@ -186,5 +179,5 @@ void Player::Update(const UpdateState& us)
 
 void Player::doRender(const oxygine::RenderState& a_State)
 {
-    DrawCollisionRays(std::make_shared<decltype(m_Rays)>(m_Rays), a_State.transform);
+    DrawCollisionRays(m_Rays, a_State.transform);
 }

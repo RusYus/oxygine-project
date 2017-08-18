@@ -16,10 +16,10 @@ public:
         : m_CollisionNormal(0, 0)
     {}
 
-    virtual ~IMovable() = default;
+    virtual ~IMovable();
 
     virtual void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false);
-    virtual std::vector<Collision::Ray>& GetRays();
+    virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays();
     virtual oxygine::Vector2 GetDirection() const;
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
@@ -31,7 +31,6 @@ protected:
 protected:
     oxygine::Vector2 m_Direction;
     Service::Normal2 m_CollisionNormal;
-    // TODO : store shared_ptr to vector
-    std::vector<Collision::Ray> m_Rays;
+    std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
 };

@@ -51,7 +51,7 @@ private:
             return;
         }
 
-        for(auto& ray : a_First->GetRays())
+        for(auto& ray : *(a_First->GetRays()))
         {
 
             a_IntersectionPoint.setZero();

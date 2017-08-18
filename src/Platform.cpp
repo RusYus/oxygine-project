@@ -94,7 +94,7 @@ void Platform::Move()
 
 void Platform::doRender(const oxygine::RenderState& a_State)
 {
-    DrawCollisionRays(std::make_shared<decltype(m_Rays)>(m_Rays), a_State.transform);
+    DrawCollisionRays(m_Rays, a_State.transform);
 }
 
 void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
@@ -136,7 +136,6 @@ void Platform::SetPosition()
 {
     IMovable::SetPosition();
 
-    // TODO : Refactor!
     if (m_DebugDraw)
     {
         UpdateRays();

@@ -1,12 +1,17 @@
 #include <iostream>
 #include "IMovable.hpp"
 
+IMovable::~IMovable()
+{
+    m_Rays->clear();
+}
+
 void IMovable::SetDirection(const oxygine::Vector2& aNewDirection, bool /*a_SetExact*/)
 {
     m_Direction = aNewDirection;
 }
 
-std::vector<Collision::Ray>& IMovable::GetRays()
+std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays()
 {
     return m_Rays;
 }
@@ -45,7 +50,7 @@ void IMovable::SetPosition()
 {
     oxygine::Vector2 newPos = GetPosition() + m_Direction;
 
-    for(auto& ray : m_Rays)
+    for(auto& ray : *m_Rays)
     {
         ray.Original += m_Direction;
     }
@@ -55,7 +60,7 @@ void IMovable::SetPosition()
 
 void IMovable::UpdateRays()
 {
-    for(auto& ray : m_Rays)
+    for(auto& ray : *m_Rays)
     {
         ray.Destination = ray.Original;
 
@@ -117,7 +122,14 @@ void IMovable::UpdateRays()
 
 void IMovable::SetRays()
 {
-    m_Rays.clear();
+    if (m_Rays)
+    {
+        m_Rays->clear();
+    }
+    else
+    {
+        m_Rays = std::make_shared<std::vector<Collision::Ray>>();
+    }
 
     int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));
     float actualIntervalLength = GetWidth() / actualIntervalsNumber;
@@ -125,11 +137,11 @@ void IMovable::SetRays()
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
                                           oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
                                           Collision::RayDirection::Down));
         // Top
-        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           Collision::RayDirection::Up));
     }
@@ -140,29 +152,29 @@ void IMovable::SetRays()
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
                                           oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Right));
         // Left
-        m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
+        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
                                           oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Left));
     }
 
     // UpLeft diagonal.
-    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY()),
+    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY()),
                                        oxygine::Vector2(GetX(), GetY()),
                                        Collision::RayDirection::UpLeft));
     // UpRight diagonal.
-    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY()),
+    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY()),
                                        oxygine::Vector2(GetX() + GetWidth(), GetY()),
                                        Collision::RayDirection::UpRight));
     // DownLeft diagonal.
-    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + GetHeight()),
                                        oxygine::Vector2(GetX(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownLeft));
     // DownRight diagonal.
-    m_Rays.emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
                                        oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownRight));
 }

@@ -56,7 +56,7 @@ void CollisionManager::CheckCollisions()
                 oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
                 oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
 
-                for (const auto& ray : movableBody->GetRays())
+                for (const auto& ray : *(movableBody->GetRays()))
                 {
                     if (ray.Original.x < minCoords.x)
                     {
