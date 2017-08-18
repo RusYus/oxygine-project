@@ -6,39 +6,31 @@
 #include "DemoLevel.hpp"
 #include "Player.hpp"
 
-// TODO : bring back pair.
-struct CollisionBody
-{
-    Basis::BasisObject* m_Object = nullptr;
-    bool m_IsMovable = false;
-};
-
-struct CollisionRectangle
-{
-    int X = -1;
-    int Y = -1;
-    int Width = -1;
-    int Height = -1;
-};
-
 class CollisionManager
 {
+    using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
+    struct CollisionRectangle
+    {
+        int X = -1;
+        int Y = -1;
+        int Width = -1;
+        int Height = -1;
+    };
 public:
     template<typename BodyType>
     void AddBody(BodyType* aBody)
     {
-        CollisionBody body;
-        body.m_Object = static_cast<Basis::BasisObject*>(aBody);
+        TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
         // Check whether it MovableObject or not (derived from BasisObject?)
         if (std::is_base_of<IMovable, BodyType>::value)
         {
             std::cout << "Base or same type " << std::endl;
-            body.m_IsMovable = true;
+            body.second = true;
         }
         else
         {
             std::cout << "Not the same type " << std::endl;
-            body.m_IsMovable = false;
+            body.second = false;
         }
 
         m_Bodies.emplace_back(std::move(body));
@@ -186,6 +178,6 @@ private:
         oxygine::Vector2& /*intersection*/);
 
 private:
-    std::vector<CollisionBody> m_Bodies;
+    std::vector<TBody> m_Bodies;
     CollisionRectangle m_Rectangle;
 };

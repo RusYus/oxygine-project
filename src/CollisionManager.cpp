@@ -15,14 +15,14 @@ void CollisionManager::CheckCollisions()
     for (auto& body : m_Bodies)
     {
         // Not movable.
-        if (!body.m_IsMovable)
+        if (!body.second)
         {
             continue;
         }
 
         collisionSides.Reset();
 
-        IMovable* firstBody = dynamic_cast<IMovable*>(body.m_Object);
+        IMovable* firstBody = dynamic_cast<IMovable*>(body.first);
         if (!firstBody)
         {
             std::cout << "Can't cast to movable body!" << std::endl;
@@ -37,22 +37,22 @@ void CollisionManager::CheckCollisions()
         for (auto& secondBody : m_Bodies)
         {
             // Same body
-            if (bodyId == secondBody.m_Object->GetId())
+            if (bodyId == secondBody.first->GetId())
             {
                 continue;
             }
 
-            if (dynamic_cast<Static*>(secondBody.m_Object))
+            if (dynamic_cast<Static*>(secondBody.first))
             {
-                Static* ground = dynamic_cast<Static*>(secondBody.m_Object);
+                Static* ground = dynamic_cast<Static*>(secondBody.first);
                 m_Rectangle.X = ground->GetX();
                 m_Rectangle.Y = ground->GetY();
                 m_Rectangle.Width = ground->GetWidth();
                 m_Rectangle.Height = ground->GetHeight();
             }
-            else if (dynamic_cast<IMovable*>(secondBody.m_Object))
+            else if (dynamic_cast<IMovable*>(secondBody.first))
             {
-                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.m_Object);
+                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.first);
                 oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
                 oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
 
