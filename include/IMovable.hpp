@@ -21,7 +21,7 @@ public:
     virtual void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false);
     virtual std::vector<Collision::Ray>& GetRays();
     virtual oxygine::Vector2 GetDirection() const;
-    virtual void SetCollisionNormal(const oxygine::Vector2);
+    virtual void SetCollisionNormal(const oxygine::Vector2&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
 

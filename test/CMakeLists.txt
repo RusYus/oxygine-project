@@ -13,6 +13,7 @@ set(
 	PROJECT_TESTS_SOURCES
 	CollisionManagerTests.cpp
     JsonImporterTests.cpp
+    PlayerFake.cpp
 	TestExample.cpp
 	Tests.cpp
 )
