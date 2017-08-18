@@ -54,7 +54,6 @@ void Player::Jump(Event* /*aEvent*/)
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
         m_IsJumping = true;
         m_Direction.y -= m_JumpSpeed;
-//        _body->SetLinearVelocity(b2Vec2(mDirection.x, -mJumpSpeed / Service::Constants::SCALE));
     }
 }
 

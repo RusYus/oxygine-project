@@ -208,7 +208,7 @@ bool CollisionManager::Intersection(
     f_low = std::max(f_dim_low, f_low);
     f_high = std::min(f_dim_high, f_high);
 
-    if (f_low >= f_high)
+    if (f_low > f_high)
         return false;
 
     oxygine::Vector2 b = aEndRay - aStartRay;

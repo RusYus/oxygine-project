@@ -81,7 +81,7 @@ private:
                 {
                 case Collision::RayDirection::Down:
                     newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-                    a_NewPoint.y = newPos > 0.1 ? newPos : 0;
+                    a_NewPoint.y = newPos > 0.01 ? newPos : 0;
                     a_Sides.Down = true;
                     break;
 

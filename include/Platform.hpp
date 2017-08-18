@@ -25,7 +25,7 @@ struct PathNode
     oxygine::Vector2 Position;
 };
 
-static const constexpr float32 NODE_SLIPPAGE = 1;
+static const constexpr int NODE_SLIPPAGE = 1;
 
 DECLARE_SMART(Platform, spPlatform);
 class Platform: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable

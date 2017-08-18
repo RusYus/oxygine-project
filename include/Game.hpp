@@ -60,8 +60,6 @@ public:
     {
         oxygine::key::init();
 
-        mWorld = new b2World(b2Vec2(0, 10));
-
         MapProperty mapProperty;
         mImporter = std::unique_ptr<Service::JsonImporter>(new Service::JsonImporter());
         if (!mImporter->LoadMap("1.json", mapProperty))
@@ -76,7 +74,7 @@ public:
         addChild(mCamera);
 
         mLevels.emplace_back(new DemoLevel);
-        mLevels.back()->Init(mWorld, std::move(mapProperty));
+        mLevels.back()->Init(std::move(mapProperty));
         addChild(mLevels.back());
 
         mCamera->setContent(mLevels.back());
@@ -129,8 +127,6 @@ public:
 
     void doUpdate(const UpdateState& us)
     {
-        //in real project you should make steps with fixed dt, check box2d documentation
-//        mWorld->Step(us.dt / 1000.0f, 6, 2);
         mPlayer->Update(us);
         mLevels.back()->Update(us);
         m_CollisionManager.CheckCollisions();
@@ -138,7 +134,6 @@ public:
         mLevels.back()->m_Platform->SetPosition();
     }
 
-    // TODO : Not working right now.
     void ShowHideDebug(Event* /*event*/)
     {
         mPlayer->SetDebugDraw(!mPlayer->GetDebugDraw());
@@ -146,7 +141,6 @@ public:
     }
 
     spEventProxy mEventProxy;
-    b2World* mWorld;
     CollisionManager m_CollisionManager;
     spPlayer mPlayer;
     spCamera mCamera;

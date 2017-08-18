@@ -8,6 +8,7 @@
 #include "core/gl/VideoDriverGLES20.h"
 #include "Material.h"
 #include "STDMaterial.h"
+#include "math/ScalarMath.h"
 
 #include "IDrawable.hpp"
 #include "CollisionInfo.hpp"
@@ -57,10 +58,10 @@ public:
 protected:
     void CreateCircleVertices(const oxygine::Vector2& a_Center, int a_Radius)
     {
-        const float k_increment = 2.0f * b2_pi / CIRCLE_SEGMENTS;
+        const float k_increment = 2.0f * MATH_PI / CIRCLE_SEGMENTS;
         float theta = 0.0f;
 
-        for (int32 i = 0; i < CIRCLE_SEGMENTS; ++i)
+        for (int i = 0; i < CIRCLE_SEGMENTS; ++i)
         {
             oxygine::Vector2 v  = oxygine::Vector2(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
             v *=a_Radius;

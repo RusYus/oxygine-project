@@ -23,7 +23,7 @@ void IMovable::SetCollisionNormal(const oxygine::Vector2 aNormal)
 
 void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
-    m_CollisionNormal.SetZero();
+    m_CollisionNormal.setZero();
 
     if (a_Sides.Down)
     {

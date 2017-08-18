@@ -9,10 +9,6 @@ add_definitions(
 include_directories(${OXYGINE_INCLUDE_DIRS})
 link_directories(${OXYGINE_LIBRARY_DIRS})
 
-file(GLOB_RECURSE BOX2DSRC
-		./box2d/*.cpp
-		./box2d/*.h)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OXYGINE_CXX_FLAGS}")
 
 set(LAUNCHER MyDemo)
@@ -71,11 +67,8 @@ target_include_directories(${PROJECT_LIB} PUBLIC
 
 add_executable(
 	${LAUNCHER}
-	${BOX2DSRC}
+    ${PROJECT_SOURCES}
 )
-
-source_group(box2d FILES ${BOX2DSRC})
-include_directories(./box2d)
 
 target_link_libraries(
 	${LAUNCHER}

@@ -13,8 +13,6 @@ enum class ObjectType
 
 struct Constants
 {
-    // Scaling factor between project and box2d.
-    static constexpr const float SCALE = 100.0f;
     static constexpr const int GRAVITY = 50;
     static constexpr const int MAX_SPEED = 3;
     static constexpr const int PLAYER_MAX_SPEED = 5;
