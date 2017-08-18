@@ -27,8 +27,6 @@ struct CollisionManagerFixture
     }
 };
 
-// TODO : Rename tests, add tests for two dynamic body collision!
-
 BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisAlligned, CollisionManagerFixture)
 {
     // Left side.
