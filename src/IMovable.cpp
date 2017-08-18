@@ -16,11 +16,6 @@ oxygine::Vector2 IMovable::GetDirection() const
     return m_Direction;
 }
 
-void IMovable::SetCollisionNormal(const oxygine::Vector2& aNormal)
-{
-    m_CollisionNormal += aNormal;
-}
-
 void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
     m_CollisionNormal.setZero();

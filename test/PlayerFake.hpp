@@ -16,8 +16,6 @@ public:
         m_NewDirection = a_NewDirection;
     }
 
-    void SetCollisionNormal(const oxygine::Vector2&) override {}
-
     void ResetCollisionNormal(const Collision::CollisionInfo& a_Sides) override
     {
         m_WasCollision = a_Sides.Down || a_Sides.Left || a_Sides.Right || a_Sides.Up;
