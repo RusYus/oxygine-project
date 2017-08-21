@@ -20,7 +20,7 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(0, -300));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(300, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
@@ -53,7 +53,7 @@ void Platform::Move()
 
     if (IsAroundNode())
     {
-        SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition(), true);
+        ICarrier::SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
 
         // Last node (by id).
         if (m_NextNodeId == static_cast<PathNode::TId>(m_Nodes.size() - 1))
@@ -108,24 +108,14 @@ void Platform::doRender(const oxygine::RenderState& a_State)
     DrawCollisionRays(m_CarrierRays, a_State.transform, oxygine::Color::Blue);
 }
 
-void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
+void Platform::SetDirection(const Vector2& a_NewDirection)
 {
-    if (a_NewDirection != oxygine::Vector2(0, 0))
-    {
-        ICarrier::SetDirection(a_NewDirection);
+    ICarrier::SetDirection(a_NewDirection);
 
-        if (!a_SetExact)
-        {
-            m_Direction.normalize();
-            m_Direction *= m_MaxSpeed;
+    m_Direction.normalize();
+    m_Direction *= m_MaxSpeed;
 //            Service::RoundToOneDigit(m_Direction);
-            m_DirectionUntilStop = m_Direction;
-        }
-    }
-    else
-    {
-        m_Direction.setZero();
-    }
+    m_DirectionUntilStop = m_Direction;
 }
 
 void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
@@ -151,6 +141,4 @@ void Platform::SetPosition()
     {
         UpdateRays();
     }
-
-    std::cout << m_Direction.x << ":" << m_Direction.y << std::endl;
 }

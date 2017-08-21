@@ -12,7 +12,7 @@ IMovable::~IMovable()
     m_Rays->clear();
 }
 
-void IMovable::SetDirection(const oxygine::Vector2& aNewDirection, bool /*a_SetExact*/)
+void IMovable::SetDirection(const oxygine::Vector2& aNewDirection)
 {
     m_Direction = aNewDirection;
 }

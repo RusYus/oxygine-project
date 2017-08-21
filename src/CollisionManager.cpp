@@ -118,6 +118,21 @@ void CollisionManager::CheckCollisions()
                 continue;
             }
 
+            if (dynamic_cast<Platform*>(firstBody))
+            {
+                ICarrier* carrier = dynamic_cast<Platform*>(firstBody);
+                if (HandleCarrierIntersection(carrier))
+                {
+                    Player* player = dynamic_cast<Player*>(secondBody.first);
+                    oxygine::Vector2 newDirectionForPlayer;
+//                    newDirectionForPlayer.x = player->GetDirection().x;
+                    newDirectionForPlayer.x = carrier->GetDirection().x;
+                    newDirectionForPlayer.y = carrier->GetY() - player->GetY() - player->GetHeight();
+                    player->SetDirectionFinalForStep(newDirectionForPlayer);
+                    continue;
+                }
+            }
+
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 

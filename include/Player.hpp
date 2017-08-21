@@ -22,6 +22,9 @@ public:
 
     void doRender(const oxygine::RenderState&);
 
+    void SetDirection(const oxygine::Vector2&) override;
+    void SetDirectionFinalForStep(const oxygine::Vector2&);
+
 private:
     void Move(bool /*aIsMovingRight*/);
     inline void Stop();
@@ -31,6 +34,7 @@ private:
     spEventProxy m_EventProxy;
     bool m_IsJumping;
     bool m_IsButtonMoving;
+    bool m_IsDirectionFinalForTheseStep;
     const int m_MaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
     const int m_JumpSpeed = Service::Constants::PLAYER_JUMP_SPEED;
 };

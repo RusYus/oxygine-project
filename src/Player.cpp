@@ -9,6 +9,7 @@
 Player::Player()
     : m_IsButtonMoving(false)
     , m_IsJumping(false)
+    , m_IsDirectionFinalForTheseStep(false)
 {
 }
 
@@ -28,7 +29,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_View->setPosition(600, 100);
+    m_View->setPosition(500, 100);
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -145,8 +146,28 @@ void Player::SetPosition()
 
 }
 
+void Player::SetDirection(const oxygine::Vector2& aNewDirection)
+{
+    if (!m_IsDirectionFinalForTheseStep)
+    {
+        m_Direction = aNewDirection;
+    }
+}
+
+void Player::SetDirectionFinalForStep(const oxygine::Vector2& aNewDirection)
+{
+    if (!m_IsDirectionFinalForTheseStep)
+    {
+        m_Direction.x += aNewDirection.x;
+        m_Direction.y = aNewDirection.y;
+        m_IsDirectionFinalForTheseStep = true;
+    }
+}
+
 void Player::Update(const UpdateState& us)
 {
+    m_IsDirectionFinalForTheseStep = false;
+
     ProcessKeyboard();
 
     // Reseting direction, if collision in place.

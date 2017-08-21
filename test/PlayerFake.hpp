@@ -11,7 +11,7 @@ public:
 
     void SetupValues(int /*a_X*/, int /*a_Y*/, const oxygine::Vector2& /*a_Direction*/);
 
-    void SetDirection(const oxygine::Vector2& a_NewDirection, bool a_SetExact = false) override
+    void SetDirection(const oxygine::Vector2& a_NewDirection) override
     {
         m_NewDirection = a_NewDirection;
     }

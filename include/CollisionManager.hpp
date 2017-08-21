@@ -158,6 +158,40 @@ private:
         }
     }
 
+    template<typename FirstBody>
+    bool HandleCarrierIntersection(FirstBody* a_First)
+    {
+        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
+        {
+            std::cout << "Negative size" << std::endl;
+            return false;
+        }
+
+        for(const auto& ray : *(a_First->GetCarrierRays()))
+        {
+            // Don't need to check in that direction, since I assume, that if coords are the same
+            // means no moving there.
+            if (ray.Original == ray.Destination)
+            {
+                continue;
+            }
+
+            oxygine::Vector2 intersectionPoint;
+
+            if (Intersection(
+                    oxygine::Vector2(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
+                    oxygine::Vector2(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
+                    ray.Original,
+                    ray.Destination,
+                    intersectionPoint))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     bool Intersection(
         const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
         const oxygine::Vector2& /*startRay*/, const oxygine::Vector2& /*endRay*/,

@@ -16,7 +16,7 @@ public:
 
     virtual ~IMovable();
 
-    virtual void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false);
+    virtual void SetDirection(const oxygine::Vector2&);
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
     virtual oxygine::Vector2 GetDirection() const;
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);

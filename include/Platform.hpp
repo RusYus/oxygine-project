@@ -34,7 +34,7 @@ public:
     Platform(const oxygine::RectF&);
     ~Platform();
     void Move();
-    void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false) override;
+    void SetDirection(const oxygine::Vector2&) override;
     void SetPosition() override;
     void ResetCollisionNormal(const Collision::CollisionInfo&) override;
 
