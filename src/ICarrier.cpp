@@ -10,25 +10,25 @@ ICarrier::~ICarrier()
     m_CarrierRays->clear();
 }
 
-std::shared_ptr<std::vector<Collision::Ray>> ICarrier::GetRays() const
+std::shared_ptr<std::vector<Collision::Ray>> ICarrier::GetCarrierRays() const
 {
     return m_CarrierRays;
 }
 
 void ICarrier::SetPosition()
 {
-    oxygine::Vector2 newPos = GetPosition() + m_Direction;
+    IMovable::SetPosition();
 
     for(auto& ray : *m_CarrierRays)
     {
         ray.Original += m_Direction;
     }
-
-    m_View->setPosition(newPos);
 }
 
 void ICarrier::UpdateRays()
 {
+    IMovable::UpdateRays();
+
     for(auto& ray : *m_CarrierRays)
     {
         ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y - m_RayLength);
@@ -37,6 +37,8 @@ void ICarrier::UpdateRays()
 
 void ICarrier::SetRays()
 {
+    IMovable::SetRays();
+
     m_CarrierRays->clear();
 
     int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));

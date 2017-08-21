@@ -16,12 +16,12 @@ public:
 
     virtual ~ICarrier();
 
-    std::shared_ptr<std::vector<Collision::Ray>> GetRays() const override;
+    std::shared_ptr<std::vector<Collision::Ray>> GetCarrierRays() const;
     void SetPosition() override;
 
 protected:
-    void UpdateRays();
-    void SetRays();
+    void UpdateRays() override;
+    void SetRays() override;
 
 protected:
     const float m_RayLength = 1;

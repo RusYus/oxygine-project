@@ -83,7 +83,10 @@ protected:
         oxglDisableVertexAttribArray(0);
     }
 
-    void DrawCollisionRays(const std::shared_ptr<std::vector<Collision::Ray>>& a_Rays, const oxygine::Transform& a_Transform)
+    void DrawCollisionRays(
+        const std::shared_ptr<std::vector<Collision::Ray>>& a_Rays,
+        const oxygine::Transform& a_Transform,
+        oxygine::Color a_Color = oxygine::Color::Green)
     {
         if (!m_DebugDraw || !m_ShaderProgram)
         {
@@ -117,7 +120,7 @@ protected:
                 if (diff.y < 0)
                     diff.y -= 20;
                 m_Vertices[1] = ray.Original + diff;
-                DrawPrimitives(2, oxygine::Color::Green);
+                DrawPrimitives(2, a_Color);
             }
             else
             {

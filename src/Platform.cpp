@@ -103,14 +103,16 @@ void Platform::Move()
 
 void Platform::doRender(const oxygine::RenderState& a_State)
 {
+    // TODO : Use different color for carrier's rays.
     DrawCollisionRays(m_Rays, a_State.transform);
+    DrawCollisionRays(m_CarrierRays, a_State.transform, oxygine::Color::Blue);
 }
 
 void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
 {
     if (a_NewDirection != oxygine::Vector2(0, 0))
     {
-        IMovable::SetDirection(a_NewDirection);
+        ICarrier::SetDirection(a_NewDirection);
 
         if (!a_SetExact)
         {
@@ -128,7 +130,7 @@ void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
 
 void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
-    IMovable::ResetCollisionNormal(a_Sides);
+    ICarrier::ResetCollisionNormal(a_Sides);
 
     if (m_CollisionNormal.x == 0 && m_DirectionUntilStop.x != 0)
     {
@@ -143,7 +145,7 @@ void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 
 void Platform::SetPosition()
 {
-    IMovable::SetPosition();
+    ICarrier::SetPosition();
 
     if (m_DebugDraw)
     {

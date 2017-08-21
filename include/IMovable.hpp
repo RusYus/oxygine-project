@@ -23,8 +23,8 @@ public:
     virtual void SetPosition();
 
 protected:
-    void UpdateRays();
-    void SetRays();
+    virtual void UpdateRays();
+    virtual void SetRays();
 
 protected:
     oxygine::Vector2 m_Direction;

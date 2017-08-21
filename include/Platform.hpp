@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMovable.hpp"
+#include "ICarrier.hpp"
 #include "IDebugDrawable.hpp"
 #include "BasisEventProxy.hpp"
 #include "Utils.hpp"
@@ -28,7 +28,7 @@ struct PathNode
 static const constexpr int NODE_SLIPPAGE = 1;
 
 DECLARE_SMART(Platform, spPlatform);
-class Platform: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
+class Platform: public oxygine::Actor, public virtual ICarrier, public virtual IDebugDrawable
 {
 public:
     Platform(const oxygine::RectF&);
