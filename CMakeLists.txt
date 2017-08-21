@@ -29,6 +29,7 @@ set(
     include/Ground.hpp
     include/IDrawable.hpp
     include/IDebugDrawable.hpp
+    include/ICarrier.hpp
     include/IMovable.hpp
     include/JsonImporter.hpp
     include/MapProperty.hpp
@@ -45,6 +46,7 @@ set(
     src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp
+    src/ICarrier.cpp
     src/IMovable.cpp
     src/JsonImporter.cpp
     src/main.cpp

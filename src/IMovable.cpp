@@ -1,6 +1,12 @@
 #include <iostream>
 #include "IMovable.hpp"
 
+IMovable::IMovable()
+    : m_CollisionNormal(0, 0)
+    , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
+{
+}
+
 IMovable::~IMovable()
 {
     m_Rays->clear();
@@ -121,14 +127,7 @@ void IMovable::UpdateRays()
 
 void IMovable::SetRays()
 {
-    if (m_Rays)
-    {
-        m_Rays->clear();
-    }
-    else
-    {
-        m_Rays = std::make_shared<std::vector<Collision::Ray>>();
-    }
+    m_Rays->clear();
 
     int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));
     float actualIntervalLength = GetWidth() / actualIntervalsNumber;

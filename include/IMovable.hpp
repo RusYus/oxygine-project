@@ -12,9 +12,7 @@
 class IMovable : public virtual IDrawable
 {
 public:
-    IMovable()
-        : m_CollisionNormal(0, 0)
-    {}
+    IMovable();
 
     virtual ~IMovable();
 
