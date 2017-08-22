@@ -141,4 +141,6 @@ void Platform::SetPosition()
     {
         UpdateRays();
     }
+
+//    std::cout << "Platform:" << GetX() << ":" << GetY() << std::endl;
 }

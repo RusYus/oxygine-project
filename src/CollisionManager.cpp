@@ -136,6 +136,10 @@ void CollisionManager::CheckCollisions()
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 
+        if (dynamic_cast<Player*>(firstBody))
+        {
+            std::cout << collisionSides.Up << collisionSides.Right << collisionSides.Down << collisionSides.Left << std::endl;
+        }
         firstBody->SetDirection(newPoint);
         firstBody->ResetCollisionNormal(collisionSides);
     }
@@ -244,9 +248,14 @@ bool CollisionManager::Intersection(
 
     if (outIntersection == aStartRay)
     {
+        // TODO : Can't use round, as it "truncates" number if fractional part less than 0.5
+        // e.g. 405.23 -> 405 and comparison failing.
+//        return
+//                (std::round(aBottomLeftAABB.x) < std::round(aEndRay.x) && std::round(aEndRay.x) < std::round(aTopRightAABB.x)
+//                 && std::round(aTopRightAABB.y) < std::round(aEndRay.y) && std::round(aEndRay.y) < std::round(aBottomLeftAABB.y));
         return
-                (std::round(aBottomLeftAABB.x) < std::round(aEndRay.x) && std::round(aEndRay.x) < std::round(aTopRightAABB.x)
-                 && std::round(aTopRightAABB.y) < std::round(aEndRay.y) && std::round(aEndRay.y) < std::round(aBottomLeftAABB.y));
+                (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
+                 && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y);
     }
 
     return true;

@@ -128,6 +128,8 @@ void Player::SetPosition()
         UpdateRays();
     }
 
+//    std::cout << "Player:" << GetX() << ":" << GetY() << std::endl;
+
     // If player doesn't stand on something, he can't jump.
     if (m_CollisionNormal.y == -1)
     {
@@ -156,10 +158,19 @@ void Player::SetDirection(const oxygine::Vector2& aNewDirection)
 
 void Player::SetDirectionFinalForStep(const oxygine::Vector2& aNewDirection)
 {
+    std::cout << "SetDirectionFinal collisionnormal:" << m_CollisionNormal.y << std::endl;
+    if (m_CollisionNormal.y == 0)
+    {
+        std::cout << "Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+    }
+
     if (!m_IsDirectionFinalForTheseStep)
     {
         m_Direction.x += aNewDirection.x;
-        m_Direction.y = aNewDirection.y;
+        if (!m_IsJumping)
+        {
+            m_Direction.y = aNewDirection.y;
+        }
         m_IsDirectionFinalForTheseStep = true;
     }
 }
