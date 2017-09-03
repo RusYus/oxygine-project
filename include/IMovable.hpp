@@ -19,6 +19,8 @@ public:
     virtual void SetDirection(const oxygine::Vector2&);
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
     virtual oxygine::Vector2 GetDirection() const;
+    virtual Service::Normal2 GetCollisionNormal() const;
+    virtual void SetCollisionNormal(const Service::Normal2&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
 

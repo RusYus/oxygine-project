@@ -29,7 +29,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_View->setPosition(500, 100);
+    m_View->setPosition(350, 100);
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -121,6 +121,15 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
+//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+
+    // Reseting direction, if collision in place.
+    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
+    {
+        m_Direction.x = 0;
+        std::cout << "Reseting direction x!!!" << std::endl;
+    }
+
     IMovable::SetPosition();
 
     if (m_DebugDraw)
@@ -140,6 +149,10 @@ void Player::SetPosition()
         m_IsJumping = true;
     }
 
+//    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+//              << "; IsJumping:" << m_IsJumping
+//              << "; Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
 //                     << GetX() << ":" << GetY() << "  |  "
@@ -158,12 +171,6 @@ void Player::SetDirection(const oxygine::Vector2& aNewDirection)
 
 void Player::SetDirectionFinalForStep(const oxygine::Vector2& aNewDirection)
 {
-    std::cout << "SetDirectionFinal collisionnormal:" << m_CollisionNormal.y << std::endl;
-    if (m_CollisionNormal.y == 0)
-    {
-        std::cout << "Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
-    }
-
     if (!m_IsDirectionFinalForTheseStep)
     {
         m_Direction.x += aNewDirection.x;
@@ -181,11 +188,12 @@ void Player::Update(const UpdateState& us)
 
     ProcessKeyboard();
 
-    // Reseting direction, if collision in place.
-    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
-    {
-        m_Direction.x = 0;
-    }
+//    // Reseting direction, if collision in place.
+//    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
+//    {
+//        m_Direction.x = 0;
+//        std::cout << "Reseting direction x!!!" << std::endl;
+//    }
 
     m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
 

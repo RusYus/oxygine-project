@@ -127,7 +127,7 @@ public:
 
     void doUpdate(const UpdateState& us)
     {
-        std::cout << "**************Beginning step:" << std::endl;
+        std::cout << "------Starting Step:"<< std::endl;
         mPlayer->Update(us);
         mLevels.back()->Update(us);
         m_CollisionManager.CheckCollisions();

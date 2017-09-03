@@ -124,11 +124,27 @@ void CollisionManager::CheckCollisions()
                 if (HandleCarrierIntersection(carrier))
                 {
                     Player* player = dynamic_cast<Player*>(secondBody.first);
+
+                    std::cout << "Intersection:" <<
+                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
+                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
+                              << "Player:" << player->GetX() << ":" << player->GetY()
+                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
+
+
                     oxygine::Vector2 newDirectionForPlayer;
 //                    newDirectionForPlayer.x = player->GetDirection().x;
                     newDirectionForPlayer.x = carrier->GetDirection().x;
-                    newDirectionForPlayer.y = carrier->GetY() - player->GetY() - player->GetHeight();
+                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
                     player->SetDirectionFinalForStep(newDirectionForPlayer);
+                    Service::Normal2 playerNormal = player->GetCollisionNormal();
+                    playerNormal.y = -1;
+
+                    player->SetCollisionNormal(playerNormal);
+
+                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
+                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
+                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
                     continue;
                 }
             }
@@ -136,10 +152,17 @@ void CollisionManager::CheckCollisions()
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
 
-        if (dynamic_cast<Player*>(firstBody))
-        {
-            std::cout << collisionSides.Up << collisionSides.Right << collisionSides.Down << collisionSides.Left << std::endl;
-        }
+//        if (dynamic_cast<Player*>(firstBody))
+//        {
+//            std::cout << collisionSides.Up << collisionSides.Right << collisionSides.Down << collisionSides.Left << std::endl;
+//            std::cout << "P:" << firstBody->GetX() << ":" << firstBody->GetY() + firstBody->GetHeight()
+//                      << "; Direction:" << firstBody->GetDirection().y << std::endl;
+//        }
+//        else
+//        {
+//            std::cout << "Plat:" << firstBody->GetX() << ":" << firstBody->GetY()
+//                      << "; Direction:" << firstBody->GetDirection().y << std::endl;
+//        }
         firstBody->SetDirection(newPoint);
         firstBody->ResetCollisionNormal(collisionSides);
     }
@@ -151,6 +174,17 @@ bool CollisionManager::Intersection(
         const oxygine::Vector2& aStartRay, const oxygine::Vector2& aEndRay,
         oxygine::Vector2& outIntersection)
 {
+    //StartRay and EndRay is in the AABB, so I presume, taht there are no intersections.
+    if ((aBottomLeftAABB.x < aStartRay.x && aStartRay.x < aTopRightAABB.x
+        && aTopRightAABB.y < aStartRay.y && aStartRay.y < aBottomLeftAABB.y)
+        && (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
+            && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y))
+    {
+        outIntersection.x = std::numeric_limits<float>::quiet_NaN();
+        outIntersection.y = std::numeric_limits<float>::quiet_NaN();
+        return false;
+    }
+
     float f_low = 0;
     float f_high = 1;
 

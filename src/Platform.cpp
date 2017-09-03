@@ -20,7 +20,7 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(300, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(0, -300));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
@@ -112,8 +112,11 @@ void Platform::SetDirection(const Vector2& a_NewDirection)
 {
     ICarrier::SetDirection(a_NewDirection);
 
-    m_Direction.normalize();
-    m_Direction *= m_MaxSpeed;
+    if (a_NewDirection != oxygine::Vector2(0, 0))
+    {
+        m_Direction.normalize();
+        m_Direction *= m_MaxSpeed;
+    }
 //            Service::RoundToOneDigit(m_Direction);
     m_DirectionUntilStop = m_Direction;
 }
@@ -135,6 +138,8 @@ void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 
 void Platform::SetPosition()
 {
+//    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+
     ICarrier::SetPosition();
 
     if (m_DebugDraw)

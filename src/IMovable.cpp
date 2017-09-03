@@ -27,6 +27,16 @@ oxygine::Vector2 IMovable::GetDirection() const
     return m_Direction;
 }
 
+Service::Normal2 IMovable::GetCollisionNormal() const
+{
+    return m_CollisionNormal;
+}
+
+void IMovable::SetCollisionNormal(const Service::Normal2& a_Normal)
+{
+    m_CollisionNormal = a_Normal;
+}
+
 void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
     m_CollisionNormal.setZero();
@@ -82,6 +92,13 @@ void IMovable::UpdateRays()
                 if (m_Direction.y > 0)
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
+                }
+                // TODO : Maybe another interface?
+                // Basically, I always need rays pointing down regardless of direction
+                // in case if body moving up and something (platform) hitting it from the bottom.
+                else
+                {
+                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + 1);
                 }
                 break;
             case Collision::RayDirection::Right:

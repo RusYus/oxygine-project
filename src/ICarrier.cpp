@@ -23,6 +23,18 @@ void ICarrier::SetPosition()
     {
         ray.Original += m_Direction;
     }
+
+    for (auto& pass : m_Passengers)
+    {
+        if (!pass)
+        {
+            std::cout << "Passenger is NULL!" << std::endl;
+            continue;
+        }
+
+        // Move.
+//        pass.SetDirection();
+    }
 }
 
 void ICarrier::UpdateRays()

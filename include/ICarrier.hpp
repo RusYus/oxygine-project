@@ -26,4 +26,5 @@ protected:
 protected:
     const float m_RayLength = 1;
     std::shared_ptr<std::vector<Collision::Ray>> m_CarrierRays;
+    std::vector<IMovable*> m_Passengers;
 };

@@ -6,6 +6,12 @@
 #include "DemoLevel.hpp"
 #include "Player.hpp"
 
+// 1 - Don't check collisions for platform
+// 2 - Check intersection (handle carrier?) to add passengers
+// 3 - Every carrier has own passengers
+// 4 - Move passengers before Update (adding direction)
+// 5 - Move everything as usual
+
 class CollisionManager
 {
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
@@ -21,7 +27,8 @@ public:
     void AddBody(BodyType* aBody)
     {
         TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
-        if (std::is_base_of<IMovable, BodyType>::value)
+        // TODO : refactor condition.
+        if (std::is_base_of<IMovable, BodyType>::value && !dynamic_cast<Platform*>(aBody))
         {
             body.second = true;
         }
@@ -46,6 +53,12 @@ private:
 
         auto handleRight = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
             a_NewPoint.x = newPos > 0.01 ? newPos : 0;
             a_Sides.Right = true;
@@ -53,6 +66,12 @@ private:
 
         auto handleLeft = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.x - a_First->GetX();
             a_NewPoint.x = newPos > 0.01 ? newPos : 0;
             a_Sides.Left = true;
@@ -60,6 +79,12 @@ private:
 
         auto handleUp = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.y - a_First->GetY();
             a_NewPoint.y = newPos > 0.01 ? newPos : 0;
             a_Sides.Up = true;
@@ -67,6 +92,12 @@ private:
 
         auto handleDown = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
             a_NewPoint.y = newPos > 0.01 ? newPos : 0;
             a_Sides.Down = true;
@@ -99,7 +130,7 @@ private:
                     break;
 
                 case Collision::RayDirection::Right:
-                    handleRight();
+//                    handleRight();
                     break;
 
                 case Collision::RayDirection::Left:
