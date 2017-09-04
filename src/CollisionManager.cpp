@@ -6,8 +6,8 @@ void CollisionManager::CheckCollisions()
 {
     Collision::CollisionInfo collisionSides;
 
-    m_Rectangle.X = 0;
-    m_Rectangle.Y = 0;
+    m_Rectangle.X = std::numeric_limits<int>::quiet_NaN();
+    m_Rectangle.Y = std::numeric_limits<int>::quiet_NaN();
     m_Rectangle.Width = -1;
     m_Rectangle.Height = -1;
 
@@ -42,81 +42,12 @@ void CollisionManager::CheckCollisions()
                 continue;
             }
 
-            if (dynamic_cast<Static*>(secondBody.first))
-            {
-                Static* ground = dynamic_cast<Static*>(secondBody.first);
-                m_Rectangle.X = ground->GetX();
-                m_Rectangle.Y = ground->GetY();
-                m_Rectangle.Width = ground->GetWidth();
-                m_Rectangle.Height = ground->GetHeight();
-            }
-            else if (dynamic_cast<IMovable*>(secondBody.first))
-            {
-                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.first);
-                oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
-                oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
-
-                // Calculating boundaries of the object out of it's rays (including destination).
-                // It's gonna be aabb for first body to check collision with.
-                auto checkMin = [&minCoords] (const auto& a_Ray)
-                {
-                    if (a_Ray.Original.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Original.x;
-                    }
-
-                    if (a_Ray.Original.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Original.y;
-                    }
-
-                    if (a_Ray.Destination.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Destination.x;
-                    }
-
-                    if (a_Ray.Destination.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Destination.y;
-                    }
-                };
-
-                auto checkMax = [&maxCoords] (const auto& a_Ray)
-                {
-                    if (a_Ray.Original.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Original.x;
-                    }
-
-                    if (a_Ray.Original.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Original.y;
-                    }
-
-                    if (a_Ray.Destination.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Destination.x;
-                    }
-
-                    if (a_Ray.Destination.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Destination.y;
-                    }
-                };
-
-                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMin);
-                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMax);
-
-                m_Rectangle.X = minCoords.x;
-                m_Rectangle.Y = minCoords.y;
-                m_Rectangle.Width = maxCoords.x - minCoords.x;
-                m_Rectangle.Height = maxCoords.y - minCoords.y;
-            }
-            else
-            {
-                std::cout << "Can't cast second body!" << std::endl;
-                continue;
-            }
+            // Setting collision boundaries for second body.
+            // TODO : Check if conversion from secondBody.first needed.
+            m_Rectangle.X = secondBody.first->GetX();
+            m_Rectangle.Y = secondBody.first->GetY();
+            m_Rectangle.Width = secondBody.first->GetWidth();
+            m_Rectangle.Height = secondBody.first->GetHeight();
 
             if (dynamic_cast<ICarrier*>(firstBody))
             {

@@ -17,8 +17,8 @@ class CollisionManager
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
     struct CollisionRectangle
     {
-        int X = -1;
-        int Y = -1;
+        int X = std::numeric_limits<int>::quiet_NaN();
+        int Y = std::numeric_limits<int>::quiet_NaN();
         int Width = -1;
         int Height = -1;
     };
