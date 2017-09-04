@@ -118,34 +118,42 @@ void CollisionManager::CheckCollisions()
                 continue;
             }
 
-            if (dynamic_cast<Platform*>(firstBody))
+            if (dynamic_cast<ICarrier*>(firstBody))
             {
-                ICarrier* carrier = dynamic_cast<Platform*>(firstBody);
-                if (HandleCarrierIntersection(carrier))
+                IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody.first);
+
+                if (possiblePassenger)
                 {
-                    Player* player = dynamic_cast<Player*>(secondBody.first);
+                    ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
+                    if (HandleCarrierIntersection(carrier))
+                    {
 
-                    std::cout << "Intersection:" <<
-                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
-                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
-                              << "Player:" << player->GetX() << ":" << player->GetY()
-                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
+                        carrier->AddPassenger(possiblePassenger);
+
+    //                    Player* player = dynamic_cast<Player*>(secondBody.first);
+
+    //                    std::cout << "Intersection:" <<
+    //                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
+    //                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
+    //                              << "Player:" << player->GetX() << ":" << player->GetY()
+    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
 
 
-                    oxygine::Vector2 newDirectionForPlayer;
-//                    newDirectionForPlayer.x = player->GetDirection().x;
-                    newDirectionForPlayer.x = carrier->GetDirection().x;
-                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
-                    player->SetDirectionFinalForStep(newDirectionForPlayer);
-                    Service::Normal2 playerNormal = player->GetCollisionNormal();
-                    playerNormal.y = -1;
+    //                    oxygine::Vector2 newDirectionForPlayer;
+    ////                    newDirectionForPlayer.x = player->GetDirection().x;
+    //                    newDirectionForPlayer.x = carrier->GetDirection().x;
+    //                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
+    //                    player->SetDirectionFinalForStep(newDirectionForPlayer);
+    //                    Service::Normal2 playerNormal = player->GetCollisionNormal();
+    //                    playerNormal.y = -1;
 
-                    player->SetCollisionNormal(playerNormal);
+    //                    player->SetCollisionNormal(playerNormal);
 
-                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
-                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
-                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
-                    continue;
+    //                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
+    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
+    //                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
+                        continue;
+                    }
                 }
             }
 

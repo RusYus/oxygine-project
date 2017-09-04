@@ -28,7 +28,7 @@ public:
     {
         TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
         // TODO : refactor condition.
-        if (std::is_base_of<IMovable, BodyType>::value && !dynamic_cast<Platform*>(aBody))
+        if (std::is_base_of<IMovable, BodyType>::value /*&& !dynamic_cast<Platform*>(aBody)*/)
         {
             body.second = true;
         }
@@ -192,6 +192,8 @@ private:
     template<typename FirstBody>
     bool HandleCarrierIntersection(FirstBody* a_First)
     {
+        static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
+
         if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
         {
             std::cout << "Negative size" << std::endl;

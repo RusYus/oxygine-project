@@ -15,6 +15,22 @@ std::shared_ptr<std::vector<Collision::Ray>> ICarrier::GetCarrierRays() const
     return m_CarrierRays;
 }
 
+void ICarrier::AddPassenger(IMovable* a_Body)
+{
+    if (!a_Body || std::find(m_Passengers.cbegin(), m_Passengers.cend(), a_Body) != m_Passengers.cend())
+    {
+        std::cout << "Can't add passenger: NULL or already exists!" << std::endl;
+        return;
+    }
+
+    m_Passengers.push_back(a_Body);
+}
+
+void ICarrier::ClearPassengers()
+{
+    m_Passengers.clear();
+}
+
 void ICarrier::SetPosition()
 {
     IMovable::SetPosition();

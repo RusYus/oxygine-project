@@ -17,14 +17,16 @@ public:
     virtual ~ICarrier();
 
     std::shared_ptr<std::vector<Collision::Ray>> GetCarrierRays() const;
+    void AddPassenger(IMovable* a_Body);
     void SetPosition() override;
 
 protected:
+    void ClearPassengers();
     void UpdateRays() override;
     void SetRays() override;
 
 protected:
-    const float m_RayLength = 1;
+    const float m_RayLength = Service::Constants::CARRIER_RAY_LENGTH;
     std::shared_ptr<std::vector<Collision::Ray>> m_CarrierRays;
     std::vector<IMovable*> m_Passengers;
 };
