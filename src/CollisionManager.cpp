@@ -55,6 +55,65 @@ void CollisionManager::CheckCollisions()
 
                 if (possiblePassenger)
                 {
+                    oxygine::Vector2 minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+                    oxygine::Vector2 maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+
+                    // Calculating boundaries of the object out of it's rays (including destination).
+                    // It's gonna be aabb for first body to check collision with.
+                    auto checkMin = [&minCoords] (const auto& a_Ray)
+                    {
+                        if (a_Ray.Original.x < minCoords.x)
+                        {
+                            minCoords.x = a_Ray.Original.x;
+                        }
+
+                        if (a_Ray.Original.y < minCoords.y)
+                        {
+                            minCoords.y = a_Ray.Original.y;
+                        }
+
+                        if (a_Ray.Destination.x < minCoords.x)
+                        {
+                            minCoords.x = a_Ray.Destination.x;
+                        }
+
+                        if (a_Ray.Destination.y < minCoords.y)
+                        {
+                            minCoords.y = a_Ray.Destination.y;
+                        }
+                    };
+
+                    auto checkMax = [&maxCoords] (const auto& a_Ray)
+                    {
+                        if (a_Ray.Original.x > maxCoords.x)
+                        {
+                            maxCoords.x = a_Ray.Original.x;
+                        }
+
+                        if (a_Ray.Original.y > maxCoords.y)
+                        {
+                            maxCoords.y = a_Ray.Original.y;
+                        }
+
+                        if (a_Ray.Destination.x > maxCoords.x)
+                        {
+                            maxCoords.x = a_Ray.Destination.x;
+                        }
+
+                        if (a_Ray.Destination.y > maxCoords.y)
+                        {
+                            maxCoords.y = a_Ray.Destination.y;
+                        }
+                    };
+
+                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
+                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
+
+                    m_Rectangle.X = minCoords.x;
+                    m_Rectangle.Y = minCoords.y;
+                    m_Rectangle.Width = maxCoords.x - minCoords.x;
+                    m_Rectangle.Height = maxCoords.y - minCoords.y;
+
                     ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
                     if (HandleCarrierIntersection(carrier))
                     {
@@ -83,7 +142,7 @@ void CollisionManager::CheckCollisions()
     //                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
     //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
     //                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
-                        continue;
+                    continue;
                     }
                 }
             }

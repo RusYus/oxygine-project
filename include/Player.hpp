@@ -22,7 +22,7 @@ public:
 
     void doRender(const oxygine::RenderState&);
 
-    void SetDirection(const oxygine::Vector2&) override;
+//    void SetDirection(const oxygine::Vector2&) override;
     void SetDirectionFinalForStep(const oxygine::Vector2&);
 
 private:

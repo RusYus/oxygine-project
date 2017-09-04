@@ -28,5 +28,5 @@ protected:
 protected:
     const float m_RayLength = Service::Constants::CARRIER_RAY_LENGTH;
     std::shared_ptr<std::vector<Collision::Ray>> m_CarrierRays;
-    std::vector<IMovable*> m_Passengers;
+    std::unique_ptr<std::vector<IMovable*>> m_Passengers;
 };

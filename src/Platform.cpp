@@ -6,7 +6,6 @@
 
 Platform::Platform(const oxygine::RectF& aRect)
     : m_DirectionUntilStop(m_Direction)
-    , m_Passengers(std::make_unique<std::vector<IMovable*>>())
 {
     m_Box->setResAnim(res::ui.getResAnim("platform"));
     m_View->setPosition(350, 450);
@@ -20,7 +19,7 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(0, -300));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(300, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
@@ -49,7 +48,7 @@ bool Platform::IsAroundNode()
 
 void Platform::Move()
 {
-    m_Passengers->clear();
+    ICarrier::ClearPassengers();
 
     if (IsAroundNode())
     {

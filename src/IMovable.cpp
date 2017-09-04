@@ -17,6 +17,11 @@ void IMovable::SetDirection(const oxygine::Vector2& aNewDirection)
     m_Direction = aNewDirection;
 }
 
+void IMovable::AddDirection(const oxygine::Vector2& aNewDirection)
+{
+    m_Direction += aNewDirection;
+}
+
 std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const
 {
     return m_Rays;

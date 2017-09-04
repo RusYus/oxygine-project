@@ -3,6 +3,7 @@
 
 ICarrier::ICarrier()
     : m_CarrierRays(std::make_shared<std::vector<Collision::Ray>>())
+    , m_Passengers(std::make_unique<std::vector<IMovable*>>())
 {}
 
 ICarrier::~ICarrier()
@@ -17,22 +18,29 @@ std::shared_ptr<std::vector<Collision::Ray>> ICarrier::GetCarrierRays() const
 
 void ICarrier::AddPassenger(IMovable* a_Body)
 {
-    if (!a_Body || std::find(m_Passengers.cbegin(), m_Passengers.cend(), a_Body) != m_Passengers.cend())
+    assert(m_Passengers != nullptr);
+
+    if (!a_Body || std::find(m_Passengers->cbegin(), m_Passengers->cend(), a_Body) != m_Passengers->cend())
     {
         std::cout << "Can't add passenger: NULL or already exists!" << std::endl;
         return;
     }
 
-    m_Passengers.push_back(a_Body);
+    m_Passengers->push_back(a_Body);
+    std::cout << "Adding passenger" << std::endl;
 }
 
 void ICarrier::ClearPassengers()
 {
-    m_Passengers.clear();
+    assert(m_Passengers != nullptr);
+    m_Passengers->clear();
+    std::cout << "Clear all passengers" << std::endl;
 }
 
 void ICarrier::SetPosition()
 {
+    assert(m_Passengers != nullptr);
+
     IMovable::SetPosition();
 
     for(auto& ray : *m_CarrierRays)
@@ -40,16 +48,16 @@ void ICarrier::SetPosition()
         ray.Original += m_Direction;
     }
 
-    for (auto& pass : m_Passengers)
+    for (auto& passenger : *m_Passengers)
     {
-        if (!pass)
+        if (!passenger)
         {
-            std::cout << "Passenger is NULL!" << std::endl;
+            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
             continue;
         }
 
-        // Move.
-//        pass.SetDirection();
+        passenger->AddDirection(m_Direction);
+        std::cout << "Moving passenger" << std::endl;
     }
 }
 

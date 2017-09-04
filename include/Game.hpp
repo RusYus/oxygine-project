@@ -131,8 +131,8 @@ public:
         mPlayer->Update(us);
         mLevels.back()->Update(us);
         m_CollisionManager.CheckCollisions();
-        mPlayer->SetPosition();
         mLevels.back()->m_Platform->SetPosition();
+        mPlayer->SetPosition();
     }
 
     void ShowHideDebug(Event* /*event*/)

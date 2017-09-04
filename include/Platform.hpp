@@ -49,5 +49,4 @@ private:
     bool m_IsMovingReverse = false;
     oxygine::Vector2 m_DirectionUntilStop;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
-    std::unique_ptr<std::vector<IMovable*>> m_Passengers;
 };
