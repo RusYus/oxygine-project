@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 
+#include "ICollisionManager.hpp"
 #include "DemoLevel.hpp"
 #include "Player.hpp"
 
@@ -12,7 +13,7 @@
 // 4 - Move passengers before Update (adding direction)
 // 5 - Move everything as usual
 
-class CollisionManager
+class CollisionManager : public virtual ICollisionManager
 {
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
     struct CollisionRectangle
@@ -23,12 +24,14 @@ class CollisionManager
         int Height = -1;
     };
 public:
-    template<typename BodyType>
-    void AddBody(BodyType* aBody)
+    CollisionManager() = default;
+    ~CollisionManager() = default;
+
+    void AddBody(Basis::BasisObject* a_Body) override
     {
-        TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
+        TBody body = std::make_pair(a_Body, false);
         // TODO : refactor condition.
-        if (std::is_base_of<IMovable, BodyType>::value /*&& !dynamic_cast<Platform*>(aBody)*/)
+        if (std::is_base_of<IMovable, TBody>::value /*&& !dynamic_cast<Platform*>(aBody)*/)
         {
             body.second = true;
         }
@@ -36,7 +39,7 @@ public:
         m_Bodies.emplace_back(std::move(body));
     }
 
-    void CheckCollisions();
+    void CheckCollisions(Basis::BasisObject::TId) override;
 private:
     template<typename FirstBody>
     void HandleIntersection(

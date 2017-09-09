@@ -34,7 +34,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisA
         m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(m_Distance + m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Right side.
@@ -42,7 +42,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisA
         m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(-m_Distance - m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up side.
@@ -50,7 +50,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisA
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
         oxygine::Vector2(0, m_Distance + m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down side.
@@ -58,7 +58,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisA
         m_Ground.GetX(),
         m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
         oxygine::Vector2(0, -m_Distance - m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
@@ -69,7 +69,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngle
         m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(m_Distance + m_Threshold, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Right side.
@@ -77,7 +77,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngle
         m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(-m_Distance - m_Threshold, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up side.
@@ -85,7 +85,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngle
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
         oxygine::Vector2(m_Threshold, m_Distance + m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down side.
@@ -93,7 +93,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngle
         m_Ground.GetX(),
         m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
         oxygine::Vector2(-m_Threshold, -m_Distance - m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
@@ -104,7 +104,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(m_Distance, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Right side.
@@ -112,7 +112,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
         m_Ground.GetY(),
         oxygine::Vector2(-m_Distance, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up side.
@@ -120,7 +120,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
         oxygine::Vector2(0, m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down side.
@@ -128,7 +128,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground.GetX(),
         m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
         oxygine::Vector2(0, -m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
@@ -139,7 +139,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxis
         m_Ground.GetX() - m_Player.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Right side.
@@ -147,7 +147,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxis
         m_Ground.GetX() + m_Ground.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(-m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up side.
@@ -155,7 +155,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxis
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight(),
         oxygine::Vector2(0, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down side.
@@ -163,7 +163,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxis
         m_Ground.GetX(),
         m_Ground.GetY() + m_Ground.GetHeight(),
         oxygine::Vector2(0, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
@@ -174,7 +174,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOutside
         m_Ground.GetX() - m_Player.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(-m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Right side.
@@ -182,7 +182,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOutside
         m_Ground.GetX() + m_Ground.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Up side.
@@ -190,7 +190,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOutside
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight(),
         oxygine::Vector2(0, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Down side.
@@ -198,7 +198,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOnBorderDestinationOutside
         m_Ground.GetX(),
         m_Ground.GetY() + m_Ground.GetHeight(),
         oxygine::Vector2(0, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 }
 
@@ -209,7 +209,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenMovingOnSurface, CollisionManagerF
         m_Ground.GetX() - m_Player.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(0, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Right side.
@@ -217,7 +217,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenMovingOnSurface, CollisionManagerF
         m_Ground.GetX() + m_Ground.GetWidth(),
         m_Ground.GetY() + m_Ground.GetHeight(),
         oxygine::Vector2(0, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Up side.
@@ -225,7 +225,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenMovingOnSurface, CollisionManagerF
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight(),
         oxygine::Vector2(m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 
     // Down side.
@@ -233,7 +233,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenMovingOnSurface, CollisionManagerF
         m_Ground.GetX() + m_Ground.GetWidth(),
         m_Ground.GetY() + m_Ground.GetHeight(),
         oxygine::Vector2(-m_Threshold, 0));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(!m_Player.CollisionTookPlace());
 }
 
@@ -244,7 +244,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnSurfaceWithForceTowardsIt, Co
         m_Ground.GetX() - m_Player.GetWidth(),
         m_Ground.GetY(),
         oxygine::Vector2(m_Threshold, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Right side.
@@ -252,7 +252,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnSurfaceWithForceTowardsIt, Co
         m_Ground.GetX() + m_Ground.GetWidth(),
         m_Ground.GetY() + m_Ground.GetHeight() - m_Player.GetHeight(),
         oxygine::Vector2(-m_Threshold, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up side.
@@ -260,7 +260,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnSurfaceWithForceTowardsIt, Co
         m_Ground.GetX(),
         m_Ground.GetY() - m_Player.GetHeight(),
         oxygine::Vector2(m_Threshold, m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down side.
@@ -268,7 +268,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnSurfaceWithForceTowardsIt, Co
         m_Ground.GetX() + m_Ground.GetWidth() - m_Player.GetWidth(),
         m_Ground.GetY() + m_Ground.GetHeight(),
         oxygine::Vector2(-m_Threshold, -m_Threshold));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 
@@ -279,7 +279,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
         m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
         m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
         oxygine::Vector2(m_Distance, m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Up Right side.
@@ -287,7 +287,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
         m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
         m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
         oxygine::Vector2(-m_Distance, m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down Left side.
@@ -295,7 +295,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
         m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
         m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
         oxygine::Vector2(m_Distance, -m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 
     // Down right side.
@@ -303,7 +303,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenMovingOnTheCorner, CollisionManagerFi
         m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
         m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
         oxygine::Vector2(-m_Distance, -m_Distance));
-    m_Manager.CheckCollisions();
+    m_Manager.CheckCollisions(0);
     BOOST_CHECK(m_Player.CollisionTookPlace());
 }
 

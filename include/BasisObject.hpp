@@ -10,6 +10,8 @@ namespace Basis
 class BasisObject
 {
 public:
+    using TId = Service::IdGenerator::TId;
+
     BasisObject()
     {
         m_Id = Service::IdGenerator::GetNextId();
@@ -23,13 +25,13 @@ public:
     virtual inline float GetHeight() const = 0;
     virtual inline oxygine::Vector2 GetPosition() const = 0;
 
-    inline Service::IdGenerator::TId GetId() const
+    inline TId GetId() const
     {
         return m_Id;
     }
 
 protected:
-    Service::IdGenerator::TId m_Id;
+     TId m_Id;
 };
 
 }

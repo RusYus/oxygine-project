@@ -57,6 +57,7 @@ public:
     Game()
         : mContent()
         , mEventProxy(new EventProxy)
+        , m_CollisionManager(std::make_shared<CollisionManager>())
     {
         oxygine::key::init();
 
@@ -80,10 +81,10 @@ public:
         mCamera->setContent(mLevels.back());
 
         //create player ship
-        mPlayer = new Player;
-        mPlayer->Init(mEventProxy);
+        m_Player = new Player;
+        m_Player->Init(mEventProxy);
 //        mLevels.back()->addChild(mPlayer->GetView());
-        mLevels.back()->addChild(mPlayer);
+        mLevels.back()->addChild(m_Player);
 
         // TODO : camera not changing coordinates.
 //        _camera->setX(_player->GetX() - _camera->getWidth() / 2.0);
@@ -117,33 +118,36 @@ public:
         mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
         mJump->attachTo(this);
 
-        m_CollisionManager.AddBody(mPlayer.get());
-        m_CollisionManager.AddBody(mLevels.back()->mStatic);
-        m_CollisionManager.AddBody(mLevels.back()->mStatic2);
-        m_CollisionManager.AddBody(mLevels.back()->mStatic3);
-        m_CollisionManager.AddBody(mLevels.back()->mStatic4);
-        m_CollisionManager.AddBody(mLevels.back()->m_Platform.get());
+        m_CollisionManager->AddBody(m_Player.get());
+        m_CollisionManager->AddBody(mLevels.back()->mStatic);
+        m_CollisionManager->AddBody(mLevels.back()->mStatic2);
+        m_CollisionManager->AddBody(mLevels.back()->mStatic3);
+        m_CollisionManager->AddBody(mLevels.back()->mStatic4);
+        m_CollisionManager->AddBody(mLevels.back()->m_Platform.get());
+
+        m_Player->BindCollisionManager(m_CollisionManager);
+        mLevels.back()->m_Platform->BindCollisionManager(m_CollisionManager);
     }
 
     void doUpdate(const UpdateState& us)
     {
         std::cout << "------Starting Step:"<< std::endl;
-        mPlayer->Update(us);
+        m_Player->Update(us);
         mLevels.back()->Update(us);
-        m_CollisionManager.CheckCollisions();
+        m_CollisionManager->CheckCollisions(0);
         mLevels.back()->m_Platform->SetPosition();
-        mPlayer->SetPosition();
+        m_Player->SetPosition();
     }
 
     void ShowHideDebug(Event* /*event*/)
     {
-        mPlayer->SetDebugDraw(!mPlayer->GetDebugDraw());
+        m_Player->SetDebugDraw(!m_Player->GetDebugDraw());
         mLevels.back()->m_Platform->SetDebugDraw(!mLevels.back()->m_Platform->GetDebugDraw());
     }
 
     spEventProxy mEventProxy;
-    CollisionManager m_CollisionManager;
-    spPlayer mPlayer;
+    std::shared_ptr<CollisionManager> m_CollisionManager;
+    spPlayer m_Player;
     spCamera mCamera;
     spMoveButton mMoveLeft;
     spMoveButton mMoveRight;

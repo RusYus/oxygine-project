@@ -4,6 +4,7 @@
 
 #include "math/Vector2.h"
 
+#include "ICollisionManager.hpp"
 #include "CollisionInfo.hpp"
 #include "Constants.hpp"
 #include "IDrawable.hpp"
@@ -16,6 +17,8 @@ public:
 
     virtual ~IMovable();
 
+    void BindCollisionManager(const std::shared_ptr<ICollisionManager>&);
+
     virtual void SetDirection(const oxygine::Vector2&);
     virtual void AddDirection(const oxygine::Vector2&);
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
@@ -24,6 +27,7 @@ public:
     virtual void SetCollisionNormal(const Service::Normal2&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
+    virtual void CheckCollision();
 
 protected:
     virtual void UpdateRays();
@@ -32,6 +36,7 @@ protected:
 protected:
     oxygine::Vector2 m_Direction;
     Service::Normal2 m_CollisionNormal;
+    std::shared_ptr<ICollisionManager> m_CollisionManager;
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
 };

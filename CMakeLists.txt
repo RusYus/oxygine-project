@@ -27,6 +27,7 @@ set(
     include/example.hpp
     include/Game.hpp
     include/Ground.hpp
+    include/ICollisionManager.hpp
     include/IDrawable.hpp
     include/IDebugDrawable.hpp
     include/ICarrier.hpp

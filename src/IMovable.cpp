@@ -7,6 +7,12 @@ IMovable::IMovable()
 {
 }
 
+void IMovable::BindCollisionManager(const std::shared_ptr<ICollisionManager>& a_Manager)
+{
+    assert(!m_CollisionManager);
+   m_CollisionManager = std::shared_ptr<ICollisionManager>(a_Manager);
+}
+
 IMovable::~IMovable()
 {
     m_Rays->clear();
@@ -197,4 +203,14 @@ void IMovable::SetRays()
     m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
                                        oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownRight));
+}
+
+void IMovable::CheckCollision()
+{
+    if (!m_CollisionManager)
+    {
+        return;
+    }
+
+    m_CollisionManager->CheckCollisions(this->GetId());
 }

@@ -2,7 +2,7 @@
 
 #include "CollisionManager.hpp"
 
-void CollisionManager::CheckCollisions()
+void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
     Collision::CollisionInfo collisionSides;
 
