@@ -34,7 +34,7 @@ void ICarrier::ClearPassengers()
 {
     assert(m_Passengers != nullptr);
     m_Passengers->clear();
-    std::cout << "Clear all passengers" << std::endl;
+//    std::cout << "Clear all passengers" << std::endl;
 }
 
 void ICarrier::SetPosition()

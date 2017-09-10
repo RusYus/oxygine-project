@@ -104,13 +104,6 @@ void IMovable::UpdateRays()
                 {
                     ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
-                // TODO : Maybe another interface?
-                // Basically, I always need rays pointing down regardless of direction
-                // in case if body moving up and something (platform) hitting it from the bottom.
-                else
-                {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + 1);
-                }
                 break;
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)

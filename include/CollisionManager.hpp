@@ -135,7 +135,7 @@ private:
                     break;
 
                 case Collision::RayDirection::Right:
-//                    handleRight();
+                    handleRight();
                     break;
 
                 case Collision::RayDirection::Left:

@@ -13,41 +13,41 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
 
-        auto bodyIt = m_Bodies.find(a_Id);
-        if (bodyIt == m_Bodies.end())
+    auto bodyIt = m_Bodies.find(a_Id);
+    if (bodyIt == m_Bodies.end())
+    {
+        return;
+    }
+    collisionSides.Reset();
+
+    IMovable* firstBody = dynamic_cast<IMovable*>(bodyIt->second.first);
+    if (!firstBody)
+    {
+        std::cout << "Can't cast to movable body!" << std::endl;
+        return;
+    }
+
+    oxygine::Vector2 intersectionPoint;
+    oxygine::Vector2 newPoint = firstBody->GetDirection();
+
+    const auto bodyId = firstBody->GetId();
+
+    for (auto& secondBodyIt : m_Bodies)
+    {
+        TValue secondBody = secondBodyIt.second;
+
+        // Same body
+        if (bodyId == secondBody.first->GetId())
         {
-            return;
+            continue;
         }
-        collisionSides.Reset();
 
-        IMovable* firstBody = dynamic_cast<IMovable*>(bodyIt->second.first);
-        if (!firstBody)
-        {
-            std::cout << "Can't cast to movable body!" << std::endl;
-            return;
-        }
-
-        oxygine::Vector2 intersectionPoint;
-        oxygine::Vector2 newPoint = firstBody->GetDirection();
-
-        const auto bodyId = firstBody->GetId();
-
-        for (auto& secondBodyIt : m_Bodies)
-        {
-            TValue secondBody = secondBodyIt.second;
-
-            // Same body
-            if (bodyId == secondBody.first->GetId())
-            {
-                continue;
-            }
-
-            // Setting collision boundaries for second body.
-            // TODO : Check if conversion from secondBody.first needed.
-            m_Rectangle.X = secondBody.first->GetX();
-            m_Rectangle.Y = secondBody.first->GetY();
-            m_Rectangle.Width = secondBody.first->GetWidth();
-            m_Rectangle.Height = secondBody.first->GetHeight();
+        // Setting collision boundaries for second body.
+        // TODO : Check if conversion from secondBody.first needed.
+        m_Rectangle.X = secondBody.first->GetX();
+        m_Rectangle.Y = secondBody.first->GetY();
+        m_Rectangle.Width = secondBody.first->GetWidth();
+        m_Rectangle.Height = secondBody.first->GetHeight();
 
 //            if (dynamic_cast<ICarrier*>(firstBody))
 //            {
@@ -161,8 +161,8 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 //            std::cout << "Plat:" << firstBody->GetX() << ":" << firstBody->GetY()
 //                      << "; Direction:" << firstBody->GetDirection().y << std::endl;
 //        }
-        firstBody->SetDirection(newPoint);
-        firstBody->ResetCollisionNormal(collisionSides);
+    firstBody->SetDirection(newPoint);
+    firstBody->ResetCollisionNormal(collisionSides);
 }
 
 // TODO : Use better names, more comments.
@@ -171,16 +171,16 @@ bool CollisionManager::Intersection(
         const oxygine::Vector2& aStartRay, const oxygine::Vector2& aEndRay,
         oxygine::Vector2& outIntersection)
 {
-    //StartRay and EndRay is in the AABB, so I presume, taht there are no intersections.
-    if ((aBottomLeftAABB.x < aStartRay.x && aStartRay.x < aTopRightAABB.x
-        && aTopRightAABB.y < aStartRay.y && aStartRay.y < aBottomLeftAABB.y)
-        && (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
-            && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y))
-    {
-        outIntersection.x = std::numeric_limits<float>::quiet_NaN();
-        outIntersection.y = std::numeric_limits<float>::quiet_NaN();
-        return false;
-    }
+//    //StartRay and EndRay is in the AABB, so I presume, that there are no intersections.
+//    if ((aBottomLeftAABB.x < aStartRay.x && aStartRay.x < aTopRightAABB.x
+//        && aTopRightAABB.y < aStartRay.y && aStartRay.y < aBottomLeftAABB.y)
+//        && (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
+//            && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y))
+//    {
+//        outIntersection.x = std::numeric_limits<float>::quiet_NaN();
+//        outIntersection.y = std::numeric_limits<float>::quiet_NaN();
+//        return false;
+//    }
 
     float f_low = 0;
     float f_high = 1;
