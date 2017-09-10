@@ -10,7 +10,7 @@ IMovable::IMovable()
 void IMovable::BindCollisionManager(const std::shared_ptr<ICollisionManager>& a_Manager)
 {
     assert(!m_CollisionManager);
-   m_CollisionManager = std::shared_ptr<ICollisionManager>(a_Manager);
+    m_CollisionManager = std::shared_ptr<ICollisionManager>(a_Manager);
 }
 
 IMovable::~IMovable()
@@ -205,7 +205,7 @@ void IMovable::SetRays()
                                        Collision::RayDirection::DownRight));
 }
 
-void IMovable::CheckCollision()
+void IMovable::CheckCollisions()
 {
     if (!m_CollisionManager)
     {

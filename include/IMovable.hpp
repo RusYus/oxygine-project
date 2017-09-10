@@ -27,7 +27,7 @@ public:
     virtual void SetCollisionNormal(const Service::Normal2&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
-    virtual void CheckCollision();
+    virtual void CheckCollisions();
 
 protected:
     virtual void UpdateRays();

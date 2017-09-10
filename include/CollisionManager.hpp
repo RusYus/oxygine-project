@@ -16,6 +16,8 @@
 class CollisionManager : public virtual ICollisionManager
 {
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
+    using TKey = Basis::BasisObject::TId;
+    using TValue = TBody;
     struct CollisionRectangle
     {
         int X = std::numeric_limits<int>::quiet_NaN();
@@ -36,7 +38,7 @@ public:
             body.second = true;
         }
 
-        m_Bodies.emplace_back(std::move(body));
+        m_Bodies.emplace(body.first->GetId(), std::move(body));
     }
 
     void CheckCollisions(Basis::BasisObject::TId) override;
@@ -234,6 +236,6 @@ private:
         oxygine::Vector2& /*intersection*/);
 
 private:
-    std::vector<TBody> m_Bodies;
+    std::unordered_map<TKey, TValue> m_Bodies;
     CollisionRectangle m_Rectangle;
 };

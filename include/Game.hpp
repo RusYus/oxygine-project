@@ -134,7 +134,7 @@ public:
         std::cout << "------Starting Step:"<< std::endl;
         m_Player->Update(us);
         mLevels.back()->Update(us);
-        m_CollisionManager->CheckCollisions(0);
+        m_Player->CheckCollisions();
         mLevels.back()->m_Platform->SetPosition();
         m_Player->SetPosition();
     }

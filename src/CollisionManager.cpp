@@ -12,21 +12,19 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     m_Rectangle.Height = -1;
 
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
-    for (auto& body : m_Bodies)
-    {
-        // Not movable.
-        if (!body.second)
-        {
-            continue;
-        }
 
+        auto bodyIt = m_Bodies.find(a_Id);
+        if (bodyIt == m_Bodies.end())
+        {
+            return;
+        }
         collisionSides.Reset();
 
-        IMovable* firstBody = dynamic_cast<IMovable*>(body.first);
+        IMovable* firstBody = dynamic_cast<IMovable*>(bodyIt->second.first);
         if (!firstBody)
         {
             std::cout << "Can't cast to movable body!" << std::endl;
-            continue;
+            return;
         }
 
         oxygine::Vector2 intersectionPoint;
@@ -34,8 +32,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
         const auto bodyId = firstBody->GetId();
 
-        for (auto& secondBody : m_Bodies)
+        for (auto& secondBodyIt : m_Bodies)
         {
+            TValue secondBody = secondBodyIt.second;
+
             // Same body
             if (bodyId == secondBody.first->GetId())
             {
@@ -49,103 +49,103 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
             m_Rectangle.Width = secondBody.first->GetWidth();
             m_Rectangle.Height = secondBody.first->GetHeight();
 
-            if (dynamic_cast<ICarrier*>(firstBody))
-            {
-                IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody.first);
+//            if (dynamic_cast<ICarrier*>(firstBody))
+//            {
+//                IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody.first);
 
-                if (possiblePassenger)
-                {
-                    oxygine::Vector2 minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
-                    oxygine::Vector2 maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+//                if (possiblePassenger)
+//                {
+//                    oxygine::Vector2 minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+//                    oxygine::Vector2 maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
 
-                    // Calculating boundaries of the object out of it's rays (including destination).
-                    // It's gonna be aabb for first body to check collision with.
-                    auto checkMin = [&minCoords] (const auto& a_Ray)
-                    {
-                        if (a_Ray.Original.x < minCoords.x)
-                        {
-                            minCoords.x = a_Ray.Original.x;
-                        }
+//                    // Calculating boundaries of the object out of it's rays (including destination).
+//                    // It's gonna be aabb for first body to check collision with.
+//                    auto checkMin = [&minCoords] (const auto& a_Ray)
+//                    {
+//                        if (a_Ray.Original.x < minCoords.x)
+//                        {
+//                            minCoords.x = a_Ray.Original.x;
+//                        }
 
-                        if (a_Ray.Original.y < minCoords.y)
-                        {
-                            minCoords.y = a_Ray.Original.y;
-                        }
+//                        if (a_Ray.Original.y < minCoords.y)
+//                        {
+//                            minCoords.y = a_Ray.Original.y;
+//                        }
 
-                        if (a_Ray.Destination.x < minCoords.x)
-                        {
-                            minCoords.x = a_Ray.Destination.x;
-                        }
+//                        if (a_Ray.Destination.x < minCoords.x)
+//                        {
+//                            minCoords.x = a_Ray.Destination.x;
+//                        }
 
-                        if (a_Ray.Destination.y < minCoords.y)
-                        {
-                            minCoords.y = a_Ray.Destination.y;
-                        }
-                    };
+//                        if (a_Ray.Destination.y < minCoords.y)
+//                        {
+//                            minCoords.y = a_Ray.Destination.y;
+//                        }
+//                    };
 
-                    auto checkMax = [&maxCoords] (const auto& a_Ray)
-                    {
-                        if (a_Ray.Original.x > maxCoords.x)
-                        {
-                            maxCoords.x = a_Ray.Original.x;
-                        }
+//                    auto checkMax = [&maxCoords] (const auto& a_Ray)
+//                    {
+//                        if (a_Ray.Original.x > maxCoords.x)
+//                        {
+//                            maxCoords.x = a_Ray.Original.x;
+//                        }
 
-                        if (a_Ray.Original.y > maxCoords.y)
-                        {
-                            maxCoords.y = a_Ray.Original.y;
-                        }
+//                        if (a_Ray.Original.y > maxCoords.y)
+//                        {
+//                            maxCoords.y = a_Ray.Original.y;
+//                        }
 
-                        if (a_Ray.Destination.x > maxCoords.x)
-                        {
-                            maxCoords.x = a_Ray.Destination.x;
-                        }
+//                        if (a_Ray.Destination.x > maxCoords.x)
+//                        {
+//                            maxCoords.x = a_Ray.Destination.x;
+//                        }
 
-                        if (a_Ray.Destination.y > maxCoords.y)
-                        {
-                            maxCoords.y = a_Ray.Destination.y;
-                        }
-                    };
+//                        if (a_Ray.Destination.y > maxCoords.y)
+//                        {
+//                            maxCoords.y = a_Ray.Destination.y;
+//                        }
+//                    };
 
-                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
-                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
+//                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
+//                    std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
 
-                    m_Rectangle.X = minCoords.x;
-                    m_Rectangle.Y = minCoords.y;
-                    m_Rectangle.Width = maxCoords.x - minCoords.x;
-                    m_Rectangle.Height = maxCoords.y - minCoords.y;
+//                    m_Rectangle.X = minCoords.x;
+//                    m_Rectangle.Y = minCoords.y;
+//                    m_Rectangle.Width = maxCoords.x - minCoords.x;
+//                    m_Rectangle.Height = maxCoords.y - minCoords.y;
 
-                    ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
-                    if (HandleCarrierIntersection(carrier))
-                    {
+//                    ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
+//                    if (HandleCarrierIntersection(carrier))
+//                    {
 
-                        carrier->AddPassenger(possiblePassenger);
+//                        carrier->AddPassenger(possiblePassenger);
 
-    //                    Player* player = dynamic_cast<Player*>(secondBody.first);
+//    //                    Player* player = dynamic_cast<Player*>(secondBody.first);
 
-    //                    std::cout << "Intersection:" <<
-    //                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
-    //                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
-    //                              << "Player:" << player->GetX() << ":" << player->GetY()
-    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
+//    //                    std::cout << "Intersection:" <<
+//    //                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
+//    //                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
+//    //                              << "Player:" << player->GetX() << ":" << player->GetY()
+//    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
 
 
-    //                    oxygine::Vector2 newDirectionForPlayer;
-    ////                    newDirectionForPlayer.x = player->GetDirection().x;
-    //                    newDirectionForPlayer.x = carrier->GetDirection().x;
-    //                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
-    //                    player->SetDirectionFinalForStep(newDirectionForPlayer);
-    //                    Service::Normal2 playerNormal = player->GetCollisionNormal();
-    //                    playerNormal.y = -1;
+//    //                    oxygine::Vector2 newDirectionForPlayer;
+//    ////                    newDirectionForPlayer.x = player->GetDirection().x;
+//    //                    newDirectionForPlayer.x = carrier->GetDirection().x;
+//    //                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
+//    //                    player->SetDirectionFinalForStep(newDirectionForPlayer);
+//    //                    Service::Normal2 playerNormal = player->GetCollisionNormal();
+//    //                    playerNormal.y = -1;
 
-    //                    player->SetCollisionNormal(playerNormal);
+//    //                    player->SetCollisionNormal(playerNormal);
 
-    //                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
-    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
-    //                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
-                    continue;
-                    }
-                }
-            }
+//    //                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
+//    //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
+//    //                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
+//                    continue;
+//                    }
+//                }
+//            }
 
             HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
         }
@@ -163,7 +163,6 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 //        }
         firstBody->SetDirection(newPoint);
         firstBody->ResetCollisionNormal(collisionSides);
-    }
 }
 
 // TODO : Use better names, more comments.
