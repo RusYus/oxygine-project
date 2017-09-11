@@ -92,3 +92,17 @@ void ICarrier::MovePassengers()
         std::cout << "Moving passenger" << std::endl;
     }
 }
+
+void ICarrier::PassengersCheckCollisions()
+{
+    for (auto& passenger : *m_Passengers)
+    {
+        if (!passenger)
+        {
+            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
+            continue;
+        }
+
+        passenger->CheckCollisions();
+    }
+}
