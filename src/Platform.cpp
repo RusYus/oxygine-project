@@ -46,7 +46,7 @@ bool Platform::IsAroundNode()
     return nodeDirection.length() <= GetDirection().length();
 }
 
-void Platform::Move()
+void Platform::Update()
 {
     ICarrier::ClearPassengers();
 
@@ -147,4 +147,10 @@ void Platform::SetPosition()
     }
 
 //    std::cout << "Platform:" << GetX() << ":" << GetY() << std::endl;
+}
+
+void Platform::CheckCollisions()
+{
+    IMovable::CheckCollisions();
+    ICarrier::MovePassengers();
 }

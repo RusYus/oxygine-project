@@ -131,9 +131,10 @@ public:
 
     void doUpdate(const UpdateState& us)
     {
-        std::cout << "------Starting Step:"<< std::endl;
+//        std::cout << "------Starting Step:"<< std::endl;
         m_Player->Update(us);
         mLevels.back()->Update(us);
+        mLevels.back()->m_Platform->CheckCollisions();
         m_Player->CheckCollisions();
         mLevels.back()->m_Platform->SetPosition();
         m_Player->SetPosition();

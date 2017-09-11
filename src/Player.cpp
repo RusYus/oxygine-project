@@ -121,7 +121,7 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))

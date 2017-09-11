@@ -21,6 +21,7 @@ public:
     void SetPosition() override;
 
 protected:
+    void MovePassengers();
     void ClearPassengers();
     void UpdateRays() override;
     void SetRays() override;

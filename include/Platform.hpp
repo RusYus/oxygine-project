@@ -33,10 +33,11 @@ class Platform: public oxygine::Actor, public virtual ICarrier, public virtual I
 public:
     Platform(const oxygine::RectF&);
     ~Platform();
-    void Move();
+    void Update();
     void SetDirection(const oxygine::Vector2&) override;
     void SetPosition() override;
     void ResetCollisionNormal(const Collision::CollisionInfo&) override;
+    void CheckCollisions() override;
 
     void doRender(const oxygine::RenderState&);
 

@@ -47,18 +47,6 @@ void ICarrier::SetPosition()
     {
         ray.Original += m_Direction;
     }
-
-    for (auto& passenger : *m_Passengers)
-    {
-        if (!passenger)
-        {
-            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
-            continue;
-        }
-
-        passenger->AddDirection(m_Direction);
-        std::cout << "Moving passenger" << std::endl;
-    }
 }
 
 void ICarrier::UpdateRays()
@@ -86,5 +74,21 @@ void ICarrier::SetRays()
         m_CarrierRays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
                                           Collision::RayDirection::Up));
+    }
+}
+
+void ICarrier::MovePassengers()
+{
+    for (auto& passenger : *m_Passengers)
+    {
+        if (!passenger)
+        {
+            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
+            continue;
+        }
+
+        const auto directionY = this->GetDirection().y - passenger->GetDirection().y;
+        passenger->AddDirection({this->GetDirection().x, directionY});
+        std::cout << "Moving passenger" << std::endl;
     }
 }

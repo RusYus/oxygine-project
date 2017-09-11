@@ -76,7 +76,7 @@ void DemoLevel::Update(const UpdateState& /*us*/)
 {
     if (m_Platform)
     {
-        m_Platform->Move();
+        m_Platform->Update();
     }
 }
 
