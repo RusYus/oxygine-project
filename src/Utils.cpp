@@ -5,15 +5,26 @@ namespace Service
 
 IdGenerator::TId IdGenerator::mId = 0;
 
-float RoundToOneDigit(float a_Number)
+float RoundToNDigits(float a_Number, int a_N = 2)
 {
-    return std::round(a_Number * 10) / 10;
+    if (a_N < 1 || a_N > 4)
+    {
+        a_N = 2;
+    }
+    int ratio = 10 * a_N;
+    return std::round(a_Number * ratio) / ratio;
 }
 
-void RoundToOneDigit(oxygine::Vector2& a_Vector)
+void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2)
 {
-    a_Vector.x = RoundToOneDigit(a_Vector.x);
-    a_Vector.x = RoundToOneDigit(a_Vector.y);
+    a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
+    a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
+}
+
+void RoundToNDigits(Velocity& a_Vector, int a_N = 2)
+{
+    a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
+    a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
 }
 
 }

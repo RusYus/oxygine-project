@@ -19,14 +19,16 @@ private:
     static TId mId;
 };
 
-struct Normal2: oxygine::Vector2
+struct Normal2 : oxygine::Vector2
 {
-    Normal2() = default;
+public:
+    Normal2()
+        : oxygine::Vector2()
+    {}
 
     Normal2(float x, float y)
         : oxygine::Vector2(x, y)
-    {
-    }
+    {}
 
     void operator =(const oxygine::Vector2& a_Vector)
     {
@@ -96,10 +98,87 @@ struct Normal2: oxygine::Vector2
     }
 };
 
+struct Velocity : oxygine::Vector2
+{
+public:
+    Velocity()
+        : oxygine::Vector2()
+    {}
+
+    Velocity(float a_X, float a_Y)
+        : oxygine::Vector2(a_X, a_Y)
+    {}
+
+    Velocity(const oxygine::Vector2& a_Vector)
+        : oxygine::Vector2(a_Vector.x, a_Vector.y)
+    {}
+
+    Velocity operator + (const VectorT2& a_Vector) const
+    {
+        Velocity temp = oxygine::Vector2::operator +(a_Vector);
+        // TODO : rounding
+        return temp;
+    }
+
+    Velocity operator - (const VectorT2& a_Vector) const
+    {
+        Velocity temp = oxygine::Vector2::operator -(a_Vector);
+        // TODO : rounding
+        return temp;
+    }
+
+    template <class R>
+    Velocity operator * (R a_Vector) const
+    {
+        Velocity temp = oxygine::Vector2::operator *(a_Vector);
+        // TODO : rounding
+        return temp;
+    }
+
+    template <class R>
+    Velocity operator / (R a_Vector) const
+    {
+        Velocity temp = oxygine::Vector2::operator /(a_Vector);
+        // TODO : rounding
+        return temp;
+    }
+
+    Velocity& operator += (const VectorT2& a_Vector)
+    {
+        oxygine::Vector2::operator +=(a_Vector);
+        // TODO : rounding
+        return (*this);
+    }
+
+    Velocity& operator -= (const VectorT2& a_Vector)
+    {
+        oxygine::Vector2::operator -=(a_Vector);
+        // TODO : rounding
+        return (*this);
+    }
+
+    template <typename T>
+    Velocity& operator *= (T a_Value)
+    {
+        oxygine::Vector2::operator *=(a_Value);
+        // TODO : rounding
+        return (*this);
+    }
+
+    template <typename T>
+    Velocity& operator /= (T a_Value)
+    {
+        oxygine::Vector2::operator /=(a_Value);
+        // TODO : rounding
+        return (*this);
+    }
+};
+
 static const Normal2 ZeroNormal = Normal2{0, 0};
 
-float RoundToOneDigit(float);
+float RoundToNDigits(float, int);
 
-void RoundToOneDigit(oxygine::Vector2&);
+void RoundToNDigits(oxygine::Vector2&, int);
+void RoundToNDigits(oxygine::Point&, int);
 
 }
