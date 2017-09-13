@@ -34,35 +34,77 @@ public:
     inline void FixCoordinatesIfExceeds();
 };
 
-struct Velocity : oxygine::Vector2
+struct Velocity
 {
+private:
+    struct Coordinate
+    {
+    public:
+        using Type = float;
+    public:
+        Coordinate(int);
+        Type operator + (const Coordinate& a_Value)
+        {
+            return m_Value + a_Value.m_Value;
+        }
+        template <typename T>
+        Type operator + (T a_Value)
+        {
+            return m_Value + a_Value;
+        }
+        Type operator - (const Coordinate& a_Value)
+        {
+            return m_Value - a_Value.m_Value;
+        }
+        template <typename T>
+        Type operator - (T a_Value)
+        {
+            return m_Value - a_Value;
+        }
+        void operator += (const Coordinate& a_Value)
+        {
+            m_Value += a_Value.m_Value;
+        }
+        template <typename T>
+        void operator +=(T a_Value)
+        {
+            m_Value += a_Value;
+        }
+        void operator -= (const Coordinate& a_Value)
+        {
+            m_Value -= a_Value.m_Value;
+        }
+        template <typename T>
+        void operator -=(T a_Value)
+        {
+            m_Value -= a_Value;
+        }
+    public:
+        Type m_Value;
+    };
+
 public:
     Velocity();
     Velocity(float a_X, float a_Y);
     Velocity(const oxygine::Vector2& a_Vector);
-    Velocity operator + (const VectorT2& a_Vector) const;
-    Velocity operator - (const VectorT2& a_Vector) const;
+    Velocity operator + (const oxygine::Vector2& a_Vector);
+    Velocity operator + (const Velocity& a_Vector);
+    Velocity operator - (const oxygine::Vector2& a_Vector);
+    Velocity operator - (const Velocity& a_Vector);
     template <class R>
     Velocity operator * (R a_Vector) const;
     template <class R>
     Velocity operator / (R a_Vector) const;
-    Velocity& operator += (const VectorT2& a_Vector);
-    Velocity& operator -= (const VectorT2& a_Vector);
+    Velocity& operator += (const oxygine::Vector2& a_Vector);
+    Velocity& operator += (const Velocity& a_Vector);
+    Velocity& operator -= (const oxygine::Vector2& a_Vector);
+    Velocity& operator -= (const Velocity& a_Vector);
     template <typename T>
     Velocity& operator *= (T a_Value);
     template <typename T>
     Velocity& operator /= (T a_Value);
-    // TODO :
-//    struct X
-//    {
-//        float value;
-//        template <typename T>
-//        void operator +=(T a_Value)
-//        {
-//            value += a_Value;
-//        }
-//    };
-//    X x, y;
+
+    Coordinate x, y;
 };
 
 static const Normal2 ZeroNormal = Normal2{0, 0};

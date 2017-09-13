@@ -78,28 +78,49 @@ inline void Normal2::FixCoordinatesIfExceeds()
     }
 }
 
+Velocity::Coordinate::Coordinate(int a_Value)
+    : m_Value(a_Value)
+{}
+
 Velocity::Velocity()
-    : oxygine::Vector2()
+    : x(0)
+    , y(0)
 {}
 
 Velocity::Velocity(float a_X, float a_Y)
-    : oxygine::Vector2(a_X, a_Y)
+    : x(a_X)
+    , y(a_Y)
 {}
 
 Velocity::Velocity(const oxygine::Vector2& a_Vector)
-    : oxygine::Vector2(a_Vector.x, a_Vector.y)
+    : x(a_Vector.x)
+    , y(a_Vector.y)
 {}
 
-Velocity Velocity::operator + (const VectorT2& a_Vector) const
+Velocity Velocity::operator + (const oxygine::Vector2& a_Vector)
 {
-    Velocity temp = oxygine::Vector2::operator +(a_Vector);
+    Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
     RoundToNDigits(temp);
     return temp;
 }
 
-Velocity Velocity::operator - (const VectorT2& a_Vector) const
+Velocity Velocity::operator + (const Velocity& a_Vector)
 {
-    Velocity temp = oxygine::Vector2::operator -(a_Vector);
+    Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
+    RoundToNDigits(temp);
+    return temp;
+}
+
+Velocity Velocity::operator - (const oxygine::Vector2& a_Vector)
+{
+    Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
+    RoundToNDigits(temp);
+    return temp;
+}
+
+Velocity Velocity::operator - (const Velocity& a_Vector)
+{
+    Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
     RoundToNDigits(temp);
     return temp;
 }
@@ -120,16 +141,18 @@ Velocity Velocity::operator / (R a_Vector) const
     return temp;
 }
 
-Velocity& Velocity::operator += (const VectorT2& a_Vector)
+Velocity& Velocity::operator += (const oxygine::Vector2& a_Vector)
 {
-    oxygine::Vector2::operator +=(a_Vector);
+    this->x += a_Vector.x;
+    this->y += a_Vector.y;
     RoundToNDigits(*this);
     return (*this);
 }
 
-Velocity& Velocity::operator -= (const VectorT2& a_Vector)
+Velocity& Velocity::operator -= (const oxygine::Vector2& a_Vector)
 {
-    oxygine::Vector2::operator -=(a_Vector);
+    this->x -= a_Vector.x;
+    this->y -= a_Vector.y;
     RoundToNDigits(*this);
     return (*this);
 }
@@ -170,8 +193,9 @@ void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N)
 
 void RoundToNDigits(Velocity& a_Vector, int a_N)
 {
-    a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
-    a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
+    // TODO : Maybe another overloading to hide m_Value ?
+    a_Vector.x = RoundToNDigits(a_Vector.x.m_Value, a_N);
+    a_Vector.x = RoundToNDigits(a_Vector.y.m_Value, a_N);
 }
 
 }
