@@ -34,6 +34,8 @@ public:
     inline void FixCoordinatesIfExceeds();
 };
 
+// TODO : Move to own file
+
 struct Velocity
 {
 private:
@@ -43,42 +45,43 @@ private:
         using Type = float;
     public:
         Coordinate(int);
-        Type operator + (const Coordinate& a_Value)
-        {
-            return m_Value + a_Value.m_Value;
-        }
+        Type operator + (const Coordinate& a_Value);
+        Type operator - (const Coordinate& a_Value);
+        void operator += (const Coordinate& a_Value);
+        void operator -= (const Coordinate& a_Value);
+        bool operator < (const Coordinate& a_Value);
+        bool operator > (const Coordinate& a_Value);
+        bool operator <= (const Coordinate& a_Value);
+        bool operator >= (const Coordinate& a_Value);
+        bool operator == (const Coordinate& a_Value);
+        bool operator != (const Coordinate& a_Value);
+        Type operator * (const Coordinate& a_Value);
+        void operator *= (const Coordinate& a_Value);
         template <typename T>
-        Type operator + (T a_Value)
-        {
-            return m_Value + a_Value;
-        }
-        Type operator - (const Coordinate& a_Value)
-        {
-            return m_Value - a_Value.m_Value;
-        }
+        Type operator + (T a_Value);
         template <typename T>
-        Type operator - (T a_Value)
-        {
-            return m_Value - a_Value;
-        }
-        void operator += (const Coordinate& a_Value)
-        {
-            m_Value += a_Value.m_Value;
-        }
+        Type operator - (T a_Value);
         template <typename T>
-        void operator +=(T a_Value)
-        {
-            m_Value += a_Value;
-        }
-        void operator -= (const Coordinate& a_Value)
-        {
-            m_Value -= a_Value.m_Value;
-        }
+        void operator += (T a_Value);
         template <typename T>
-        void operator -=(T a_Value)
-        {
-            m_Value -= a_Value;
-        }
+        void operator -= (T a_Value);
+        template <typename T>
+        bool operator < (T a_Value);
+        template <typename T>
+        bool operator > (T a_Value);
+        template <typename T>
+        bool operator <= (T a_Value);
+        template <typename T>
+        bool operator >= (T a_Value);
+        template <typename T>
+        bool operator == (T a_Value);
+        template <typename T>
+        bool operator != (T a_Value);
+        template <typename T>
+        Type operator * (T a_Value);
+        template <typename T>
+        void operator *= (T a_Value);
+
     public:
         Type m_Value;
     };
@@ -92,20 +95,39 @@ public:
     Velocity operator - (const oxygine::Vector2& a_Vector);
     Velocity operator - (const Velocity& a_Vector);
     template <class R>
-    Velocity operator * (R a_Vector) const;
+    Velocity operator * (R a_Value) const;
     template <class R>
-    Velocity operator / (R a_Vector) const;
+    Velocity operator / (R a_Value) const;
     Velocity& operator += (const oxygine::Vector2& a_Vector);
     Velocity& operator += (const Velocity& a_Vector);
     Velocity& operator -= (const oxygine::Vector2& a_Vector);
     Velocity& operator -= (const Velocity& a_Vector);
     template <typename T>
-    Velocity& operator *= (T a_Value);
+    Velocity operator *= (T a_Value);
     template <typename T>
-    Velocity& operator /= (T a_Value);
+    Velocity operator /= (T a_Value);
 
+    void Normalize();
+
+public:
+    oxygine::Vector2 ToVector2() const;
     Coordinate x, y;
 };
+
+template<typename T>
+std::enable_if_t<std::is_arithmetic<T>::value, T>
+operator + (T a_Value, const Velocity::Coordinate& a_Coord)
+{
+    return a_Value + a_Coord.m_Value;
+}
+
+template<typename T>
+std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
+operator + (T a_Value, const Velocity& a_Vel)
+{
+    return T(a_Value.x + a_Vel.x, a_Value.y + a_Vel.y);
+}
+
 
 static const Normal2 ZeroNormal = Normal2{0, 0};
 float RoundToNDigits(float, int /*a_N*/= 2);

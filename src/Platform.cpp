@@ -113,7 +113,7 @@ void Platform::SetDirection(const Vector2& a_NewDirection)
 
     if (a_NewDirection != oxygine::Vector2(0, 0))
     {
-        m_Direction.normalize();
+        m_Direction.Normalize();
         m_Direction *= m_MaxSpeed;
     }
 //            Service::RoundToOneDigit(m_Direction);

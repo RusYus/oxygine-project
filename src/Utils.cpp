@@ -82,6 +82,143 @@ Velocity::Coordinate::Coordinate(int a_Value)
     : m_Value(a_Value)
 {}
 
+Velocity::Coordinate::Type Velocity::Coordinate::operator + (const Coordinate& a_Value)
+{
+    return m_Value + a_Value.m_Value;
+}
+
+Velocity::Coordinate::Type Velocity::Coordinate::operator - (const Coordinate& a_Value)
+{
+    return m_Value - a_Value.m_Value;
+}
+
+void Velocity::Coordinate::operator += (const Coordinate& a_Value)
+{
+    m_Value += a_Value.m_Value;
+}
+
+void Velocity::Coordinate::operator -= (const Coordinate& a_Value)
+{
+    m_Value -= a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator < (const Coordinate& a_Value)
+{
+    return m_Value < a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator > (const Coordinate& a_Value)
+{
+    return m_Value > a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator <= (const Coordinate& a_Value)
+{
+    return m_Value <= a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator >= (const Coordinate& a_Value)
+{
+    return m_Value >= a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator == (const Coordinate& a_Value)
+{
+    return m_Value == a_Value.m_Value;
+}
+
+bool Velocity::Coordinate::operator != (const Coordinate& a_Value)
+{
+    return !operator == (a_Value);
+}
+
+Velocity::Coordinate::Type Velocity::Coordinate::operator * (const Coordinate& a_Value)
+{
+    return m_Value * a_Value.m_Value;
+}
+
+void Velocity::Coordinate::operator *= (const Coordinate& a_Value)
+{
+    m_Value *= a_Value.m_Value;
+}
+
+template <typename T>
+Velocity::Coordinate::Type Velocity::Coordinate::operator + (T a_Value)
+{
+    return m_Value + a_Value;
+}
+
+template <typename T>
+Velocity::Coordinate::Type Velocity::Coordinate::operator - (T a_Value)
+{
+    return m_Value - a_Value;
+}
+
+template <typename T>
+void Velocity::Coordinate::operator += (T a_Value)
+{
+    m_Value += a_Value;
+}
+
+template <typename T>
+void Velocity::Coordinate::operator -= (T a_Value)
+{
+    m_Value -= a_Value;
+}
+
+//template <typename T>
+//bool Velocity::Coordinate::operator < (T a_Value)
+//{
+//    return m_Value < a_Value;
+//}
+
+template <typename T>
+bool Velocity::Coordinate::operator > (T a_Value)
+{
+    return m_Value > a_Value;
+}
+
+template <typename T>
+bool Velocity::Coordinate::operator <= (T a_Value)
+{
+    return m_Value <= a_Value;
+}
+
+template <typename T>
+bool Velocity::Coordinate::operator >= (T a_Value)
+{
+    return m_Value >= a_Value;
+}
+
+template <typename T>
+bool Velocity::Coordinate::operator == (T a_Value)
+{
+    return m_Value == a_Value;
+}
+
+template <typename T>
+bool Velocity::Coordinate::operator != (T a_Value)
+{
+    return !operator == (a_Value);
+}
+
+template <typename T>
+Velocity::Coordinate::Type Velocity::Coordinate::operator * (T a_Value)
+{
+    return m_Value * a_Value;
+}
+
+template <typename T>
+void Velocity::Coordinate::operator *= (T a_Value)
+{
+    m_Value *= a_Value;
+}
+
+oxygine::Vector2 Velocity::ToVector2() const
+{
+    return oxygine::Vector2(this->x.m_Value, this->y.m_Value);
+}
+
 Velocity::Velocity()
     : x(0)
     , y(0)
@@ -126,17 +263,19 @@ Velocity Velocity::operator - (const Velocity& a_Vector)
 }
 
 template <class R>
-Velocity Velocity::operator * (R a_Vector) const
+Velocity Velocity::operator * (R a_Value) const
 {
-    Velocity temp = oxygine::Vector2::operator *(a_Vector);
+//    Velocity temp = oxygine::Vector2::operator *(a_Value);
+    Velocity temp(this->x * a_Value, this->y * a_Value);
     RoundToNDigits(temp);
     return temp;
 }
 
 template <class R>
-Velocity Velocity::operator / (R a_Vector) const
+Velocity Velocity::operator / (R a_Value) const
 {
-    Velocity temp = oxygine::Vector2::operator /(a_Vector);
+//    Velocity temp = oxygine::Vector2::operator /(a_Value);
+    Velocity temp(this->x / a_Value, this->y / a_Value);
     RoundToNDigits(temp);
     return temp;
 }
@@ -158,19 +297,31 @@ Velocity& Velocity::operator -= (const oxygine::Vector2& a_Vector)
 }
 
 template <typename T>
-Velocity& Velocity::operator *= (T a_Value)
+Velocity Velocity::operator *= (T a_Value)
 {
-    oxygine::Vector2::operator *=(a_Value);
+//    oxygine::Vector2::operator *=(a_Value);
+    this->x *= a_Value;
+    this->y *= a_Value;
     RoundToNDigits(*this);
     return (*this);
 }
 
 template <typename T>
-Velocity& Velocity::operator /= (T a_Value)
+Velocity Velocity::operator /= (T a_Value)
 {
-    oxygine::Vector2::operator /=(a_Value);
+//    oxygine::Vector2::operator /=(a_Value);
+    this->x /= a_Value;
+    this->y /= a_Value;
     RoundToNDigits(*this);
     return (*this);
+}
+
+void Velocity::Normalize()
+{
+    Coordinate::Type normal = 1.0 / oxygine::scalar::sqrt(this->x * this->x + this->y * this->y);
+
+    this->x *= normal;
+    this->y *= normal;
 }
 
 IdGenerator::TId IdGenerator::mId = 0;

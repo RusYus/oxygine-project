@@ -45,7 +45,7 @@ void ICarrier::SetPosition()
 
     for(auto& ray : *m_CarrierRays)
     {
-        ray.Original += m_Direction;
+        ray.Original += m_Direction.ToVector2();
     }
 }
 

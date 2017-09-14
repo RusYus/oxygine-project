@@ -35,7 +35,7 @@ std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const
 
 oxygine::Vector2 IMovable::GetDirection() const
 {
-    return m_Direction;
+    return m_Direction.ToVector2();
 }
 
 Service::Normal2 IMovable::GetCollisionNormal() const
@@ -75,11 +75,11 @@ void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 
 void IMovable::SetPosition()
 {
-    oxygine::Vector2 newPos = GetPosition() + m_Direction;
+    oxygine::Vector2 newPos = GetPosition() + m_Direction.ToVector2();
 
     for(auto& ray : *m_Rays)
     {
-        ray.Original += m_Direction;
+        ray.Original += m_Direction.ToVector2();
     }
 
     m_View->setPosition(newPos);

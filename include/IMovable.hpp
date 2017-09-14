@@ -34,7 +34,8 @@ protected:
     virtual void SetRays();
 
 protected:
-    oxygine::Vector2 m_Direction;
+//    oxygine::Vector2 m_Direction;
+    Service::Velocity m_Direction;
     Service::Normal2 m_CollisionNormal;
     std::shared_ptr<ICollisionManager> m_CollisionManager;
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
