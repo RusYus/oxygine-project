@@ -48,6 +48,6 @@ private:
     PointToPointMode m_RunningMode = PointToPointMode::BackToBack;
     typename PathNode::TId m_NextNodeId = 1;
     bool m_IsMovingReverse = false;
-    Service::Velocity m_DirectionUntilStop;
+    Model::Velocity m_DirectionUntilStop;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
 };

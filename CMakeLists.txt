@@ -39,6 +39,7 @@ set(
     include/Platform.hpp
     include/res.hpp
     include/Utils.hpp
+    include/Velocity.hpp
 )
 
 set(
