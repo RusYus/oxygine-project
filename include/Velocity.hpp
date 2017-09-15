@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #include "math/Vector2.h"
 
 namespace Model
@@ -13,69 +15,19 @@ private:
     public:
         using Type = float;
     public:
-        Coordinate(int a_Value)
-            : m_Value(a_Value)
-        {}
-
-        Type operator + (const Coordinate& a_Value)
-        {
-            return m_Value + a_Value.m_Value;
-        }
-
-        Type operator - (const Coordinate& a_Value)
-        {
-            return m_Value - a_Value.m_Value;
-        }
-
-        void operator += (const Coordinate& a_Value)
-        {
-            m_Value += a_Value.m_Value;
-        }
-
-        void operator -= (const Coordinate& a_Value)
-        {
-            m_Value -= a_Value.m_Value;
-        }
-
-        bool operator < (const Coordinate& a_Value)
-        {
-            return m_Value < a_Value.m_Value;
-        }
-
-        bool operator > (const Coordinate& a_Value)
-        {
-            return m_Value > a_Value.m_Value;
-        }
-
-        bool operator <= (const Coordinate& a_Value)
-        {
-            return m_Value <= a_Value.m_Value;
-        }
-
-        bool operator >= (const Coordinate& a_Value)
-        {
-            return m_Value >= a_Value.m_Value;
-        }
-
-        bool operator == (const Coordinate& a_Value)
-        {
-            return m_Value == a_Value.m_Value;
-        }
-
-        bool operator != (const Coordinate& a_Value)
-        {
-            return !operator == (a_Value);
-        }
-
-        Type operator * (const Coordinate& a_Value)
-        {
-            return m_Value * a_Value.m_Value;
-        }
-
-        void operator *= (const Coordinate& a_Value)
-        {
-            m_Value *= a_Value.m_Value;
-        }
+        Coordinate(int a_Value);
+        Type operator + (const Coordinate& a_Value);
+        Type operator - (const Coordinate& a_Value);
+        void operator += (const Coordinate& a_Value);
+        void operator -= (const Coordinate& a_Value);
+        bool operator < (const Coordinate& a_Value) const;
+        bool operator > (const Coordinate& a_Value) const;
+        bool operator <= (const Coordinate& a_Value) const;
+        bool operator >= (const Coordinate& a_Value) const;
+        bool operator == (const Coordinate& a_Value) const;
+        bool operator != (const Coordinate& a_Value) const;
+        Type operator * (const Coordinate& a_Value);
+        void operator *= (const Coordinate& a_Value);
 
         template <typename T>
         Type operator + (T a_Value)
@@ -102,37 +54,37 @@ private:
         }
 
         template <typename T>
-        bool operator < (T a_Value)
+        bool operator < (T a_Value) const
         {
             return m_Value < a_Value;
         }
 
         template <typename T>
-        bool operator > (T a_Value)
+        bool operator > (T a_Value) const
         {
             return m_Value > a_Value;
         }
 
         template <typename T>
-        bool operator <= (T a_Value)
+        bool operator <= (T a_Value) const
         {
             return m_Value <= a_Value;
         }
 
         template <typename T>
-        bool operator >= (T a_Value)
+        bool operator >= (T a_Value) const
         {
             return m_Value >= a_Value;
         }
 
         template <typename T>
-        bool operator == (T a_Value)
+        bool operator == (T a_Value) const
         {
             return m_Value == a_Value;
         }
 
         template <typename T>
-        bool operator != (T a_Value)
+        bool operator != (T a_Value) const
         {
             return !operator == (a_Value);
         }
@@ -153,68 +105,58 @@ private:
     };
 
 public:
-    Velocity()
-        : x(0)
-        , y(0)
-    {}
-
-    Velocity(float a_X, float a_Y)
-        : x(a_X)
-        , y(a_Y)
-    {}
-
-    Velocity(const oxygine::Vector2& a_Vector)
-        : x(a_Vector.x)
-        , y(a_Vector.y)
-    {}
-
-    Velocity operator + (const oxygine::Vector2& a_Vector)
+    Velocity();
+    Velocity(float a_X, float a_Y);
+    Velocity(const oxygine::Vector2& a_Vector);
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator + (const T& a_Vector)
     {
         Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
         RoundToNDigits(temp);
         return temp;
     }
 
-    Velocity operator + (const Velocity& a_Vector)
-    {
-        Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
-        RoundToNDigits(temp);
-        return temp;
-    }
-
-    Velocity operator - (const oxygine::Vector2& a_Vector)
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator - (const T& a_Vector)
     {
         Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
         RoundToNDigits(temp);
         return temp;
     }
 
-    Velocity operator - (const Velocity& a_Vector)
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator * (const T& a_Vector)
     {
-        Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
+        Velocity temp = Velocity(this->x * a_Vector.x, this->y * a_Vector.y);
         RoundToNDigits(temp);
         return temp;
     }
 
-    template <class R>
-    Velocity operator * (R a_Value)
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator / (const T& a_Vector)
     {
-    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
-        Velocity temp(this->x * a_Value, this->y * a_Value);
+        Velocity temp = Velocity(this->x / a_Vector.x, this->y / a_Vector.y);
         RoundToNDigits(temp);
         return temp;
     }
 
-    template <class R>
-    Velocity operator / (R a_Value)
-    {
-    //    Velocity temp = oxygine::Vector2::operator /(a_Value);
-        Velocity temp(this->x / a_Value, this->y / a_Value);
-        RoundToNDigits(temp);
-        return temp;
-    }
-
-    Velocity& operator += (const oxygine::Vector2& a_Vector)
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity&>
+    operator += (const T& a_Vector)
     {
         this->x += a_Vector.x;
         this->y += a_Vector.y;
@@ -222,7 +164,11 @@ public:
         return (*this);
     }
 
-    Velocity& operator -= (const oxygine::Vector2& a_Vector)
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity&>
+    operator -= (const T& a_Vector)
     {
         this->x -= a_Vector.x;
         this->y -= a_Vector.y;
@@ -231,9 +177,125 @@ public:
     }
 
     template <typename T>
-    Velocity operator *= (T a_Value)
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity&>
+    operator *= (const T& a_Vector)
     {
-    //    oxygine::Vector2::operator *=(a_Value);
+        this->x *= a_Vector.x;
+        this->y *= a_Vector.y;
+        RoundToNDigits(*this);
+        return (*this);
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, Velocity&>
+    operator /= (const T& a_Vector)
+    {
+        this->x /= a_Vector.x;
+        this->y /= a_Vector.y;
+        RoundToNDigits(*this);
+        return (*this);
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, bool>
+    operator == (const T& a_Vector) const
+    {
+        return this->x == a_Vector.x && this->y == a_Vector.y;
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        || std::is_same<std::decay_t<T>, Velocity>::value, bool>
+    operator != (const T& a_Vector) const
+    {
+        return !operator == (a_Vector);
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator + (T a_Value)
+    {
+    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
+        Velocity temp(this->x + a_Value, this->y + a_Value);
+        RoundToNDigits(temp);
+        return temp;
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator - (T a_Value)
+    {
+    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
+        Velocity temp(this->x - a_Value, this->y - a_Value);
+        RoundToNDigits(temp);
+        return temp;
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator * (T a_Value)
+    {
+    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
+        Velocity temp(this->x * a_Value, this->y * a_Value);
+        RoundToNDigits(temp);
+        return temp;
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator / (T a_Value)
+    {
+    //    Velocity temp = oxygine::Vector2::operator /(a_Value);
+        Velocity temp(this->x / a_Value, this->y / a_Value);
+        RoundToNDigits(temp);
+        return temp;
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator += (T a_Value)
+    {
+        this->x += a_Value;
+        this->y += a_Value;
+        RoundToNDigits(*this);
+        return (*this);
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator -= (T a_Value)
+    {
+        this->x -= a_Value;
+        this->y -= a_Value;
+        RoundToNDigits(*this);
+        return (*this);
+    }
+
+    template <typename T>
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator *= (T a_Value)
+    {
         this->x *= a_Value;
         this->y *= a_Value;
         RoundToNDigits(*this);
@@ -241,52 +303,25 @@ public:
     }
 
     template <typename T>
-    Velocity operator /= (T a_Value)
+    typename std::enable_if_t<
+        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
+        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    operator /= (T a_Value)
     {
-    //    oxygine::Vector2::operator /=(a_Value);
         this->x /= a_Value;
         this->y /= a_Value;
         RoundToNDigits(*this);
         return (*this);
     }
 public:
-    void Normalize()
-    {
-        Coordinate::Type normal = 1.0 / oxygine::scalar::sqrt(this->x * this->x + this->y * this->y);
-
-        this->x *= normal;
-        this->y *= normal;
-    }
-
+    void Normalize();
+    oxygine::Vector2 ToVector2() const;
 public:
-    oxygine::Vector2 ToVector2() const
-    {
-        return oxygine::Vector2(this->x.m_Value, this->y.m_Value);
-    }
     Coordinate x, y;
 private:
-    float RoundToNDigits(float a_Number, int a_N = 2)
-    {
-        if (a_N < 1 || a_N > 4)
-        {
-            a_N = 2;
-        }
-        int ratio = 10 * a_N;
-        return std::round(a_Number * ratio) / ratio;
-    }
-
-    void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2)
-    {
-        a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
-        a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
-    }
-
-    void RoundToNDigits(Velocity& a_Vector, int a_N = 2)
-    {
-        // TODO : Maybe another overloading to hide m_Value ?
-        a_Vector.x = RoundToNDigits(a_Vector.x.m_Value, a_N);
-        a_Vector.x = RoundToNDigits(a_Vector.y.m_Value, a_N);
-    }
+    float RoundToNDigits(float a_Number, int a_N = 2);
+    void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2);
+    void RoundToNDigits(Velocity& a_Vector, int a_N = 2);
 };
 
 template<typename T>

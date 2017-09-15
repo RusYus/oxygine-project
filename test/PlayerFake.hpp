@@ -28,5 +28,5 @@ public:
     }
 public:
     bool m_WasCollision;
-    oxygine::Vector2 m_NewDirection;
+    Model::Velocity m_NewDirection;
 };

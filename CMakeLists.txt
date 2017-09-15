@@ -56,6 +56,7 @@ set(
     src/Platform.cpp
     src/res.cpp
     src/Utils.cpp
+    src/Velocity.cpp
 )
 
 add_library(
