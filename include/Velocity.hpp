@@ -197,7 +197,7 @@ public:
     }
 
     template <class R>
-    Velocity operator * (R a_Value) const
+    Velocity operator * (R a_Value)
     {
     //    Velocity temp = oxygine::Vector2::operator *(a_Value);
         Velocity temp(this->x * a_Value, this->y * a_Value);
@@ -206,7 +206,7 @@ public:
     }
 
     template <class R>
-    Velocity operator / (R a_Value) const
+    Velocity operator / (R a_Value)
     {
     //    Velocity temp = oxygine::Vector2::operator /(a_Value);
         Velocity temp(this->x / a_Value, this->y / a_Value);
@@ -265,7 +265,7 @@ public:
     }
     Coordinate x, y;
 private:
-    float RoundToNDigits(float a_Number, int a_N)
+    float RoundToNDigits(float a_Number, int a_N = 2)
     {
         if (a_N < 1 || a_N > 4)
         {
@@ -275,13 +275,13 @@ private:
         return std::round(a_Number * ratio) / ratio;
     }
 
-    void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N)
+    void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2)
     {
         a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
         a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
     }
 
-    void RoundToNDigits(Velocity& a_Vector, int a_N)
+    void RoundToNDigits(Velocity& a_Vector, int a_N = 2)
     {
         // TODO : Maybe another overloading to hide m_Value ?
         a_Vector.x = RoundToNDigits(a_Vector.x.m_Value, a_N);
