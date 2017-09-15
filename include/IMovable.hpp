@@ -9,6 +9,7 @@
 #include "Constants.hpp"
 #include "IDrawable.hpp"
 #include "Utils.hpp"
+#include "Velocity.hpp"
 
 class IMovable : public virtual IDrawable
 {

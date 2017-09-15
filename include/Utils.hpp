@@ -3,7 +3,6 @@
 #include "oxygine-framework.h"
 
 #include "Constants.hpp"
-#include "Velocity.hpp"
 
 namespace Service
 {
@@ -37,7 +36,5 @@ public:
 };
 
 static const Normal2 ZeroNormal = Normal2{0, 0};
-void RoundToNDigits(Model::Velocity&, int /*a_N*/= 2);
-void RoundToNDigits(oxygine::Vector2&, int /*a_N*/= 2);
-float RoundToNDigits(float, int /*a_N*/= 2);
+
 }

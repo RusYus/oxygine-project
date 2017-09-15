@@ -2,8 +2,6 @@
 
 #include "math/Vector2.h"
 
-#include "Utils.hpp"
-
 namespace Model
 {
 
@@ -173,28 +171,28 @@ public:
     Velocity operator + (const oxygine::Vector2& a_Vector)
     {
         Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
     Velocity operator + (const Velocity& a_Vector)
     {
         Velocity temp = Velocity(this->x + a_Vector.x, this->y + a_Vector.y);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
     Velocity operator - (const oxygine::Vector2& a_Vector)
     {
         Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
     Velocity operator - (const Velocity& a_Vector)
     {
         Velocity temp = Velocity(this->x - a_Vector.x, this->y - a_Vector.y);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
@@ -203,7 +201,7 @@ public:
     {
     //    Velocity temp = oxygine::Vector2::operator *(a_Value);
         Velocity temp(this->x * a_Value, this->y * a_Value);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
@@ -212,7 +210,7 @@ public:
     {
     //    Velocity temp = oxygine::Vector2::operator /(a_Value);
         Velocity temp(this->x / a_Value, this->y / a_Value);
-        Service::RoundToNDigits(temp);
+        RoundToNDigits(temp);
         return temp;
     }
 
@@ -220,7 +218,7 @@ public:
     {
         this->x += a_Vector.x;
         this->y += a_Vector.y;
-        Service::RoundToNDigits(*this);
+        RoundToNDigits(*this);
         return (*this);
     }
 
@@ -228,7 +226,7 @@ public:
     {
         this->x -= a_Vector.x;
         this->y -= a_Vector.y;
-        Service::RoundToNDigits(*this);
+        RoundToNDigits(*this);
         return (*this);
     }
 
@@ -238,7 +236,7 @@ public:
     //    oxygine::Vector2::operator *=(a_Value);
         this->x *= a_Value;
         this->y *= a_Value;
-        Service::RoundToNDigits(*this);
+        RoundToNDigits(*this);
         return (*this);
     }
 
@@ -248,7 +246,7 @@ public:
     //    oxygine::Vector2::operator /=(a_Value);
         this->x /= a_Value;
         this->y /= a_Value;
-        Service::RoundToNDigits(*this);
+        RoundToNDigits(*this);
         return (*this);
     }
 public:
@@ -266,6 +264,29 @@ public:
         return oxygine::Vector2(this->x.m_Value, this->y.m_Value);
     }
     Coordinate x, y;
+private:
+    float RoundToNDigits(float a_Number, int a_N)
+    {
+        if (a_N < 1 || a_N > 4)
+        {
+            a_N = 2;
+        }
+        int ratio = 10 * a_N;
+        return std::round(a_Number * ratio) / ratio;
+    }
+
+    void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N)
+    {
+        a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
+        a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
+    }
+
+    void RoundToNDigits(Velocity& a_Vector, int a_N)
+    {
+        // TODO : Maybe another overloading to hide m_Value ?
+        a_Vector.x = RoundToNDigits(a_Vector.x.m_Value, a_N);
+        a_Vector.x = RoundToNDigits(a_Vector.y.m_Value, a_N);
+    }
 };
 
 template<typename T>
