@@ -319,6 +319,8 @@ public:
 public:
     Coordinate x, y;
 private:
+    static constexpr const unsigned int m_MAX_ROUNDING_DIGITS_COUNT = 4;
+    std::array<unsigned int, m_MAX_ROUNDING_DIGITS_COUNT> m_RoundingDegrees{100, 1000, 10000};
     float RoundToNDigits(float a_Number, int a_N = 2);
     void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2);
     void RoundToNDigits(Velocity& a_Vector, int a_N = 2);

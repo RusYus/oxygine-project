@@ -98,25 +98,25 @@ oxygine::Vector2 Velocity::ToVector2() const
 
 float Velocity::RoundToNDigits(float a_Number, int a_N)
 {
-    if (a_N < 1 || a_N > 4)
+    if (a_N < 2 || a_N > m_MAX_ROUNDING_DIGITS_COUNT)
     {
         a_N = 2;
     }
-    int ratio = 10 * a_N;
-    return std::round(a_Number * ratio) / ratio;
+
+    return std::round(a_Number * m_RoundingDegrees[a_N - 2]) / m_RoundingDegrees[a_N - 2];
 }
 
 void Velocity::RoundToNDigits(oxygine::Vector2& a_Vector, int a_N)
 {
     a_Vector.x = RoundToNDigits(a_Vector.x, a_N);
-    a_Vector.x = RoundToNDigits(a_Vector.y, a_N);
+    a_Vector.y = RoundToNDigits(a_Vector.y, a_N);
 }
 
 void Velocity::RoundToNDigits(Velocity& a_Vector, int a_N)
 {
     // TODO : Maybe another overloading to hide m_Value ?
     a_Vector.x = RoundToNDigits(a_Vector.x.m_Value, a_N);
-    a_Vector.x = RoundToNDigits(a_Vector.y.m_Value, a_N);
+    a_Vector.y = RoundToNDigits(a_Vector.y.m_Value, a_N);
 }
 
 }
