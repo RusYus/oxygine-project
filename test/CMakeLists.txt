@@ -16,6 +16,7 @@ set(
     PlayerFake.cpp
 	TestExample.cpp
 	Tests.cpp
+    VelocityTests.cpp
 )
 
 add_executable(

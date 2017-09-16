@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ostream>
 #include <type_traits>
 
 #include "math/Vector2.h"
@@ -100,8 +101,22 @@ private:
         {
             m_Value *= a_Value;
         }
-    public:
+
+        template<typename T>
+        std::enable_if_t<std::is_arithmetic<T>::value, T>
+        friend operator + (T a_Value, const Velocity::Coordinate& a_Coord)
+        {
+            return a_Value + a_Coord.m_Value;
+        }
+
+        friend std::ostream& operator << (std::ostream& a_Os, const Coordinate& a_Coord)
+        {
+            a_Os << a_Coord.m_Value;
+            return a_Os;
+        }
+    private:
         Type m_Value;
+        friend Velocity;
     };
 
 public:
@@ -313,6 +328,13 @@ public:
         RoundToNDigits(*this);
         return (*this);
     }
+
+    friend std::ostream& operator << (std::ostream& a_Os, const Velocity& a_Vel)
+    {
+        a_Os << a_Vel.x << ":" << a_Vel.y;
+        return a_Os;
+    }
+
 public:
     void Normalize();
     oxygine::Vector2 ToVector2() const;
@@ -325,13 +347,6 @@ private:
     void RoundToNDigits(oxygine::Vector2& a_Vector, int a_N = 2);
     void RoundToNDigits(Velocity& a_Vector, int a_N = 2);
 };
-
-template<typename T>
-std::enable_if_t<std::is_arithmetic<T>::value, T>
-operator + (T a_Value, const Velocity::Coordinate& a_Coord)
-{
-    return a_Value + a_Coord.m_Value;
-}
 
 template<typename T>
 std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
