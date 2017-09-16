@@ -16,7 +16,7 @@ private:
     public:
         using Type = float;
     public:
-        Coordinate(int a_Value);
+        Coordinate(Type a_Value);
         Type operator + (const Coordinate& a_Value);
         Type operator - (const Coordinate& a_Value);
         void operator += (const Coordinate& a_Value);
@@ -109,11 +109,18 @@ private:
             return a_Value + a_Coord.m_Value;
         }
 
+        // TODO : Move to cpp!
         friend std::ostream& operator << (std::ostream& a_Os, const Coordinate& a_Coord)
         {
             a_Os << a_Coord.m_Value;
             return a_Os;
         }
+
+        operator Type() const
+        {
+            return m_Value;
+        }
+
     private:
         Type m_Value;
         friend Velocity;
@@ -239,7 +246,6 @@ public:
         && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
     operator + (T a_Value)
     {
-    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
         Velocity temp(this->x + a_Value, this->y + a_Value);
         RoundToNDigits(temp);
         return temp;
@@ -251,7 +257,6 @@ public:
         && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
     operator - (T a_Value)
     {
-    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
         Velocity temp(this->x - a_Value, this->y - a_Value);
         RoundToNDigits(temp);
         return temp;
@@ -263,7 +268,6 @@ public:
         && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
     operator * (T a_Value)
     {
-    //    Velocity temp = oxygine::Vector2::operator *(a_Value);
         Velocity temp(this->x * a_Value, this->y * a_Value);
         RoundToNDigits(temp);
         return temp;
@@ -275,7 +279,6 @@ public:
         && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
     operator / (T a_Value)
     {
-    //    Velocity temp = oxygine::Vector2::operator /(a_Value);
         Velocity temp(this->x / a_Value, this->y / a_Value);
         RoundToNDigits(temp);
         return temp;
@@ -353,6 +356,13 @@ std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
 operator + (T a_Value, const Velocity& a_Vel)
 {
     return T(a_Value.x + a_Vel.x, a_Value.y + a_Vel.y);
+}
+
+template<typename T>
+std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
+operator + (T a_Value, const Velocity& a_Vel)
+{
+    return Velocity(a_Value + a_Vel.x, a_Value + a_Vel.y);
 }
 
 }

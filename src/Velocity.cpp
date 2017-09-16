@@ -3,7 +3,7 @@
 namespace Model
 {
 
-Velocity::Coordinate::Coordinate(int a_Value)
+Velocity::Coordinate::Coordinate(Velocity::Coordinate::Type a_Value)
     : m_Value(a_Value)
 {}
 

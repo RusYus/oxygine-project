@@ -7,6 +7,16 @@
 namespace Service
 {
 
+inline bool AreEqual(float a_Ls, float a_Rs)
+{
+    if (std::fabs(a_Ls) < Constants::EPSILON && std::fabs(a_Rs) < Constants::EPSILON)
+    {
+        return true;
+    }
+
+    return std::fabs(a_Ls - a_Rs) < Constants::EPSILON;
+}
+
 class IdGenerator
 {
 public:
