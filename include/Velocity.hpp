@@ -102,24 +102,13 @@ private:
             m_Value *= a_Value;
         }
 
-        template<typename T>
-        std::enable_if_t<std::is_arithmetic<T>::value, T>
-        friend operator + (T a_Value, const Velocity::Coordinate& a_Coord)
-        {
-            return a_Value + a_Coord.m_Value;
-        }
-
-        // TODO : Move to cpp!
         friend std::ostream& operator << (std::ostream& a_Os, const Coordinate& a_Coord)
         {
             a_Os << a_Coord.m_Value;
             return a_Os;
         }
 
-        operator Type() const
-        {
-            return m_Value;
-        }
+        operator Type() const;
 
     private:
         Type m_Value;
@@ -241,9 +230,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator + (T a_Value)
     {
         Velocity temp(this->x + a_Value, this->y + a_Value);
@@ -252,9 +239,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator - (T a_Value)
     {
         Velocity temp(this->x - a_Value, this->y - a_Value);
@@ -263,9 +248,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator * (T a_Value)
     {
         Velocity temp(this->x * a_Value, this->y * a_Value);
@@ -274,9 +257,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator / (T a_Value)
     {
         Velocity temp(this->x / a_Value, this->y / a_Value);
@@ -285,9 +266,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator += (T a_Value)
     {
         this->x += a_Value;
@@ -297,9 +276,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator -= (T a_Value)
     {
         this->x -= a_Value;
@@ -309,9 +286,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator *= (T a_Value)
     {
         this->x *= a_Value;
@@ -321,9 +296,7 @@ public:
     }
 
     template <typename T>
-    typename std::enable_if_t<
-        !std::is_same<std::decay_t<T>, oxygine::Vector2>::value
-        && !std::is_same<std::decay_t<T>, Velocity>::value, Velocity>
+    typename std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
     operator /= (T a_Value)
     {
         this->x /= a_Value;
@@ -359,10 +332,10 @@ operator + (T a_Value, const Velocity& a_Vel)
 }
 
 template<typename T>
-std::enable_if_t<std::is_arithmetic<T>::value, Velocity>
-operator + (T a_Value, const Velocity& a_Vel)
+std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
+operator - (T a_Value, const Velocity& a_Vel)
 {
-    return Velocity(a_Value + a_Vel.x, a_Value + a_Vel.y);
+    return T(a_Value.x - a_Vel.x, a_Value.y - a_Vel.y);
 }
 
 }

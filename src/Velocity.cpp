@@ -67,6 +67,10 @@ void Velocity::Coordinate::operator *= (const Velocity::Coordinate& a_Value)
     m_Value *= a_Value.m_Value;
 }
 
+Velocity::Coordinate::operator Type() const
+{
+    return m_Value;
+}
 
 Velocity::Velocity()
     : x(0)

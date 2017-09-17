@@ -35,10 +35,6 @@ BOOST_AUTO_TEST_CASE(AdditionTest)
     BOOST_CHECK(Service::AreEqual(res.x, 4.4));
     BOOST_CHECK(Service::AreEqual(res.y, 5.5));
 
-    res = 4.4 + v;
-    BOOST_CHECK(Service::AreEqual(res.x, 5.5));
-    BOOST_CHECK(Service::AreEqual(res.y, 6.6));
-
     res = v + oxygine::Vector2(1.2, 2.3);
     BOOST_CHECK(Service::AreEqual(res.x, 2.3));
     BOOST_CHECK(Service::AreEqual(res.y, 4.5));
@@ -70,6 +66,47 @@ BOOST_AUTO_TEST_CASE(AdditionTest)
     BOOST_CHECK(Service::AreEqual(res.x, 7.7));
     BOOST_CHECK(Service::AreEqual(res.y, 11.7));
 }
+
+BOOST_AUTO_TEST_CASE(SubstractionTest)
+{
+    Velocity v(1.1, 2.2);
+
+    Velocity res = v - 3.3;
+    BOOST_CHECK(Service::AreEqual(res.x, -2.2));
+    BOOST_CHECK(Service::AreEqual(res.y, -1.1));
+
+    res = v - oxygine::Vector2(1.2, 2.4);
+    BOOST_CHECK(Service::AreEqual(res.x, -0.1));
+    BOOST_CHECK(Service::AreEqual(res.y, -0.2));
+
+    res = oxygine::Vector2(1.6, 2.1) - v;
+    BOOST_CHECK(Service::AreEqual(res.x, 0.5));
+    BOOST_CHECK(Service::AreEqual(res.y, -0.1));
+
+    res = v - Velocity(2.1, 3.9);
+    BOOST_CHECK(Service::AreEqual(res.x, -1.0));
+    BOOST_CHECK(Service::AreEqual(res.y, -1.7));
+
+    res = Velocity(2.6, 6.1) - v;
+    BOOST_CHECK(Service::AreEqual(res.x, 1.5));
+    BOOST_CHECK(Service::AreEqual(res.y, 3.9));
+
+    // -=
+    res = v;
+
+    res -= 3.3;
+    BOOST_CHECK(Service::AreEqual(res.x, -2.2));
+    BOOST_CHECK(Service::AreEqual(res.y, -1.1));
+
+    res -= oxygine::Vector2(1.2, 3.3);
+    BOOST_CHECK(Service::AreEqual(res.x, -3.4));
+    BOOST_CHECK(Service::AreEqual(res.y, -4.4));
+
+    res -= Velocity(2.1, 3.9);
+    BOOST_CHECK(Service::AreEqual(res.x, -5.5));
+    BOOST_CHECK(Service::AreEqual(res.y, -8.3));
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
 
