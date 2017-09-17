@@ -147,6 +147,46 @@ BOOST_AUTO_TEST_CASE(MultiplicationTest)
     BOOST_CHECK(Service::AreEqual(res.y, 168));
 }
 
+BOOST_AUTO_TEST_CASE(DivisionTest)
+{
+    Velocity v(600, 256);
+
+    Velocity res = v / 2;
+    BOOST_CHECK(Service::AreEqual(res.x, 300));
+    BOOST_CHECK(Service::AreEqual(res.y, 128));
+
+    res = v / oxygine::Vector2(3, 1);
+    BOOST_CHECK(Service::AreEqual(res.x, 200));
+    BOOST_CHECK(Service::AreEqual(res.y, 256));
+
+    res = oxygine::Vector2(1200, 1024) / v;
+    BOOST_CHECK(Service::AreEqual(res.x, 2));
+    BOOST_CHECK(Service::AreEqual(res.y, 4));
+
+    res = v / Velocity(60, 8);
+    BOOST_CHECK(Service::AreEqual(res.x, 10));
+    BOOST_CHECK(Service::AreEqual(res.y, 32));
+
+    res = Velocity(600, 512) / v;
+    BOOST_CHECK(Service::AreEqual(res.x, 1));
+    BOOST_CHECK(Service::AreEqual(res.y, 2));
+
+    // /=
+    res = v;
+
+    res /= 4;
+    BOOST_CHECK(Service::AreEqual(res.x, 150));
+    BOOST_CHECK(Service::AreEqual(res.y, 64));
+
+    res /= oxygine::Vector2(50, 8);
+    BOOST_CHECK(Service::AreEqual(res.x, 3));
+    BOOST_CHECK(Service::AreEqual(res.y, 8));
+
+    res /= Velocity(3, 4);
+    BOOST_CHECK(Service::AreEqual(res.x, 1));
+    BOOST_CHECK(Service::AreEqual(res.y, 2));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 }

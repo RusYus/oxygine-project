@@ -102,6 +102,18 @@ private:
             m_Value *= a_Value;
         }
 
+        template <typename T>
+        Type operator / (T a_Value)
+        {
+            return m_Value / a_Value;
+        }
+
+        template <typename T>
+        void operator /= (T a_Value)
+        {
+            m_Value /= a_Value;
+        }
+
         friend std::ostream& operator << (std::ostream& a_Os, const Coordinate& a_Coord)
         {
             a_Os << a_Coord.m_Value;
@@ -343,6 +355,13 @@ std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
 operator * (T a_Value, const Velocity& a_Vel)
 {
     return T(a_Value.x * a_Vel.x, a_Value.y * a_Vel.y);
+}
+
+template<typename T>
+std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
+operator / (T a_Value, const Velocity& a_Vel)
+{
+    return T(a_Value.x / a_Vel.x, a_Value.y / a_Vel.y);
 }
 
 }
