@@ -338,4 +338,11 @@ operator - (T a_Value, const Velocity& a_Vel)
     return T(a_Value.x - a_Vel.x, a_Value.y - a_Vel.y);
 }
 
+template<typename T>
+std::enable_if_t<std::is_base_of<oxygine::Vector2, T>::value, T>
+operator * (T a_Value, const Velocity& a_Vel)
+{
+    return T(a_Value.x * a_Vel.x, a_Value.y * a_Vel.y);
+}
+
 }
