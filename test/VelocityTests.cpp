@@ -187,6 +187,33 @@ BOOST_AUTO_TEST_CASE(DivisionTest)
     BOOST_CHECK(Service::AreEqual(res.y, 2));
 }
 
+BOOST_AUTO_TEST_CASE(MoreOrLessOrEqualThanTest)
+{
+    Velocity v(10, 20);
+
+    BOOST_CHECK(v != Velocity(20, 10));
+    BOOST_CHECK(v == Velocity(10, 20));
+
+    BOOST_CHECK(v != oxygine::Vector2(20, 10));
+    BOOST_CHECK(v == oxygine::Vector2(10, 20));
+
+    BOOST_CHECK(v.x > 5);
+    BOOST_CHECK(v.x >= 10);
+    BOOST_CHECK(v.x == 10);
+    BOOST_CHECK(v.x != 20);
+    BOOST_CHECK(v.x < 11);
+    BOOST_CHECK(v.x <= 10);
+
+    Velocity v2(12, 18);
+
+    BOOST_CHECK(!(v.x > v2.x));
+    BOOST_CHECK(!(v.x >= v2.x));
+    BOOST_CHECK(!(v.x == v2.x));
+    BOOST_CHECK(v.x != v2.x);
+    BOOST_CHECK(v.x < v2.x);
+    BOOST_CHECK(v.x <= v2.x);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 }
