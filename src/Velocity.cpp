@@ -78,13 +78,13 @@ Velocity::Velocity()
 {}
 
 Velocity::Velocity(float a_X, float a_Y)
-    : x(a_X)
-    , y(a_Y)
+    : x(RoundToNDigits(a_X))
+    , y(RoundToNDigits(a_Y))
 {}
 
 Velocity::Velocity(const oxygine::Vector2& a_Vector)
-    : x(a_Vector.x)
-    , y(a_Vector.y)
+    : x(RoundToNDigits(a_Vector.x))
+    , y(RoundToNDigits(a_Vector.y))
 {}
 
 void Velocity::Normalize()

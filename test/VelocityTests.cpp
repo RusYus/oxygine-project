@@ -214,6 +214,13 @@ BOOST_AUTO_TEST_CASE(MoreOrLessOrEqualThanTest)
     BOOST_CHECK(v.x <= v2.x);
 }
 
+BOOST_AUTO_TEST_CASE(RoundingTest)
+{
+    Velocity v1(2.3333333, 0.168452);
+    BOOST_CHECK(Service::AreEqual(v1.x, 2.33));
+    BOOST_CHECK(Service::AreEqual(v1.y, 0.17));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 }
