@@ -17,6 +17,9 @@ inline bool AreEqual(float a_Ls, float a_Rs)
     return std::fabs(a_Ls - a_Rs) < Constants::EPSILON;
 }
 
+using TCoordinate = long long;
+typedef oxygine::VectorT2<TCoordinate> Vector2L;
+
 class IdGenerator
 {
 public:

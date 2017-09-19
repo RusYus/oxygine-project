@@ -45,6 +45,7 @@ set(
 set(
 	PROJECT_SOURCES
     src/BasisCamera.cpp
+    src/BasisObject.cpp
     src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp
