@@ -19,15 +19,15 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(300, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(300, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-//    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+//    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-//    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
+//    PathNode newPoint3 = PathNode(2, newPoint.Position + Service::Vector2L(150, -100));
 //    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-//    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
+//    PathNode newPoint4 = PathNode(3, newPoint.Position + Service::Vector2L(300, -100));
 //    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
-//    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
+//    PathNode newPoint5 = PathNode(4, newPoint.Position + Service::Vector2L(400, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
     SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
@@ -42,8 +42,8 @@ Platform::~Platform()
 
 bool Platform::IsAroundNode()
 {
-    const oxygine::Vector2 nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
-    return nodeDirection.length() <= GetDirection().length();
+    const Service::Vector2L nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
+    return nodeDirection.cast<oxygine::Vector2>().length() <= GetDirection().cast<oxygine::Vector2>().length();
 }
 
 void Platform::Update()
@@ -107,13 +107,13 @@ void Platform::doRender(const oxygine::RenderState& a_State)
     DrawCollisionRays(m_CarrierRays, a_State.transform, oxygine::Color::Blue);
 }
 
-void Platform::SetDirection(const Vector2& a_NewDirection)
+void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
 {
     ICarrier::SetDirection(a_NewDirection);
 
-    if (a_NewDirection != oxygine::Vector2(0, 0))
+    if (a_NewDirection != Service::Vector2L(0, 0))
     {
-        m_Direction.Normalize();
+        m_Direction.cast<oxygine::Vector2>().normalize();
         m_Direction *= m_MaxSpeed;
     }
 //            Service::RoundToOneDigit(m_Direction);

@@ -9,9 +9,9 @@ struct PlayerFake : public IMovable
 public:
     PlayerFake(int /*a_Width*/, int /*a_Height*/);
 
-    void SetupValues(int /*a_X*/, int /*a_Y*/, const oxygine::Vector2& /*a_Direction*/);
+    void SetupValues(int /*a_X*/, int /*a_Y*/, const Service::Vector2L& /*a_Direction*/);
 
-    void SetDirection(const oxygine::Vector2& a_NewDirection) override
+    void SetDirection(const Service::Vector2L& a_NewDirection) override
     {
         m_NewDirection = a_NewDirection;
     }
@@ -28,5 +28,5 @@ public:
     }
 public:
     bool m_WasCollision;
-    Model::Velocity m_NewDirection;
+    Service::Vector2L m_NewDirection;
 };

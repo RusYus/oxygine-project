@@ -18,12 +18,12 @@ IMovable::~IMovable()
     m_Rays->clear();
 }
 
-void IMovable::SetDirection(const oxygine::Vector2& aNewDirection)
+void IMovable::SetDirection(const Service::Vector2L& aNewDirection)
 {
     m_Direction = aNewDirection;
 }
 
-void IMovable::AddDirection(const oxygine::Vector2& aNewDirection)
+void IMovable::AddDirection(const Service::Vector2L& aNewDirection)
 {
     m_Direction += aNewDirection;
 }
@@ -33,9 +33,9 @@ std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const
     return m_Rays;
 }
 
-oxygine::Vector2 IMovable::GetDirection() const
+Service::Vector2L IMovable::GetDirection() const
 {
-    return m_Direction.ToVector2();
+    return m_Direction;
 }
 
 Service::Normal2 IMovable::GetCollisionNormal() const
@@ -75,11 +75,11 @@ void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 
 void IMovable::SetPosition()
 {
-    oxygine::Vector2 newPos = GetPosition() + m_Direction.ToVector2();
+    Service::Vector2L newPos = GetPosition() + m_Direction;
 
     for(auto& ray : *m_Rays)
     {
-        ray.Original += m_Direction.ToVector2();
+        ray.Original += m_Direction;
     }
 
     m_View->setPosition(newPos);
@@ -96,50 +96,50 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Up:
                 if (m_Direction.y < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 break;
             case Collision::RayDirection::Down:
                 if (m_Direction.y > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
                 break;
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 break;
 
             case Collision::RayDirection::Left:
                 if (m_Direction.x < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
                 break;
             case Collision::RayDirection::UpLeft:
                 if (m_Direction.x < 0 && m_Direction.y < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                    ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
                 break;
             case Collision::RayDirection::UpRight:
                 if (m_Direction.x > 0 && m_Direction.y < 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                    ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
                 break;
             case Collision::RayDirection::DownLeft:
                 if (m_Direction.x < 0 && m_Direction.y > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                    ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
                 break;
             case Collision::RayDirection::DownRight:
                 if (m_Direction.x > 0 && m_Direction.y > 0)
                 {
-                    ray.Destination = oxygine::Vector2(ray.Original + m_Direction);
+                    ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
                 break;
         }
@@ -156,12 +156,12 @@ void IMovable::SetRays()
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
-                                          oxygine::Vector2(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+                                          Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
                                           Collision::RayDirection::Down));
         // Top
-        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
-                                          oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY()),
+                                          Service::Vector2L(GetX() + i * actualIntervalLength, GetY()),
                                           Collision::RayDirection::Up));
     }
 
@@ -171,30 +171,30 @@ void IMovable::SetRays()
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
-                                          oxygine::Vector2(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+                                          Service::Vector2L(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Right));
         // Left
-        m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
-                                          oxygine::Vector2(GetX(), GetY() + i * actualIntervalLength),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY() + i * actualIntervalLength),
+                                          Service::Vector2L(GetX(), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Left));
     }
 
     // UpLeft diagonal.
-    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY()),
-                                       oxygine::Vector2(GetX(), GetY()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY()),
+                                       Service::Vector2L(GetX(), GetY()),
                                        Collision::RayDirection::UpLeft));
     // UpRight diagonal.
-    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY()),
-                                       oxygine::Vector2(GetX() + GetWidth(), GetY()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY()),
+                                       Service::Vector2L(GetX() + GetWidth(), GetY()),
                                        Collision::RayDirection::UpRight));
     // DownLeft diagonal.
-    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX(), GetY() + GetHeight()),
-                                       oxygine::Vector2(GetX(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY() + GetHeight()),
+                                       Service::Vector2L(GetX(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownLeft));
     // DownRight diagonal.
-    m_Rays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
-                                       oxygine::Vector2(GetX() + GetWidth(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY() + GetHeight()),
+                                       Service::Vector2L(GetX() + GetWidth(), GetY() + GetHeight()),
                                        Collision::RayDirection::DownRight));
 }
 

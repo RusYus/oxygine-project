@@ -27,8 +27,8 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         return;
     }
 
-    oxygine::Vector2 intersectionPoint;
-    oxygine::Vector2 newPoint = firstBody->GetDirection();
+    Service::Vector2L intersectionPoint;
+    Service::Vector2L newPoint = firstBody->GetDirection();
 
     const auto bodyId = firstBody->GetId();
 
@@ -55,8 +55,8 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
             if (possiblePassenger)
             {
-                oxygine::Vector2 minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
-                oxygine::Vector2 maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+                Service::Vector2L minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+                Service::Vector2L maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
 
                 // Calculating boundaries of the object out of it's rays (including destination).
                 // It's gonna be aabb for first body to check collision with.
@@ -129,7 +129,7 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 //                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
 
 
-//                    oxygine::Vector2 newDirectionForPlayer;
+//                    Service::Vector2L newDirectionForPlayer;
 ////                    newDirectionForPlayer.x = player->GetDirection().x;
 //                    newDirectionForPlayer.x = carrier->GetDirection().x;
 //                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
@@ -176,9 +176,9 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
 // TODO : Use better names, more comments.
 bool CollisionManager::Intersection(
-        const oxygine::Vector2& aBottomLeftAABB, const oxygine::Vector2& aTopRightAABB,
-        const oxygine::Vector2& aStartRay, const oxygine::Vector2& aEndRay,
-        oxygine::Vector2& outIntersection)
+        const Service::Vector2L& aBottomLeftAABB, const Service::Vector2L& aTopRightAABB,
+        const Service::Vector2L& aStartRay, const Service::Vector2L& aEndRay,
+        Service::Vector2L& outIntersection)
 {
 //    //StartRay and EndRay is in the AABB, so I presume, that there are no intersections.
 //    if ((aBottomLeftAABB.x < aStartRay.x && aStartRay.x < aTopRightAABB.x
@@ -278,7 +278,7 @@ bool CollisionManager::Intersection(
     if (f_low > f_high)
         return false;
 
-    oxygine::Vector2 b = aEndRay - aStartRay;
+    Service::Vector2L b = aEndRay - aStartRay;
 
 
     outIntersection = aStartRay + b * f_low;

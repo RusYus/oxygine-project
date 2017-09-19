@@ -22,8 +22,8 @@ public:
 
     void doRender(const oxygine::RenderState&);
 
-//    void SetDirection(const oxygine::Vector2&) override;
-    void SetDirectionFinalForStep(const oxygine::Vector2&);
+//    void SetDirection(const Service::Vector2L&) override;
+    void SetDirectionFinalForStep(const Service::Vector2L&);
 
 private:
     void Move(bool /*aIsMovingRight*/);

@@ -33,7 +33,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Distance + m_Threshold, 0));
+//        Service::Vector2L(m_Distance + m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -41,7 +41,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(-m_Distance - m_Threshold, 0));
+//        Service::Vector2L(-m_Distance - m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -49,7 +49,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
-//        oxygine::Vector2(0, m_Distance + m_Threshold));
+//        Service::Vector2L(0, m_Distance + m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -57,7 +57,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
-//        oxygine::Vector2(0, -m_Distance - m_Threshold));
+//        Service::Vector2L(0, -m_Distance - m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}
@@ -68,7 +68,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Distance + m_Threshold, m_Threshold));
+//        Service::Vector2L(m_Distance + m_Threshold, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -76,7 +76,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(-m_Distance - m_Threshold, -m_Threshold));
+//        Service::Vector2L(-m_Distance - m_Threshold, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -84,7 +84,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
-//        oxygine::Vector2(m_Threshold, m_Distance + m_Threshold));
+//        Service::Vector2L(m_Threshold, m_Distance + m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -92,7 +92,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
-//        oxygine::Vector2(-m_Threshold, -m_Distance - m_Threshold));
+//        Service::Vector2L(-m_Threshold, -m_Distance - m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}
@@ -103,7 +103,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth() - m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Distance, 0));
+//        Service::Vector2L(m_Distance, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -111,7 +111,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() + m_Distance,
 //        m_Ground.GetY(),
-//        oxygine::Vector2(-m_Distance, 0));
+//        Service::Vector2L(-m_Distance, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -119,7 +119,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight() - m_Distance,
-//        oxygine::Vector2(0, m_Distance));
+//        Service::Vector2L(0, m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -127,7 +127,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() + m_Ground.GetHeight() + m_Distance,
-//        oxygine::Vector2(0, -m_Distance));
+//        Service::Vector2L(0, -m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}
@@ -138,7 +138,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Threshold, 0));
+//        Service::Vector2L(m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -146,7 +146,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(-m_Threshold, 0));
+//        Service::Vector2L(-m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -154,7 +154,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight(),
-//        oxygine::Vector2(0, m_Threshold));
+//        Service::Vector2L(0, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -162,7 +162,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() + m_Ground.GetHeight(),
-//        oxygine::Vector2(0, -m_Threshold));
+//        Service::Vector2L(0, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}
@@ -173,7 +173,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(-m_Threshold, 0));
+//        Service::Vector2L(-m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -181,7 +181,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Threshold, 0));
+//        Service::Vector2L(m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -189,7 +189,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight(),
-//        oxygine::Vector2(0, -m_Threshold));
+//        Service::Vector2L(0, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -197,7 +197,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() + m_Ground.GetHeight(),
-//        oxygine::Vector2(0, m_Threshold));
+//        Service::Vector2L(0, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 //}
@@ -208,7 +208,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(0, -m_Threshold));
+//        Service::Vector2L(0, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -216,7 +216,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth(),
 //        m_Ground.GetY() + m_Ground.GetHeight(),
-//        oxygine::Vector2(0, m_Threshold));
+//        Service::Vector2L(0, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -224,7 +224,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight(),
-//        oxygine::Vector2(m_Threshold, 0));
+//        Service::Vector2L(m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 
@@ -232,7 +232,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth(),
 //        m_Ground.GetY() + m_Ground.GetHeight(),
-//        oxygine::Vector2(-m_Threshold, 0));
+//        Service::Vector2L(-m_Threshold, 0));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(!m_Player.CollisionTookPlace());
 //}
@@ -243,7 +243,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth(),
 //        m_Ground.GetY(),
-//        oxygine::Vector2(m_Threshold, -m_Threshold));
+//        Service::Vector2L(m_Threshold, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -251,7 +251,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth(),
 //        m_Ground.GetY() + m_Ground.GetHeight() - m_Player.GetHeight(),
-//        oxygine::Vector2(-m_Threshold, m_Threshold));
+//        Service::Vector2L(-m_Threshold, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -259,7 +259,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX(),
 //        m_Ground.GetY() - m_Player.GetHeight(),
-//        oxygine::Vector2(m_Threshold, m_Threshold));
+//        Service::Vector2L(m_Threshold, m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -267,7 +267,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() - m_Player.GetWidth(),
 //        m_Ground.GetY() + m_Ground.GetHeight(),
-//        oxygine::Vector2(-m_Threshold, -m_Threshold));
+//        Service::Vector2L(-m_Threshold, -m_Threshold));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}
@@ -278,7 +278,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
 //        m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
-//        oxygine::Vector2(m_Distance, m_Distance));
+//        Service::Vector2L(m_Distance, m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -286,7 +286,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
 //        m_Ground.GetY() - m_Player.GetHeight() - m_Threshold,
-//        oxygine::Vector2(-m_Distance, m_Distance));
+//        Service::Vector2L(-m_Distance, m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -294,7 +294,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() - m_Player.GetWidth() - m_Threshold,
 //        m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
-//        oxygine::Vector2(m_Distance, -m_Distance));
+//        Service::Vector2L(m_Distance, -m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 
@@ -302,7 +302,7 @@ struct CollisionManagerFixture
 //    m_Player.SetupValues(
 //        m_Ground.GetX() + m_Ground.GetWidth() + m_Threshold,
 //        m_Ground.GetY() + m_Ground.GetHeight() + m_Threshold,
-//        oxygine::Vector2(-m_Distance, -m_Distance));
+//        Service::Vector2L(-m_Distance, -m_Distance));
 //    m_Manager.CheckCollisions(0);
 //    BOOST_CHECK(m_Player.CollisionTookPlace());
 //}

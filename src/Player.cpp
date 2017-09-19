@@ -25,7 +25,7 @@ spActor Player::GetView() const
 void Player::Init(spEventProxy aEventProxy)
 {
 //    m_View = new Actor;
-    oxygine::Vector2 pos = getStage()->getSize() / 2;
+//    Service::Vector2L pos = getStage()->getSize() / 2;
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
@@ -40,7 +40,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
 
-    m_Direction = oxygine::Vector2();
+    m_Direction = Service::Vector2L();
 
     SetRays();
 }
@@ -161,7 +161,7 @@ void Player::SetPosition()
 
 }
 
-//void Player::SetDirection(const oxygine::Vector2& aNewDirection)
+//void Player::SetDirection(const Service::Vector2L& aNewDirection)
 //{
 //    if (!m_IsDirectionFinalForTheseStep)
 //    {
@@ -169,7 +169,7 @@ void Player::SetPosition()
 //    }
 //}
 
-void Player::SetDirectionFinalForStep(const oxygine::Vector2& aNewDirection)
+void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
 {
     if (!m_IsDirectionFinalForTheseStep)
     {

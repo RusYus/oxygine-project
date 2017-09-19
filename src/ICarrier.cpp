@@ -45,7 +45,7 @@ void ICarrier::SetPosition()
 
     for(auto& ray : *m_CarrierRays)
     {
-        ray.Original += m_Direction.ToVector2();
+        ray.Original += m_Direction;
     }
 }
 
@@ -55,7 +55,7 @@ void ICarrier::UpdateRays()
 
     for(auto& ray : *m_CarrierRays)
     {
-        ray.Destination = oxygine::Vector2(ray.Original.x, ray.Original.y - m_RayLength);
+        ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y - m_RayLength);
     }
 }
 
@@ -71,8 +71,8 @@ void ICarrier::SetRays()
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Top
-        m_CarrierRays->emplace_back(Collision::Ray(oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
-                                          oxygine::Vector2(GetX() + i * actualIntervalLength, GetY()),
+        m_CarrierRays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY()),
+                                          Service::Vector2L(GetX() + i * actualIntervalLength, GetY()),
                                           Collision::RayDirection::Up));
     }
 }

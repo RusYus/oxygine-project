@@ -47,8 +47,8 @@ private:
     void HandleIntersection(
         FirstBody* a_First,
         Collision::CollisionInfo& a_Sides,
-        oxygine::Vector2& a_IntersectionPoint,
-        oxygine::Vector2& a_NewPoint)
+        Service::Vector2L& a_IntersectionPoint,
+        Service::Vector2L& a_NewPoint)
     {
         if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
         {
@@ -118,8 +118,8 @@ private:
                 continue;
             }
             if (Intersection(
-                    oxygine::Vector2(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
-                    oxygine::Vector2(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
+                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
+                    Service::Vector2L(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
                     ray.Original,
                     ray.Destination,
                     a_IntersectionPoint))
@@ -214,11 +214,11 @@ private:
                 continue;
             }
 
-            oxygine::Vector2 intersectionPoint;
+            Service::Vector2L intersectionPoint;
 
             if (Intersection(
-                    oxygine::Vector2(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
-                    oxygine::Vector2(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
+                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
+                    Service::Vector2L(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
                     ray.Original,
                     ray.Destination,
                     intersectionPoint))
@@ -231,9 +231,9 @@ private:
     }
 
     bool Intersection(
-        const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
-        const oxygine::Vector2& /*startRay*/, const oxygine::Vector2& /*endRay*/,
-        oxygine::Vector2& /*intersection*/);
+        const Service::Vector2L& /*bottomLeftAABB*/, const Service::Vector2L& /*topRightAABB*/,
+        const Service::Vector2L& /*startRay*/, const Service::Vector2L& /*endRay*/,
+        Service::Vector2L& /*intersection*/);
 
 private:
     std::unordered_map<TKey, TValue> m_Bodies;

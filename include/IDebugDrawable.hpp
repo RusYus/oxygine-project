@@ -56,14 +56,14 @@ public:
     bool GetDebugDraw() const { return m_DebugDraw; }
 
 protected:
-    void CreateCircleVertices(const oxygine::Vector2& a_Center, int a_Radius)
+    void CreateCircleVertices(const Service::Vector2L& a_Center, int a_Radius)
     {
         const float k_increment = 2.0f * MATH_PI / CIRCLE_SEGMENTS;
         float theta = 0.0f;
 
         for (int i = 0; i < CIRCLE_SEGMENTS; ++i)
         {
-            oxygine::Vector2 v  = oxygine::Vector2(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
+            Service::Vector2L v  = Service::Vector2L(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
             v *=a_Radius;
             v += a_Center;
             m_Vertices[i] = v;
@@ -110,7 +110,7 @@ protected:
             {
                 m_Vertices[0] = ray.Original;
                 // actual difference is to small, so I need to increase it visually.
-                oxygine::Vector2 diff = ray.Destination - ray.Original;
+                Service::Vector2L diff = ray.Destination - ray.Original;
                 if (diff.x > 0)
                     diff.x += 20;
                 if (diff.x < 0)
@@ -133,7 +133,7 @@ protected:
 protected:
     static const int MAX_VERTICES = 64;
     static const int CIRCLE_SEGMENTS = 16;
-    oxygine::Vector2 m_Vertices[MAX_VERTICES];
+    Service::Vector2L m_Vertices[MAX_VERTICES];
     bool m_DebugDraw = false;
     typename oxygine::ShaderProgramGL* m_ShaderProgram;
 };

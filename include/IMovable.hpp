@@ -20,10 +20,10 @@ public:
 
     void BindCollisionManager(const std::shared_ptr<ICollisionManager>&);
 
-    virtual void SetDirection(const oxygine::Vector2&);
-    virtual void AddDirection(const oxygine::Vector2&);
+    virtual void SetDirection(const Service::Vector2L&);
+    virtual void AddDirection(const Service::Vector2L&);
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
-    virtual oxygine::Vector2 GetDirection() const;
+    virtual Service::Vector2L GetDirection() const;
     virtual Service::Normal2 GetCollisionNormal() const;
     virtual void SetCollisionNormal(const Service::Normal2&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
@@ -35,8 +35,7 @@ protected:
     virtual void SetRays();
 
 protected:
-//    oxygine::Vector2 m_Direction;
-    Model::Velocity m_Direction;
+    Service::Vector2L m_Direction;
     Service::Normal2 m_CollisionNormal;
     std::shared_ptr<ICollisionManager> m_CollisionManager;
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
