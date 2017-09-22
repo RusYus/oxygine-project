@@ -29,7 +29,8 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_View->setPosition(100, 200);
+    m_Position.set(10000, 20000);
+    m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -195,6 +196,7 @@ void Player::Update(const UpdateState& us)
 //        std::cout << "Reseting direction x!!!" << std::endl;
 //    }
 
+    // TODO : Correct scaling!
     m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;

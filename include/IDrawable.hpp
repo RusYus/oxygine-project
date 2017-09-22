@@ -18,8 +18,10 @@ public:
 
     virtual ~IDrawable() = default;
 
-    inline float GetWidth() const override { return (m_View.get() ? m_View->getWidth() : .0f); }
-    inline float GetHeight() const override { return (m_View.get() ? m_View->getHeight() : .0f); }
+    inline Service::TCoordinate GetWidth() const override { return Service::ConvertFromOxygine((m_View.get() ? m_View->getWidth() : .0f)); }
+    inline Service::TCoordinate GetHeight() const override { return Service::ConvertFromOxygine((m_View.get() ? m_View->getHeight() : .0f)); }
+    inline float GetWidthRaw() const { return Service::ConvertFromOxygineRaw((m_View.get() ? m_View->getWidth() : .0f)); }
+    inline float GetHeightRaw() const { return Service::ConvertFromOxygineRaw((m_View.get() ? m_View->getHeight() : .0f)); }
 
 protected:
     oxygine::spActor m_View;

@@ -108,18 +108,18 @@ protected:
         {
             if (ray.Original != ray.Destination)
             {
-                m_Vertices[0] = ray.Original;
+                m_Vertices[0] = Service::Convert(ray.Original);
                 // actual difference is to small, so I need to increase it visually.
                 Service::Vector2L diff = ray.Destination - ray.Original;
                 if (diff.x > 0)
-                    diff.x += 20;
+                    diff.x += (20 * Service::Constants::SCALE);
                 if (diff.x < 0)
-                    diff.x -= 20;
+                    diff.x -= (20 * Service::Constants::SCALE);
                 if (diff.y > 0)
-                    diff.y += 20;
+                    diff.y += (20 * Service::Constants::SCALE);
                 if (diff.y < 0)
-                    diff.y -= 20;
-                m_Vertices[1] = ray.Original + diff;
+                    diff.y -= (20 * Service::Constants::SCALE);
+                m_Vertices[1] = Service::Convert(ray.Original + diff);
                 DrawPrimitives(2, a_Color);
             }
             else
@@ -133,7 +133,7 @@ protected:
 protected:
     static const int MAX_VERTICES = 64;
     static const int CIRCLE_SEGMENTS = 16;
-    Service::Vector2L m_Vertices[MAX_VERTICES];
+    oxygine::Vector2 m_Vertices[MAX_VERTICES];
     bool m_DebugDraw = false;
     typename oxygine::ShaderProgramGL* m_ShaderProgram;
 };

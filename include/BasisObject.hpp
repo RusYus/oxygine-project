@@ -16,18 +16,18 @@ public:
 
     virtual ~BasisObject() = default;
 
-    virtual inline float GetX() const
+    virtual inline Service::TCoordinate GetX() const
     {
         return m_Position.x;
     }
 
-    virtual inline float GetY() const
+    virtual inline Service::TCoordinate GetY() const
     {
         return m_Position.y;
     }
 
-    virtual inline float GetWidth() const = 0;
-    virtual inline float GetHeight() const = 0;
+    virtual inline Service::TCoordinate GetWidth() const = 0;
+    virtual inline Service::TCoordinate GetHeight() const = 0;
     virtual inline Service::Vector2L GetPosition() const
     {
         return m_Position;

@@ -77,12 +77,14 @@ void IMovable::SetPosition()
 {
     Service::Vector2L newPos = GetPosition() + m_Direction;
 
+    m_Position.set(newPos.x, newPos.y);
+
     for(auto& ray : *m_Rays)
     {
         ray.Original += m_Direction;
     }
 
-    m_View->setPosition(newPos);
+    m_View->setPosition(Service::Convert(newPos));
 }
 
 void IMovable::UpdateRays()
@@ -150,14 +152,14 @@ void IMovable::SetRays()
 {
     m_Rays->clear();
 
-    int actualIntervalsNumber = static_cast<int>(std::ceil(GetWidth() / Service::Constants::RAYCAST_INTERVAL));
-    float actualIntervalLength = GetWidth() / actualIntervalsNumber;
+    int actualIntervalsNumber = static_cast<int>(std::ceil(Service::ConvertFromOxygineRaw(GetWidth()) / Service::Constants::RAYCAST_INTERVAL));
+    long long actualIntervalLength = std::round(Service::ConvertFromOxygineRaw(GetWidth()) / actualIntervalsNumber);
     actualIntervalsNumber--;
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Bottom
-        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
-                                          Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + GetHeight()),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
+                                          Service::Vector2L(GetX() + i * actualIntervalLength, GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
                                           Collision::RayDirection::Down));
         // Top
         m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + i * actualIntervalLength, GetY()),
@@ -165,14 +167,14 @@ void IMovable::SetRays()
                                           Collision::RayDirection::Up));
     }
 
-    actualIntervalsNumber = static_cast<int>(std::ceil(GetHeight() / Service::Constants::RAYCAST_INTERVAL));
-    actualIntervalLength = GetHeight() / actualIntervalsNumber;
+    actualIntervalsNumber = static_cast<int>(std::ceil(Service::ConvertFromOxygineRaw(GetHeight()) / Service::Constants::RAYCAST_INTERVAL));
+    actualIntervalLength = std::round(Service::ConvertFromOxygineRaw(GetHeight()) / actualIntervalsNumber);
     actualIntervalsNumber--;
     for (int i = 0; i < actualIntervalsNumber + 2; ++i)
     {
         // Right
-        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
-                                          Service::Vector2L(GetX() + GetWidth(), GetY() + i * actualIntervalLength),
+        m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY() + i * actualIntervalLength),
+                                          Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY() + i * actualIntervalLength),
                                           Collision::RayDirection::Right));
         // Left
         m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY() + i * actualIntervalLength),
@@ -185,16 +187,16 @@ void IMovable::SetRays()
                                        Service::Vector2L(GetX(), GetY()),
                                        Collision::RayDirection::UpLeft));
     // UpRight diagonal.
-    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY()),
-                                       Service::Vector2L(GetX() + GetWidth(), GetY()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY()),
+                                       Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY()),
                                        Collision::RayDirection::UpRight));
     // DownLeft diagonal.
-    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY() + GetHeight()),
-                                       Service::Vector2L(GetX(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX(), GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
+                                       Service::Vector2L(GetX(), GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
                                        Collision::RayDirection::DownLeft));
     // DownRight diagonal.
-    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + GetWidth(), GetY() + GetHeight()),
-                                       Service::Vector2L(GetX() + GetWidth(), GetY() + GetHeight()),
+    m_Rays->emplace_back(Collision::Ray(Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
+                                       Service::Vector2L(GetX() + Service::ConvertFromOxygineRaw(GetWidth()), GetY() + Service::ConvertFromOxygineRaw(GetHeight())),
                                        Collision::RayDirection::DownRight));
 }
 
