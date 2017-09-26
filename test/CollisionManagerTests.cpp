@@ -19,7 +19,7 @@ struct CollisionManagerFixture
 
     CollisionManagerFixture()
         : m_Player(100, 100)
-        , m_Ground(oxygine::RectF(300, 100, 200, 50))
+        , m_Ground(oxygine::Rect(300, 100, 200, 50))
     {
         static_assert(m_Distance > m_Threshold, "Distance should be bigger than threshold!");
         m_Manager.AddBody(&m_Player);

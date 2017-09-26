@@ -163,10 +163,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 //        }
     if (newPoint != firstBody->GetDirection())
     {
-        if (newPoint.x != firstBody->GetDirection().x)
-        {
-            std::cout << "NewDirection (x):" << newPoint.x << "; old:" << firstBody->GetDirection().x << std::endl;
-        }
+//        if (newPoint.x != firstBody->GetDirection().x)
+//        {
+//            std::cout << "NewDirection (x):" << newPoint.x << "; old:" << firstBody->GetDirection().x << std::endl;
+//        }
 
         firstBody->SetDirection(newPoint);
     }

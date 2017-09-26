@@ -30,6 +30,11 @@ inline oxygine::Vector2 Convert(const Vector2L& a_Pos)
     return oxygine::Vector2(a_Pos.cast<oxygine::Vector2>() / Constants::SCALE);
 }
 
+inline oxygine::Vector2 Convert(const oxygine::Point& a_Pos)
+{
+    return oxygine::Vector2(a_Pos.cast<oxygine::Vector2>() / Constants::SCALE);
+}
+
 inline TCoordinate ConvertFromOxygine(float a_Value)
 {
     return static_cast<TCoordinate>(a_Value * Constants::SCALE);

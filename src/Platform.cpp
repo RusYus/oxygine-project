@@ -4,12 +4,13 @@
 
 #include "Platform.hpp"
 
-Platform::Platform(const oxygine::RectF& aRect)
+Platform::Platform(const oxygine::Rect& aRect)
     : m_DirectionUntilStop(m_Direction)
 {
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_View->setPosition(350, 450);
-    m_Box->setSize(aRect.getSize());
+    m_Position.set(35000, 45000);
+    m_View->setPosition(Service::Convert(m_Position));
+    m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -19,7 +20,7 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(300, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(30'000, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
@@ -43,6 +44,8 @@ Platform::~Platform()
 bool Platform::IsAroundNode()
 {
     const Service::Vector2L nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
+    auto q1 = nodeDirection.cast<oxygine::Vector2>().length();
+    auto q2 = GetDirection().cast<oxygine::Vector2>().length();
     return nodeDirection.cast<oxygine::Vector2>().length() <= GetDirection().cast<oxygine::Vector2>().length();
 }
 
@@ -102,7 +105,6 @@ void Platform::Update()
 
 void Platform::doRender(const oxygine::RenderState& a_State)
 {
-    // TODO : Use different color for carrier's rays.
     DrawCollisionRays(m_Rays, a_State.transform);
     DrawCollisionRays(m_CarrierRays, a_State.transform, oxygine::Color::Blue);
 }
@@ -113,8 +115,12 @@ void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
 
     if (a_NewDirection != Service::Vector2L(0, 0))
     {
-        m_Direction.cast<oxygine::Vector2>().normalize();
-        m_Direction *= m_MaxSpeed;
+//        m_Direction.cast<oxygine::Vector2>().normalize();
+        oxygine::Vector2 dirTemp = Service::Convert(m_Direction);
+        dirTemp.normalize();
+        // TODO : double multiplication by scale.s
+        m_Direction = Service::Convert(dirTemp);
+        m_Direction *= (m_MaxSpeed / Service::Constants::SCALE);
     }
 //            Service::RoundToOneDigit(m_Direction);
     m_DirectionUntilStop = m_Direction;
@@ -138,6 +144,7 @@ void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 void Platform::SetPosition()
 {
 //    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+    std::cout << "Platform:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
 
     ICarrier::SetPosition();
 
