@@ -11,6 +11,7 @@ Player::Player()
     , m_IsJumping(false)
     , m_IsDirectionFinalForTheseStep(false)
 {
+    std::cout << "Player ID:" << GetId() << std::endl;
 }
 
 Player::~Player()

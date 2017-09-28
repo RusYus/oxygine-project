@@ -7,6 +7,7 @@
 Platform::Platform(const oxygine::Rect& aRect)
     : m_DirectionUntilStop(m_Direction)
 {
+    std::cout << "Platform ID:" << GetId() << std::endl;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
     m_Position.set(35000, 45000);
     m_View->setPosition(Service::Convert(m_Position));

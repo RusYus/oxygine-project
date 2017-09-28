@@ -89,6 +89,7 @@ void IMovable::SetPosition()
 
 void IMovable::UpdateRays()
 {
+    std::cout << "Id:" << GetId() << std::endl;
     for(auto& ray : *m_Rays)
     {
         ray.Destination = ray.Original;
