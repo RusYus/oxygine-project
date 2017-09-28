@@ -201,6 +201,7 @@ void Player::Update(const UpdateState& us)
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
+    std::cout << "Player:-----------------" << std::endl;
     UpdateRays();
 
 //    std::cout << "Dt:" << us.dt << std::endl;

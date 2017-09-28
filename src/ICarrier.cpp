@@ -27,7 +27,7 @@ void ICarrier::AddPassenger(IMovable* a_Body)
     }
 
     m_Passengers->push_back(a_Body);
-    std::cout << "Adding passenger" << std::endl;
+//    std::cout << "Adding passenger" << std::endl;
 }
 
 void ICarrier::ClearPassengers()
@@ -89,7 +89,7 @@ void ICarrier::MovePassengers()
 
         const auto directionY = this->GetDirection().y - passenger->GetDirection().y;
         passenger->AddDirection({this->GetDirection().x, directionY});
-        std::cout << "Moving passenger" << std::endl;
+//        std::cout << "Moving passenger" << std::endl;
     }
 }
 

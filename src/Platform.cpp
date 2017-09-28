@@ -100,6 +100,7 @@ void Platform::Update()
         SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
     }
 
+    std::cout << "Platform:-----------------" << std::endl;
     UpdateRays();
 }
 
@@ -144,7 +145,7 @@ void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 void Platform::SetPosition()
 {
 //    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << std::endl;
-    std::cout << "Platform:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
+//    std::cout << "Platform:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
 
     ICarrier::SetPosition();
 
