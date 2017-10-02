@@ -22,6 +22,8 @@ public:
 
     virtual void SetDirection(const Service::Vector2L&);
     virtual void AddDirection(const Service::Vector2L&);
+    virtual void AddDirectionX(Service::TCoordinate);
+    virtual void AddDirectionY(Service::TCoordinate);
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
     virtual Service::Vector2L GetDirection() const;
     virtual Service::Normal2 GetCollisionNormal() const;

@@ -18,14 +18,25 @@ IMovable::~IMovable()
     m_Rays->clear();
 }
 
-void IMovable::SetDirection(const Service::Vector2L& aNewDirection)
+void IMovable::SetDirection(const Service::Vector2L& a_NewDirection)
 {
-    m_Direction = aNewDirection;
+    m_Direction = a_NewDirection;
 }
 
-void IMovable::AddDirection(const Service::Vector2L& aNewDirection)
+void IMovable::AddDirection(const Service::Vector2L& a_NewDirection)
 {
-    m_Direction += aNewDirection;
+    m_Direction += a_NewDirection;
+}
+
+void IMovable::AddDirectionX(Service::TCoordinate a_Value)
+{
+    m_Direction.x += a_Value;
+    std::cout << a_Value << std::endl;
+}
+
+void IMovable::AddDirectionY(Service::TCoordinate a_Value)
+{
+    m_Direction.y += a_Value;
 }
 
 std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const
@@ -89,7 +100,7 @@ void IMovable::SetPosition()
 
 void IMovable::UpdateRays()
 {
-    std::cout << "Id:" << GetId() << std::endl;
+    //std::cout << "Id:" << GetId() << std::endl;
     for(auto& ray : *m_Rays)
     {
         ray.Destination = ray.Original;
@@ -101,24 +112,24 @@ void IMovable::UpdateRays()
                 {
                     ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
-                std::cout << "Up:  Original   : " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "Up:  Original   : " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::Down:
                 if (m_Direction.y > 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
                 }
-                std::cout << "Down:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "Down:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
-                std::cout << "Right:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "Right:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
 
             case Collision::RayDirection::Left:
@@ -126,40 +137,40 @@ void IMovable::UpdateRays()
                 {
                     ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
                 }
-                std::cout << "Left:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "Left:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::UpLeft:
                 if (m_Direction.x < 0 && m_Direction.y < 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
-                std::cout << "UpLeft:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "UpLeft:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::UpRight:
                 if (m_Direction.x > 0 && m_Direction.y < 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
-                std::cout << "UpRight:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination  : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "UpRight:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination  : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::DownLeft:
                 if (m_Direction.x < 0 && m_Direction.y > 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
-                std::cout << "DownLeft:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination   : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "DownLeft:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination   : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
             case Collision::RayDirection::DownRight:
                 if (m_Direction.x > 0 && m_Direction.y > 0)
                 {
                     ray.Destination = Service::Vector2L(ray.Original + m_Direction);
                 }
-                std::cout << "DownRight:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
-                std::cout << "     Destination    : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
+                // std::cout << "DownRight:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
+                // std::cout << "     Destination    : " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
                 break;
         }
     }

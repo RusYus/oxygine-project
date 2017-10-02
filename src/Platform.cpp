@@ -9,7 +9,7 @@ Platform::Platform(const oxygine::Rect& aRect)
 {
     std::cout << "Platform ID:" << GetId() << std::endl;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_Position.set(35000, 45000);
+    m_Position.set(20'000, 45'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
@@ -21,7 +21,8 @@ Platform::Platform(const oxygine::Rect& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(30'000, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(0, -20'000));
+//    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(30'000, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(150, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
@@ -45,13 +46,12 @@ Platform::~Platform()
 bool Platform::IsAroundNode()
 {
     const Service::Vector2L nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
-    auto q1 = nodeDirection.cast<oxygine::Vector2>().length();
-    auto q2 = GetDirection().cast<oxygine::Vector2>().length();
     return nodeDirection.cast<oxygine::Vector2>().length() <= GetDirection().cast<oxygine::Vector2>().length();
 }
 
 void Platform::Update()
 {
+    std::cout << m_Position.y << std::endl;
     ICarrier::ClearPassengers();
 
     if (IsAroundNode())
@@ -101,7 +101,7 @@ void Platform::Update()
         SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
     }
 
-    std::cout << "Platform:-----------------" << std::endl;
+//    std::cout << "Platform:-----------------" << std::endl;
     UpdateRays();
 }
 

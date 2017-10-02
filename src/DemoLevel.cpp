@@ -67,7 +67,7 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
 
-    spPlatform platform = new Platform(Rect(40'000, 20'000, 15'000, 2'000));
+    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000));
     addChild(platform);
     m_Platform = platform;
 }

@@ -18,17 +18,17 @@ public:
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
     void ProcessMoveEvent(oxygine::Event*);
-    void Jump(oxygine::Event*);
-
+    void ProcessJumpEvent(oxygine::Event*);
     void doRender(const oxygine::RenderState&);
 
-//    void SetDirection(const Service::Vector2L&) override;
+    void SetDirection(const Service::Vector2L&) override;
     void SetDirectionFinalForStep(const Service::Vector2L&);
 
 private:
     void Move(bool /*aIsMovingRight*/);
     inline void Stop();
     void ProcessKeyboard();
+    void Jump();
 
 private:
     spEventProxy m_EventProxy;

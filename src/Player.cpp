@@ -40,16 +40,21 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
 
-    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
+    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
 
     m_Direction = Service::Vector2L();
 
     SetRays();
 }
 
-void Player::Jump(Event* /*aEvent*/)
+void Player::ProcessJumpEvent(oxygine::Event* /*aEvent*/)
 {
-//    std::cout << m_CollisionNormal.y << std::endl;
+
+}
+
+void Player::Jump()
+{
+    //    std::cout << m_CollisionNormal.y << std::endl;
     if (!m_IsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
@@ -117,7 +122,7 @@ void Player::ProcessKeyboard()
 
     if (oxygine::key::wasPressed(SDL_SCANCODE_SPACE))
     {
-        Jump(nullptr);
+        Jump();
     }
 }
 
@@ -163,13 +168,12 @@ void Player::SetPosition()
 
 }
 
-//void Player::SetDirection(const Service::Vector2L& aNewDirection)
-//{
-//    if (!m_IsDirectionFinalForTheseStep)
-//    {
-//        m_Direction = aNewDirection;
-//    }
-//}
+void Player::SetDirection(const Service::Vector2L& aNewDirection)
+{
+
+
+    IMovable::SetDirection(aNewDirection);
+}
 
 void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
 {
@@ -184,10 +188,9 @@ void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
     }
 }
 
-void Player::Update(const UpdateState& us)
+void Player::Update(const UpdateState& /*aUpdateState*/)
 {
     m_IsDirectionFinalForTheseStep = false;
-
     ProcessKeyboard();
 
 //    // Reseting direction, if collision in place.
@@ -197,12 +200,11 @@ void Player::Update(const UpdateState& us)
 //        std::cout << "Reseting direction x!!!" << std::endl;
 //    }
 
-    // TODO : Correct scaling!
-    m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
+    m_Direction.y += Service::Constants::GRAVITY;
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
-    std::cout << "Player:-----------------" << std::endl;
+//    std::cout << "Player:-----------------" << std::endl;
     UpdateRays();
 
 //    std::cout << "Dt:" << us.dt << std::endl;
