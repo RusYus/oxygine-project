@@ -115,10 +115,12 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
                 m_Rectangle.Height = maxCoords.y - minCoords.y;
 
                 ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
-                if (HandleCarrierIntersection(carrier))
+                Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};
+                if (HandleCarrierIntersection(carrier, additionalDirection))
                 {
 
                     std::cout << "Adding passenger" << std::endl;
+                    possiblePassenger->SetDirection(additionalDirection);
                     carrier->AddPassenger(possiblePassenger);
 
 //                    Player* player = dynamic_cast<Player*>(secondBody.first);

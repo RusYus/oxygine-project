@@ -9,7 +9,7 @@ Platform::Platform(const oxygine::Rect& aRect)
 {
     std::cout << "Platform ID:" << GetId() << std::endl;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_Position.set(20'000, 35'000);
+    m_Position.set(20'000, 25'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
@@ -21,7 +21,7 @@ Platform::Platform(const oxygine::Rect& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(0, 10'000));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(0, 15'000));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(30'000, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
 //    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(150, 0));
@@ -119,6 +119,9 @@ void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
 //        m_Direction.cast<oxygine::Vector2>().normalize();
         oxygine::Vector2 dirTemp = Service::Convert(m_Direction);
         dirTemp.normalize();
+        // TODO : Refactor!
+        dirTemp.x = std::round(dirTemp.x);
+        dirTemp.y = std::round(dirTemp.y);
         // TODO : double multiplication by scale.s
         m_Direction = Service::Convert(dirTemp);
         m_Direction *= (m_MaxSpeed / Service::Constants::SCALE);

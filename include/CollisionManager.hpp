@@ -195,7 +195,7 @@ private:
     }
 
     template<typename FirstBody>
-    bool HandleCarrierIntersection(FirstBody* a_First)
+    bool HandleCarrierIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint)
     {
         static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
 
@@ -223,6 +223,13 @@ private:
                     ray.Destination,
                     intersectionPoint))
             {
+                if (intersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                    || intersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+                {
+                    return false;
+                }
+
+                a_NewPoint.y = intersectionPoint.y -  m_Rectangle.Y - m_Rectangle.Height;
                 return true;
             }
         }

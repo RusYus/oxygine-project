@@ -86,14 +86,16 @@ void ICarrier::MovePassengers()
             std::cout << "Moving passengers: passenger is NULL!" << std::endl;
             continue;
         }
-        passenger->AddDirectionX(m_Direction.x);
 
-        // If not jumping, reset direction y (adding negative itself)
-        // and add carrier y.
-        if (passenger->GetDirection().y >= m_Direction.y)
-        {
-            passenger->AddDirectionY(-passenger->GetDirection().y + m_Direction.y);
-        }
+        passenger->AddDirection(m_Direction);
+//        passenger->AddDirectionX(m_Direction.x);
+
+//        // If not jumping, reset direction y (adding negative itself)
+//        // and add carrier y.
+//        if (passenger->GetDirection().y >= m_Direction.y)
+//        {
+//            passenger->AddDirectionY(-passenger->GetDirection().y + m_Direction.y);
+//        }
 //        std::cout << "Moving passenger" << std::endl;
     }
 }
