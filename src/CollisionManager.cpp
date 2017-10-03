@@ -118,6 +118,7 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
                 if (HandleCarrierIntersection(carrier))
                 {
 
+                    std::cout << "Adding passenger" << std::endl;
                     carrier->AddPassenger(possiblePassenger);
 
 //                    Player* player = dynamic_cast<Player*>(secondBody.first);

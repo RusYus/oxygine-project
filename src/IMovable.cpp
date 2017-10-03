@@ -21,22 +21,25 @@ IMovable::~IMovable()
 void IMovable::SetDirection(const Service::Vector2L& a_NewDirection)
 {
     m_Direction = a_NewDirection;
+    UpdateRays();
 }
 
 void IMovable::AddDirection(const Service::Vector2L& a_NewDirection)
 {
     m_Direction += a_NewDirection;
+    UpdateRays();
 }
 
 void IMovable::AddDirectionX(Service::TCoordinate a_Value)
 {
     m_Direction.x += a_Value;
-    std::cout << a_Value << std::endl;
+    UpdateRays();
 }
 
 void IMovable::AddDirectionY(Service::TCoordinate a_Value)
 {
     m_Direction.y += a_Value;
+    UpdateRays();
 }
 
 std::shared_ptr<std::vector<Collision::Ray>> IMovable::GetRays() const

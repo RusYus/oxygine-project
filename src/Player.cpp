@@ -30,7 +30,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(10000, 20000);
+    m_Position.set(20000, 20000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
@@ -128,7 +128,7 @@ void Player::ProcessKeyboard()
 
 void Player::SetPosition()
 {
-//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
@@ -166,13 +166,6 @@ void Player::SetPosition()
 ////                  << m_CollisionNormal.x << ":" << m_CollisionNormal.y
 //                  << std::endl;
 
-}
-
-void Player::SetDirection(const Service::Vector2L& aNewDirection)
-{
-
-
-    IMovable::SetDirection(aNewDirection);
 }
 
 void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
