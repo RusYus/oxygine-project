@@ -10,6 +10,8 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     m_Rectangle.Y = std::numeric_limits<int>::quiet_NaN();
     m_Rectangle.Width = -1;
     m_Rectangle.Height = -1;
+    m_Rectangle.WidthWithDirection = -1;
+    m_Rectangle.HeightWithDirection = -1;
 
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
 
@@ -111,8 +113,8 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
                 m_Rectangle.X = minCoords.x;
                 m_Rectangle.Y = minCoords.y;
-                m_Rectangle.Width = maxCoords.x - minCoords.x;
-                m_Rectangle.Height = maxCoords.y - minCoords.y;
+                m_Rectangle.WidthWithDirection = maxCoords.x - minCoords.x;
+                m_Rectangle.HeightWithDirection = maxCoords.y - minCoords.y;
 
                 ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
                 Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};

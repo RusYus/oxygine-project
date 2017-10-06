@@ -20,10 +20,12 @@ class CollisionManager : public virtual ICollisionManager
     using TValue = TBody;
     struct CollisionRectangle
     {
-        int X = std::numeric_limits<int>::quiet_NaN();
-        int Y = std::numeric_limits<int>::quiet_NaN();
+        Service::TCoordinate X = std::numeric_limits<int>::quiet_NaN();
+        Service::TCoordinate Y = std::numeric_limits<int>::quiet_NaN();
         int Width = -1;
         int Height = -1;
+        int WidthWithDirection = -1;
+        int HeightWithDirection = -1;
     };
 public:
     CollisionManager() = default;
@@ -199,7 +201,8 @@ private:
     {
         static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
 
-        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
+        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0
+            || m_Rectangle.WidthWithDirection <= 0 || m_Rectangle.HeightWithDirection <= 0)
         {
             std::cout << "Negative size" << std::endl;
             return false;
@@ -217,8 +220,8 @@ private:
             Service::Vector2L intersectionPoint;
 
             if (Intersection(
-                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
-                    Service::Vector2L(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
+                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.HeightWithDirection),
+                    Service::Vector2L(m_Rectangle.X + m_Rectangle.WidthWithDirection, m_Rectangle.Y),
                     ray.Original,
                     ray.Destination,
                     intersectionPoint))

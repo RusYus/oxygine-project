@@ -126,10 +126,13 @@ void Player::ProcessKeyboard()
     }
 }
 
+void Player::AddDirection(const Service::Vector2L& a_Direction)
+{
+    m_Direction += a_Direction;
+}
+
 void Player::SetPosition()
 {
-    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << std::endl;
-
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
@@ -194,6 +197,8 @@ void Player::Update(const UpdateState& /*aUpdateState*/)
 //    }
 
     m_Direction.y += Service::Constants::GRAVITY;
+
+    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 

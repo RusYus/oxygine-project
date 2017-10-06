@@ -128,6 +128,7 @@ void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
     }
 //            Service::RoundToOneDigit(m_Direction);
     m_DirectionUntilStop = m_Direction;
+    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 }
 
 void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
@@ -147,7 +148,6 @@ void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
 
 void Platform::SetPosition()
 {
-    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 //    std::cout << "Platform:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
 
     ICarrier::SetPosition();
