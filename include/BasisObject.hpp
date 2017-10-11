@@ -26,9 +26,9 @@ public:
         return m_Position.y;
     }
 
-    virtual inline Service::TCoordinate GetWidth() const = 0;
-    virtual inline Service::TCoordinate GetHeight() const = 0;
-    virtual inline Service::Vector2L GetPosition() const
+    virtual Service::TCoordinate GetWidth() const = 0;
+    virtual Service::TCoordinate GetHeight() const = 0;
+    virtual Service::Vector2L GetPosition() const
     {
         return m_Position;
     }
