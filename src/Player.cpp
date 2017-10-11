@@ -140,6 +140,8 @@ void Player::SetPosition()
         std::cout << "Reseting direction x!!!" << std::endl;
     }
 
+    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+
     IMovable::SetPosition();
 
     if (m_DebugDraw)

@@ -6,12 +6,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
     Collision::CollisionInfo collisionSides;
 
-    m_Rectangle.X = std::numeric_limits<int>::quiet_NaN();
-    m_Rectangle.Y = std::numeric_limits<int>::quiet_NaN();
-    m_Rectangle.Width = -1;
-    m_Rectangle.Height = -1;
-    m_Rectangle.WidthWithDirection = -1;
-    m_Rectangle.HeightWithDirection = -1;
+    m_Rectangle.Width = 0;
+    m_Rectangle.Height = 0;
+    m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
+    m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
 
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
 
@@ -45,10 +43,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
         // Setting collision boundaries for second body.
         // TODO : Check if conversion from secondBody.first needed.
-        m_Rectangle.X = secondBody.first->GetX();
-        m_Rectangle.Y = secondBody.first->GetY();
         m_Rectangle.Width = secondBody.first->GetWidth();
         m_Rectangle.Height = secondBody.first->GetHeight();
+        m_Rectangle.bottomLeft.set(secondBody.first->GetX(), secondBody.first->GetY() + secondBody.first->GetHeight());
+        m_Rectangle.topRight.set(secondBody.first->GetX() + secondBody.first->GetWidth(), secondBody.first->GetY());
 
         if (dynamic_cast<ICarrier*>(firstBody))
         {
@@ -56,64 +54,84 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
             if (possiblePassenger)
             {
-                Service::Vector2L minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
-                Service::Vector2L maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
-
-                // Calculating boundaries of the object out of it's rays (including destination).
-                // It's gonna be aabb for first body to check collision with.
-                auto checkMin = [&minCoords] (const auto& a_Ray)
+//                m_Rectangle.X += possiblePassenger->GetDirection().x;
+//                m_Rectangle.Y += possiblePassenger->GetDirection().y;
+                if (possiblePassenger->GetDirection().x >= 0)
                 {
-                    if (a_Ray.Original.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Original.x;
-                    }
-
-                    if (a_Ray.Original.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Original.y;
-                    }
-
-                    if (a_Ray.Destination.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Destination.x;
-                    }
-
-                    if (a_Ray.Destination.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Destination.y;
-                    }
-                };
-
-                auto checkMax = [&maxCoords] (const auto& a_Ray)
+                    m_Rectangle.topRight.x += possiblePassenger->GetDirection().x;
+                }
+                else
                 {
-                    if (a_Ray.Original.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Original.x;
-                    }
+                    m_Rectangle.bottomLeft.x += possiblePassenger->GetDirection().x;
+                }
+                if (possiblePassenger->GetDirection().y >= 0)
+                {
+                    m_Rectangle.bottomLeft.y += possiblePassenger->GetDirection().y;
+                }
+                else
+                {
+                    m_Rectangle.topRight.y += possiblePassenger->GetDirection().y;
+                }
+//                m_Rectangle.WidthWithDirection += possiblePassenger->GetDirection().x;
+//                m_Rectangle.HeightWithDirection += possiblePassenger->GetDirection().y;
+//                Service::Vector2L minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+//                Service::Vector2L maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
 
-                    if (a_Ray.Original.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Original.y;
-                    }
+//                // Calculating boundaries of the object out of it's rays (including destination).
+//                // It's gonna be aabb for first body to check collision with.
+//                auto checkMin = [&minCoords] (const auto& a_Ray)
+//                {
+//                    if (a_Ray.Original.x < minCoords.x)
+//                    {
+//                        minCoords.x = a_Ray.Original.x;
+//                    }
 
-                    if (a_Ray.Destination.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Destination.x;
-                    }
+//                    if (a_Ray.Original.y < minCoords.y)
+//                    {
+//                        minCoords.y = a_Ray.Original.y;
+//                    }
 
-                    if (a_Ray.Destination.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Destination.y;
-                    }
-                };
+//                    if (a_Ray.Destination.x < minCoords.x)
+//                    {
+//                        minCoords.x = a_Ray.Destination.x;
+//                    }
 
-                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
-                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
+//                    if (a_Ray.Destination.y < minCoords.y)
+//                    {
+//                        minCoords.y = a_Ray.Destination.y;
+//                    }
+//                };
 
-                m_Rectangle.X = minCoords.x;
-                m_Rectangle.Y = minCoords.y;
-                m_Rectangle.WidthWithDirection = maxCoords.x - minCoords.x;
-                m_Rectangle.HeightWithDirection = maxCoords.y - minCoords.y;
+//                auto checkMax = [&maxCoords] (const auto& a_Ray)
+//                {
+//                    if (a_Ray.Original.x > maxCoords.x)
+//                    {
+//                        maxCoords.x = a_Ray.Original.x;
+//                    }
+
+//                    if (a_Ray.Original.y > maxCoords.y)
+//                    {
+//                        maxCoords.y = a_Ray.Original.y;
+//                    }
+
+//                    if (a_Ray.Destination.x > maxCoords.x)
+//                    {
+//                        maxCoords.x = a_Ray.Destination.x;
+//                    }
+
+//                    if (a_Ray.Destination.y > maxCoords.y)
+//                    {
+//                        maxCoords.y = a_Ray.Destination.y;
+//                    }
+//                };
+
+//                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
+//                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
+
+//                m_Rectangle.X = minCoords.x;
+//                m_Rectangle.Y = minCoords.y;
+//                m_Rectangle.WidthWithDirection = maxCoords.x - minCoords.x;
+//                m_Rectangle.HeightWithDirection = maxCoords.y - minCoords.y;
 
                 ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
                 Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};

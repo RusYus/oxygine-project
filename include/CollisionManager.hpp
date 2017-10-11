@@ -20,12 +20,10 @@ class CollisionManager : public virtual ICollisionManager
     using TValue = TBody;
     struct CollisionRectangle
     {
-        Service::TCoordinate X = std::numeric_limits<int>::quiet_NaN();
-        Service::TCoordinate Y = std::numeric_limits<int>::quiet_NaN();
         int Width = -1;
         int Height = -1;
-        int WidthWithDirection = -1;
-        int HeightWithDirection = -1;
+        Service::Vector2L bottomLeft{std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN()};
+        Service::Vector2L topRight{std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN()};
     };
 public:
     CollisionManager() = default;
@@ -52,7 +50,8 @@ private:
         Service::Vector2L& a_IntersectionPoint,
         Service::Vector2L& a_NewPoint)
     {
-        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
+        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
+            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
         {
             std::cout << "Negative size" << std::endl;
             return;
@@ -120,11 +119,11 @@ private:
                 continue;
             }
             if (Intersection(
-                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
-                    Service::Vector2L(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
-                    ray.Original,
-                    ray.Destination,
-                    a_IntersectionPoint))
+                m_Rectangle.bottomLeft,
+                m_Rectangle.topRight,
+                ray.Original,
+                ray.Destination,
+                a_IntersectionPoint))
             {
                 switch (ray.Direction)
                 {
@@ -146,7 +145,7 @@ private:
 
                 case Collision::RayDirection::UpRight:
                     // If exactly on corner, considering it under (have to choose between under and right).
-                    if (a_IntersectionPoint.x == m_Rectangle.X)
+                    if (a_IntersectionPoint.x == m_Rectangle.bottomLeft.x)
                     {
                         handleRight();
                     }
@@ -158,7 +157,7 @@ private:
 
                 case Collision::RayDirection::UpLeft:
                     // If exactly on corner, considering it under (have to choose between under and left).
-                    if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
+                    if (a_IntersectionPoint.x == m_Rectangle.topRight.x)
                     {
                         handleLeft();
                     }
@@ -170,7 +169,7 @@ private:
 
                 case Collision::RayDirection::DownRight:
                     // If exactly on corner, considering it on top (have to choose between on top and right).
-                    if (a_IntersectionPoint.x == m_Rectangle.X)
+                    if (a_IntersectionPoint.x == m_Rectangle.bottomLeft.x)
                     {
                         handleRight();
                     }
@@ -182,7 +181,7 @@ private:
 
                 case Collision::RayDirection::DownLeft:
                     // If exactly on corner, considering it on top (have to choose between on top and left).
-                    if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
+                    if (a_IntersectionPoint.x == m_Rectangle.topRight.x)
                     {
                         handleLeft();
                     }
@@ -201,8 +200,8 @@ private:
     {
         static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
 
-        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0
-            || m_Rectangle.WidthWithDirection <= 0 || m_Rectangle.HeightWithDirection <= 0)
+        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
+            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
         {
             std::cout << "Negative size" << std::endl;
             return false;
@@ -220,11 +219,11 @@ private:
             Service::Vector2L intersectionPoint;
 
             if (Intersection(
-                    Service::Vector2L(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.HeightWithDirection),
-                    Service::Vector2L(m_Rectangle.X + m_Rectangle.WidthWithDirection, m_Rectangle.Y),
-                    ray.Original,
-                    ray.Destination,
-                    intersectionPoint))
+                m_Rectangle.bottomLeft,
+                m_Rectangle.topRight,
+                ray.Original,
+                ray.Destination,
+                intersectionPoint))
             {
                 if (intersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
                     || intersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
@@ -232,7 +231,7 @@ private:
                     return false;
                 }
 
-                a_NewPoint.y = intersectionPoint.y -  m_Rectangle.Y - m_Rectangle.Height;
+                a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
                 return true;
             }
         }
