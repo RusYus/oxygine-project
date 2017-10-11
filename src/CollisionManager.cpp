@@ -32,14 +32,13 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     Service::Vector2L intersectionPoint;
     Service::Vector2L newPoint = firstBody->GetDirection();
 
-    const auto bodyId = firstBody->GetId();
-
     for (auto& secondBodyIt : m_Bodies)
     {
         TValue secondBody = secondBodyIt.second;
 
         // Same body
-        if (bodyId == secondBody.first->GetId())
+        if (firstBody->GetId() == secondBody.first->GetId()
+            || firstBody->CarrierId == secondBody.first->GetId())
         {
             continue;
         }

@@ -6,7 +6,7 @@
 
 #include "BasisObject.hpp"
 
-class IDrawable : public Basis::BasisObject
+class IDrawable : public virtual Basis::BasisObject
 {
 public:
     IDrawable()

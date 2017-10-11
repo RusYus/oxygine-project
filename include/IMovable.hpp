@@ -36,6 +36,9 @@ protected:
     virtual void UpdateRays();
     virtual void SetRays();
 
+public:
+    Basis::BasisObject::TId CarrierId;
+
 protected:
     Service::Vector2L m_Direction;
     Service::Normal2 m_CollisionNormal;

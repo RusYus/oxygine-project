@@ -4,6 +4,7 @@
 IMovable::IMovable()
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
+    , CarrierId(Service::IdGenerator::UnknownId)
 {
 }
 

@@ -26,6 +26,7 @@ void ICarrier::AddPassenger(IMovable* a_Body)
         return;
     }
 
+    a_Body->CarrierId = m_Id;
     m_Passengers->push_back(a_Body);
 //    std::cout << "Adding passenger" << std::endl;
 }
@@ -33,6 +34,10 @@ void ICarrier::AddPassenger(IMovable* a_Body)
 void ICarrier::ClearPassengers()
 {
     assert(m_Passengers != nullptr);
+    for (auto& passenger : *m_Passengers)
+    {
+        passenger->CarrierId = Service::IdGenerator::UnknownId;
+    }
     m_Passengers->clear();
 //    std::cout << "Clear all passengers" << std::endl;
 }
