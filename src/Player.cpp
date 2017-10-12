@@ -47,6 +47,11 @@ void Player::Init(spEventProxy aEventProxy)
     SetRays();
 }
 
+bool Player::IsJumping() const
+{
+    return m_IsJumping;
+}
+
 void Player::ProcessJumpEvent(oxygine::Event* /*aEvent*/)
 {
 
@@ -141,6 +146,7 @@ void Player::SetPosition()
     }
 
     std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+    std::cout << "IsJumping:" << m_IsJumping << std::endl;
 
     IMovable::SetPosition();
 
@@ -151,14 +157,9 @@ void Player::SetPosition()
 
 //    std::cout << "Player:" << GetX() << ":" << GetY() << std::endl;
 
-    // If player doesn't stand on something, he can't jump.
-    if (m_CollisionNormal.y == -1)
+    if (m_CollisionNormal.y == -1 && m_IsJumping)
     {
         m_IsJumping = false;
-    }
-    else
-    {
-        m_IsJumping = true;
     }
 
 //    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y

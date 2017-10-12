@@ -138,6 +138,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
                 if (HandleCarrierIntersection(carrier, additionalDirection))
                 {
 
+                    if (dynamic_cast<Player*>(possiblePassenger) && dynamic_cast<Player*>(possiblePassenger)->IsJumping())
+                    {
+                        continue;
+                    }
                     std::cout << "Adding passenger" << std::endl;
                     possiblePassenger->SetDirection(additionalDirection);
                     carrier->AddPassenger(possiblePassenger);

@@ -21,6 +21,7 @@ public:
     void ProcessJumpEvent(oxygine::Event*);
     void doRender(const oxygine::RenderState&);
     void AddDirection(const Service::Vector2L&) override;
+    bool IsJumping() const;
 
     void SetDirectionFinalForStep(const Service::Vector2L&);
 

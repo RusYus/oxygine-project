@@ -93,6 +93,11 @@ void ICarrier::MovePassengers()
         }
 
         passenger->AddDirection(m_Direction);
+
+        // TODO : Refactor!
+        auto passengerNormal = passenger->GetCollisionNormal();
+        passengerNormal.y = -1;
+        passenger->SetCollisionNormal(passengerNormal);
 //        passenger->AddDirectionX(m_Direction.x);
 
 //        // If not jumping, reset direction y (adding negative itself)
