@@ -231,7 +231,11 @@ private:
                     return false;
                 }
 
-                a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                // This means that passenger coming from above.
+                if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                {
+                    a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                }
                 return true;
             }
         }
