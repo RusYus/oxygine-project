@@ -28,7 +28,7 @@ void ICarrier::AddPassenger(IMovable* a_Body)
 
     a_Body->CarrierId = m_Id;
     m_Passengers->push_back(a_Body);
-//    std::cout << "Adding passenger" << std::endl;
+    std::cout << "Adding passenger" << std::endl;
 }
 
 void ICarrier::ClearPassengers()
@@ -93,20 +93,7 @@ void ICarrier::MovePassengers()
         }
 
         passenger->AddDirection(m_Direction);
-
-        // TODO : Refactor!
-        auto passengerNormal = passenger->GetCollisionNormal();
-        passengerNormal.y = -1;
-        passenger->SetCollisionNormal(passengerNormal);
-//        passenger->AddDirectionX(m_Direction.x);
-
-//        // If not jumping, reset direction y (adding negative itself)
-//        // and add carrier y.
-//        if (passenger->GetDirection().y >= m_Direction.y)
-//        {
-//            passenger->AddDirectionY(-passenger->GetDirection().y + m_Direction.y);
-//        }
-//        std::cout << "Moving passenger" << std::endl;
+        passenger->AddCollisionNormal(Collision::CollisionInfoDown);
     }
 }
 

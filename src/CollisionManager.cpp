@@ -20,184 +20,94 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     }
     collisionSides.Reset();
 
-    IMovable* firstBody = dynamic_cast<IMovable*>(bodyIt->second.first);
-    if (!firstBody)
-    {
-        std::cout << "Can't cast to movable body!" << std::endl;
-        return;
-    }
-
+    IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
     Service::Vector2L intersectionPoint;
-    Service::Vector2L newPoint = firstBody->GetDirection();
+    Service::Vector2L newDirection = body->GetDirection();
 
     for (auto& secondBodyIt : m_Bodies)
     {
-        TValue secondBody = secondBodyIt.second;
+        Basis::BasisObject* secondBody = secondBodyIt.second.first;
+        if (!secondBody)
+        {
+            std::cout << "No second body!" << std::endl;
+            continue;
+        }
 
-        // Same body
-        if (firstBody->GetId() == secondBody.first->GetId()
-            || firstBody->CarrierId == secondBody.first->GetId())
+        // Don't check collisions if same body or it's carrier.
+        if (body->GetId() == secondBody->GetId()
+            || body->CarrierId == secondBody->GetId())
         {
             continue;
         }
 
         // Setting collision boundaries for second body.
-        // TODO : Check if conversion from secondBody.first needed.
-        m_Rectangle.Width = secondBody.first->GetWidth();
-        m_Rectangle.Height = secondBody.first->GetHeight();
-        m_Rectangle.bottomLeft.set(secondBody.first->GetX(), secondBody.first->GetY() + secondBody.first->GetHeight());
-        m_Rectangle.topRight.set(secondBody.first->GetX() + secondBody.first->GetWidth(), secondBody.first->GetY());
+        FillRectangleValues(*secondBody);
 
-        if (dynamic_cast<ICarrier*>(firstBody))
+        ICarrier* carrier = dynamic_cast<ICarrier*>(body);
+        if (carrier)
         {
-            IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody.first);
+            IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody);
 
             if (possiblePassenger)
             {
-//                m_Rectangle.X += possiblePassenger->GetDirection().x;
-//                m_Rectangle.Y += possiblePassenger->GetDirection().y;
-                if (possiblePassenger->GetDirection().x >= 0)
-                {
-                    m_Rectangle.topRight.x += possiblePassenger->GetDirection().x;
-                }
-                else
-                {
-                    m_Rectangle.bottomLeft.x += possiblePassenger->GetDirection().x;
-                }
-                if (possiblePassenger->GetDirection().y >= 0)
-                {
-                    m_Rectangle.bottomLeft.y += possiblePassenger->GetDirection().y;
-                }
-                else
-                {
-                    m_Rectangle.topRight.y += possiblePassenger->GetDirection().y;
-                }
-//                m_Rectangle.WidthWithDirection += possiblePassenger->GetDirection().x;
-//                m_Rectangle.HeightWithDirection += possiblePassenger->GetDirection().y;
-//                Service::Vector2L minCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
-//                Service::Vector2L maxCoords{possiblePassenger->GetX(), possiblePassenger->GetY()};
+                UpdateRectangleWithDirection(*possiblePassenger);
 
-//                // Calculating boundaries of the object out of it's rays (including destination).
-//                // It's gonna be aabb for first body to check collision with.
-//                auto checkMin = [&minCoords] (const auto& a_Ray)
-//                {
-//                    if (a_Ray.Original.x < minCoords.x)
-//                    {
-//                        minCoords.x = a_Ray.Original.x;
-//                    }
-
-//                    if (a_Ray.Original.y < minCoords.y)
-//                    {
-//                        minCoords.y = a_Ray.Original.y;
-//                    }
-
-//                    if (a_Ray.Destination.x < minCoords.x)
-//                    {
-//                        minCoords.x = a_Ray.Destination.x;
-//                    }
-
-//                    if (a_Ray.Destination.y < minCoords.y)
-//                    {
-//                        minCoords.y = a_Ray.Destination.y;
-//                    }
-//                };
-
-//                auto checkMax = [&maxCoords] (const auto& a_Ray)
-//                {
-//                    if (a_Ray.Original.x > maxCoords.x)
-//                    {
-//                        maxCoords.x = a_Ray.Original.x;
-//                    }
-
-//                    if (a_Ray.Original.y > maxCoords.y)
-//                    {
-//                        maxCoords.y = a_Ray.Original.y;
-//                    }
-
-//                    if (a_Ray.Destination.x > maxCoords.x)
-//                    {
-//                        maxCoords.x = a_Ray.Destination.x;
-//                    }
-
-//                    if (a_Ray.Destination.y > maxCoords.y)
-//                    {
-//                        maxCoords.y = a_Ray.Destination.y;
-//                    }
-//                };
-
-//                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMin);
-//                std::for_each(possiblePassenger->GetRays()->cbegin(), possiblePassenger->GetRays()->cend(), checkMax);
-
-//                m_Rectangle.X = minCoords.x;
-//                m_Rectangle.Y = minCoords.y;
-//                m_Rectangle.WidthWithDirection = maxCoords.x - minCoords.x;
-//                m_Rectangle.HeightWithDirection = maxCoords.y - minCoords.y;
-
-                ICarrier* carrier = dynamic_cast<ICarrier*>(firstBody);
                 Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};
                 if (HandleCarrierIntersection(carrier, additionalDirection))
                 {
-
+                    // If passenger is Player and is jumping, then ignore collision.
                     if (dynamic_cast<Player*>(possiblePassenger) && dynamic_cast<Player*>(possiblePassenger)->IsJumping())
                     {
                         continue;
                     }
-                    std::cout << "Adding passenger" << std::endl;
+
+                    // Set new direction to passenger (after first collision it's suposed to be 0).
                     possiblePassenger->SetDirection(additionalDirection);
                     carrier->AddPassenger(possiblePassenger);
-
-//                    Player* player = dynamic_cast<Player*>(secondBody.first);
-
-//                    std::cout << "Intersection:" <<
-//                              "Plat:" <<  carrier->GetX() << ":" << carrier->GetY() <<
-//                                 "; Dir:" << carrier->GetDirection().x << ":" << carrier->GetDirection().y << std::endl
-//                              << "Player:" << player->GetX() << ":" << player->GetY()
-//                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y << std::endl;
-
-
-//                    Service::Vector2L newDirectionForPlayer;
-////                    newDirectionForPlayer.x = player->GetDirection().x;
-//                    newDirectionForPlayer.x = carrier->GetDirection().x;
-//                    newDirectionForPlayer.y = carrier->GetY() + carrier->GetDirection().y - player->GetY() - player->GetHeight();
-//                    player->SetDirectionFinalForStep(newDirectionForPlayer);
-//                    Service::Normal2 playerNormal = player->GetCollisionNormal();
-//                    playerNormal.y = -1;
-
-//                    player->SetCollisionNormal(playerNormal);
-
-//                    std::cout << "After:" << "Player:" << player->GetX() << ":" << player->GetY()
-//                              << "; Dir:" << player->GetDirection().x << ":" << player->GetDirection().y <<
-//                              "NewDir(y) was:" << newDirectionForPlayer.y << std::endl;
                     continue;
                 }
             }
         }
-
-        HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
+        else
+        {
+            HandleIntersection(body, collisionSides, intersectionPoint, newDirection);
+        }
     }
 
-//        if (dynamic_cast<Player*>(firstBody))
-//        {
-//            std::cout << collisionSides.Up << collisionSides.Right << collisionSides.Down << collisionSides.Left << std::endl;
-//            std::cout << "P:" << firstBody->GetX() << ":" << firstBody->GetY() + firstBody->GetHeight()
-//                      << "; Direction:" << firstBody->GetDirection().y << std::endl;
-//        }
-//        else
-//        {
-//            std::cout << "Plat:" << firstBody->GetX() << ":" << firstBody->GetY()
-//                      << "; Direction:" << firstBody->GetDirection().y << std::endl;
-//        }
-    if (newPoint != firstBody->GetDirection())
+    if (newDirection != body->GetDirection())
     {
-//        if (newPoint.x != firstBody->GetDirection().x)
-//        {
-//            std::cout << "NewDirection (x):" << newPoint.x << "; old:" << firstBody->GetDirection().x << std::endl;
-//        }
-
-        firstBody->SetDirection(newPoint);
+        body->SetDirection(newDirection);
     }
 
-    firstBody->ResetCollisionNormal(collisionSides);
+    body->ResetCollisionNormal(collisionSides);
+}
+
+void CollisionManager::FillRectangleValues(Basis::BasisObject& a_out_Body)
+{
+    m_Rectangle.Width = a_out_Body.GetWidth();
+    m_Rectangle.Height = a_out_Body.GetHeight();
+    m_Rectangle.bottomLeft.set(a_out_Body.GetX(), a_out_Body.GetY() + a_out_Body.GetHeight());
+    m_Rectangle.topRight.set(a_out_Body.GetX() + a_out_Body.GetWidth(), a_out_Body.GetY());
+}
+
+void CollisionManager::UpdateRectangleWithDirection(IMovable& a_out_Body)
+{
+    if (a_out_Body.GetDirection().x >= 0)
+    {
+        m_Rectangle.topRight.x += a_out_Body.GetDirection().x;
+    }
+    else
+    {
+        m_Rectangle.bottomLeft.x += a_out_Body.GetDirection().x;
+    }
+    if (a_out_Body.GetDirection().y >= 0)
+    {
+        m_Rectangle.bottomLeft.y += a_out_Body.GetDirection().y;
+    }
+    else
+    {
+        m_Rectangle.topRight.y += a_out_Body.GetDirection().y;
+    }
 }
 
 // TODO : Use better names, more comments.
@@ -206,17 +116,6 @@ bool CollisionManager::Intersection(
         const Service::Vector2L& aStartRay, const Service::Vector2L& aEndRay,
         Service::Vector2L& outIntersection)
 {
-//    //StartRay and EndRay is in the AABB, so I presume, that there are no intersections.
-//    if ((aBottomLeftAABB.x < aStartRay.x && aStartRay.x < aTopRightAABB.x
-//        && aTopRightAABB.y < aStartRay.y && aStartRay.y < aBottomLeftAABB.y)
-//        && (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
-//            && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y))
-//    {
-//        outIntersection.x = std::numeric_limits<float>::quiet_NaN();
-//        outIntersection.y = std::numeric_limits<float>::quiet_NaN();
-//        return false;
-//    }
-
     float f_low = 0;
     float f_high = 1;
 
@@ -314,14 +213,7 @@ bool CollisionManager::Intersection(
 
     if (outIntersection == aStartRay)
     {
-        // TODO : Can't use round, as it "truncates" number if fractional part less than 0.5
-        // e.g. 405.23 -> 405 and comparison failing.
-//        return
-//                (std::round(aBottomLeftAABB.x) < std::round(aEndRay.x) && std::round(aEndRay.x) < std::round(aTopRightAABB.x)
-//                 && std::round(aTopRightAABB.y) < std::round(aEndRay.y) && std::round(aEndRay.y) < std::round(aBottomLeftAABB.y));
-        return
-                (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x
-                 && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y);
+        return (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y);
     }
 
     return true;

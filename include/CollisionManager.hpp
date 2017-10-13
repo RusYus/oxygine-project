@@ -43,6 +43,9 @@ public:
 
     void CheckCollisions(Basis::BasisObject::TId) override;
 private:
+    void FillRectangleValues(Basis::BasisObject&);
+    void UpdateRectangleWithDirection(IMovable&);
+
     template<typename FirstBody>
     void HandleIntersection(
         FirstBody* a_First,

@@ -27,7 +27,7 @@ public:
     virtual std::shared_ptr<std::vector<Collision::Ray>> GetRays() const;
     virtual Service::Vector2L GetDirection() const;
     virtual Service::Normal2 GetCollisionNormal() const;
-    virtual void SetCollisionNormal(const Service::Normal2&);
+    virtual void AddCollisionNormal(const Collision::CollisionInfo&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
     virtual void CheckCollisions();

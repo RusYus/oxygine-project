@@ -58,15 +58,8 @@ Service::Normal2 IMovable::GetCollisionNormal() const
     return m_CollisionNormal;
 }
 
-void IMovable::SetCollisionNormal(const Service::Normal2& a_Normal)
+void IMovable::AddCollisionNormal(const Collision::CollisionInfo& a_Sides)
 {
-    m_CollisionNormal = a_Normal;
-}
-
-void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
-{
-    m_CollisionNormal.setZero();
-
     if (a_Sides.Down)
     {
         m_CollisionNormal.y = -1;
@@ -86,6 +79,12 @@ void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
     {
         m_CollisionNormal.x = -1;
     }
+}
+
+void IMovable::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
+{
+    m_CollisionNormal.setZero();
+    AddCollisionNormal(a_Sides);
 }
 
 void IMovable::SetPosition()
