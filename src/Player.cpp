@@ -54,7 +54,7 @@ bool Player::IsJumping() const
 
 void Player::ProcessJumpEvent(oxygine::Event* /*aEvent*/)
 {
-
+    Jump();
 }
 
 void Player::Jump()
@@ -64,13 +64,13 @@ void Player::Jump()
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
         m_IsJumping = true;
-        m_Direction.y -= m_JumpSpeed;
+        m_Direction.y = -m_JumpSpeed;
     }
 }
 
 void Player::ProcessMoveEvent(Event* aEvent)
 {
-    PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
+    PlayerMoveEvent* playerEvent = oxygine::safeCast<PlayerMoveEvent*>(aEvent);
     if (!playerEvent->mIsMoving)
     {
         m_IsButtonMoving = false;
@@ -154,8 +154,6 @@ void Player::SetPosition()
     {
         UpdateRays();
     }
-
-//    std::cout << "Player:" << GetX() << ":" << GetY() << std::endl;
 
     if (m_CollisionNormal.y == -1 && m_IsJumping)
     {
