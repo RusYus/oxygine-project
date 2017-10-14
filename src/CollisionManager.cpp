@@ -2,135 +2,119 @@
 
 #include "CollisionManager.hpp"
 
-void CollisionManager::CheckCollisions()
+void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
     Collision::CollisionInfo collisionSides;
 
-    m_Rectangle.X = 0;
-    m_Rectangle.Y = 0;
-    m_Rectangle.Width = -1;
-    m_Rectangle.Height = -1;
+    m_Rectangle.Width = 0;
+    m_Rectangle.Height = 0;
+    m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
+    m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
 
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
-    for (auto& body : m_Bodies)
+
+    auto bodyIt = m_Bodies.find(a_Id);
+    if (bodyIt == m_Bodies.end())
     {
-        // Not movable.
-        if (!body.second)
+        return;
+    }
+    collisionSides.Reset();
+
+    IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
+    Service::Vector2L intersectionPoint;
+    Service::Vector2L newDirection = body->GetDirection();
+
+    for (auto& secondBodyIt : m_Bodies)
+    {
+        Basis::BasisObject* secondBody = secondBodyIt.second.first;
+        if (!secondBody)
+        {
+            std::cout << "No second body!" << std::endl;
+            continue;
+        }
+
+        // Don't check collisions if same body or it's carrier.
+        if (body->GetId() == secondBody->GetId()
+            || body->CarrierId == secondBody->GetId())
         {
             continue;
         }
 
-        collisionSides.Reset();
+        // Setting collision boundaries for second body.
+        FillRectangleValues(*secondBody);
 
-        IMovable* firstBody = dynamic_cast<IMovable*>(body.first);
-        if (!firstBody)
+        ICarrier* carrier = dynamic_cast<ICarrier*>(body);
+        if (carrier)
         {
-            std::cout << "Can't cast to movable body!" << std::endl;
-            continue;
+            IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody);
+
+            if (possiblePassenger)
+            {
+                UpdateRectangleWithDirection(*possiblePassenger);
+
+                Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};
+                if (HandleCarrierIntersection(carrier, additionalDirection))
+                {
+                    // If passenger is Player and is jumping, then ignore collision.
+                    if (dynamic_cast<Player*>(possiblePassenger) && dynamic_cast<Player*>(possiblePassenger)->IsJumping())
+                    {
+                        continue;
+                    }
+
+                    // Set new direction to passenger (after first collision it's suposed to be 0).
+                    possiblePassenger->SetDirection(additionalDirection);
+                    carrier->AddPassenger(possiblePassenger);
+                    continue;
+                }
+            }
         }
-
-        oxygine::Vector2 intersectionPoint;
-        oxygine::Vector2 newPoint = firstBody->GetDirection();
-
-        const auto bodyId = firstBody->GetId();
-
-        for (auto& secondBody : m_Bodies)
+        else
         {
-            // Same body
-            if (bodyId == secondBody.first->GetId())
-            {
-                continue;
-            }
-
-            if (dynamic_cast<Static*>(secondBody.first))
-            {
-                Static* ground = dynamic_cast<Static*>(secondBody.first);
-                m_Rectangle.X = ground->GetX();
-                m_Rectangle.Y = ground->GetY();
-                m_Rectangle.Width = ground->GetWidth();
-                m_Rectangle.Height = ground->GetHeight();
-            }
-            else if (dynamic_cast<IMovable*>(secondBody.first))
-            {
-                IMovable* movableBody = dynamic_cast<IMovable*>(secondBody.first);
-                oxygine::Vector2 minCoords{movableBody->GetX(), movableBody->GetY()};
-                oxygine::Vector2 maxCoords{movableBody->GetX(), movableBody->GetY()};
-
-                // Calculating boundaries of the object out of it's rays (including destination).
-                // It's gonna be aabb for first body to check collision with.
-                auto checkMin = [&minCoords] (const auto& a_Ray)
-                {
-                    if (a_Ray.Original.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Original.x;
-                    }
-
-                    if (a_Ray.Original.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Original.y;
-                    }
-
-                    if (a_Ray.Destination.x < minCoords.x)
-                    {
-                        minCoords.x = a_Ray.Destination.x;
-                    }
-
-                    if (a_Ray.Destination.y < minCoords.y)
-                    {
-                        minCoords.y = a_Ray.Destination.y;
-                    }
-                };
-
-                auto checkMax = [&maxCoords] (const auto& a_Ray)
-                {
-                    if (a_Ray.Original.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Original.x;
-                    }
-
-                    if (a_Ray.Original.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Original.y;
-                    }
-
-                    if (a_Ray.Destination.x > maxCoords.x)
-                    {
-                        maxCoords.x = a_Ray.Destination.x;
-                    }
-
-                    if (a_Ray.Destination.y > maxCoords.y)
-                    {
-                        maxCoords.y = a_Ray.Destination.y;
-                    }
-                };
-
-                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMin);
-                std::for_each(movableBody->GetRays()->cbegin(), movableBody->GetRays()->cend(), checkMax);
-
-                m_Rectangle.X = minCoords.x;
-                m_Rectangle.Y = minCoords.y;
-                m_Rectangle.Width = maxCoords.x - minCoords.x;
-                m_Rectangle.Height = maxCoords.y - minCoords.y;
-            }
-            else
-            {
-                std::cout << "Can't cast second body!" << std::endl;
-                continue;
-            }
-
-            HandleIntersection(firstBody, collisionSides, intersectionPoint, newPoint);
+            HandleIntersection(body, collisionSides, intersectionPoint, newDirection);
         }
+    }
 
-        firstBody->SetDirection(newPoint);
-        firstBody->ResetCollisionNormal(collisionSides);
+    if (newDirection != body->GetDirection())
+    {
+        body->SetDirection(newDirection);
+    }
+
+    body->ResetCollisionNormal(collisionSides);
+}
+
+void CollisionManager::FillRectangleValues(Basis::BasisObject& a_out_Body)
+{
+    m_Rectangle.Width = a_out_Body.GetWidth();
+    m_Rectangle.Height = a_out_Body.GetHeight();
+    m_Rectangle.bottomLeft.set(a_out_Body.GetX(), a_out_Body.GetY() + a_out_Body.GetHeight());
+    m_Rectangle.topRight.set(a_out_Body.GetX() + a_out_Body.GetWidth(), a_out_Body.GetY());
+}
+
+void CollisionManager::UpdateRectangleWithDirection(IMovable& a_out_Body)
+{
+    if (a_out_Body.GetDirection().x >= 0)
+    {
+        m_Rectangle.topRight.x += a_out_Body.GetDirection().x;
+    }
+    else
+    {
+        m_Rectangle.bottomLeft.x += a_out_Body.GetDirection().x;
+    }
+    if (a_out_Body.GetDirection().y >= 0)
+    {
+        m_Rectangle.bottomLeft.y += a_out_Body.GetDirection().y;
+    }
+    else
+    {
+        m_Rectangle.topRight.y += a_out_Body.GetDirection().y;
     }
 }
 
 // TODO : Use better names, more comments.
 bool CollisionManager::Intersection(
-        const oxygine::Vector2& aBottomLeftAABB, const oxygine::Vector2& aTopRightAABB,
-        const oxygine::Vector2& aStartRay, const oxygine::Vector2& aEndRay,
-        oxygine::Vector2& outIntersection)
+        const Service::Vector2L& aBottomLeftAABB, const Service::Vector2L& aTopRightAABB,
+        const Service::Vector2L& aStartRay, const Service::Vector2L& aEndRay,
+        Service::Vector2L& outIntersection)
 {
     float f_low = 0;
     float f_high = 1;
@@ -219,7 +203,7 @@ bool CollisionManager::Intersection(
     if (f_low > f_high)
         return false;
 
-    oxygine::Vector2 b = aEndRay - aStartRay;
+    Service::Vector2L b = aEndRay - aStartRay;
 
 
     outIntersection = aStartRay + b * f_low;
@@ -229,9 +213,7 @@ bool CollisionManager::Intersection(
 
     if (outIntersection == aStartRay)
     {
-        return
-                (std::round(aBottomLeftAABB.x) < std::round(aEndRay.x) && std::round(aEndRay.x) < std::round(aTopRightAABB.x)
-                 && std::round(aTopRightAABB.y) < std::round(aEndRay.y) && std::round(aEndRay.y) < std::round(aBottomLeftAABB.y));
+        return (aBottomLeftAABB.x < aEndRay.x && aEndRay.x < aTopRightAABB.x && aTopRightAABB.y < aEndRay.y && aEndRay.y < aBottomLeftAABB.y);
     }
 
     return true;

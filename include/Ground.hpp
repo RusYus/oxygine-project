@@ -8,21 +8,18 @@ DECLARE_SMART(Static, spStatic);
 class Static : public oxygine::Actor, public IDrawable
 {
 public:
-    Static(const oxygine::RectF& a_Rc)
-        : mBodyPair(Service::ObjectType::Ground, this)
+    Static(const oxygine::Rect& a_Rc)
     {
-//        setResAnim(res::ui.getResAnim("pen"));
-//        setPosition(a_Rc.getLeftTop());
         m_Box = new Sprite;
         m_Box->setResAnim(res::ui.getResAnim("pen"));
-        m_Box->setSize(a_Rc.getSize());
+        m_Box->setSize(Service::Convert(a_Rc.getSize()));
         m_Box->attachTo(m_View);
 
         m_View->setSize(m_Box->getSize());
-        m_View->setPosition(a_Rc.getLeftTop());
+        m_Position.set(a_Rc.getX(), a_Rc.getY());
+        m_View->setPosition(Service::Convert(m_Position));
 
         addChild(m_View);
-
     }
 
     spActor GetView() const
@@ -30,7 +27,4 @@ public:
         return m_View;
     }
     void doRender(const oxygine::RenderState& rs) {}
-
-public:
-    std::pair<Service::ObjectType, Static*> mBodyPair;
 };

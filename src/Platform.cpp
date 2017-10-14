@@ -4,13 +4,13 @@
 
 #include "Platform.hpp"
 
-Platform::Platform(const oxygine::RectF& aRect)
-    : m_BodyPair(Service::ObjectType::Ground, this)
-    , m_DirectionUntilStop(m_Direction)
+Platform::Platform(const oxygine::Rect& aRect)
 {
+    std::cout << "Platform ID:" << GetId() << std::endl;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_View->setPosition(350, 450);
-    m_Box->setSize(aRect.getSize());
+    m_Position.set(10'000, 45'000);
+    m_View->setPosition(Service::Convert(m_Position));
+    m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -20,31 +20,40 @@ Platform::Platform(const oxygine::RectF& aRect)
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + oxygine::Vector2(150, 0));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(0, -20'000));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, newPoint.Position + oxygine::Vector2(150, -100));
+    PathNode newPoint3 = PathNode(2, newPoint2.Position + Service::Vector2L(25'000, 0));
     m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, newPoint.Position + oxygine::Vector2(300, -100));
+    PathNode newPoint4 = PathNode(3, newPoint3.Position + Service::Vector2L(10'000, 15'000));
     m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
-    PathNode newPoint5 = PathNode(4, newPoint.Position + oxygine::Vector2(400, 0));
-    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
+//    PathNode newPoint5 = PathNode(4, newPoint.Position + Service::Vector2L(400, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
     SetDirection(m_Nodes.at(m_NextNodeId).Position - m_Nodes.at(0).Position);
 
     SetRays();
 }
 
-bool Platform::IsAroundNode()
+Platform::~Platform()
 {
-    const oxygine::Vector2 nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
-    return nodeDirection.length() <= GetDirection().length();
+    m_Passengers->clear();
 }
 
-void Platform::Move()
+bool Platform::IsAroundNode()
 {
+    const Service::Vector2L nodeDirection = m_Nodes.at(m_NextNodeId).Position - GetPosition();
+    auto q1 = nodeDirection.cast<oxygine::Vector2>().length() ;
+    auto q2 = GetDirection().cast<oxygine::Vector2>().length();
+    return q1<=q2;
+}
+
+void Platform::Update()
+{
+    ICarrier::ClearPassengers();
+
     if (IsAroundNode())
     {
-        SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition(), true);
+        ICarrier::SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
 
         // Last node (by id).
         if (m_NextNodeId == static_cast<PathNode::TId>(m_Nodes.size() - 1))
@@ -89,57 +98,52 @@ void Platform::Move()
         SetDirection(m_Nodes.at(m_NextNodeId).Position - GetPosition());
     }
 
+//    std::cout << "Platform:-----------------" << std::endl;
     UpdateRays();
 }
 
 void Platform::doRender(const oxygine::RenderState& a_State)
 {
     DrawCollisionRays(m_Rays, a_State.transform);
+    DrawCollisionRays(m_CarrierRays, a_State.transform, oxygine::Color::Blue);
 }
 
-void Platform::SetDirection(const Vector2& a_NewDirection, bool a_SetExact)
+void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
 {
-    if (a_NewDirection != oxygine::Vector2(0, 0))
-    {
-        IMovable::SetDirection(a_NewDirection);
+    ICarrier::SetDirection(a_NewDirection);
 
-        if (!a_SetExact)
-        {
-            m_Direction.normalize();
-            m_Direction *= m_MaxSpeed;
-//            Service::RoundToOneDigit(m_Direction);
-            m_DirectionUntilStop = m_Direction;
-        }
-    }
-    else
+    if (a_NewDirection != Service::Vector2L(0, 0))
     {
-        m_Direction.setZero();
+//        m_Direction.cast<oxygine::Vector2>().normalize();
+        oxygine::Vector2 dirTemp = Service::Convert(m_Direction);
+        dirTemp.normalize();
+        // TODO : Refactor!
+        dirTemp.x = std::round(dirTemp.x);
+        dirTemp.y = std::round(dirTemp.y);
+        // TODO : double multiplication by scale.s
+        m_Direction = Service::Convert(dirTemp);
+        m_Direction *= (m_MaxSpeed / Service::Constants::SCALE);
     }
-}
-
-void Platform::ResetCollisionNormal(const Collision::CollisionInfo& a_Sides)
-{
-    IMovable::ResetCollisionNormal(a_Sides);
-
-    if (m_CollisionNormal.x == 0 && m_DirectionUntilStop.x != 0)
-    {
-        m_Direction.x = m_DirectionUntilStop.x;
-    }
-
-    if (m_CollisionNormal.y == 0 && m_DirectionUntilStop.y != 0)
-    {
-        m_Direction.y = m_DirectionUntilStop.y;
-    }
+//    std::cout << "Platform:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 }
 
 void Platform::SetPosition()
 {
-    IMovable::SetPosition();
+//    std::cout << "Platform:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
+
+//    std::cout << "In Set. Platform:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+    ICarrier::SetPosition();
 
     if (m_DebugDraw)
     {
         UpdateRays();
     }
 
-    std::cout << m_Direction.x << ":" << m_Direction.y << std::endl;
+//    std::cout << "Platform:" << GetX() << ":" << GetY() << std::endl;
+}
+
+void Platform::CheckCollisions()
+{
+    IMovable::CheckCollisions();
+    ICarrier::MovePassengers();
 }

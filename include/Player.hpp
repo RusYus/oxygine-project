@@ -18,21 +18,24 @@ public:
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
     void ProcessMoveEvent(oxygine::Event*);
-    void Jump(oxygine::Event*);
-
+    void ProcessJumpEvent(oxygine::Event*);
     void doRender(const oxygine::RenderState&);
+    void AddDirection(const Service::Vector2L&) override;
+    bool IsJumping() const;
+
+    void SetDirectionFinalForStep(const Service::Vector2L&);
 
 private:
     void Move(bool /*aIsMovingRight*/);
     inline void Stop();
     void ProcessKeyboard();
+    void Jump();
 
 private:
     spEventProxy m_EventProxy;
     bool m_IsJumping;
     bool m_IsButtonMoving;
+    bool m_IsDirectionFinalForTheseStep;
     const int m_MaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
     const int m_JumpSpeed = Service::Constants::PLAYER_JUMP_SPEED;
-
-    std::pair<Service::ObjectType, Player*> mBodyPair;
 };

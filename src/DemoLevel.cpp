@@ -3,7 +3,6 @@
 #include <iostream>
 
 Square::Square(const Vector2& pos, float scale = 1)
-    : mBodyPair(Service::ObjectType::DynamicBody, this)
 {
     setResAnim(res::ui.getResAnim("square"));
     setAnchor(Vector2(0.5f, 0.5f));
@@ -15,60 +14,6 @@ Square::Square(const Vector2& pos, float scale = 1)
 void Square::Update()
 {
 }
-
-SquareMovable::SquareMovable(const Vector2& pos, float scale = 1)
-    : mBodyPair(Service::ObjectType::DynamicBody, this)
-{
-    setResAnim(res::ui.getResAnim("square"));
-    setAnchor(Vector2(0.5f, 0.5f));
-    setTouchChildrenEnabled(false);
-
-    setScale(scale);
-}
-
-void SquareMovable::Update()
-{
-//    mBody->SetLinearVelocity(b2Vec2{-2, 0});
-//    const b2Vec2& pos = mBody->GetPosition();
-////    std::cout << "Square:" << pos.x*100 << "    Vel:" << mBody->GetLinearVelocity().x << std::endl;
-//    setPosition(Vector2(pos.x * 100, pos.y * 100));
-//    setRotation(mBody->GetAngle());
-
-//    b2MassData m;
-//    mBody->GetMassData(&m);
-//    std::cout << "Mass:" << m.center.x << ":" << m.center.y << ";" << m.mass << std::endl;
-}
-
-//Static::Static(const RectF& rc)
-//    : mBodyPair(Service::ObjectType::Ground, this)
-//{
-//    setResAnim(res::ui.getResAnim("pen"));
-//    setSize(rc.getSize());
-////    setPosition(rc.getLeftTop());
-//    setPosition(rc.getLeftTop());
-////    setAnchor(Vector2(0.5f, 0.5f));
-
-////    b2BodyDef groundBodyDef;
-////    groundBodyDef.position = Service::Utils::Convert(getPosition());
-
-////    b2Body* groundBody = world->CreateBody(&groundBodyDef);
-
-////    b2PolygonShape groundBox;
-////    b2Vec2 sz = Service::Utils::Convert(getSize() / 2);
-////    groundBox.SetAsBox(sz.x, sz.y);
-
-////    b2Filter filter;
-////    filter.categoryBits = 0x0001;
-////    filter.maskBits = 0x0003;
-////    filter.groupIndex = 3;
-
-////    b2FixtureDef fixtureDef;
-////    fixtureDef.density = 0.0f;
-////    fixtureDef.shape = &groundBox;
-////    fixtureDef.filter = filter;
-////    groundBody->CreateFixture(&fixtureDef);
-////    groundBody->SetUserData(&mBodyPair);
-//}
 
 void DemoLevel::Init(MapProperty&& aMapProperty)
 {
@@ -82,37 +27,25 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 
 //    spStatic ground = new Static(_world, RectF(getWidth() / 2, getHeight() - 10, getWidth() - 100, 30));
 //    spStatic ground = new Static(RectF(0, getHeight()*0.5, getWidth() * 10, 30));
-    spStatic ground = new Static(RectF(0, 600, 1000, 30));
+    spStatic ground = new Static(Rect(0, 60'000, 100'000, 3'000));
     addChild(ground);
     mStatic = ground.get();
     mObjects.push_back(ground);
 
-    spStatic ground2 = new Static(RectF(900, 0, 50, 700));
+    spStatic ground2 = new Static(Rect(90'000, 0, 5'000, 70'000));
     addChild(ground2);
     mStatic2 = ground2.get();
     mObjects.push_back(ground2);
 
-    spStatic ground3 = new Static(RectF(0, 0, 50, 700));
+    spStatic ground3 = new Static(Rect(0, 0, 5'000, 70'000));
     addChild(ground3);
     mStatic3 = ground3.get();
     mObjects.push_back(ground3);
 
-    spStatic ground4 = new Static(RectF(300, 500, 400, 30));
+    spStatic ground4 = new Static(Rect(30'000, 50'000, 40'000, 3'000));
     addChild(ground4);
     mStatic4 = ground4.get();
     mObjects.push_back(ground4);
-
-//    spSquare square = new Square(mWorld, Vector2(200, 300));
-//    square->attachTo(this);
-//    mSquares.emplace_front(std::move(square));
-
-//    spSquare square2 = new Square(mWorld, Vector2(650, 300));
-//    square2->attachTo(this);
-//    mSquares.emplace_front(std::move(square2));
-
-//    spSquare square3 = new Square(mWorld, Vector2(1100, 300));
-//    square3->attachTo(this);
-//    mSquares.emplace_front(std::move(square3));
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
@@ -134,21 +67,16 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
 
-    spPlatform platform = new Platform(RectF(400, 200, 50, 20));
+    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000));
     addChild(platform);
     m_Platform = platform;
 }
 
 void DemoLevel::Update(const UpdateState& /*us*/)
 {
-    for(auto& square : mSquares)
-    {
-        square->Update();
-    }
-
     if (m_Platform)
     {
-        m_Platform->Move();
+        m_Platform->Update();
     }
 }
 

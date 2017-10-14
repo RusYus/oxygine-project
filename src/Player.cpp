@@ -7,10 +7,11 @@
 
 
 Player::Player()
-    : mBodyPair(Service::ObjectType::Player, this)
-    , m_IsButtonMoving(false)
+    : m_IsButtonMoving(false)
     , m_IsJumping(false)
+    , m_IsDirectionFinalForTheseStep(false)
 {
+    std::cout << "Player ID:" << GetId() << std::endl;
 }
 
 Player::~Player()
@@ -25,11 +26,12 @@ spActor Player::GetView() const
 void Player::Init(spEventProxy aEventProxy)
 {
 //    m_View = new Actor;
-    oxygine::Vector2 pos = getStage()->getSize() / 2;
+//    Service::Vector2L pos = getStage()->getSize() / 2;
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_View->setPosition(600, 100);
+    m_Position.set(15'000, 10'000);
+    m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
     addChild(m_View);
@@ -38,27 +40,37 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
 
-    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::Jump));
+    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
 
-    m_Direction = oxygine::Vector2();
+    m_Direction = Service::Vector2L();
 
     SetRays();
 }
 
-void Player::Jump(Event* /*aEvent*/)
+bool Player::IsJumping() const
 {
-//    std::cout << m_CollisionNormal.y << std::endl;
+    return m_IsJumping;
+}
+
+void Player::ProcessJumpEvent(oxygine::Event* /*aEvent*/)
+{
+    Jump();
+}
+
+void Player::Jump()
+{
+    //    std::cout << m_CollisionNormal.y << std::endl;
     if (!m_IsJumping)
     {
         std::cout << "Jumping!------------------------------------------------------------" << std::endl;
         m_IsJumping = true;
-        m_Direction.y -= m_JumpSpeed;
+        m_Direction.y = -m_JumpSpeed;
     }
 }
 
 void Player::ProcessMoveEvent(Event* aEvent)
 {
-    PlayerMoveEvent* playerEvent = safeCast<PlayerMoveEvent*>(aEvent);
+    PlayerMoveEvent* playerEvent = oxygine::safeCast<PlayerMoveEvent*>(aEvent);
     if (!playerEvent->mIsMoving)
     {
         m_IsButtonMoving = false;
@@ -115,12 +127,27 @@ void Player::ProcessKeyboard()
 
     if (oxygine::key::wasPressed(SDL_SCANCODE_SPACE))
     {
-        Jump(nullptr);
+        Jump();
     }
+}
+
+void Player::AddDirection(const Service::Vector2L& a_Direction)
+{
+    m_Direction += a_Direction;
 }
 
 void Player::SetPosition()
 {
+    // Reseting direction, if collision in place.
+    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
+    {
+        m_Direction.x = 0;
+        std::cout << "Reseting direction x!!!" << std::endl;
+    }
+
+//    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+//    std::cout << "IsJumping:" << m_IsJumping << std::endl;
+
     IMovable::SetPosition();
 
     if (m_DebugDraw)
@@ -128,15 +155,14 @@ void Player::SetPosition()
         UpdateRays();
     }
 
-    // If player doesn't stand on something, he can't jump.
-    if (m_CollisionNormal.y == -1)
+    if (m_CollisionNormal.y == -1 && m_IsJumping)
     {
         m_IsJumping = false;
     }
-    else
-    {
-        m_IsJumping = true;
-    }
+
+//    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+//              << "; IsJumping:" << m_IsJumping
+//              << "; Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
@@ -146,20 +172,38 @@ void Player::SetPosition()
 
 }
 
-void Player::Update(const UpdateState& us)
+void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
 {
+    if (!m_IsDirectionFinalForTheseStep)
+    {
+        m_Direction.x += aNewDirection.x;
+        if (!m_IsJumping)
+        {
+            m_Direction.y = aNewDirection.y;
+        }
+        m_IsDirectionFinalForTheseStep = true;
+    }
+}
+
+void Player::Update(const UpdateState& /*aUpdateState*/)
+{
+    m_IsDirectionFinalForTheseStep = false;
     ProcessKeyboard();
 
-    // Reseting direction, if collision in place.
-    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
-    {
-        m_Direction.x = 0;
-    }
+//    // Reseting direction, if collision in place.
+//    if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
+//    {
+//        m_Direction.x = 0;
+//        std::cout << "Reseting direction x!!!" << std::endl;
+//    }
 
-    m_Direction.y += us.dt / static_cast<float>(Service::Constants::GRAVITY);
+    m_Direction.y += Service::Constants::GRAVITY;
+
+//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
+//    std::cout << "Player:-----------------" << std::endl;
     UpdateRays();
 
 //    std::cout << "Dt:" << us.dt << std::endl;

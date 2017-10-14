@@ -3,42 +3,58 @@
 #include <vector>
 #include <iostream>
 
+#include "ICollisionManager.hpp"
 #include "DemoLevel.hpp"
 #include "Player.hpp"
 
-class CollisionManager
+// 1 - Don't check collisions for platform
+// 2 - Check intersection (handle carrier?) to add passengers
+// 3 - Every carrier has own passengers
+// 4 - Move passengers before Update (adding direction)
+// 5 - Move everything as usual
+
+class CollisionManager : public virtual ICollisionManager
 {
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
+    using TKey = Basis::BasisObject::TId;
+    using TValue = TBody;
     struct CollisionRectangle
     {
-        int X = -1;
-        int Y = -1;
         int Width = -1;
         int Height = -1;
+        Service::Vector2L bottomLeft{std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN()};
+        Service::Vector2L topRight{std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN()};
     };
 public:
-    template<typename BodyType>
-    void AddBody(BodyType* aBody)
+    CollisionManager() = default;
+    ~CollisionManager() = default;
+
+    void AddBody(Basis::BasisObject* a_Body) override
     {
-        TBody body = std::make_pair(static_cast<Basis::BasisObject*>(aBody), false);
-        if (std::is_base_of<IMovable, BodyType>::value)
+        TBody body = std::make_pair(a_Body, false);
+        // TODO : refactor condition.
+        if (std::is_base_of<IMovable, TBody>::value /*&& !dynamic_cast<Platform*>(aBody)*/)
         {
             body.second = true;
         }
 
-        m_Bodies.emplace_back(std::move(body));
+        m_Bodies.emplace(body.first->GetId(), std::move(body));
     }
 
-    void CheckCollisions();
+    void CheckCollisions(Basis::BasisObject::TId) override;
 private:
+    void FillRectangleValues(Basis::BasisObject&);
+    void UpdateRectangleWithDirection(IMovable&);
+
     template<typename FirstBody>
     void HandleIntersection(
         FirstBody* a_First,
         Collision::CollisionInfo& a_Sides,
-        oxygine::Vector2& a_IntersectionPoint,
-        oxygine::Vector2& a_NewPoint)
+        Service::Vector2L& a_IntersectionPoint,
+        Service::Vector2L& a_NewPoint)
     {
-        if (m_Rectangle.Width <= 0 || m_Rectangle.Height <= 0)
+        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
+            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
         {
             std::cout << "Negative size" << std::endl;
             return;
@@ -46,29 +62,53 @@ private:
 
         auto handleRight = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-            a_NewPoint.x = newPos > 0.01 ? newPos : 0;
+            a_NewPoint.x = newPos > 1 ? newPos : 0;
             a_Sides.Right = true;
         };
 
         auto handleLeft = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.x - a_First->GetX();
-            a_NewPoint.x = newPos > 0.01 ? newPos : 0;
+            a_NewPoint.x = newPos > 1 ? newPos : 0;
             a_Sides.Left = true;
         };
 
         auto handleUp = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.y - a_First->GetY();
-            a_NewPoint.y = newPos > 0.01 ? newPos : 0;
+            a_NewPoint.y = newPos > 1 ? newPos : 0;
             a_Sides.Up = true;
         };
 
         auto handleDown = [&a_First, &a_Sides, &a_IntersectionPoint, &a_NewPoint] ()
         {
+            if (a_IntersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                || a_IntersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+            {
+                return;
+            }
+
             float newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-            a_NewPoint.y = newPos > 0.01 ? newPos : 0;
+            a_NewPoint.y = newPos > 1 ? newPos : 0;
             a_Sides.Down = true;
         };
 
@@ -82,11 +122,11 @@ private:
                 continue;
             }
             if (Intersection(
-                    oxygine::Vector2(m_Rectangle.X, m_Rectangle.Y + m_Rectangle.Height),
-                    oxygine::Vector2(m_Rectangle.X + m_Rectangle.Width, m_Rectangle.Y),
-                    ray.Original,
-                    ray.Destination,
-                    a_IntersectionPoint))
+                m_Rectangle.bottomLeft,
+                m_Rectangle.topRight,
+                ray.Original,
+                ray.Destination,
+                a_IntersectionPoint))
             {
                 switch (ray.Direction)
                 {
@@ -108,7 +148,7 @@ private:
 
                 case Collision::RayDirection::UpRight:
                     // If exactly on corner, considering it under (have to choose between under and right).
-                    if (a_IntersectionPoint.x == m_Rectangle.X)
+                    if (a_IntersectionPoint.x == m_Rectangle.bottomLeft.x)
                     {
                         handleRight();
                     }
@@ -120,7 +160,7 @@ private:
 
                 case Collision::RayDirection::UpLeft:
                     // If exactly on corner, considering it under (have to choose between under and left).
-                    if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
+                    if (a_IntersectionPoint.x == m_Rectangle.topRight.x)
                     {
                         handleLeft();
                     }
@@ -132,7 +172,7 @@ private:
 
                 case Collision::RayDirection::DownRight:
                     // If exactly on corner, considering it on top (have to choose between on top and right).
-                    if (a_IntersectionPoint.x == m_Rectangle.X)
+                    if (a_IntersectionPoint.x == m_Rectangle.bottomLeft.x)
                     {
                         handleRight();
                     }
@@ -144,7 +184,7 @@ private:
 
                 case Collision::RayDirection::DownLeft:
                     // If exactly on corner, considering it on top (have to choose between on top and left).
-                    if (a_IntersectionPoint.x == m_Rectangle.X + m_Rectangle.Width)
+                    if (a_IntersectionPoint.x == m_Rectangle.topRight.x)
                     {
                         handleLeft();
                     }
@@ -158,12 +198,60 @@ private:
         }
     }
 
+    template<typename FirstBody>
+    bool HandleCarrierIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint)
+    {
+        static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
+
+        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
+            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
+        {
+            std::cout << "Negative size" << std::endl;
+            return false;
+        }
+
+        for(const auto& ray : *(a_First->GetCarrierRays()))
+        {
+            // Don't need to check in that direction, since I assume, that if coords are the same
+            // means no moving there.
+            if (ray.Original == ray.Destination)
+            {
+                continue;
+            }
+
+            Service::Vector2L intersectionPoint;
+
+            if (Intersection(
+                m_Rectangle.bottomLeft,
+                m_Rectangle.topRight,
+                ray.Original,
+                ray.Destination,
+                intersectionPoint))
+            {
+                if (intersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                    || intersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+                {
+                    return false;
+                }
+
+                // This means that passenger coming from above.
+                if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                {
+                    a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                }
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     bool Intersection(
-        const oxygine::Vector2& /*bottomLeftAABB*/, const oxygine::Vector2& /*topRightAABB*/,
-        const oxygine::Vector2& /*startRay*/, const oxygine::Vector2& /*endRay*/,
-        oxygine::Vector2& /*intersection*/);
+        const Service::Vector2L& /*bottomLeftAABB*/, const Service::Vector2L& /*topRightAABB*/,
+        const Service::Vector2L& /*startRay*/, const Service::Vector2L& /*endRay*/,
+        Service::Vector2L& /*intersection*/);
 
 private:
-    std::vector<TBody> m_Bodies;
+    std::unordered_map<TKey, TValue> m_Bodies;
     CollisionRectangle m_Rectangle;
 };

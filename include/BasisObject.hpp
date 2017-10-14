@@ -10,26 +10,37 @@ namespace Basis
 class BasisObject
 {
 public:
-    BasisObject()
-    {
-        m_Id = Service::IdGenerator::GetNextId();
-    }
+    using TId = Service::IdGenerator::TId;
+
+    BasisObject();
 
     virtual ~BasisObject() = default;
 
-    virtual inline float GetX() const = 0;
-    virtual inline float GetY() const = 0;
-    virtual inline float GetWidth() const = 0;
-    virtual inline float GetHeight() const = 0;
-    virtual inline oxygine::Vector2 GetPosition() const = 0;
+    virtual inline Service::TCoordinate GetX() const
+    {
+        return m_Position.x;
+    }
 
-    inline Service::IdGenerator::TId GetId() const
+    virtual inline Service::TCoordinate GetY() const
+    {
+        return m_Position.y;
+    }
+
+    virtual Service::TCoordinate GetWidth() const = 0;
+    virtual Service::TCoordinate GetHeight() const = 0;
+    virtual Service::Vector2L GetPosition() const
+    {
+        return m_Position;
+    }
+
+    inline TId GetId() const
     {
         return m_Id;
     }
 
 protected:
-    Service::IdGenerator::TId m_Id;
+     TId m_Id;
+     Service::Vector2L m_Position;
 };
 
 }

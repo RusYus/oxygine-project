@@ -27,8 +27,10 @@ set(
     include/example.hpp
     include/Game.hpp
     include/Ground.hpp
+    include/ICollisionManager.hpp
     include/IDrawable.hpp
     include/IDebugDrawable.hpp
+    include/ICarrier.hpp
     include/IMovable.hpp
     include/JsonImporter.hpp
     include/MapProperty.hpp
@@ -37,14 +39,17 @@ set(
     include/Platform.hpp
     include/res.hpp
     include/Utils.hpp
+    include/Velocity.hpp
 )
 
 set(
 	PROJECT_SOURCES
     src/BasisCamera.cpp
+    src/BasisObject.cpp
     src/CollisionManager.cpp
     src/DemoLevel.cpp
     src/example.cpp
+    src/ICarrier.cpp
     src/IMovable.cpp
     src/JsonImporter.cpp
     src/main.cpp
@@ -52,6 +57,7 @@ set(
     src/Platform.cpp
     src/res.cpp
     src/Utils.cpp
+    src/Velocity.cpp
 )
 
 add_library(

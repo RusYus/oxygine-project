@@ -56,14 +56,14 @@ public:
     bool GetDebugDraw() const { return m_DebugDraw; }
 
 protected:
-    void CreateCircleVertices(const oxygine::Vector2& a_Center, int a_Radius)
+    void CreateCircleVertices(const Service::Vector2L& a_Center, int a_Radius)
     {
         const float k_increment = 2.0f * MATH_PI / CIRCLE_SEGMENTS;
         float theta = 0.0f;
 
         for (int i = 0; i < CIRCLE_SEGMENTS; ++i)
         {
-            oxygine::Vector2 v  = oxygine::Vector2(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
+            Service::Vector2L v  = Service::Vector2L(oxygine::scalar::cos(theta), oxygine::scalar::sin(theta));
             v *=a_Radius;
             v += a_Center;
             m_Vertices[i] = v;
@@ -83,7 +83,10 @@ protected:
         oxglDisableVertexAttribArray(0);
     }
 
-    void DrawCollisionRays(const std::shared_ptr<std::vector<Collision::Ray>>& a_Rays, const oxygine::Transform& a_Transform)
+    void DrawCollisionRays(
+        const std::shared_ptr<std::vector<Collision::Ray>>& a_Rays,
+        const oxygine::Transform& a_Transform,
+        oxygine::Color a_Color = oxygine::Color::Green)
     {
         if (!m_DebugDraw || !m_ShaderProgram)
         {
@@ -105,19 +108,19 @@ protected:
         {
             if (ray.Original != ray.Destination)
             {
-                m_Vertices[0] = ray.Original;
+                m_Vertices[0] = Service::Convert(ray.Original);
                 // actual difference is to small, so I need to increase it visually.
-                oxygine::Vector2 diff = ray.Destination - ray.Original;
+                Service::Vector2L diff = ray.Destination - ray.Original;
                 if (diff.x > 0)
-                    diff.x += 20;
+                    diff.x += (20 * Service::Constants::SCALE);
                 if (diff.x < 0)
-                    diff.x -= 20;
+                    diff.x -= (20 * Service::Constants::SCALE);
                 if (diff.y > 0)
-                    diff.y += 20;
+                    diff.y += (20 * Service::Constants::SCALE);
                 if (diff.y < 0)
-                    diff.y -= 20;
-                m_Vertices[1] = ray.Original + diff;
-                DrawPrimitives(2, oxygine::Color::Green);
+                    diff.y -= (20 * Service::Constants::SCALE);
+                m_Vertices[1] = Service::Convert(ray.Original + diff);
+                DrawPrimitives(2, a_Color);
             }
             else
             {

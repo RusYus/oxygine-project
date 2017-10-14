@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMovable.hpp"
+#include "ICarrier.hpp"
 #include "IDebugDrawable.hpp"
 #include "BasisEventProxy.hpp"
 #include "Utils.hpp"
@@ -15,27 +15,28 @@ struct PathNode
 {
     using TId = unsigned short;
 
-    PathNode(unsigned short aId, const oxygine::Vector2& aPosition)
+    PathNode(unsigned short aId, const Service::Vector2L& aPosition)
     {
         Id = aId;
         Position = aPosition;
     }
 
     TId Id;
-    oxygine::Vector2 Position;
+    Service::Vector2L Position;
 };
 
 static const constexpr int NODE_SLIPPAGE = 1;
 
 DECLARE_SMART(Platform, spPlatform);
-class Platform: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
+class Platform: public oxygine::Actor, public virtual ICarrier, public virtual IDebugDrawable
 {
 public:
-    Platform(const oxygine::RectF&);
-    void Move();
-    void SetDirection(const oxygine::Vector2&, bool /*a_SetExact*/ = false) override;
+    Platform(const oxygine::Rect&);
+    ~Platform();
+    void Update();
+    void SetDirection(const Service::Vector2L&) override;
     void SetPosition() override;
-    void ResetCollisionNormal(const Collision::CollisionInfo&) override;
+    void CheckCollisions() override;
 
     void doRender(const oxygine::RenderState&);
 
@@ -46,7 +47,5 @@ private:
     PointToPointMode m_RunningMode = PointToPointMode::BackToBack;
     typename PathNode::TId m_NextNodeId = 1;
     bool m_IsMovingReverse = false;
-    oxygine::Vector2 m_DirectionUntilStop;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
-    std::pair<Service::ObjectType, Platform*> m_BodyPair;
 };
