@@ -4,6 +4,7 @@
 
 #include "res.hpp"
 
+#include "DynamicBox.hpp"
 #include "Ground.hpp"
 #include "Platform.hpp"
 #include "MapProperty.hpp"
@@ -26,6 +27,7 @@ public:
     void Init(MapProperty&&);
     void click(Event*);
     void Update(const UpdateState&);
+    void SetPositions();
     void showHideDebug(Event*);
     Static* mStatic;
     Static* mStatic2;
@@ -43,4 +45,5 @@ private:
     MapProperty mMapProperty;
 //    std::vector<std::unique_ptr<Ground>> mObjects;
     std::vector<spStatic> mObjects;
+    std::unique_ptr<std::vector<spDynamicBox>> m_DynamicObjects;
 };

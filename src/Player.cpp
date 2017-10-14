@@ -42,7 +42,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
 
-    m_Direction = Service::Vector2L();
+    m_Direction.setZero();
 
     SetRays();
 }

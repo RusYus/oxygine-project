@@ -70,6 +70,11 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000));
     addChild(platform);
     m_Platform = platform;
+
+    spDynamicBox box1 = new DynamicBox();
+    addChild(box1);
+    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
+    m_DynamicObjects->push_back(box1);
 }
 
 void DemoLevel::Update(const UpdateState& /*us*/)
@@ -77,6 +82,43 @@ void DemoLevel::Update(const UpdateState& /*us*/)
     if (m_Platform)
     {
         m_Platform->Update();
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->Update();
+        }
+    }
+
+    if (m_Platform)
+    {
+        m_Platform->CheckCollisions();
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->CheckCollisions();
+        }
+    }
+}
+
+void DemoLevel::SetPositions()
+{
+    if (m_Platform)
+    {
+        m_Platform->SetPosition();
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->SetPosition();
+        }
     }
 }
 

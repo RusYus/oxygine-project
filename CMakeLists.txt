@@ -24,6 +24,7 @@ set(
     include/CollisionManager.hpp
     include/Constants.hpp
     include/DemoLevel.hpp
+    include/DynamicBox.hpp
     include/example.hpp
     include/Game.hpp
     include/Ground.hpp
@@ -48,6 +49,7 @@ set(
     src/BasisObject.cpp
     src/CollisionManager.cpp
     src/DemoLevel.cpp
+    src/DynamicBox.cpp
     src/example.cpp
     src/ICarrier.cpp
     src/IMovable.cpp
