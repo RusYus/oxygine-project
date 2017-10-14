@@ -36,7 +36,6 @@ public:
     void Update();
     void SetDirection(const Service::Vector2L&) override;
     void SetPosition() override;
-    void ResetCollisionNormal(const Collision::CollisionInfo&) override;
     void CheckCollisions() override;
 
     void doRender(const oxygine::RenderState&);
@@ -48,6 +47,5 @@ private:
     PointToPointMode m_RunningMode = PointToPointMode::BackToBack;
     typename PathNode::TId m_NextNodeId = 1;
     bool m_IsMovingReverse = false;
-    Service::Vector2L m_DirectionUntilStop;
     std::unordered_map<PathNode::TId, PathNode> m_Nodes;
 };

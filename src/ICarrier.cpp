@@ -28,7 +28,7 @@ void ICarrier::AddPassenger(IMovable* a_Body)
 
     a_Body->CarrierId = m_Id;
     m_Passengers->push_back(a_Body);
-    std::cout << "Adding passenger" << std::endl;
+//    std::cout << "Adding passenger" << std::endl;
 }
 
 void ICarrier::ClearPassengers()

@@ -30,7 +30,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(20000, 10000);
+    m_Position.set(15'000, 10'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
@@ -145,8 +145,8 @@ void Player::SetPosition()
         std::cout << "Reseting direction x!!!" << std::endl;
     }
 
-    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
-    std::cout << "IsJumping:" << m_IsJumping << std::endl;
+//    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+//    std::cout << "IsJumping:" << m_IsJumping << std::endl;
 
     IMovable::SetPosition();
 
@@ -199,7 +199,7 @@ void Player::Update(const UpdateState& /*aUpdateState*/)
 
     m_Direction.y += Service::Constants::GRAVITY;
 
-    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
