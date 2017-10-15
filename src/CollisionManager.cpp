@@ -4,13 +4,6 @@
 
 void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
-    Collision::CollisionInfo collisionSides;
-
-    m_Rectangle.Width = 0;
-    m_Rectangle.Height = 0;
-    m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
-    m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
-
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
 
     auto bodyIt = m_Bodies.find(a_Id);
@@ -18,8 +11,26 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     {
         return;
     }
+
+    Collision::CollisionInfo collisionSides;
+
+    m_Rectangle.Width = 0;
+    m_Rectangle.Height = 0;
+    m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
+    m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
     collisionSides.Reset();
 
+    // TODO :
+    // Add private template function CheckCollisions
+    // In if statement check for dynamic_cast and call accordingly
+    // Move everything below into this function
+    // Function for Player, Platform, DynamicBody
+    // For player: HandleIntersection
+    // For platform if section (no ResetCollisionNormal)
+    // For DynamicBody:
+    // If second body dynamic body or player check for carrier intersection first
+    // If false, check for intersection
+    // If second body ground or platform, usual check intersection
     IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
     Service::Vector2L intersectionPoint;
     Service::Vector2L newDirection = body->GetDirection();
