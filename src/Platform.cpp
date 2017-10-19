@@ -4,7 +4,9 @@
 
 #include "Platform.hpp"
 
-Platform::Platform(const oxygine::Rect& aRect)
+Platform::Platform(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionManager>& a_Manager)
+    : ICarrier(a_Manager)
+    , IMovable(a_Manager)
 {
     std::cout << "Platform ID:" << GetId() << std::endl;
     m_Box->setResAnim(res::ui.getResAnim("platform"));

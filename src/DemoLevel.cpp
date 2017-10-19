@@ -15,7 +15,7 @@ void Square::Update()
 {
 }
 
-void DemoLevel::Init(MapProperty&& aMapProperty)
+void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisionManager>& a_Manager)
 {
     //create background
 //    spSprite sky = new Sprite;
@@ -47,10 +47,25 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     mStatic4 = ground4.get();
     mObjects.push_back(ground4);
 
+
+    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000), a_Manager);
+    addChild(platform);
+    m_Platform = platform;
+
+    spDynamicBox box1 = new DynamicBox(a_Manager);
+    addChild(box1);
+    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
+    m_DynamicObjects->push_back(box1);
+
+    a_Manager->AddBody(mStatic);
+    a_Manager->AddBody(mStatic2);
+    a_Manager->AddBody(mStatic3);
+    a_Manager->AddBody(mStatic4);
+
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
     // ------- TILED ---------
-    mMapProperty = std::move(aMapProperty);
+    mMapProperty = std::move(a_MapProperty);
 
     file::buffer fb;
     const std::string pathToTexture = "buch-outdoor.png";
@@ -66,15 +81,6 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 ////        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
-
-    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000));
-    addChild(platform);
-    m_Platform = platform;
-
-    spDynamicBox box1 = new DynamicBox();
-    addChild(box1);
-    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
-    m_DynamicObjects->push_back(box1);
 }
 
 void DemoLevel::Update(const UpdateState& /*us*/)

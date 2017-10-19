@@ -1,8 +1,9 @@
 #include <iostream>
 #include "ICarrier.hpp"
 
-ICarrier::ICarrier()
-    : m_CarrierRays(std::make_shared<std::vector<Collision::Ray>>())
+ICarrier::ICarrier(const std::shared_ptr<ICollisionManager>& a_Manager)
+    : IMovable(a_Manager)
+    , m_CarrierRays(std::make_shared<std::vector<Collision::Ray>>())
     , m_Passengers(std::make_unique<std::vector<IMovable*>>())
 {}
 

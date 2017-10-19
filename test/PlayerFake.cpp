@@ -3,7 +3,8 @@
 #include "PlayerFake.hpp"
 
 PlayerFake::PlayerFake(int a_Width, int a_Height)
-    : m_WasCollision(false)
+    : IMovable(nullptr)
+    , m_WasCollision(false)
     , m_NewDirection(0, 0)
 {
     m_View->setWidth(a_Width);

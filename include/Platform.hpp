@@ -31,7 +31,7 @@ DECLARE_SMART(Platform, spPlatform);
 class Platform: public oxygine::Actor, public virtual ICarrier, public virtual IDebugDrawable
 {
 public:
-    Platform(const oxygine::Rect&);
+    Platform(const oxygine::Rect&, const std::shared_ptr<ICollisionManager>&);
     ~Platform();
     void Update();
     void SetDirection(const Service::Vector2L&) override;

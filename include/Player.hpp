@@ -10,7 +10,7 @@ DECLARE_SMART(Player, spPlayer);
 class Player: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
 {
 public:
-    Player();
+    Player(const std::shared_ptr<ICollisionManager>&);
     ~Player();
     void SetPosition() override;
 
@@ -23,8 +23,6 @@ public:
     void AddDirection(const Service::Vector2L&) override;
     bool IsJumping() const;
 
-    void SetDirectionFinalForStep(const Service::Vector2L&);
-
 private:
     void Move(bool /*aIsMovingRight*/);
     inline void Stop();
@@ -35,7 +33,6 @@ private:
     spEventProxy m_EventProxy;
     bool m_IsJumping;
     bool m_IsButtonMoving;
-    bool m_IsDirectionFinalForTheseStep;
     const int m_MaxSpeed = Service::Constants::PLAYER_MAX_SPEED;
     const int m_JumpSpeed = Service::Constants::PLAYER_JUMP_SPEED;
 };

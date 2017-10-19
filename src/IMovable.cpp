@@ -1,17 +1,13 @@
 #include <iostream>
 #include "IMovable.hpp"
 
-IMovable::IMovable()
+IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
     , CarrierId(Service::IdGenerator::UnknownId)
+    , m_CollisionManager(a_Manager)
 {
-}
-
-void IMovable::BindCollisionManager(const std::shared_ptr<ICollisionManager>& a_Manager)
-{
-    assert(!m_CollisionManager);
-    m_CollisionManager = std::shared_ptr<ICollisionManager>(a_Manager);
+    m_CollisionManager->AddBody(this);
 }
 
 IMovable::~IMovable()
@@ -28,18 +24,6 @@ void IMovable::SetDirection(const Service::Vector2L& a_NewDirection)
 void IMovable::AddDirection(const Service::Vector2L& a_NewDirection)
 {
     m_Direction += a_NewDirection;
-    UpdateRays();
-}
-
-void IMovable::AddDirectionX(Service::TCoordinate a_Value)
-{
-    m_Direction.x += a_Value;
-    UpdateRays();
-}
-
-void IMovable::AddDirectionY(Service::TCoordinate a_Value)
-{
-    m_Direction.y += a_Value;
     UpdateRays();
 }
 

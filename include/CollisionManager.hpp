@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 
+#include "ICarrier.hpp"
 #include "ICollisionManager.hpp"
 #include "DemoLevel.hpp"
 #include "Player.hpp"
@@ -15,6 +16,13 @@
 
 class CollisionManager : public virtual ICollisionManager
 {
+    enum class BodyType
+    {
+        Platform,
+        Player,
+        DynamicBox,
+    };
+
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
     using TKey = Basis::BasisObject::TId;
     using TValue = TBody;

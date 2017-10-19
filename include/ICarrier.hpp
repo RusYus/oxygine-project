@@ -12,7 +12,7 @@
 class ICarrier : public virtual IMovable
 {
 public:
-    ICarrier();
+    ICarrier(const std::shared_ptr<ICollisionManager>&);
 
     virtual ~ICarrier();
 

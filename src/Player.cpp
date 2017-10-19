@@ -6,10 +6,10 @@
 #include "BasisEvents.hpp"
 
 
-Player::Player()
-    : m_IsButtonMoving(false)
+Player::Player(const std::shared_ptr<ICollisionManager>& a_Manager)
+    : IMovable(a_Manager)
+    , m_IsButtonMoving(false)
     , m_IsJumping(false)
-    , m_IsDirectionFinalForTheseStep(false)
 {
     std::cout << "Player ID:" << GetId() << std::endl;
 }
@@ -30,7 +30,7 @@ void Player::Init(spEventProxy aEventProxy)
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(15'000, 10'000);
+    m_Position.set(9'000, 5'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
@@ -134,6 +134,7 @@ void Player::ProcessKeyboard()
 void Player::AddDirection(const Service::Vector2L& a_Direction)
 {
     m_Direction += a_Direction;
+//    std::cout << "Added direction, new:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 }
 
 void Player::SetPosition()
@@ -172,22 +173,8 @@ void Player::SetPosition()
 
 }
 
-void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
-{
-    if (!m_IsDirectionFinalForTheseStep)
-    {
-        m_Direction.x += aNewDirection.x;
-        if (!m_IsJumping)
-        {
-            m_Direction.y = aNewDirection.y;
-        }
-        m_IsDirectionFinalForTheseStep = true;
-    }
-}
-
 void Player::Update(const UpdateState& /*aUpdateState*/)
 {
-    m_IsDirectionFinalForTheseStep = false;
     ProcessKeyboard();
 
 //    // Reseting direction, if collision in place.

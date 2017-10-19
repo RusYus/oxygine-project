@@ -4,7 +4,6 @@
 
 #include "Actor.h"
 #include "key.h"
-#include "CollisionManager.hpp"
 #include "BasisObject.hpp"
 #include "BasisCamera.hpp"
 #include "Player.hpp"
@@ -81,13 +80,13 @@ public:
         addChild(mCamera);
 
         mLevels.emplace_back(new DemoLevel);
-        mLevels.back()->Init(std::move(mapProperty));
+        mLevels.back()->Init(std::move(mapProperty), m_CollisionManager);
         addChild(mLevels.back());
 
         mCamera->setContent(mLevels.back());
 
         //create player ship
-        m_Player = new Player;
+        m_Player = new Player(m_CollisionManager);
         m_Player->Init(mEventProxy);
 //        mLevels.back()->addChild(mPlayer->GetView());
         mLevels.back()->addChild(m_Player);
@@ -123,16 +122,6 @@ public:
         mJump->setX(getStage()->getWidth() - mJump->getWidth() - 10);
         mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
         mJump->attachTo(this);
-
-        m_CollisionManager->AddBody(m_Player.get());
-        m_CollisionManager->AddBody(mLevels.back()->mStatic);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic2);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic3);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic4);
-        m_CollisionManager->AddBody(mLevels.back()->m_Platform.get());
-
-        m_Player->BindCollisionManager(m_CollisionManager);
-        mLevels.back()->m_Platform->BindCollisionManager(m_CollisionManager);
     }
 
     void doUpdate(const UpdateState& us)
