@@ -10,11 +10,9 @@ DECLARE_SMART(Player, spPlayer);
 class Player: public oxygine::Actor, public virtual IMovable, public virtual IDebugDrawable
 {
 public:
-    Player(const std::shared_ptr<ICollisionManager>&);
+    Player(spEventProxy, const std::shared_ptr<ICollisionManager>&);
     ~Player();
     void SetPosition() override;
-
-    void Init(spEventProxy);
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
     void ProcessMoveEvent(oxygine::Event*);

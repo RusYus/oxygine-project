@@ -86,8 +86,7 @@ public:
         mCamera->setContent(mLevels.back());
 
         //create player ship
-        m_Player = new Player(m_CollisionManager);
-        m_Player->Init(mEventProxy);
+        m_Player = new Player(mEventProxy, m_CollisionManager);
 //        mLevels.back()->addChild(mPlayer->GetView());
         mLevels.back()->addChild(m_Player);
 

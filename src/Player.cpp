@@ -6,25 +6,12 @@
 #include "BasisEvents.hpp"
 
 
-Player::Player(const std::shared_ptr<ICollisionManager>& a_Manager)
+Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager>& a_Manager)
     : IMovable(a_Manager)
     , m_IsButtonMoving(false)
     , m_IsJumping(false)
 {
     std::cout << "Player ID:" << GetId() << std::endl;
-}
-
-Player::~Player()
-{
-}
-
-spActor Player::GetView() const
-{
-    return m_View;
-}
-
-void Player::Init(spEventProxy aEventProxy)
-{
 //    m_View = new Actor;
 //    Service::Vector2L pos = getStage()->getSize() / 2;
 
@@ -37,14 +24,21 @@ void Player::Init(spEventProxy aEventProxy)
     addChild(m_View);
 
     m_EventProxy = aEventProxy;
-
     m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
-
     m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
 
     m_Direction.setZero();
 
     SetRays();
+}
+
+Player::~Player()
+{
+}
+
+spActor Player::GetView() const
+{
+    return m_View;
 }
 
 bool Player::IsJumping() const
