@@ -6,8 +6,9 @@ namespace Service
 enum class ObjectType
 {
     Player,
+    Platform,
     DynamicBody,
-    Ground,
+    StaticBody,
     UNDEFINED,
 };
 

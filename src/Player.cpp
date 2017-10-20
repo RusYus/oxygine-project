@@ -12,6 +12,7 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
     , m_IsJumping(false)
 {
     std::cout << "Player ID:" << GetId() << std::endl;
+    Type = Service::ObjectType::Player;
 //    m_View = new Actor;
 //    Service::Vector2L pos = getStage()->getSize() / 2;
 

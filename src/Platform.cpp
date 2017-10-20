@@ -9,6 +9,7 @@ Platform::Platform(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionM
     , IMovable(a_Manager)
 {
     std::cout << "Platform ID:" << GetId() << std::endl;
+    Type = Service::ObjectType::Platform;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
     m_Position.set(10'000, 45'000);
     m_View->setPosition(Service::Convert(m_Position));

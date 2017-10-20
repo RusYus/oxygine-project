@@ -10,6 +10,7 @@ class Static : public oxygine::Actor, public IDrawable
 public:
     Static(const oxygine::Rect& a_Rc)
     {
+        Type = Service::ObjectType::StaticBody;
         m_Box = new Sprite;
         m_Box->setResAnim(res::ui.getResAnim("pen"));
         m_Box->setSize(Service::Convert(a_Rc.getSize()));

@@ -20,120 +20,32 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
     collisionSides.Reset();
 
-    // TODO :
-    // Add private template function CheckCollisions
-    // In if statement check for dynamic_cast and call accordingly
-    // Move everything below into this function
-    // Function for Player, Platform, DynamicBody
-    // For player: HandleIntersection
-    // For platform if section (no ResetCollisionNormal)
-    // For DynamicBody:
-    // If second body dynamic body or player check for carrier intersection first
-    // If false, check for intersection
-    // If second body ground or platform, usual check intersection
     IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
     Service::Vector2L intersectionPoint;
     Service::Vector2L newDirection = body->GetDirection();
 
-    //-----Platform--------
-
-    if (dynamic_cast<Platform*>(body))
+    for (auto& secondBodyIt : m_Bodies)
     {
-        Platform* platform = dynamic_cast<Platform*>(body);
-        for (auto& secondBodyIt : m_Bodies)
+        Basis::BasisObject* secondBody = secondBodyIt.second.first;
+        if (!secondBody)
         {
-            Basis::BasisObject* secondBody = secondBodyIt.second.first;
-            if (!secondBody || !dynamic_cast<IMovable*>(secondBody))
-            {
-                std::cout << "No second body or not movable! " << secondBody->GetId() << std::endl;
-                continue;
-            }
-
-            // Don't check collisions if same body or it's carrier.
-            if (platform->GetId() == secondBody->GetId())
-            {
-                continue;
-            }
-
-            // Setting collision boundaries for second body.
-            FillRectangleValues(*secondBody);
-
-            IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody);
-
-            UpdateRectangleWithDirection(*possiblePassenger);
-
-            Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};
-            if (HandleCarrierIntersection(platform, additionalDirection))
-            {
-                // If passenger is Player and is jumping, then ignore collision.
-                if (dynamic_cast<Player*>(possiblePassenger) && dynamic_cast<Player*>(possiblePassenger)->IsJumping())
-                {
-                    continue;
-                }
-
-                // Set new direction to passenger (after first collision it's suposed to be 0).
-                possiblePassenger->SetDirection(additionalDirection);
-                std::cout << "SetDirection, new:" << possiblePassenger->GetDirection().x << ":" << possiblePassenger->GetDirection().y << std::endl;
-                platform->AddPassenger(possiblePassenger);
-                continue;
-            }
-        }
-    }
-    // -----Player--------
-    else if (dynamic_cast<Player*>(body))
-    {
-        for (auto& secondBodyIt : m_Bodies)
-        {
-            Basis::BasisObject* secondBody = secondBodyIt.second.first;
-            if (!secondBody)
-            {
-                std::cout << "No second body!" << std::endl;
-                continue;
-            }
-
-            // Don't check collisions if same body or it's carrier.
-            if (body->GetId() == secondBody->GetId()
-                || body->CarrierId == secondBody->GetId())
-            {
-                continue;
-            }
-
-            // Setting collision boundaries for second body.
-            FillRectangleValues(*secondBody);
-
-            HandleIntersection(body, collisionSides, intersectionPoint, newDirection);
+            std::cout << "No second body!" << std::endl;
+            continue;
         }
 
-        if (newDirection != body->GetDirection())
+        // Don't check collisions if same body or it's carrier.
+        if (body->GetId() == secondBody->GetId()
+            || body->CarrierId == secondBody->GetId())
         {
-            body->SetDirection(newDirection);
+            continue;
         }
 
-        body->ResetCollisionNormal(collisionSides);
-    }
-    // -------DynamicBox--------
-    else if (dynamic_cast<DynamicBox*>(body))
-    {
-        for (auto& secondBodyIt : m_Bodies)
+        // Setting collision boundaries for second body.
+        FillRectangleValues(*secondBody);
+
+        if (body->Type == Service::ObjectType::DynamicBody || body->Type == Service::ObjectType::Platform)
         {
-            Basis::BasisObject* secondBody = secondBodyIt.second.first;
-            if (!secondBody)
-            {
-                std::cout << "No second body!" << std::endl;
-                continue;
-            }
-
-            // Don't check collisions if same body or it's carrier.
-            if (body->GetId() == secondBody->GetId()
-                || body->CarrierId == secondBody->GetId())
-            {
-                continue;
-            }
-
-            // Setting collision boundaries for second body.
-            FillRectangleValues(*secondBody);
-
-            if (dynamic_cast<Player*>(secondBody) || dynamic_cast<DynamicBox*>(secondBody))
+            if (secondBody->Type == Service::ObjectType::DynamicBody || secondBody->Type == Service::ObjectType::Player)
             {
                 IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody);
                 ICarrier* carrier = dynamic_cast<ICarrier*>(body);
@@ -155,18 +67,20 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
                     continue;
                 }
             }
+        }
 
-            // If I got here, no carrier intersection with second body, so check just intersection.
+        if (body->Type == Service::ObjectType::DynamicBody || body->Type == Service::ObjectType::Player)
+        {
             HandleIntersection(body, collisionSides, intersectionPoint, newDirection);
         }
-
-        if (newDirection != body->GetDirection())
-        {
-            body->SetDirection(newDirection);
-        }
-
-        body->ResetCollisionNormal(collisionSides);
     }
+
+    if (newDirection != body->GetDirection())
+    {
+        body->SetDirection(newDirection);
+    }
+
+    body->ResetCollisionNormal(collisionSides);
 }
 
 void CollisionManager::FillRectangleValues(Basis::BasisObject& a_out_Body)
