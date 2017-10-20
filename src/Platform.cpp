@@ -117,13 +117,10 @@ void Platform::SetDirection(const Service::Vector2L& a_NewDirection)
 
     if (a_NewDirection != Service::Vector2L(0, 0))
     {
-//        m_Direction.cast<oxygine::Vector2>().normalize();
         oxygine::Vector2 dirTemp = Service::Convert(m_Direction);
         dirTemp.normalize();
-        // TODO : Refactor!
         dirTemp.x = std::round(dirTemp.x);
         dirTemp.y = std::round(dirTemp.y);
-        // TODO : double multiplication by scale.s
         m_Direction = Service::Convert(dirTemp);
         m_Direction *= (m_MaxSpeed / Service::Constants::SCALE);
     }

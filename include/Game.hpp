@@ -36,25 +36,6 @@ public:
     */
 };
 
-// ----------- NEXT STEPS: ------------
-// CollisionManager : calculates all collision (for each body using quad tree)
-// Has references to all objects with body (taking from Game?)
-// If something collides, report this to these bodies.
-// Next, all bodies updates themselves, considering collisioninfo they've received.
-// Should I use raycasting? E.g. CollisionManager says I collide with ground without details.
-// Now I cast rays to ensure that and gather other info (which side, etc.)
-// CollisionMask? For the future, not now
-// Number of rays, their spacing, depends on width and height of the body, length depends on velocity in that direction
-// Rays are casted towards moving direction, except directly down (ground), which casted everytime.
-
-
-// TODO [MOV2-47]
-// Add coordinates as arguments to ctors for all objects (player, platform, etc.)
-// In ctor set position (to set position m_View)
-// Using everywhere Vector2L with cast to Vector2 if neccesary (length() and normalize())
-// Set position for m_View only for graphics
-// Use scale to convert between Vector2L and Vector2 (in setting m_View)
-
 DECLARE_SMART(Game, spGame);
 class Game: public Actor
 {
