@@ -3,7 +3,6 @@
 #include "ICarrier.hpp"
 #include "IDebugDrawable.hpp"
 #include "BasisEventProxy.hpp"
-#include "Utils.hpp"
 
 DECLARE_SMART(DynamicBox, spDynamicBox);
 class DynamicBox: public oxygine::Actor, public virtual ICarrier, public virtual IDebugDrawable

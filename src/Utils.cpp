@@ -81,3 +81,12 @@ inline void Normal2::FixCoordinatesIfExceeds()
 IdGenerator::TId IdGenerator::mId = 0;
 
 }
+
+namespace oxygine
+{
+    std::ostream& operator << (std::ostream& a_Os, const Service::Vector2L& a_Vector)
+    {
+        a_Os << a_Vector.x << ":"  << a_Vector.y << " ";
+        return a_Os;
+    }
+}

@@ -78,3 +78,8 @@ public:
 static const Normal2 ZeroNormal = Normal2{0, 0};
 
 }
+
+namespace oxygine
+{
+    std::ostream& operator << (std::ostream&, const Service::Vector2L&);
+}
