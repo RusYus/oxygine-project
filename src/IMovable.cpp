@@ -97,7 +97,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Up:
                 if (m_Direction.y < 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination.set(ray.Original.x, ray.Original.y + m_Direction.y);/* = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);*/
                 }
                 // std::cout << "Up:  Original   : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -105,7 +105,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Down:
                 if (m_Direction.y > 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination.set(ray.Original.x, ray.Original.y + m_Direction.y);/* = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);*/
                 }
                 // std::cout << "Down:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -113,7 +113,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination.set(ray.Original.x + m_Direction.x, ray.Original.y);/* = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);*/
                 }
                 // std::cout << "Right:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -122,7 +122,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Left:
                 if (m_Direction.x < 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination.set(ray.Original.x + m_Direction.x, ray.Original.y);/* = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);*/
                 }
                 // std::cout << "Left:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
