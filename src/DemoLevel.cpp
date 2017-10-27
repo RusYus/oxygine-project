@@ -48,7 +48,7 @@ void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisi
     mObjects.push_back(ground4);
 
 
-    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000), a_Manager);
+    spPlatform platform = new Platform(Rect(60'000, 20'000, 25'000, 2'000), a_Manager);
     addChild(platform);
     m_Platform = platform;
 

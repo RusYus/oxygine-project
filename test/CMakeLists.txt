@@ -6,6 +6,7 @@ include_directories(
 
 set(
     PROJECT_TESTS_HEADERS
+    PlatformFake.hpp
     PlayerFake.hpp
 )
 
@@ -13,6 +14,7 @@ set(
 	PROJECT_TESTS_SOURCES
 	CollisionManagerTests.cpp
     JsonImporterTests.cpp
+    PlatformFake.cpp
     PlayerFake.cpp
 	TestExample.cpp
 	Tests.cpp

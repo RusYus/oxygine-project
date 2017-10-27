@@ -18,7 +18,7 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(9'000, 5'000);
+    m_Position.set(54'000, 5'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
@@ -84,7 +84,7 @@ void Player::Move(bool aIsMovingRight)
 //    {
 //        mDirection = _body->GetLinearVelocity();
 
-////        std::cout << "Moving!" << "NORMALS:" << mNormal.x << ";" << mGroundNormal.x << std::endl;
+        std::cout << "Moving!" << std::endl;
         m_Direction.x = aIsMovingRight ? m_MaxSpeed : -m_MaxSpeed;
 //        mDirection.x /= Service::Constants::SCALE;
 

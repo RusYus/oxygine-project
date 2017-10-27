@@ -11,7 +11,7 @@ Platform::Platform(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionM
     std::cout << "Platform ID:" << GetId() << std::endl;
     Type = Service::ObjectType::Platform;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_Position.set(10'000, 45'000);
+    m_Position.set(60'000, 35'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
@@ -23,12 +23,12 @@ Platform::Platform(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionM
 
     PathNode newPoint = PathNode(0, GetPosition());
     m_Nodes.emplace(std::make_pair(newPoint.Id, newPoint));
-    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(0, -20'000));
+    PathNode newPoint2 = PathNode(1, newPoint.Position + Service::Vector2L(-40'000, 0));
     m_Nodes.emplace(std::make_pair(newPoint2.Id, newPoint2));
-    PathNode newPoint3 = PathNode(2, newPoint2.Position + Service::Vector2L(25'000, 0));
-    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
-    PathNode newPoint4 = PathNode(3, newPoint3.Position + Service::Vector2L(10'000, 15'000));
-    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
+//    PathNode newPoint3 = PathNode(2, newPoint2.Position + Service::Vector2L(25'000, 0));
+//    m_Nodes.emplace(std::make_pair(newPoint3.Id, newPoint3));
+//    PathNode newPoint4 = PathNode(3, newPoint3.Position + Service::Vector2L(10'000, 15'000));
+//    m_Nodes.emplace(std::make_pair(newPoint4.Id, newPoint4));
 //    PathNode newPoint5 = PathNode(4, newPoint.Position + Service::Vector2L(400, 0));
 //    m_Nodes.emplace(std::make_pair(newPoint5.Id, newPoint5));
 
