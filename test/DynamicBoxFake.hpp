@@ -4,21 +4,21 @@
 
 #include "ICarrier.hpp"
 
-struct PlatformFake : public ICarrier
+struct DynamicBoxFake : public ICarrier
 {
 public:
-    PlatformFake(const oxygine::Rect&, const std::shared_ptr<ICollisionManager>&);
+    DynamicBoxFake(const oxygine::Rect&, const std::shared_ptr<ICollisionManager>&);
 
     void SetupValues(int /*a_X*/, int /*a_Y*/, const Service::Vector2L& /*a_Direction*/);
 
     inline Service::TCoordinate GetWidth() const override
     {
-        return Service::TCoordinate(25'000);
+        return Service::TCoordinate(10'000);
     }
 
     inline Service::TCoordinate GetHeight() const override
     {
-        return Service::TCoordinate(2'000);
+        return Service::TCoordinate(10'000);
     }
 
     void Update();
