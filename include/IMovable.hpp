@@ -6,6 +6,7 @@
 
 #include "ICollisionManager.hpp"
 #include "CollisionInfo.hpp"
+#include "CommonData.hpp"
 #include "Constants.hpp"
 #include "IDrawable.hpp"
 #include "Utils.hpp"
@@ -33,7 +34,7 @@ protected:
     virtual void SetRays();
 
 public:
-    Basis::BasisObject::TId CarrierId;
+    Common::CarrierInfo CarrierInfo;
 
 protected:
     Service::Vector2L m_Direction;

@@ -35,7 +35,7 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
         // Don't check collisions if same body or it's carrier.
         if (body->GetId() == secondBody->GetId()
-            || body->CarrierId == secondBody->GetId())
+            || body->CarrierInfo.Id == secondBody->GetId())
         {
             continue;
         }

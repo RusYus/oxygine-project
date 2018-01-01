@@ -4,7 +4,7 @@
 IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
-    , CarrierId(Service::IdGenerator::UnknownId)
+    , CarrierInfo()
     , m_CollisionManager(a_Manager)
 {
     m_CollisionManager->AddBody(this);

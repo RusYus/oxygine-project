@@ -22,6 +22,7 @@ set(
     include/BasisObject.hpp
     include/CollisionInfo.hpp
     include/CollisionManager.hpp
+    include/CommonData.hpp
     include/Constants.hpp
     include/DemoLevel.hpp
     include/DynamicBox.hpp
