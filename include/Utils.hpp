@@ -20,6 +20,8 @@ inline bool AreEqual(float a_Ls, float a_Rs)
 using TCoordinate = long long;
 typedef oxygine::VectorT2<TCoordinate> Vector2L;
 
+static const Vector2L ZeroVector = Vector2L{0, 0};
+
 inline Vector2L Convert(const oxygine::Vector2& a_Pos)
 {
     return Vector2L(a_Pos.x * Constants::SCALE, a_Pos.y * Constants::SCALE);

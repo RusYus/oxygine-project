@@ -45,7 +45,7 @@ void DynamicBox::SetPosition()
 {
 //    std::cout << "DynamicBox:" << m_View->getPosition().x << ":" << m_View->getPosition().y << std::endl;
 
-    std::cout << "In Set. DynamicBox:" << m_Direction << "; Pos:" << m_Position << std::endl;
+//    std::cout << "In Set. DynamicBox:" << m_Direction << "; Pos:" << m_Position << std::endl;
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
@@ -72,5 +72,5 @@ void DynamicBox::CheckCollisions()
 void DynamicBox::AddDirection(const Service::Vector2L& a_Direction)
 {
     IMovable::AddDirection(a_Direction);
-    std::cout << "Added direction, new:" << m_Direction << std::endl;
+//    std::cout << "Added direction, new:" << m_Direction << std::endl;
 }

@@ -47,8 +47,15 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         {
             if (secondBody->Type == Service::ObjectType::DynamicBody || secondBody->Type == Service::ObjectType::Player)
             {
+                // FIXME : Check if crashed in cast when colliding with Ground.
                 IMovable* possiblePassenger = dynamic_cast<IMovable*>(secondBody);
                 ICarrier* carrier = dynamic_cast<ICarrier*>(body);
+
+                // Not moving relative to carrier.
+                if (body->CarrierInfo.Id == possiblePassenger->CarrierInfo.Id && body->GetDirection() - body->CarrierInfo.Direction == Service::ZeroVector)
+                {
+                    continue;
+                }
 
                 UpdateRectangleWithDirection(*possiblePassenger);
 
@@ -78,6 +85,10 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     if (newDirection != body->GetDirection())
     {
         body->SetDirection(newDirection);
+        if (body->CarrierInfo.Id != Service::IdGenerator::UnknownId)
+        {
+            body->AddDirection(body->CarrierInfo.Direction);
+        }
     }
 
     body->ResetCollisionNormal(collisionSides);

@@ -18,7 +18,8 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(54'000, 5'000);
+//    m_Position.set(54'000, 5'000);
+    m_Position.set(62'000, 5'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 
@@ -134,11 +135,16 @@ void Player::AddDirection(const Service::Vector2L& a_Direction)
 
 void Player::SetPosition()
 {
+    // FIXME : Somehow consider carrier info.
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
         m_Direction.x = 0;
         std::cout << "Reseting direction x!!!" << std::endl;
+        if (CarrierInfo.Id != Service::IdGenerator::UnknownId)
+        {
+            AddDirection(CarrierInfo.Direction);
+        }
     }
 
 //    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
@@ -181,7 +187,7 @@ void Player::Update(const UpdateState& /*aUpdateState*/)
 
     m_Direction.y += Service::Constants::GRAVITY;
 
-//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
 //    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 
