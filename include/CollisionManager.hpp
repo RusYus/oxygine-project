@@ -77,7 +77,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-            a_NewPoint.x = newPos > 1 ? newPos : 0;
+            a_NewPoint.x = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Right = true;
         };
 
@@ -90,7 +90,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.x - a_First->GetX();
-            a_NewPoint.x = newPos > 1 ? newPos : 0;
+            a_NewPoint.x = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Left = true;
         };
 
@@ -103,7 +103,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.y - a_First->GetY();
-            a_NewPoint.y = newPos > 1 ? newPos : 0;
+            a_NewPoint.y = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Up = true;
         };
 
@@ -116,7 +116,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-            a_NewPoint.y = newPos > 1 ? newPos : 0;
+            a_NewPoint.y = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Down = true;
         };
 
