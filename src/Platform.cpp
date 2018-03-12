@@ -11,7 +11,7 @@ Platform::Platform(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionM
     std::cout << "Platform ID:" << GetId() << std::endl;
     Type = Service::ObjectType::Platform;
     m_Box->setResAnim(res::ui.getResAnim("platform"));
-    m_Position.set(60'000, 35'000);
+    m_Position.set(60'000, 45'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());

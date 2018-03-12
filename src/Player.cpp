@@ -18,8 +18,8 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
 
     m_Box->setResAnim(res::ui.getResAnim("player"));
 //    mBox->setAnchor(Vector2(0.5f, 0.5f));
-//    m_Position.set(54'000, 5'000);
-    m_Position.set(62'000, 5'000);
+//    m_Position.set(62'000, 15'000);
+    m_Position.set(25'000, 10'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
 

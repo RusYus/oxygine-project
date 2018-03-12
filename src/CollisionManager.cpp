@@ -84,6 +84,11 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
     if (newDirection != body->GetDirection())
     {
+        std::cout << "NewDirection: " << newDirection << " ; inter point: " << intersectionPoint << std::endl;
+        if (collisionSides.Right)
+        {
+            std::cout << "COllision right" << std::endl;
+        }
         body->SetDirection(newDirection);
         if (body->CarrierInfo.Id != Service::IdGenerator::UnknownId)
         {
@@ -170,7 +175,8 @@ bool CollisionManager::Intersection(
     f_low = std::max(f_dim_low, f_low);
     f_high = std::min(f_dim_high, f_high);
 
-    if (f_low > f_high)
+    // EndRay on border doesn't count.
+    if (f_low >= f_high)
         return false;
 
 
@@ -212,7 +218,8 @@ bool CollisionManager::Intersection(
     f_low = std::max(f_dim_low, f_low);
     f_high = std::min(f_dim_high, f_high);
 
-    if (f_low > f_high)
+    // EndRay on border doesn't count.
+    if (f_low >= f_high)
         return false;
 
     Service::Vector2L b = aEndRay - aStartRay;

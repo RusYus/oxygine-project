@@ -47,20 +47,25 @@ void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisi
     mStatic4 = ground4.get();
     mObjects.push_back(ground4);
 
+    spStatic ground5 = new Static(Rect(20'000, 34'000, 15'000, 5'000));
+    addChild(ground5);
+    mStatic5 = ground5.get();
+    mObjects.push_back(ground5);
 
-    spPlatform platform = new Platform(Rect(60'000, 20'000, 25'000, 2'000), a_Manager);
-    addChild(platform);
-    m_Platform = platform;
+//    spPlatform platform = new Platform(Rect(60'000, 20'000, 25'000, 2'000), a_Manager);
+//    addChild(platform);
+//    m_Platform = platform;
 
-    spDynamicBox box1 = new DynamicBox(a_Manager);
-    addChild(box1);
-    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
-    m_DynamicObjects->push_back(box1);
+//    spDynamicBox box1 = new DynamicBox(a_Manager);
+//    addChild(box1);
+//    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
+//    m_DynamicObjects->push_back(box1);
 
     a_Manager->AddBody(mStatic);
     a_Manager->AddBody(mStatic2);
     a_Manager->AddBody(mStatic3);
     a_Manager->AddBody(mStatic4);
+    a_Manager->AddBody(mStatic5);
 
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 

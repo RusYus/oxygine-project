@@ -34,6 +34,7 @@ public:
     Static* mStatic2;
     Static* mStatic3;
     Static* mStatic4;
+    Static* mStatic5;
     spPlatform m_Platform;
     std::unique_ptr<std::vector<spDynamicBox>> m_DynamicObjects;
 

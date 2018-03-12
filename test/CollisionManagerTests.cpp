@@ -103,7 +103,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAngle
     BOOST_CHECK(m_Player->CollisionTookPlace());
 }
 
-BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxisAlligned, CollisionManagerFixture)
+BOOST_FIXTURE_TEST_CASE(ShouldNotIntersectWhenOriginalOutsideDestinationOnBorderAxisAlligned, CollisionManagerFixture)
 {
     // Left side.
     m_Player->SetupValues(
@@ -111,7 +111,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground->GetY(),
         Service::Vector2L(m_Distance, 0));
     m_Manager->CheckCollisions(m_Player->GetId());
-    BOOST_CHECK(m_Player->CollisionTookPlace());
+    BOOST_CHECK(!m_Player->CollisionTookPlace());
 
     // Right side.
     m_Player->SetupValues(
@@ -119,7 +119,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground->GetY(),
         Service::Vector2L(-m_Distance, 0));
     m_Manager->CheckCollisions(m_Player->GetId());
-    BOOST_CHECK(m_Player->CollisionTookPlace());
+    BOOST_CHECK(!m_Player->CollisionTookPlace());
 
     // Up side.
     m_Player->SetupValues(
@@ -127,7 +127,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground->GetY() - m_Player->GetHeight() - m_Distance,
         Service::Vector2L(0, m_Distance));
     m_Manager->CheckCollisions(m_Player->GetId());
-    BOOST_CHECK(m_Player->CollisionTookPlace());
+    BOOST_CHECK(!m_Player->CollisionTookPlace());
 
     // Down side.
     m_Player->SetupValues(
@@ -135,7 +135,7 @@ BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationOnBorderAxi
         m_Ground->GetY() + m_Ground->GetHeight() + m_Distance,
         Service::Vector2L(0, -m_Distance));
     m_Manager->CheckCollisions(m_Player->GetId());
-    BOOST_CHECK(m_Player->CollisionTookPlace());
+    BOOST_CHECK(!m_Player->CollisionTookPlace());
 }
 
 BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOnBorderDestinationInsideAxisAlligned, CollisionManagerFixture)

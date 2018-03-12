@@ -11,7 +11,7 @@ DynamicBox::DynamicBox(const std::shared_ptr<ICollisionManager>& a_Manager)
     std::cout << "DynamicBox ID:" << GetId() << std::endl;
     Type = Service::ObjectType::DynamicBody;
     m_Box->setResAnim(res::ui.getResAnim("square"));
-    m_Position.set(72'000, 5'000);
+    m_Position.set(72'000, 15'000);
     m_View->setPosition(Service::Convert(m_Position));
     m_View->setSize(m_Box->getSize());
     addChild(m_View);
