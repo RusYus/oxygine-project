@@ -52,14 +52,26 @@ void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisi
     mStatic5 = ground5.get();
     mObjects.push_back(ground5);
 
-//    spPlatform platform = new Platform(Rect(60'000, 20'000, 25'000, 2'000), a_Manager);
-//    addChild(platform);
-//    m_Platform = platform;
+    spPlatform platform1 = new Platform(Rect(60'000, 45'000, 25'000, 2'000), a_Manager);
+    addChild(platform1);
+    m_Platforms = std::make_unique<std::vector<spPlatform>>();
+    m_Platforms->push_back(platform1);
 
-//    spDynamicBox box1 = new DynamicBox(a_Manager);
-//    addChild(box1);
+//    spPlatform platform2 = new Platform(Rect(10'000, 45'000, 25'000, 2'000), a_Manager);
+//    addChild(platform2);
+//    m_Platforms->push_back(platform2);
+
 //    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
+//    spDynamicBox box1 = new DynamicBox(Rect(72'000, 15'000, 10'000, 10'000), a_Manager);
+//    addChild(box1);
 //    m_DynamicObjects->push_back(box1);
+
+//    std::cout << "After box1" << std::endl;
+//    a_Manager->PrintCarrierId();
+
+//    spDynamicBox box2 = new DynamicBox(Rect(72'000, -100'000, 10'000, 10'000), a_Manager);
+//    addChild(box2);
+//    m_DynamicObjects->push_back(box2);
 
     a_Manager->AddBody(mStatic);
     a_Manager->AddBody(mStatic2);
@@ -90,9 +102,12 @@ void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisi
 
 void DemoLevel::Update(const UpdateState& /*us*/)
 {
-    if (m_Platform)
+    if (m_Platforms)
     {
-        m_Platform->Update();
+        for (auto& platform : *m_Platforms)
+        {
+            platform->Update();
+        }
     }
 
     if (m_DynamicObjects)
@@ -103,9 +118,12 @@ void DemoLevel::Update(const UpdateState& /*us*/)
         }
     }
 
-    if (m_Platform)
+    if (m_Platforms)
     {
-        m_Platform->CheckCollisions();
+        for (auto& platform : *m_Platforms)
+        {
+            platform->CheckCollisions();
+        }
     }
 
     if (m_DynamicObjects)
@@ -119,9 +137,12 @@ void DemoLevel::Update(const UpdateState& /*us*/)
 
 void DemoLevel::SetPositions()
 {
-    if (m_Platform)
+    if (m_Platforms)
     {
-        m_Platform->SetPosition();
+        for (auto& platform : *m_Platforms)
+        {
+            platform->SetPosition();
+        }
     }
 
     if (m_DynamicObjects)
@@ -129,6 +150,25 @@ void DemoLevel::SetPositions()
         for (auto& boxes : *m_DynamicObjects)
         {
             boxes->SetPosition();
+        }
+    }
+}
+
+void DemoLevel::ToggleDebugDraw()
+{
+    if (m_Platforms)
+    {
+        for (auto& platform : *m_Platforms)
+        {
+            platform->ToggleDebugDraw();
+        }
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->ToggleDebugDraw();
         }
     }
 }

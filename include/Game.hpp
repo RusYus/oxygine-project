@@ -67,6 +67,8 @@ public:
         mCamera->setContent(mLevels.back());
 
         //create player ship
+
+        m_CollisionManager->PrintCarrierId();
         m_Player = new Player(mEventProxy, m_CollisionManager);
 //        mLevels.back()->addChild(mPlayer->GetView());
         mLevels.back()->addChild(m_Player);
@@ -106,22 +108,22 @@ public:
 
     void doUpdate(const UpdateState& us)
     {
-        std::cout << "------Starting Step:"<< std::endl;
         m_Player->Update(us);
         mLevels.back()->Update(us);
         m_Player->CheckCollisions();
         mLevels.back()->SetPositions();
         m_Player->SetPosition();
+
     }
 
     void ShowHideDebug(Event* /*event*/)
     {
-        m_Player->SetDebugDraw(!m_Player->GetDebugDraw());
-        mLevels.back()->m_Platform->SetDebugDraw(!mLevels.back()->m_Platform->GetDebugDraw());
+        m_Player->ToggleDebugDraw();
+        mLevels.back()->ToggleDebugDraw();
     }
 
     spEventProxy mEventProxy;
-    std::shared_ptr<CollisionManager> m_CollisionManager;
+    std::shared_ptr<ICollisionManager> m_CollisionManager;
     spPlayer m_Player;
     spCamera mCamera;
     spMoveButton mMoveLeft;

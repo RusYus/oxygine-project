@@ -56,7 +56,7 @@ public:
         return ++mId;
     }
 
-    static const TId UnknownId = 0;
+    static const TId UnknownId = -1;
 
 private:
     static TId mId;

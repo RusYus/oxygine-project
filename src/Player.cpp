@@ -32,6 +32,8 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
     m_Direction.setZero();
 
     SetRays();
+
+    CarrierInfo.Id = m_Id * 100;
 }
 
 Player::~Player()
@@ -162,6 +164,8 @@ void Player::SetPosition()
         m_IsJumping = false;
     }
 
+    std::cout << this->CarrierInfo.Id << std::endl;
+
 //    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
 //              << "; IsJumping:" << m_IsJumping
 //              << "; Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
@@ -187,14 +191,9 @@ void Player::Update(const UpdateState& /*aUpdateState*/)
 
     m_Direction.y += Service::Constants::GRAVITY;
 
-    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
+//    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
-//    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
-
-//    std::cout << "Player:-----------------" << std::endl;
     UpdateRays();
-
-//    std::cout << "Dt:" << us.dt << std::endl;
 
 //    std::cout << "Player:"
 //              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;

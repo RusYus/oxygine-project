@@ -46,7 +46,20 @@ public:
             body.second = true;
         }
 
-        m_Bodies.emplace(body.first->GetId(), std::move(body));
+//        m_Bodies.emplace(body.first->GetId(), std::move(body));
+        m_Bodies.emplace(body.first->GetId(), body);
+    }
+
+    void PrintCarrierId()
+    {
+        for (const auto& body : m_Bodies)
+        {
+            const auto bodyP = dynamic_cast<IMovable*>(body.second.first);
+            if (bodyP)
+            {
+                std::cout << bodyP->GetId() << " : " << bodyP->CarrierInfo.Id << "; Address: " << bodyP << std::endl;
+            }
+        }
     }
 
     void CheckCollisions(Basis::BasisObject::TId) override;

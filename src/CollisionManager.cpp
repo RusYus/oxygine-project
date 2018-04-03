@@ -2,6 +2,14 @@
 
 #include "CollisionManager.hpp"
 
+// 1 - Only Player ## DONE
+// 2 - Platform + Player ##
+// Bugs:
+// 1) When jumping on platform, sometimes falling through, then immed. standing as supposed to be.
+//с большой высоты не успевает считать? скорость -5000 проскальзывает, с земли тормозит норм.
+// 2) When on platform, moving through bodies (ground for now)
+// 3) When platform pushes Player, Player isn't pushed, but stands on platform.
+
 void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
@@ -63,11 +71,15 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
                 if (HandleCarrierIntersection(carrier, additionalDirection))
                 {
                     // If passenger is Player and is jumping, then ignore collision.
-                    if (dynamic_cast<Player*>(possiblePassenger) && dynamic_cast<Player*>(possiblePassenger)->IsJumping())
+                    if (dynamic_cast<Player*>(possiblePassenger)
+                        && dynamic_cast<Player*>(possiblePassenger)->IsJumping()
+                        /*&& body->GetId() == possiblePassenger->CarrierInfo.Id*/)
                     {
                         continue;
                     }
 
+                    std::cout << "adding passenger with id: " << possiblePassenger->GetId() << " and CarrierId: " << possiblePassenger->CarrierInfo.Id << std::endl;
+                    std::cout << " with direction:" << additionalDirection << std::endl;
                     // Set new direction to passenger (after first collision it's suposed to be 0).
                     possiblePassenger->SetDirection(additionalDirection);
                     carrier->AddPassenger(possiblePassenger);
@@ -84,11 +96,6 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
     if (newDirection != body->GetDirection())
     {
-        std::cout << "NewDirection: " << newDirection << " ; inter point: " << intersectionPoint << std::endl;
-        if (collisionSides.Right)
-        {
-            std::cout << "COllision right" << std::endl;
-        }
         body->SetDirection(newDirection);
         if (body->CarrierInfo.Id != Service::IdGenerator::UnknownId)
         {

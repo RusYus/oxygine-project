@@ -4,19 +4,21 @@
 
 #include "DynamicBox.hpp"
 
-DynamicBox::DynamicBox(const std::shared_ptr<ICollisionManager>& a_Manager)
+DynamicBox::DynamicBox(const oxygine::Rect& aRect, const std::shared_ptr<ICollisionManager>& a_Manager)
     : ICarrier(a_Manager)
     , IMovable(a_Manager)
 {
     std::cout << "DynamicBox ID:" << GetId() << std::endl;
     Type = Service::ObjectType::DynamicBody;
     m_Box->setResAnim(res::ui.getResAnim("square"));
-    m_Position.set(72'000, 15'000);
+    m_Position.set(aRect.getX(), aRect.getY());
     m_View->setPosition(Service::Convert(m_Position));
+    m_Box->setSize(Service::Convert(aRect.getSize()));
     m_View->setSize(m_Box->getSize());
     addChild(m_View);
     m_Direction.setZero();
     SetRays();
+    CarrierInfo.Id = m_Id * 100;
 }
 
 DynamicBox::~DynamicBox()
@@ -26,13 +28,13 @@ DynamicBox::~DynamicBox()
 
 void DynamicBox::Update()
 {
-    ICarrier::ClearPassengers();
+//    ICarrier::ClearPassengers();
     // TODO : Store last directionX, restore and decrease it in update
     // So this simulate inertia (e.g. force push)
     m_Direction.x = 0;
     m_Direction.y += Service::Constants::GRAVITY;
     UpdateRays();
-    std::cout << "DynamicBox:" << m_Direction << "; Pos:" << m_Position << std::endl;
+//    std::cout << "DynamicBox:" << m_Direction << "; Pos:" << m_Position << std::endl;
 }
 
 void DynamicBox::doRender(const oxygine::RenderState& a_State)
@@ -63,11 +65,11 @@ void DynamicBox::SetPosition()
 //    std::cout << "DynamicBox:" << GetX() << ":" << GetY() << std::endl;
 }
 
-void DynamicBox::CheckCollisions()
-{
-    IMovable::CheckCollisions();
-    ICarrier::MovePassengers();
-}
+//void DynamicBox::CheckCollisions()
+//{
+//    IMovable::CheckCollisions();
+//    ICarrier::MovePassengers();
+//}
 
 void DynamicBox::AddDirection(const Service::Vector2L& a_Direction)
 {

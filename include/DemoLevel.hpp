@@ -30,12 +30,13 @@ public:
     void Update(const UpdateState&);
     void SetPositions();
     void showHideDebug(Event*);
+    void ToggleDebugDraw();
     Static* mStatic;
     Static* mStatic2;
     Static* mStatic3;
     Static* mStatic4;
     Static* mStatic5;
-    spPlatform m_Platform;
+    std::unique_ptr<std::vector<spPlatform>> m_Platforms;
     std::unique_ptr<std::vector<spDynamicBox>> m_DynamicObjects;
 
 private:
