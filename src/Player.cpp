@@ -130,6 +130,7 @@ void Player::ProcessKeyboard()
 void Player::AddDirection(const Service::Vector2L& a_Direction)
 {
     m_Direction += a_Direction;
+    UpdateRays();
 //    std::cout << "Added direction, new:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 }
 
@@ -163,8 +164,9 @@ void Player::SetPosition()
     }
 
 
-//    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
-//              << "; IsJumping:" << m_IsJumping
+//    std::cout << "End of step, collision normal:"
+////    << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+////              << "; IsJumping:" << m_IsJumping
 ////              << "; Direction:" << m_Direction.x << ":" << m_Direction.y
 //              << "; Position:" << m_Position
 //              << std::endl;

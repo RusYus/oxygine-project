@@ -5,7 +5,6 @@
 // 1 - Only Player ## DONE
 // 2 - Platform + Player ##
 // Bugs:
-// 2) When on platform, moving through bodies (ground for now)
 // 3) When platform pushes Player, Player isn't pushed, but stands on platform.
 
 void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
@@ -76,10 +75,6 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     if (newDirection != body->GetDirection())
     {
         body->SetDirection(newDirection);
-        if (body->IsAttachToAnyCarrier())
-        {
-            body->AddDirection(body->CarrierInfo.Direction);
-        }
     }
 
     body->ResetCollisionNormal(collisionSides);
