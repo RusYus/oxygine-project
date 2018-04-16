@@ -32,8 +32,6 @@ Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager
     m_Direction.setZero();
 
     SetRays();
-
-    CarrierInfo.Id = m_Id * 100;
 }
 
 Player::~Player()
@@ -164,11 +162,12 @@ void Player::SetPosition()
         m_IsJumping = false;
     }
 
-    std::cout << this->CarrierInfo.Id << std::endl;
 
 //    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
 //              << "; IsJumping:" << m_IsJumping
-//              << "; Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+////              << "; Direction:" << m_Direction.x << ":" << m_Direction.y
+//              << "; Position:" << m_Position
+//              << std::endl;
 
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
@@ -212,3 +211,17 @@ void Player::doRender(const oxygine::RenderState& a_State)
 {
     DrawCollisionRays(m_Rays, a_State.transform);
 }
+
+void Player::DetachFromCarrier()
+{
+    IMovable::DetachFromCarrier();
+    std::cout << "Player detached" << std::endl;
+}
+
+void Player::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+{
+    IMovable::AttachToCarrier(a_Id, a_Direction);
+    AddCollisionNormal(Collision::CollisionInfoDown);
+    std::cout << "Player attached" << std::endl;
+}
+

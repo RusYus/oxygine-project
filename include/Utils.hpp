@@ -62,15 +62,15 @@ private:
     static TId mId;
 };
 
-struct Normal2 : oxygine::Vector2
+struct Normal2 : oxygine::Point
 {
 public:
     Normal2();
-    Normal2(float x, float y);
-    void operator =(const oxygine::Vector2& a_Vector);
-    void operator += (const oxygine::Vector2& a_Vector);
+    Normal2(int a_X, int a_Y);
+    void operator =(const oxygine::Point& a_Vector);
+    void operator += (const oxygine::Point& a_Vector);
     void operator += (const Normal2& a_Vector);
-    void operator -= (const oxygine::Vector2& a_Vector);
+    void operator -= (const oxygine::Point& a_Vector);
     void operator -= (const Normal2& a_Vector);
     bool operator == (const Normal2& a_Vector);
     bool operator != (const Normal2& a_Vector);

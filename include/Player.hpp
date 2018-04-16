@@ -13,12 +13,15 @@ public:
     Player(spEventProxy, const std::shared_ptr<ICollisionManager>&);
     ~Player();
     void SetPosition() override;
+    void AddDirection(const Service::Vector2L&) override;
+    void AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction = Service::ZeroVector) override;
+    void DetachFromCarrier() override;
+
     void Update(const oxygine::UpdateState&);
     oxygine::spActor GetView() const;
     void ProcessMoveEvent(oxygine::Event*);
     void ProcessJumpEvent(oxygine::Event*);
     void doRender(const oxygine::RenderState&);
-    void AddDirection(const Service::Vector2L&) override;
     bool IsJumping() const;
 
 private:

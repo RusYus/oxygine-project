@@ -5,8 +5,6 @@
 // 1 - Only Player ## DONE
 // 2 - Platform + Player ##
 // Bugs:
-// 1) When jumping on platform, sometimes falling through, then immed. standing as supposed to be.
-//с большой высоты не успевает считать? скорость -5000 проскальзывает, с земли тормозит норм.
 // 2) When on platform, moving through bodies (ground for now)
 // 3) When platform pushes Player, Player isn't pushed, but stands on platform.
 
@@ -20,15 +18,14 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         return;
     }
 
-    Collision::CollisionInfo collisionSides;
 
     m_Rectangle.Width = 0;
     m_Rectangle.Height = 0;
     m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
     m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
-    collisionSides.Reset();
 
     IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
+    Collision::CollisionInfo collisionSides;
     Service::Vector2L intersectionPoint;
     Service::Vector2L newDirection = body->GetDirection();
 
@@ -42,11 +39,16 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         }
 
         // Don't check collisions if same body or it's carrier.
-        if (body->GetId() == secondBody->GetId()
-            || body->CarrierInfo.Id == secondBody->GetId())
+        if (body->GetId() == secondBody->GetId())
         {
             continue;
         }
+        else if (body->CarrierInfo.Id == secondBody->GetId())
+        {
+            collisionSides.Down = true;
+            continue;
+        }
+
 
         // Setting collision boundaries for second body.
         FillRectangleValues(*secondBody);
@@ -67,22 +69,33 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 
                 UpdateRectangleWithDirection(*possiblePassenger);
 
-                Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, 0};
+//                std::cout << body->GetY() << std::endl;
+//                std::cout << "\t" << m_Rectangle.bottomLeft << std::endl;
+//                std::cout << "\t" << m_Rectangle.topRight << std::endl;
+
+                Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, possiblePassenger->GetDirection().y};
                 if (HandleCarrierIntersection(carrier, additionalDirection))
                 {
                     // If passenger is Player and is jumping, then ignore collision.
                     if (dynamic_cast<Player*>(possiblePassenger)
                         && dynamic_cast<Player*>(possiblePassenger)->IsJumping()
-                        /*&& body->GetId() == possiblePassenger->CarrierInfo.Id*/)
+                        && body->GetId() == possiblePassenger->CarrierInfo.Id)
                     {
+                        carrier->RemovePassenger(possiblePassenger);
                         continue;
                     }
 
-                    std::cout << "adding passenger with id: " << possiblePassenger->GetId() << " and CarrierId: " << possiblePassenger->CarrierInfo.Id << std::endl;
-                    std::cout << " with direction:" << additionalDirection << std::endl;
+//                    std::cout << "adding passenger with id: " << possiblePassenger->GetId() << " and CarrierId: " << possiblePassenger->CarrierInfo.Id << std::endl;
+//                    std::cout << " with direction:" << additionalDirection << std::endl;
                     // Set new direction to passenger (after first collision it's suposed to be 0).
                     possiblePassenger->SetDirection(additionalDirection);
                     carrier->AddPassenger(possiblePassenger);
+                    continue;
+                }
+                else if (carrier->IsPassengerExists(possiblePassenger))
+                {
+                    carrier->RemovePassenger(possiblePassenger);
+                    std::cout << "new else" << std::endl;
                     continue;
                 }
             }

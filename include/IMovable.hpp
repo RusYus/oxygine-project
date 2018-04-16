@@ -28,6 +28,8 @@ public:
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
     virtual void CheckCollisions();
+    virtual void AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction = Service::ZeroVector);
+    virtual void DetachFromCarrier();
 
 protected:
     virtual void UpdateRays();

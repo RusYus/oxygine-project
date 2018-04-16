@@ -224,3 +224,15 @@ void IMovable::CheckCollisions()
 
     m_CollisionManager->CheckCollisions(this->GetId());
 }
+
+void IMovable::DetachFromCarrier()
+{
+    CarrierInfo.Id = Service::IdGenerator::UnknownId;
+    CarrierInfo.Direction.setZero();
+}
+
+void IMovable::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+{
+    CarrierInfo.Id = a_Id;
+    CarrierInfo.Direction.set(a_Direction.x, a_Direction.y);
+}

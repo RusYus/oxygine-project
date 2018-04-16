@@ -23,14 +23,28 @@ void ICarrier::AddPassenger(IMovable* a_Body)
 
     if (!a_Body || std::find(m_Passengers->cbegin(), m_Passengers->cend(), a_Body) != m_Passengers->cend())
     {
-        std::cout << "Can't add passenger: NULL or already exists!" << std::endl;
+//        std::cout << "Can't add passenger: NULL or already exists!" << std::endl;
         return;
     }
 
-    a_Body->CarrierInfo.Id = m_Id;
-    a_Body->CarrierInfo.Direction = m_Direction;
+    a_Body->AttachToCarrier(m_Id, m_Direction);
     m_Passengers->push_back(a_Body);
 //    std::cout << "Adding passenger" << std::endl;
+}
+
+void ICarrier::RemovePassenger(IMovable* a_Body)
+{
+    assert(m_Passengers != nullptr);
+    auto passengerIt = std::find_if(m_Passengers->begin(), m_Passengers->end(), [&a_Body] (IMovable* a_Item) { return a_Item == a_Body; });
+    (*passengerIt)->DetachFromCarrier();
+    m_Passengers->erase(passengerIt);
+}
+
+bool ICarrier::IsPassengerExists(IMovable* a_Body)
+{
+    assert(m_Passengers != nullptr);
+    auto passengerIt = std::find_if(m_Passengers->begin(), m_Passengers->end(), [&a_Body] (IMovable* a_Item) { return a_Item == a_Body; });
+    return passengerIt == m_Passengers->end() ? false : true;
 }
 
 void ICarrier::ClearPassengers()
@@ -38,7 +52,7 @@ void ICarrier::ClearPassengers()
     assert(m_Passengers != nullptr);
     for (auto& passenger : *m_Passengers)
     {
-        passenger->CarrierInfo.Id = Service::IdGenerator::UnknownId;
+        passenger->DetachFromCarrier();
     }
     m_Passengers->clear();
 //    std::cout << "Clear all passengers" << std::endl;

@@ -53,7 +53,7 @@ bool Platform::IsAroundNode()
 
 void Platform::Update()
 {
-    ICarrier::ClearPassengers();
+//    ICarrier::ClearPassengers();
 
     if (IsAroundNode())
     {
