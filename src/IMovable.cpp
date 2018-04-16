@@ -236,3 +236,13 @@ void IMovable::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service
     CarrierInfo.Id = a_Id;
     CarrierInfo.Direction.set(a_Direction.x, a_Direction.y);
 }
+
+bool IMovable::IsAttachToAnyCarrier()
+{
+    return CarrierInfo.Id != Service::IdGenerator::UnknownId;
+}
+
+bool IMovable::IsAttachToCarrier(Basis::BasisObject::TId a_Id)
+{
+    return CarrierInfo.Id == a_Id;
+}

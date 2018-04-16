@@ -30,6 +30,8 @@ public:
     virtual void CheckCollisions();
     virtual void AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction = Service::ZeroVector);
     virtual void DetachFromCarrier();
+    virtual bool IsAttachToAnyCarrier();
+    virtual bool IsAttachToCarrier(Basis::BasisObject::TId a_Id);
 
 protected:
     virtual void UpdateRays();
