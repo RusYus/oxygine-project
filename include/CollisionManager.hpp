@@ -67,6 +67,7 @@ private:
     void FillRectangleValues(Basis::BasisObject&);
     void UpdateRectangleWithDirection(IMovable&);
     bool CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
+    bool CheckCollisionsAsCarrier2(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
     void CheckCollisionsAsBody(IMovable* a_Body, Collision::CollisionInfo& a_CollisionSides, Service::Vector2L& a_Intersection, Service::Vector2L& a_Direction);
 
     template<typename FirstBody>
@@ -262,6 +263,48 @@ private:
                 {
                     a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
                 }
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    template<typename FirstBody>
+    bool HandleCarrierIntersection2(FirstBody* a_First, Service::Vector2L& a_NewPoint)
+    {
+        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
+            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
+        {
+            std::cout << "Negative size" << std::endl;
+            return false;
+        }
+
+        for(const auto& ray : *(a_First->GetRays()))
+        {
+            // Don't need to check in that direction, since I assume, that if coords are the same
+            // means no moving there.
+            if (ray.Original == ray.Destination)
+            {
+                continue;
+            }
+
+            Service::Vector2L intersectionPoint;
+
+            if (Intersection(
+                m_Rectangle.bottomLeft,
+                m_Rectangle.topRight,
+                ray.Original,
+                ray.Destination,
+                intersectionPoint))
+            {
+                if (intersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
+                    || intersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+                {
+                    return false;
+                }
+
+                a_NewPoint.x = ray.Destination.x - intersectionPoint.x;
                 return true;
             }
         }

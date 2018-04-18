@@ -5,7 +5,6 @@
 // 1 - Only Player ## DONE
 // 2 - Platform + Player ##
 // Bugs:
-// 3) When platform pushes Player, Player isn't pushed, but stands on platform.
 
 void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
@@ -55,6 +54,7 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         {
         case Service::ObjectType::Platform:
             CheckCollisionsAsCarrier(body, secondBody);
+            CheckCollisionsAsCarrier2(body, secondBody);
             break;
         case Service::ObjectType::DynamicBody:
             if (CheckCollisionsAsCarrier(body, secondBody))
@@ -127,6 +127,29 @@ bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisOb
     {
         carrier->RemovePassenger(possiblePassenger);
         std::cout << "new else" << std::endl;
+        return true;
+    }
+
+    return false;
+}
+
+bool CollisionManager::CheckCollisionsAsCarrier2(IMovable* a_Body, Basis::BasisObject* a_SecondBody)
+{
+    assert(a_Body->Type == Service::ObjectType::DynamicBody || a_Body->Type == Service::ObjectType::Platform && "CheckCollisionsAsCarrier: wrong body type!");
+
+    if (a_SecondBody->Type != Service::ObjectType::DynamicBody && a_SecondBody->Type != Service::ObjectType::Player)
+    {
+        return false;
+    }
+
+    IMovable* secondBody = dynamic_cast<IMovable*>(a_SecondBody);
+
+    UpdateRectangleWithDirection(*secondBody);
+
+    Service::Vector2L additionalDirection{secondBody->GetDirection().x, secondBody->GetDirection().y};
+    if (HandleCarrierIntersection2(a_Body, additionalDirection))
+    {
+        secondBody->SetDirection(additionalDirection);
         return true;
     }
 
