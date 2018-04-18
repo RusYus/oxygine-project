@@ -164,12 +164,12 @@ void Player::SetPosition()
     }
 
 
-//    std::cout << "End of step, collision normal:"
+    std::cout << "End of step, collision normal:"
 ////    << m_CollisionNormal.x << ":" << m_CollisionNormal.y
 ////              << "; IsJumping:" << m_IsJumping
-////              << "; Direction:" << m_Direction.x << ":" << m_Direction.y
+              << "; Direction:" << m_Direction.x << ":" << m_Direction.y
 //              << "; Position:" << m_Position
-//              << std::endl;
+              << std::endl;
 
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "

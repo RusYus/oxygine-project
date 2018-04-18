@@ -5,6 +5,7 @@
 // 1 - Only Player ## DONE
 // 2 - Platform + Player ##
 // Bugs:
+// 1 - Somitemes player fast acceleration when moving towards platform.
 
 void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
 {
@@ -15,7 +16,6 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
     {
         return;
     }
-
 
     m_Rectangle.Width = 0;
     m_Rectangle.Height = 0;
@@ -54,7 +54,6 @@ void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
         {
         case Service::ObjectType::Platform:
             CheckCollisionsAsCarrier(body, secondBody);
-            CheckCollisionsAsCarrier2(body, secondBody);
             break;
         case Service::ObjectType::DynamicBody:
             if (CheckCollisionsAsCarrier(body, secondBody))
@@ -84,12 +83,14 @@ bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisOb
 {
     assert(a_Body->Type == Service::ObjectType::DynamicBody || a_Body->Type == Service::ObjectType::Platform && "CheckCollisionsAsCarrier: wrong body type!");
 
+    bool result = false;
+
     if (a_SecondBody->Type != Service::ObjectType::DynamicBody && a_SecondBody->Type != Service::ObjectType::Player)
     {
         return false;
     }
-    // FIXME : Check if crashed in cast when colliding with Ground.
-    IMovable* possiblePassenger = dynamic_cast<IMovable*>(a_SecondBody);
+
+    IMovable* secondBody = dynamic_cast<IMovable*>(a_SecondBody);
     ICarrier* carrier = dynamic_cast<ICarrier*>(a_Body);
 
     // Not moving relative to carrier.
@@ -98,67 +99,53 @@ bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisOb
 //        return true;
 //    }
 
-    UpdateRectangleWithDirection(*possiblePassenger);
+    UpdateRectangleWithDirection(*secondBody);
 
 //                std::cout << a_Body->GetY() << std::endl;
 //                std::cout << "\t" << m_Rectangle.bottomLeft << std::endl;
 //                std::cout << "\t" << m_Rectangle.topRight << std::endl;
 
-    Service::Vector2L additionalDirection{possiblePassenger->GetDirection().x, possiblePassenger->GetDirection().y};
-    if (HandleCarrierIntersection(carrier, additionalDirection))
+    Service::Vector2L additionalDirection{secondBody->GetDirection().x, secondBody->GetDirection().y};
+    if (HandleActiveIntersection(carrier, additionalDirection, true))
     {
         // If passenger is Player and is jumping, then ignore collision.
-        if (dynamic_cast<Player*>(possiblePassenger)
-            && dynamic_cast<Player*>(possiblePassenger)->IsJumping()
-            && possiblePassenger->IsAttachToCarrier(a_Body->GetId()))
+        if (dynamic_cast<Player*>(secondBody)
+            && dynamic_cast<Player*>(secondBody)->IsJumping()
+            && secondBody->IsAttachToCarrier(a_Body->GetId()))
         {
-            carrier->RemovePassenger(possiblePassenger);
-            return true;
+            carrier->RemovePassenger(secondBody);
+            result = true;
         }
 
 //                    std::cout << "adding passenger with id: " << possiblePassenger->GetId() << " and CarrierId: " << possiblePassenger->CarrierInfo.Id << std::endl;
 //                    std::cout << " with direction:" << additionalDirection << std::endl;
         // Set new direction to passenger (after first collision it's suposed to be 0).
-        possiblePassenger->SetDirection(additionalDirection);
-        carrier->AddPassenger(possiblePassenger);
-        return true;
-    }
-    else if (carrier->IsPassengerExists(possiblePassenger))
-    {
-        carrier->RemovePassenger(possiblePassenger);
-        std::cout << "new else" << std::endl;
-        return true;
-    }
-
-    return false;
-}
-
-bool CollisionManager::CheckCollisionsAsCarrier2(IMovable* a_Body, Basis::BasisObject* a_SecondBody)
-{
-    assert(a_Body->Type == Service::ObjectType::DynamicBody || a_Body->Type == Service::ObjectType::Platform && "CheckCollisionsAsCarrier: wrong body type!");
-
-    if (a_SecondBody->Type != Service::ObjectType::DynamicBody && a_SecondBody->Type != Service::ObjectType::Player)
-    {
-        return false;
-    }
-
-    IMovable* secondBody = dynamic_cast<IMovable*>(a_SecondBody);
-
-    UpdateRectangleWithDirection(*secondBody);
-
-    Service::Vector2L additionalDirection{secondBody->GetDirection().x, secondBody->GetDirection().y};
-    if (HandleCarrierIntersection2(a_Body, additionalDirection))
-    {
         secondBody->SetDirection(additionalDirection);
+        carrier->AddPassenger(secondBody);
         return true;
     }
+    else if (carrier->IsPassengerExists(secondBody))
+    {
+        carrier->RemovePassenger(secondBody);
+        std::cout << "new else" << std::endl;
+        result = true;
+    }
+    else
+    {
+        additionalDirection.set(secondBody->GetDirection().x, secondBody->GetDirection().y);
+        if (HandleActiveIntersection(carrier, additionalDirection, false))
+        {
+            secondBody->SetDirection(additionalDirection);
+            result = true;
+        }
+    }
 
-    return false;
+    return result;
 }
 
 void CollisionManager::CheckCollisionsAsBody(IMovable* a_Body, Collision::CollisionInfo& a_CollisionSides, Service::Vector2L& a_Intersection, Service::Vector2L& a_Direction)
 {
-    HandleIntersection(a_Body, a_CollisionSides, a_Intersection, a_Direction);
+    HandlePassiveIntersection(a_Body, a_CollisionSides, a_Intersection, a_Direction);
 }
 
 void CollisionManager::FillRectangleValues(Basis::BasisObject& a_out_Body)

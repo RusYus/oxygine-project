@@ -71,7 +71,7 @@ private:
     void CheckCollisionsAsBody(IMovable* a_Body, Collision::CollisionInfo& a_CollisionSides, Service::Vector2L& a_Intersection, Service::Vector2L& a_Direction);
 
     template<typename FirstBody>
-    void HandleIntersection(
+    void HandlePassiveIntersection(
         FirstBody* a_First,
         Collision::CollisionInfo& a_Sides,
         Service::Vector2L& a_IntersectionPoint,
@@ -223,10 +223,8 @@ private:
     }
 
     template<typename FirstBody>
-    bool HandleCarrierIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint)
+    bool HandleActiveIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint, bool a_UseCarrierRays)
     {
-        static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
-
         if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
             || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
         {
@@ -234,7 +232,9 @@ private:
             return false;
         }
 
-        for(const auto& ray : *(a_First->GetCarrierRays()))
+        std::vector<Collision::Ray>& rays = a_UseCarrierRays ? *(a_First->GetCarrierRays()) : *(a_First->GetRays());
+
+        for(const auto& ray : rays)
         {
             // Don't need to check in that direction, since I assume, that if coords are the same
             // means no moving there.
@@ -258,53 +258,18 @@ private:
                     return false;
                 }
 
-                // This means that passenger coming from above.
-                if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                if (a_UseCarrierRays)
                 {
-                    a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                    // This means that passenger coming from above.
+                    if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                    {
+                        a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                    }
                 }
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    template<typename FirstBody>
-    bool HandleCarrierIntersection2(FirstBody* a_First, Service::Vector2L& a_NewPoint)
-    {
-        if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
-            || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
-        {
-            std::cout << "Negative size" << std::endl;
-            return false;
-        }
-
-        for(const auto& ray : *(a_First->GetRays()))
-        {
-            // Don't need to check in that direction, since I assume, that if coords are the same
-            // means no moving there.
-            if (ray.Original == ray.Destination)
-            {
-                continue;
-            }
-
-            Service::Vector2L intersectionPoint;
-
-            if (Intersection(
-                m_Rectangle.bottomLeft,
-                m_Rectangle.topRight,
-                ray.Original,
-                ray.Destination,
-                intersectionPoint))
-            {
-                if (intersectionPoint.x == std::numeric_limits<float>::quiet_NaN()
-                    || intersectionPoint.y == std::numeric_limits<float>::quiet_NaN())
+                else
                 {
-                    return false;
+                    a_NewPoint.x = ray.Destination.x - intersectionPoint.x;
                 }
-
-                a_NewPoint.x = ray.Destination.x - intersectionPoint.x;
                 return true;
             }
         }
