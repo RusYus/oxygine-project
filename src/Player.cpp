@@ -6,12 +6,32 @@
 #include "BasisEvents.hpp"
 
 
-Player::Player()
-    : m_IsButtonMoving(false)
+Player::Player(spEventProxy aEventProxy, const std::shared_ptr<ICollisionManager>& a_Manager)
+    : IMovable(a_Manager)
+    , m_IsButtonMoving(false)
     , m_IsJumping(false)
-    , m_IsDirectionFinalForTheseStep(false)
 {
     std::cout << "Player ID:" << GetId() << std::endl;
+    Type = Service::ObjectType::Player;
+//    m_View = new Actor;
+//    Service::Vector2L pos = getStage()->getSize() / 2;
+
+    m_Box->setResAnim(res::ui.getResAnim("player"));
+//    mBox->setAnchor(Vector2(0.5f, 0.5f));
+//    m_Position.set(62'000, 15'000);
+    m_Position.set(25'000, 10'000);
+    m_View->setPosition(Service::Convert(m_Position));
+    m_View->setSize(m_Box->getSize());
+
+    addChild(m_View);
+
+    m_EventProxy = aEventProxy;
+    m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
+    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
+
+    m_Direction.setZero();
+
+    SetRays();
 }
 
 Player::~Player()
@@ -21,30 +41,6 @@ Player::~Player()
 spActor Player::GetView() const
 {
     return m_View;
-}
-
-void Player::Init(spEventProxy aEventProxy)
-{
-//    m_View = new Actor;
-//    Service::Vector2L pos = getStage()->getSize() / 2;
-
-    m_Box->setResAnim(res::ui.getResAnim("player"));
-//    mBox->setAnchor(Vector2(0.5f, 0.5f));
-    m_Position.set(15'000, 10'000);
-    m_View->setPosition(Service::Convert(m_Position));
-    m_View->setSize(m_Box->getSize());
-
-    addChild(m_View);
-
-    m_EventProxy = aEventProxy;
-
-    m_EventProxy->addEventListener(PlayerMoveEvent::EVENT, CLOSURE(this, &Player::ProcessMoveEvent));
-
-    m_EventProxy->addEventListener(PlayerJumpEvent::EVENT, CLOSURE(this, &Player::ProcessJumpEvent));
-
-    m_Direction = Service::Vector2L();
-
-    SetRays();
 }
 
 bool Player::IsJumping() const
@@ -89,7 +85,7 @@ void Player::Move(bool aIsMovingRight)
 //    {
 //        mDirection = _body->GetLinearVelocity();
 
-////        std::cout << "Moving!" << "NORMALS:" << mNormal.x << ";" << mGroundNormal.x << std::endl;
+        std::cout << "Moving!" << std::endl;
         m_Direction.x = aIsMovingRight ? m_MaxSpeed : -m_MaxSpeed;
 //        mDirection.x /= Service::Constants::SCALE;
 
@@ -134,15 +130,22 @@ void Player::ProcessKeyboard()
 void Player::AddDirection(const Service::Vector2L& a_Direction)
 {
     m_Direction += a_Direction;
+    UpdateRays();
+//    std::cout << "Added direction, new:" << m_Direction.x << ":" << m_Direction.y << std::endl;
 }
 
 void Player::SetPosition()
 {
+    // FIXME : Somehow consider carrier info.
     // Reseting direction, if collision in place.
     if ((m_Direction.x < 0 && m_CollisionNormal.x < 0) || (m_Direction.x > 0  && m_CollisionNormal.x > 0))
     {
         m_Direction.x = 0;
         std::cout << "Reseting direction x!!!" << std::endl;
+        if (CarrierInfo.Id != Service::IdGenerator::UnknownId)
+        {
+            AddDirection(CarrierInfo.Direction);
+        }
     }
 
 //    std::cout << "In Set. Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
@@ -160,9 +163,13 @@ void Player::SetPosition()
         m_IsJumping = false;
     }
 
-//    std::cout << "End of step, collision normal:" << m_CollisionNormal.x << ":" << m_CollisionNormal.y
-//              << "; IsJumping:" << m_IsJumping
-//              << "; Direction:" << m_Direction.x << ":" << m_Direction.y << std::endl;
+
+    std::cout << "End of step, collision normal:"
+////    << m_CollisionNormal.x << ":" << m_CollisionNormal.y
+////              << "; IsJumping:" << m_IsJumping
+              << "; Direction:" << m_Direction.x << ":" << m_Direction.y
+//              << "; Position:" << m_Position
+              << std::endl;
 
 //        std::cout << "Player:"
 ////                  << m_Direction.x << ":" << m_Direction.y << "  |  "
@@ -172,22 +179,8 @@ void Player::SetPosition()
 
 }
 
-void Player::SetDirectionFinalForStep(const Service::Vector2L& aNewDirection)
-{
-    if (!m_IsDirectionFinalForTheseStep)
-    {
-        m_Direction.x += aNewDirection.x;
-        if (!m_IsJumping)
-        {
-            m_Direction.y = aNewDirection.y;
-        }
-        m_IsDirectionFinalForTheseStep = true;
-    }
-}
-
 void Player::Update(const UpdateState& /*aUpdateState*/)
 {
-    m_IsDirectionFinalForTheseStep = false;
     ProcessKeyboard();
 
 //    // Reseting direction, if collision in place.
@@ -201,12 +194,7 @@ void Player::Update(const UpdateState& /*aUpdateState*/)
 
 //    std::cout << "Player:" << m_Direction.x << ":" << m_Direction.y << " ; Pos:" << m_Position.x << ":" << m_Position.y << std::endl;
 
-//    std::cout << "Update:" << m_Direction.x << ":" << m_Direction.y << std::endl;
-
-//    std::cout << "Player:-----------------" << std::endl;
     UpdateRays();
-
-//    std::cout << "Dt:" << us.dt << std::endl;
 
 //    std::cout << "Player:"
 //              << mCollisionNormal.x << ":" << mCollisionNormal.y << std::endl;
@@ -225,3 +213,17 @@ void Player::doRender(const oxygine::RenderState& a_State)
 {
     DrawCollisionRays(m_Rays, a_State.transform);
 }
+
+void Player::DetachFromCarrier()
+{
+    IMovable::DetachFromCarrier();
+    std::cout << "Player detached" << std::endl;
+}
+
+void Player::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+{
+    IMovable::AttachToCarrier(a_Id, a_Direction);
+    AddCollisionNormal(Collision::CollisionInfoDown);
+    std::cout << "Player attached" << std::endl;
+}
+

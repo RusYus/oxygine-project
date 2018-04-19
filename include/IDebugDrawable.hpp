@@ -54,6 +54,10 @@ public:
 
     void SetDebugDraw(bool a_Value) { m_DebugDraw = a_Value; }
     bool GetDebugDraw() const { return m_DebugDraw; }
+    void ToggleDebugDraw()
+    {
+        m_DebugDraw = !m_DebugDraw;
+    }
 
 protected:
     void CreateCircleVertices(const Service::Vector2L& a_Center, int a_Radius)

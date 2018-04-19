@@ -4,6 +4,8 @@
 
 #include "res.hpp"
 
+#include "CollisionManager.hpp"
+#include "DynamicBox.hpp"
 #include "Ground.hpp"
 #include "Platform.hpp"
 #include "MapProperty.hpp"
@@ -23,15 +25,19 @@ public:
 class DemoLevel: public Actor
 {
 public:
-    void Init(MapProperty&&);
+    void Init(MapProperty&&, const std::shared_ptr<ICollisionManager>&);
     void click(Event*);
     void Update(const UpdateState&);
+    void SetPositions();
     void showHideDebug(Event*);
+    void ToggleDebugDraw();
     Static* mStatic;
     Static* mStatic2;
     Static* mStatic3;
     Static* mStatic4;
-    spPlatform m_Platform;
+    Static* mStatic5;
+    std::unique_ptr<std::vector<spPlatform>> m_Platforms;
+    std::unique_ptr<std::vector<spDynamicBox>> m_DynamicObjects;
 
 private:
     friend class Player;

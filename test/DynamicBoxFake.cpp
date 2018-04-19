@@ -1,20 +1,21 @@
 #include <boost/test/unit_test.hpp>
 
-#include "PlayerFake.hpp"
+#include "DynamicBoxFake.hpp"
 
-PlayerFake::PlayerFake(const std::shared_ptr<ICollisionManager>& a_Manager)
-    : IMovable(a_Manager)
+DynamicBoxFake::DynamicBoxFake(const oxygine::Rect&, const std::shared_ptr<ICollisionManager>& a_Manager)
+    : ICarrier(a_Manager)
+    , IMovable(a_Manager)
     , m_WasCollision(false)
     , m_InitialDirection(0, 0)
 {
-    Type = Service::ObjectType::Player;
+    Type = Service::ObjectType::DynamicBody;
     m_View->setPosition(0, 0);
     m_View->setSize(oxygine::Vector2(100, 100));
     m_Direction.setZero();
     SetRays();
 }
 
-void PlayerFake::SetupValues(int a_X, int a_Y, const Service::Vector2L& a_Direction)
+void DynamicBoxFake::SetupValues(int a_X, int a_Y, const Service::Vector2L& a_Direction)
 {
     m_WasCollision = false;
     m_Position.set(a_X, a_Y);
@@ -24,4 +25,11 @@ void PlayerFake::SetupValues(int a_X, int a_Y, const Service::Vector2L& a_Direct
     m_InitialDirection.set(a_Direction.x, a_Direction.y);
     SetRays();
     UpdateRays();
+    ClearPassengers();
+}
+
+void DynamicBoxFake::Update()
+{
+    IMovable::CheckCollisions();
+    ICarrier::MovePassengers();
 }

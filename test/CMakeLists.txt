@@ -6,13 +6,17 @@ include_directories(
 
 set(
     PROJECT_TESTS_HEADERS
+    DynamicBoxFake.hpp
+    PlatformFake.hpp
     PlayerFake.hpp
 )
 
 set(
 	PROJECT_TESTS_SOURCES
 	CollisionManagerTests.cpp
+    DynamicBoxFake.cpp
     JsonImporterTests.cpp
+    PlatformFake.cpp
     PlayerFake.cpp
 	TestExample.cpp
 	Tests.cpp

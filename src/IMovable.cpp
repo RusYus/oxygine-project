@@ -1,17 +1,13 @@
 #include <iostream>
 #include "IMovable.hpp"
 
-IMovable::IMovable()
+IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
-    , CarrierId(Service::IdGenerator::UnknownId)
+    , CarrierInfo()
+    , m_CollisionManager(a_Manager)
 {
-}
-
-void IMovable::BindCollisionManager(const std::shared_ptr<ICollisionManager>& a_Manager)
-{
-    assert(!m_CollisionManager);
-    m_CollisionManager = std::shared_ptr<ICollisionManager>(a_Manager);
+    m_CollisionManager->AddBody(this);
 }
 
 IMovable::~IMovable()
@@ -28,18 +24,6 @@ void IMovable::SetDirection(const Service::Vector2L& a_NewDirection)
 void IMovable::AddDirection(const Service::Vector2L& a_NewDirection)
 {
     m_Direction += a_NewDirection;
-    UpdateRays();
-}
-
-void IMovable::AddDirectionX(Service::TCoordinate a_Value)
-{
-    m_Direction.x += a_Value;
-    UpdateRays();
-}
-
-void IMovable::AddDirectionY(Service::TCoordinate a_Value)
-{
-    m_Direction.y += a_Value;
     UpdateRays();
 }
 
@@ -113,7 +97,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Up:
                 if (m_Direction.y < 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination.set(ray.Original.x, ray.Original.y + m_Direction.y);/* = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);*/
                 }
                 // std::cout << "Up:  Original   : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -121,7 +105,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Down:
                 if (m_Direction.y > 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);
+                    ray.Destination.set(ray.Original.x, ray.Original.y + m_Direction.y);/* = Service::Vector2L(ray.Original.x, ray.Original.y + m_Direction.y);*/
                 }
                 // std::cout << "Down:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -129,7 +113,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Right:
                 if (m_Direction.x > 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination.set(ray.Original.x + m_Direction.x, ray.Original.y);/* = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);*/
                 }
                 // std::cout << "Right:  Original: " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -138,7 +122,7 @@ void IMovable::UpdateRays()
             case Collision::RayDirection::Left:
                 if (m_Direction.x < 0)
                 {
-                    ray.Destination = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);
+                    ray.Destination.set(ray.Original.x + m_Direction.x, ray.Original.y);/* = Service::Vector2L(ray.Original.x + m_Direction.x, ray.Original.y);*/
                 }
                 // std::cout << "Left:  Original : " << ray.Original.x << ":" << ray.Original.y << std::endl;
                 // std::cout << "     Destination: " << ray.Destination.x << ":" << ray.Destination.y << std::endl;
@@ -239,4 +223,26 @@ void IMovable::CheckCollisions()
     }
 
     m_CollisionManager->CheckCollisions(this->GetId());
+}
+
+void IMovable::DetachFromCarrier()
+{
+    CarrierInfo.Id = Service::IdGenerator::UnknownId;
+    CarrierInfo.Direction.setZero();
+}
+
+void IMovable::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+{
+    CarrierInfo.Id = a_Id;
+    CarrierInfo.Direction.set(a_Direction.x, a_Direction.y);
+}
+
+bool IMovable::IsAttachToAnyCarrier()
+{
+    return CarrierInfo.Id != Service::IdGenerator::UnknownId;
+}
+
+bool IMovable::IsAttachToCarrier(Basis::BasisObject::TId a_Id)
+{
+    return CarrierInfo.Id == a_Id;
 }

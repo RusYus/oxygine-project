@@ -11,6 +11,7 @@ class BasisObject
 {
 public:
     using TId = Service::IdGenerator::TId;
+    Service::ObjectType Type = Service::ObjectType::UNDEFINED;
 
     BasisObject();
 

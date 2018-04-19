@@ -4,7 +4,6 @@
 
 #include "Actor.h"
 #include "key.h"
-#include "CollisionManager.hpp"
 #include "BasisObject.hpp"
 #include "BasisCamera.hpp"
 #include "Player.hpp"
@@ -37,25 +36,6 @@ public:
     */
 };
 
-// ----------- NEXT STEPS: ------------
-// CollisionManager : calculates all collision (for each body using quad tree)
-// Has references to all objects with body (taking from Game?)
-// If something collides, report this to these bodies.
-// Next, all bodies updates themselves, considering collisioninfo they've received.
-// Should I use raycasting? E.g. CollisionManager says I collide with ground without details.
-// Now I cast rays to ensure that and gather other info (which side, etc.)
-// CollisionMask? For the future, not now
-// Number of rays, their spacing, depends on width and height of the body, length depends on velocity in that direction
-// Rays are casted towards moving direction, except directly down (ground), which casted everytime.
-
-
-// TODO [MOV2-47]
-// Add coordinates as arguments to ctors for all objects (player, platform, etc.)
-// In ctor set position (to set position m_View)
-// Using everywhere Vector2L with cast to Vector2 if neccesary (length() and normalize())
-// Set position for m_View only for graphics
-// Use scale to convert between Vector2L and Vector2 (in setting m_View)
-
 DECLARE_SMART(Game, spGame);
 class Game: public Actor
 {
@@ -81,14 +61,15 @@ public:
         addChild(mCamera);
 
         mLevels.emplace_back(new DemoLevel);
-        mLevels.back()->Init(std::move(mapProperty));
+        mLevels.back()->Init(std::move(mapProperty), m_CollisionManager);
         addChild(mLevels.back());
 
         mCamera->setContent(mLevels.back());
 
         //create player ship
-        m_Player = new Player;
-        m_Player->Init(mEventProxy);
+
+        m_CollisionManager->PrintCarrierId();
+        m_Player = new Player(mEventProxy, m_CollisionManager);
 //        mLevels.back()->addChild(mPlayer->GetView());
         mLevels.back()->addChild(m_Player);
 
@@ -123,37 +104,26 @@ public:
         mJump->setX(getStage()->getWidth() - mJump->getWidth() - 10);
         mJump->setY(getStage()->getHeight() - mJump->getHeight() - 10);
         mJump->attachTo(this);
-
-        m_CollisionManager->AddBody(m_Player.get());
-        m_CollisionManager->AddBody(mLevels.back()->mStatic);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic2);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic3);
-        m_CollisionManager->AddBody(mLevels.back()->mStatic4);
-        m_CollisionManager->AddBody(mLevels.back()->m_Platform.get());
-
-        m_Player->BindCollisionManager(m_CollisionManager);
-        mLevels.back()->m_Platform->BindCollisionManager(m_CollisionManager);
     }
 
     void doUpdate(const UpdateState& us)
     {
-        std::cout << "------Starting Step:"<< std::endl;
         m_Player->Update(us);
         mLevels.back()->Update(us);
-        mLevels.back()->m_Platform->CheckCollisions();
         m_Player->CheckCollisions();
-        mLevels.back()->m_Platform->SetPosition();
+        mLevels.back()->SetPositions();
         m_Player->SetPosition();
+
     }
 
     void ShowHideDebug(Event* /*event*/)
     {
-        m_Player->SetDebugDraw(!m_Player->GetDebugDraw());
-        mLevels.back()->m_Platform->SetDebugDraw(!mLevels.back()->m_Platform->GetDebugDraw());
+        m_Player->ToggleDebugDraw();
+        mLevels.back()->ToggleDebugDraw();
     }
 
     spEventProxy mEventProxy;
-    std::shared_ptr<CollisionManager> m_CollisionManager;
+    std::shared_ptr<ICollisionManager> m_CollisionManager;
     spPlayer m_Player;
     spCamera mCamera;
     spMoveButton mMoveLeft;

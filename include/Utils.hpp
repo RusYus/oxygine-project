@@ -20,6 +20,8 @@ inline bool AreEqual(float a_Ls, float a_Rs)
 using TCoordinate = long long;
 typedef oxygine::VectorT2<TCoordinate> Vector2L;
 
+static const Vector2L ZeroVector = Vector2L{0, 0};
+
 inline Vector2L Convert(const oxygine::Vector2& a_Pos)
 {
     return Vector2L(a_Pos.x * Constants::SCALE, a_Pos.y * Constants::SCALE);
@@ -54,21 +56,21 @@ public:
         return ++mId;
     }
 
-    static const TId UnknownId = 0;
+    static const TId UnknownId = -1;
 
 private:
     static TId mId;
 };
 
-struct Normal2 : oxygine::Vector2
+struct Normal2 : oxygine::Point
 {
 public:
     Normal2();
-    Normal2(float x, float y);
-    void operator =(const oxygine::Vector2& a_Vector);
-    void operator += (const oxygine::Vector2& a_Vector);
+    Normal2(int a_X, int a_Y);
+    void operator =(const oxygine::Point& a_Vector);
+    void operator += (const oxygine::Point& a_Vector);
     void operator += (const Normal2& a_Vector);
-    void operator -= (const oxygine::Vector2& a_Vector);
+    void operator -= (const oxygine::Point& a_Vector);
     void operator -= (const Normal2& a_Vector);
     bool operator == (const Normal2& a_Vector);
     bool operator != (const Normal2& a_Vector);
@@ -77,4 +79,9 @@ public:
 
 static const Normal2 ZeroNormal = Normal2{0, 0};
 
+}
+
+namespace oxygine
+{
+    std::ostream& operator << (std::ostream&, const Service::Vector2L&);
 }

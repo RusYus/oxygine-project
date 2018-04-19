@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 
+#include "ICarrier.hpp"
 #include "ICollisionManager.hpp"
 #include "DemoLevel.hpp"
 #include "Player.hpp"
@@ -15,6 +16,13 @@
 
 class CollisionManager : public virtual ICollisionManager
 {
+    enum class BodyType
+    {
+        Platform,
+        Player,
+        DynamicBox,
+    };
+
     using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
     using TKey = Basis::BasisObject::TId;
     using TValue = TBody;
@@ -38,16 +46,32 @@ public:
             body.second = true;
         }
 
-        m_Bodies.emplace(body.first->GetId(), std::move(body));
+//        m_Bodies.emplace(body.first->GetId(), std::move(body));
+        m_Bodies.emplace(body.first->GetId(), body);
+    }
+
+    void PrintCarrierId()
+    {
+        for (const auto& body : m_Bodies)
+        {
+            const auto bodyP = dynamic_cast<IMovable*>(body.second.first);
+            if (bodyP)
+            {
+                std::cout << bodyP->GetId() << " : " << bodyP->CarrierInfo.Id << "; Address: " << bodyP << std::endl;
+            }
+        }
     }
 
     void CheckCollisions(Basis::BasisObject::TId) override;
 private:
     void FillRectangleValues(Basis::BasisObject&);
     void UpdateRectangleWithDirection(IMovable&);
+    bool CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
+    bool CheckCollisionsAsCarrier2(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
+    void CheckCollisionsAsBody(IMovable* a_Body, Collision::CollisionInfo& a_CollisionSides, Service::Vector2L& a_Intersection, Service::Vector2L& a_Direction);
 
     template<typename FirstBody>
-    void HandleIntersection(
+    void HandlePassiveIntersection(
         FirstBody* a_First,
         Collision::CollisionInfo& a_Sides,
         Service::Vector2L& a_IntersectionPoint,
@@ -69,7 +93,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.x - (a_First->GetX() + a_First->GetWidth());
-            a_NewPoint.x = newPos > 1 ? newPos : 0;
+            a_NewPoint.x = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Right = true;
         };
 
@@ -82,7 +106,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.x - a_First->GetX();
-            a_NewPoint.x = newPos > 1 ? newPos : 0;
+            a_NewPoint.x = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Left = true;
         };
 
@@ -95,7 +119,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.y - a_First->GetY();
-            a_NewPoint.y = newPos > 1 ? newPos : 0;
+            a_NewPoint.y = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Up = true;
         };
 
@@ -108,7 +132,7 @@ private:
             }
 
             float newPos = a_IntersectionPoint.y - (a_First->GetY() + a_First->GetHeight());
-            a_NewPoint.y = newPos > 1 ? newPos : 0;
+            a_NewPoint.y = std::abs(newPos) > 1 ? newPos : 0;
             a_Sides.Down = true;
         };
 
@@ -199,10 +223,8 @@ private:
     }
 
     template<typename FirstBody>
-    bool HandleCarrierIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint)
+    bool HandleActiveIntersection(FirstBody* a_First, Service::Vector2L& a_NewPoint, bool a_UseCarrierRays)
     {
-        static_assert(std::is_base_of<ICarrier, FirstBody>::value, "Should be used with ICarrier or it's child!");
-
         if (m_Rectangle.topRight.x <= m_Rectangle.bottomLeft.x
             || m_Rectangle.bottomLeft.y <= m_Rectangle.topRight.y)
         {
@@ -210,7 +232,9 @@ private:
             return false;
         }
 
-        for(const auto& ray : *(a_First->GetCarrierRays()))
+        std::vector<Collision::Ray>& rays = a_UseCarrierRays ? *(a_First->GetCarrierRays()) : *(a_First->GetRays());
+
+        for(const auto& ray : rays)
         {
             // Don't need to check in that direction, since I assume, that if coords are the same
             // means no moving there.
@@ -234,10 +258,17 @@ private:
                     return false;
                 }
 
-                // This means that passenger coming from above.
-                if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                if (a_UseCarrierRays)
                 {
-                    a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                    // This means that passenger coming from above.
+                    if (intersectionPoint.y != m_Rectangle.bottomLeft.y)
+                    {
+                        a_NewPoint.y = intersectionPoint.y -  m_Rectangle.topRight.y - m_Rectangle.Height;
+                    }
+                }
+                else
+                {
+                    a_NewPoint.x = ray.Destination.x - intersectionPoint.x;
                 }
                 return true;
             }

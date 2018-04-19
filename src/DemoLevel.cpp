@@ -15,7 +15,7 @@ void Square::Update()
 {
 }
 
-void DemoLevel::Init(MapProperty&& aMapProperty)
+void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisionManager>& a_Manager)
 {
     //create background
 //    spSprite sky = new Sprite;
@@ -47,10 +47,42 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
     mStatic4 = ground4.get();
     mObjects.push_back(ground4);
 
+    spStatic ground5 = new Static(Rect(20'000, 34'000, 15'000, 5'000));
+    addChild(ground5);
+    mStatic5 = ground5.get();
+    mObjects.push_back(ground5);
+
+    spPlatform platform1 = new Platform(Rect(60'000, 45'000, 25'000, 2'000), a_Manager);
+    addChild(platform1);
+    m_Platforms = std::make_unique<std::vector<spPlatform>>();
+    m_Platforms->push_back(platform1);
+
+//    spPlatform platform2 = new Platform(Rect(10'000, 45'000, 25'000, 2'000), a_Manager);
+//    addChild(platform2);
+//    m_Platforms->push_back(platform2);
+
+//    m_DynamicObjects = std::make_unique<std::vector<spDynamicBox>>();
+//    spDynamicBox box1 = new DynamicBox(Rect(72'000, 15'000, 10'000, 10'000), a_Manager);
+//    addChild(box1);
+//    m_DynamicObjects->push_back(box1);
+
+//    std::cout << "After box1" << std::endl;
+//    a_Manager->PrintCarrierId();
+
+//    spDynamicBox box2 = new DynamicBox(Rect(72'000, -100'000, 10'000, 10'000), a_Manager);
+//    addChild(box2);
+//    m_DynamicObjects->push_back(box2);
+
+    a_Manager->AddBody(mStatic);
+    a_Manager->AddBody(mStatic2);
+    a_Manager->AddBody(mStatic3);
+    a_Manager->AddBody(mStatic4);
+    a_Manager->AddBody(mStatic5);
+
     addEventListener(TouchEvent::CLICK, CLOSURE(this, &DemoLevel::click));
 
     // ------- TILED ---------
-    mMapProperty = std::move(aMapProperty);
+    mMapProperty = std::move(a_MapProperty);
 
     file::buffer fb;
     const std::string pathToTexture = "buch-outdoor.png";
@@ -66,17 +98,78 @@ void DemoLevel::Init(MapProperty&& aMapProperty)
 ////        mObjects.emplace_back(std::unique_ptr<Ground>(new Ground(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight))));
 //        mObjects.emplace_back(new Static(mWorld, RectF(object.mX, object.mY, object.mWidth, object.mHeight)));
 //    }
-
-    spPlatform platform = new Platform(Rect(20'000, 20'000, 25'000, 2'000));
-    addChild(platform);
-    m_Platform = platform;
 }
 
 void DemoLevel::Update(const UpdateState& /*us*/)
 {
-    if (m_Platform)
+    if (m_Platforms)
     {
-        m_Platform->Update();
+        for (auto& platform : *m_Platforms)
+        {
+            platform->Update();
+        }
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->Update();
+        }
+    }
+
+    if (m_Platforms)
+    {
+        for (auto& platform : *m_Platforms)
+        {
+            platform->CheckCollisions();
+        }
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->CheckCollisions();
+        }
+    }
+}
+
+void DemoLevel::SetPositions()
+{
+    if (m_Platforms)
+    {
+        for (auto& platform : *m_Platforms)
+        {
+            platform->SetPosition();
+        }
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->SetPosition();
+        }
+    }
+}
+
+void DemoLevel::ToggleDebugDraw()
+{
+    if (m_Platforms)
+    {
+        for (auto& platform : *m_Platforms)
+        {
+            platform->ToggleDebugDraw();
+        }
+    }
+
+    if (m_DynamicObjects)
+    {
+        for (auto& boxes : *m_DynamicObjects)
+        {
+            boxes->ToggleDebugDraw();
+        }
     }
 }
 

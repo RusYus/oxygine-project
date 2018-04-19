@@ -12,13 +12,15 @@
 class ICarrier : public virtual IMovable
 {
 public:
-    ICarrier();
+    ICarrier(const std::shared_ptr<ICollisionManager>&);
 
     virtual ~ICarrier();
 
+    void SetPosition() override;
     std::shared_ptr<std::vector<Collision::Ray>> GetCarrierRays() const;
     void AddPassenger(IMovable* a_Body);
-    void SetPosition() override;
+    void RemovePassenger(IMovable* a_Body);
+    bool IsPassengerExists(IMovable* a_Body);
 
 protected:
     void MovePassengers();

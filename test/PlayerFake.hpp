@@ -7,26 +7,31 @@
 struct PlayerFake : public IMovable
 {
 public:
-    PlayerFake(int /*a_Width*/, int /*a_Height*/);
+    PlayerFake(const std::shared_ptr<ICollisionManager>&);
 
     void SetupValues(int /*a_X*/, int /*a_Y*/, const Service::Vector2L& /*a_Direction*/);
-
-    void SetDirection(const Service::Vector2L& a_NewDirection) override
-    {
-        m_NewDirection = a_NewDirection;
-    }
 
     void ResetCollisionNormal(const Collision::CollisionInfo& a_Sides) override
     {
         m_WasCollision = a_Sides.Down || a_Sides.Left || a_Sides.Right || a_Sides.Up;
     }
 
+    inline Service::TCoordinate GetWidth() const override
+    {
+        return Service::TCoordinate(10'000);
+    }
+
+    inline Service::TCoordinate GetHeight() const override
+    {
+        return Service::TCoordinate(10'000);
+    }
+
     inline bool CollisionTookPlace() const
     {
         // I presume, that in case of collision new position took place (surface of a body).
-        return m_Direction != m_NewDirection || m_WasCollision;
+        return m_Direction != m_InitialDirection || m_WasCollision;
     }
 public:
     bool m_WasCollision;
-    Service::Vector2L m_NewDirection;
+    Service::Vector2L m_InitialDirection;
 };
