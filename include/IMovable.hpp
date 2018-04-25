@@ -6,11 +6,13 @@
 
 #include "ICollisionManager.hpp"
 #include "CollisionInfo.hpp"
-#include "CommonData.hpp"
 #include "Constants.hpp"
 #include "IDrawable.hpp"
 #include "Utils.hpp"
 #include "Velocity.hpp"
+
+// Shit forward declaration.
+class ICarrier;
 
 class IMovable : public virtual IDrawable
 {
@@ -28,7 +30,7 @@ public:
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
     virtual void CheckCollisions();
-    virtual void AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction = Service::ZeroVector);
+    virtual void AttachToCarrier(ICarrier* a_Carrier);
     virtual void DetachFromCarrier();
     virtual bool IsAttachToAnyCarrier();
     virtual bool IsAttachToCarrier(Basis::BasisObject::TId a_Id);
@@ -37,13 +39,11 @@ protected:
     virtual void UpdateRays();
     virtual void SetRays();
 
-public:
-    Common::CarrierInfo CarrierInfo;
-
 protected:
     Service::Vector2L m_Direction;
     Service::Normal2 m_CollisionNormal;
     std::shared_ptr<ICollisionManager> m_CollisionManager;
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
+    ICarrier* m_Carrier;
 };

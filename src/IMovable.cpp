@@ -1,11 +1,11 @@
 #include <iostream>
-#include "IMovable.hpp"
+#include "ICarrier.hpp"
 
 IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
-    , CarrierInfo()
     , m_CollisionManager(a_Manager)
+    , m_Carrier(nullptr)
 {
     m_CollisionManager->AddBody(this);
 }
@@ -227,22 +227,20 @@ void IMovable::CheckCollisions()
 
 void IMovable::DetachFromCarrier()
 {
-    CarrierInfo.Id = Service::IdGenerator::UnknownId;
-    CarrierInfo.Direction.setZero();
+    m_Carrier = nullptr;
 }
 
-void IMovable::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+void IMovable::AttachToCarrier(ICarrier* a_Carrier)
 {
-    CarrierInfo.Id = a_Id;
-    CarrierInfo.Direction.set(a_Direction.x, a_Direction.y);
+    m_Carrier = a_Carrier;
 }
 
 bool IMovable::IsAttachToAnyCarrier()
 {
-    return CarrierInfo.Id != Service::IdGenerator::UnknownId;
+    return m_Carrier != nullptr;
 }
 
 bool IMovable::IsAttachToCarrier(Basis::BasisObject::TId a_Id)
 {
-    return CarrierInfo.Id == a_Id;
+    return m_Carrier != nullptr && m_Carrier->GetId() == a_Id;
 }

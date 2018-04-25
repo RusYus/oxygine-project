@@ -93,12 +93,6 @@ bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisOb
     IMovable* secondBody = dynamic_cast<IMovable*>(a_SecondBody);
     ICarrier* carrier = dynamic_cast<ICarrier*>(a_Body);
 
-    // Not moving relative to carrier.
-//    if (a_Body->CarrierInfo.Id == possiblePassenger->CarrierInfo.Id && a_Body->GetDirection() - a_Body->CarrierInfo.Direction == Service::ZeroVector)
-//    {
-//        return true;
-//    }
-
     UpdateRectangleWithDirection(*secondBody);
 
 //                std::cout << a_Body->GetY() << std::endl;
@@ -117,8 +111,6 @@ bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisOb
             result = true;
         }
 
-//                    std::cout << "adding passenger with id: " << possiblePassenger->GetId() << " and CarrierId: " << possiblePassenger->CarrierInfo.Id << std::endl;
-//                    std::cout << " with direction:" << additionalDirection << std::endl;
         // Set new direction to passenger (after first collision it's suposed to be 0).
         secondBody->SetDirection(additionalDirection);
         carrier->AddPassenger(secondBody);

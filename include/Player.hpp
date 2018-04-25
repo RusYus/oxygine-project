@@ -14,7 +14,7 @@ public:
     ~Player();
     void SetPosition() override;
     void AddDirection(const Service::Vector2L&) override;
-    void AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction = Service::ZeroVector) override;
+    void AttachToCarrier(ICarrier* a_Carrier) override;
     void DetachFromCarrier() override;
 
     void Update(const oxygine::UpdateState&);

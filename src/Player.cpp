@@ -142,9 +142,9 @@ void Player::SetPosition()
     {
         m_Direction.x = 0;
         std::cout << "Reseting direction x!!!" << std::endl;
-        if (CarrierInfo.Id != Service::IdGenerator::UnknownId)
+        if (m_Carrier != nullptr)
         {
-            AddDirection(CarrierInfo.Direction);
+            AddDirection(m_Carrier->GetDirection());
         }
     }
 
@@ -220,9 +220,9 @@ void Player::DetachFromCarrier()
     std::cout << "Player detached" << std::endl;
 }
 
-void Player::AttachToCarrier(const Basis::BasisObject::TId a_Id, const Service::Vector2L& a_Direction)
+void Player::AttachToCarrier(ICarrier* a_Carrier)
 {
-    IMovable::AttachToCarrier(a_Id, a_Direction);
+    IMovable::AttachToCarrier(a_Carrier);
     AddCollisionNormal(Collision::CollisionInfoDown);
     std::cout << "Player attached" << std::endl;
 }

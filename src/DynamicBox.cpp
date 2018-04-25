@@ -18,7 +18,6 @@ DynamicBox::DynamicBox(const oxygine::Rect& aRect, const std::shared_ptr<ICollis
     addChild(m_View);
     m_Direction.setZero();
     SetRays();
-    CarrierInfo.Id = m_Id * 100;
 }
 
 DynamicBox::~DynamicBox()
