@@ -12,7 +12,7 @@
 class ICarrier : public virtual IMovable
 {
 public:
-//    using TLevel = unsigned;
+    using TLevel = unsigned;
 public:
     ICarrier(const std::shared_ptr<ICollisionManager>&);
 
@@ -20,11 +20,13 @@ public:
 
     void SetPosition() override;
     void AttachToCarrier(ICarrier* a_Carrier) override;
+    void DetachFromCarrier() override;
 
     std::shared_ptr<std::vector<Collision::Ray>> GetCarrierRays() const;
     void AddPassenger(IMovable* a_Body);
     void RemovePassenger(IMovable* a_Body);
     bool IsPassengerExists(IMovable* a_Body);
+    TLevel GetCarrierLevel() const;
 
 protected:
     void MovePassengers();
@@ -35,7 +37,7 @@ protected:
 
 protected:
     const float m_RayLength = Service::Constants::CARRIER_RAY_LENGTH;
-//    TLevel m_Level;
+    TLevel m_Level;
     std::shared_ptr<std::vector<Collision::Ray>> m_CarrierRays;
     std::unique_ptr<std::vector<IMovable*>> m_Passengers;
 };

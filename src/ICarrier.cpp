@@ -128,10 +128,22 @@ void ICarrier::PassengersCheckCollisions()
     }
 }
 
-//void ICarrier::AttachToCarrier(ICarrier* a_Carrier)
-//{
-//    // TODO : increment level!
-//    IMovable::AttachToCarrier(a_Carrier);
-//    std::cout << "ICarrier attached" << std::endl;
-//}
+void ICarrier::AttachToCarrier(ICarrier* a_Carrier)
+{
+    IMovable::AttachToCarrier(a_Carrier);
+    m_Level = a_Carrier->GetCarrierLevel() + 1;
+    std::cout << "ICarrier attached" << std::endl;
+}
+
+ICarrier::TLevel ICarrier::GetCarrierLevel() const
+{
+    return m_Level;
+}
+
+void ICarrier::DetachFromCarrier()
+{
+    IMovable::DetachFromCarrier();
+    assert(m_Level > 0);
+    m_Level--;
+}
 
