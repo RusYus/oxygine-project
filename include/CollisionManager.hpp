@@ -41,7 +41,6 @@ private:
     void FillRectangleValues(Basis::BasisObject&);
     void UpdateRectangleWithDirection(IMovable&);
     bool CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
-    bool CheckCollisionsAsCarrier2(IMovable* a_Body, Basis::BasisObject* a_SecondBody);
     void CheckCollisionsAsBody(IMovable* a_Body, Collision::CollisionInfo& a_CollisionSides, Service::Vector2L& a_Intersection, Service::Vector2L& a_Direction);
 
     template<typename FirstBody>

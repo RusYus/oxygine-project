@@ -21,13 +21,20 @@ void ICarrier::AddPassenger(IMovable* a_Body)
 {
     assert(m_Passengers != nullptr);
 
-    if (!a_Body || std::find(m_Passengers->cbegin(), m_Passengers->cend(), a_Body) != m_Passengers->cend())
+    if (!a_Body)
     {
-//        std::cout << "Can't add passenger: NULL or already exists!" << std::endl;
+        return;
+    }
+
+    auto passengerIt = std::find(m_Passengers->cbegin(), m_Passengers->cend(), a_Body);
+    if (passengerIt != m_Passengers->cend())
+    {
+        MovePassenger(*passengerIt);
         return;
     }
 
     a_Body->AttachToCarrier(this);
+    MovePassenger(a_Body);
     m_Passengers->push_back(a_Body);
 //    std::cout << "Adding passenger" << std::endl;
 }
@@ -98,18 +105,9 @@ void ICarrier::SetRays()
     }
 }
 
-void ICarrier::MovePassengers()
+void ICarrier::MovePassenger(IMovable* a_Passenger)
 {
-    for (auto& passenger : *m_Passengers)
-    {
-        if (!passenger)
-        {
-            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
-            continue;
-        }
-
-        passenger->AddDirection(m_Direction);
-        passenger->AddCollisionNormal(Collision::CollisionInfoDown);
-    }
+    assert(a_Passenger && "Moving passenger: passenger is NULL!");
+    a_Passenger->AddDirection(m_Direction);
+    a_Passenger->AddCollisionNormal(Collision::CollisionInfoDown);
 }
-

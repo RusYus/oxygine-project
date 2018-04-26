@@ -24,7 +24,7 @@ public:
     bool IsPassengerExists(IMovable* a_Body);
 
 protected:
-    void MovePassengers();
+    void MovePassenger(IMovable* a_Passenger);
     void ClearPassengers();
     void UpdateRays() override;
     void SetRays() override;

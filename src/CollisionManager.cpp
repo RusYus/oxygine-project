@@ -67,8 +67,10 @@ void CollisionManager::CheckCollisions()
         body->ResetCollisionNormal(collisionSides);
     }
 
-    // TODO : Sort
-//    std::sort(m_MovingBodies.begin(), m_MovingBodies.end(), [] (IMovable* a_First, IMovable* a_Second) { a_First->GetLevel() < a_Second->GetLevel();});
+    if (!std::is_sorted(m_MovingBodies.begin(), m_MovingBodies.end()))
+    {
+        std::sort(m_MovingBodies.begin(), m_MovingBodies.end(), [] (IMovable* a_First, IMovable* a_Second) { return a_First->GetLevel() < a_Second->GetLevel();});
+    }
 }
 
 bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisObject* a_SecondBody)
