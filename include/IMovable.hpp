@@ -17,6 +17,9 @@ class ICarrier;
 class IMovable : public virtual IDrawable
 {
 public:
+    using TLevel = unsigned;
+
+public:
     IMovable(const std::shared_ptr<ICollisionManager>&);
 
     virtual ~IMovable();
@@ -34,6 +37,7 @@ public:
     virtual void DetachFromCarrier();
     virtual bool IsAttachToAnyCarrier();
     virtual bool IsAttachToCarrier(Basis::BasisObject::TId a_Id);
+    TLevel GetCarrierLevel() const;
 
 protected:
     virtual void UpdateRays();
@@ -46,4 +50,5 @@ protected:
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
     ICarrier* m_Carrier;
+    TLevel m_Level;
 };

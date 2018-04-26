@@ -6,6 +6,7 @@ IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
     , m_CollisionManager(a_Manager)
     , m_Carrier(nullptr)
+    , m_Level(0)
 {
     m_CollisionManager->AddBody(this);
 }
@@ -228,11 +229,14 @@ void IMovable::CheckCollisions()
 void IMovable::DetachFromCarrier()
 {
     m_Carrier = nullptr;
+    assert(m_Level > 0);
+    m_Level--;
 }
 
 void IMovable::AttachToCarrier(ICarrier* a_Carrier)
 {
     m_Carrier = a_Carrier;
+    m_Level = a_Carrier->GetCarrierLevel() + 1;
 }
 
 bool IMovable::IsAttachToAnyCarrier()
@@ -243,4 +247,9 @@ bool IMovable::IsAttachToAnyCarrier()
 bool IMovable::IsAttachToCarrier(Basis::BasisObject::TId a_Id)
 {
     return m_Carrier != nullptr && m_Carrier->GetId() == a_Id;
+}
+
+IMovable::TLevel IMovable::GetCarrierLevel() const
+{
+    return m_Level;
 }

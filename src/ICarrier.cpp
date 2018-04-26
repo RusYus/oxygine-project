@@ -3,7 +3,6 @@
 
 ICarrier::ICarrier(const std::shared_ptr<ICollisionManager>& a_Manager)
     : IMovable(a_Manager)
-    , m_Level(0)
     , m_CarrierRays(std::make_shared<std::vector<Collision::Ray>>())
     , m_Passengers(std::make_unique<std::vector<IMovable*>>())
 {}
@@ -126,24 +125,5 @@ void ICarrier::PassengersCheckCollisions()
 
         passenger->CheckCollisions();
     }
-}
-
-void ICarrier::AttachToCarrier(ICarrier* a_Carrier)
-{
-    IMovable::AttachToCarrier(a_Carrier);
-    m_Level = a_Carrier->GetCarrierLevel() + 1;
-    std::cout << "ICarrier attached" << std::endl;
-}
-
-ICarrier::TLevel ICarrier::GetCarrierLevel() const
-{
-    return m_Level;
-}
-
-void ICarrier::DetachFromCarrier()
-{
-    IMovable::DetachFromCarrier();
-    assert(m_Level > 0);
-    m_Level--;
 }
 
