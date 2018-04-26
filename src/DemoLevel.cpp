@@ -67,7 +67,6 @@ void DemoLevel::Init(MapProperty&& a_MapProperty, const std::shared_ptr<ICollisi
 //    m_DynamicObjects->push_back(box1);
 
 //    std::cout << "After box1" << std::endl;
-//    a_Manager->PrintCarrierId();
 
 //    spDynamicBox box2 = new DynamicBox(Rect(72'000, -100'000, 10'000, 10'000), a_Manager);
 //    addChild(box2);
@@ -115,22 +114,6 @@ void DemoLevel::Update(const UpdateState& /*us*/)
         for (auto& boxes : *m_DynamicObjects)
         {
             boxes->Update();
-        }
-    }
-
-    if (m_Platforms)
-    {
-        for (auto& platform : *m_Platforms)
-        {
-            platform->CheckCollisions();
-        }
-    }
-
-    if (m_DynamicObjects)
-    {
-        for (auto& boxes : *m_DynamicObjects)
-        {
-            boxes->CheckCollisions();
         }
     }
 }

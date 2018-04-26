@@ -113,17 +113,3 @@ void ICarrier::MovePassengers()
     }
 }
 
-void ICarrier::PassengersCheckCollisions()
-{
-    for (auto& passenger : *m_Passengers)
-    {
-        if (!passenger)
-        {
-            std::cout << "Moving passengers: passenger is NULL!" << std::endl;
-            continue;
-        }
-
-        passenger->CheckCollisions();
-    }
-}
-

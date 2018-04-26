@@ -30,6 +30,4 @@ void DynamicBoxFake::SetupValues(int a_X, int a_Y, const Service::Vector2L& a_Di
 
 void DynamicBoxFake::Update()
 {
-    IMovable::CheckCollisions();
-    ICarrier::MovePassengers();
 }

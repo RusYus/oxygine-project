@@ -16,16 +16,6 @@
 
 class CollisionManager : public virtual ICollisionManager
 {
-    enum class BodyType
-    {
-        Platform,
-        Player,
-        DynamicBox,
-    };
-
-    using TBody = std::pair<Basis::BasisObject*, bool /*isMovable*/>;
-    using TKey = Basis::BasisObject::TId;
-    using TValue = TBody;
     struct CollisionRectangle
     {
         int Width = -1;
@@ -39,22 +29,14 @@ public:
 
     void AddBody(Basis::BasisObject* a_Body) override
     {
-        TBody body = std::make_pair(a_Body, false);
-        // TODO : refactor condition.
-        if (std::is_base_of<IMovable, TBody>::value /*&& !dynamic_cast<Platform*>(aBody)*/)
+        m_AllBodies.emplace_back(a_Body);
+        if (IMovable* movingBody = dynamic_cast<IMovable*>(a_Body))
         {
-            body.second = true;
+            m_MovingBodies.emplace_back(movingBody);
         }
-
-//        m_Bodies.emplace(body.first->GetId(), std::move(body));
-        m_Bodies.emplace(body.first->GetId(), body);
     }
 
-    void PrintCarrierId()
-    {
-    }
-
-    void CheckCollisions(Basis::BasisObject::TId) override;
+    void CheckCollisions() override;
 private:
     void FillRectangleValues(Basis::BasisObject&);
     void UpdateRectangleWithDirection(IMovable&);
@@ -275,6 +257,7 @@ private:
         Service::Vector2L& /*intersection*/);
 
 private:
-    std::unordered_map<TKey, TValue> m_Bodies;
+    std::vector<Basis::BasisObject*> m_AllBodies;
+    std::vector<IMovable*> m_MovingBodies;
     CollisionRectangle m_Rectangle;
 };

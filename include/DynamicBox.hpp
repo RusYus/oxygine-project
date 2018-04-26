@@ -12,7 +12,6 @@ public:
     ~DynamicBox();
     void Update();
     void SetPosition() override;
-//    void CheckCollisions() override;
     void AddDirection(const Service::Vector2L&) override;
     void doRender(const oxygine::RenderState&);
 };

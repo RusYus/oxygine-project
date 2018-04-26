@@ -25,7 +25,6 @@ public:
 
 protected:
     void MovePassengers();
-    void PassengersCheckCollisions();
     void ClearPassengers();
     void UpdateRays() override;
     void SetRays() override;

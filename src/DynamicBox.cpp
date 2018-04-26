@@ -64,12 +64,6 @@ void DynamicBox::SetPosition()
 //    std::cout << "DynamicBox:" << GetX() << ":" << GetY() << std::endl;
 }
 
-//void DynamicBox::CheckCollisions()
-//{
-//    IMovable::CheckCollisions();
-//    ICarrier::MovePassengers();
-//}
-
 void DynamicBox::AddDirection(const Service::Vector2L& a_Direction)
 {
     IMovable::AddDirection(a_Direction);

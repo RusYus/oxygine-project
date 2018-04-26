@@ -216,16 +216,6 @@ void IMovable::SetRays()
                                        Collision::RayDirection::DownRight));
 }
 
-void IMovable::CheckCollisions()
-{
-    if (!m_CollisionManager)
-    {
-        return;
-    }
-
-    m_CollisionManager->CheckCollisions(this->GetId());
-}
-
 void IMovable::DetachFromCarrier()
 {
     m_Carrier = nullptr;
@@ -236,7 +226,7 @@ void IMovable::DetachFromCarrier()
 void IMovable::AttachToCarrier(ICarrier* a_Carrier)
 {
     m_Carrier = a_Carrier;
-    m_Level = a_Carrier->GetCarrierLevel() + 1;
+    m_Level = a_Carrier->GetLevel() + 1;
 }
 
 bool IMovable::IsAttachToAnyCarrier()
@@ -249,7 +239,7 @@ bool IMovable::IsAttachToCarrier(Basis::BasisObject::TId a_Id)
     return m_Carrier != nullptr && m_Carrier->GetId() == a_Id;
 }
 
-IMovable::TLevel IMovable::GetCarrierLevel() const
+IMovable::TLevel IMovable::GetLevel() const
 {
     return m_Level;
 }

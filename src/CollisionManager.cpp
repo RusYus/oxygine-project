@@ -7,76 +7,68 @@
 // Bugs:
 // 1 - Somitemes player fast acceleration when moving towards platform.
 
-void CollisionManager::CheckCollisions(Basis::BasisObject::TId a_Id)
+void CollisionManager::CheckCollisions()
 {
     // TODO : Optimizations checks for collisions (quad tree or four-areas on screen?).
 
-    auto bodyIt = m_Bodies.find(a_Id);
-    if (bodyIt == m_Bodies.end())
+    for (auto& body : m_MovingBodies)
     {
-        return;
-    }
+        m_Rectangle.Width = 0;
+        m_Rectangle.Height = 0;
+        m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
+        m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
 
-    m_Rectangle.Width = 0;
-    m_Rectangle.Height = 0;
-    m_Rectangle.bottomLeft.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
-    m_Rectangle.topRight.set(std::numeric_limits<Service::TCoordinate>::quiet_NaN(), std::numeric_limits<Service::TCoordinate>::quiet_NaN());
+        Collision::CollisionInfo collisionSides;
+        Service::Vector2L intersectionPoint;
+        Service::Vector2L newDirection = body->GetDirection();
 
-    IMovable* body = dynamic_cast<IMovable*>(bodyIt->second.first);
-    Collision::CollisionInfo collisionSides;
-    Service::Vector2L intersectionPoint;
-    Service::Vector2L newDirection = body->GetDirection();
-
-    for (auto& secondBodyIt : m_Bodies)
-    {
-        Basis::BasisObject* secondBody = secondBodyIt.second.first;
-        if (!secondBody)
+        for (auto& secondBody : m_AllBodies)
         {
-            std::cout << "No second body!" << std::endl;
-            continue;
-        }
-
-        // Don't check collisions if same body or it's carrier.
-        if (body->GetId() == secondBody->GetId())
-        {
-            continue;
-        }
-        else if (body->IsAttachToCarrier(secondBody->GetId()))
-        {
-            collisionSides.Down = true;
-            continue;
-        }
-
-        // Setting collision boundaries for second body.
-        FillRectangleValues(*secondBody);
-
-        switch(body->Type)
-        {
-        case Service::ObjectType::Platform:
-            CheckCollisionsAsCarrier(body, secondBody);
-            break;
-        case Service::ObjectType::DynamicBody:
-            if (CheckCollisionsAsCarrier(body, secondBody))
+            // Don't check collisions if same body or it's carrier.
+            if (body->GetId() == secondBody->GetId())
             {
                 continue;
             }
-            else
+            else if (body->IsAttachToCarrier(secondBody->GetId()))
             {
-                CheckCollisionsAsBody(body, collisionSides, intersectionPoint, newDirection);
+                collisionSides.Down = true;
+                continue;
             }
-            break;
-        case Service::ObjectType::Player:
-            CheckCollisionsAsBody(body, collisionSides, intersectionPoint, newDirection);
-            break;
+
+            // Setting collision boundaries for second body.
+            FillRectangleValues(*secondBody);
+
+            switch(body->Type)
+            {
+            case Service::ObjectType::Platform:
+                CheckCollisionsAsCarrier(body, secondBody);
+                break;
+            case Service::ObjectType::DynamicBody:
+                if (CheckCollisionsAsCarrier(body, secondBody))
+                {
+                    continue;
+                }
+                else
+                {
+                    CheckCollisionsAsBody(body, collisionSides, intersectionPoint, newDirection);
+                }
+                break;
+            case Service::ObjectType::Player:
+                CheckCollisionsAsBody(body, collisionSides, intersectionPoint, newDirection);
+                break;
+            }
         }
+
+        if (newDirection != body->GetDirection())
+        {
+            body->SetDirection(newDirection);
+        }
+
+        body->ResetCollisionNormal(collisionSides);
     }
 
-    if (newDirection != body->GetDirection())
-    {
-        body->SetDirection(newDirection);
-    }
-
-    body->ResetCollisionNormal(collisionSides);
+    // TODO : Sort
+//    std::sort(m_MovingBodies.begin(), m_MovingBodies.end(), [] (IMovable* a_First, IMovable* a_Second) { a_First->GetLevel() < a_Second->GetLevel();});
 }
 
 bool CollisionManager::CheckCollisionsAsCarrier(IMovable* a_Body, Basis::BasisObject* a_SecondBody)

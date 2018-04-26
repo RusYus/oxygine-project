@@ -33,7 +33,7 @@ struct CollisionManagerFixture
     }
 };
 
-BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisAlligned, CollisionManagerFixture)
+/*BOOST_FIXTURE_TEST_CASE(ShouldIntersectWhenOriginalOutsideDestinationInsideAxisAlligned, CollisionManagerFixture)
 {
     // Left side.
     m_Player->SetupValues(
@@ -325,7 +325,7 @@ BOOST_FIXTURE_TEST_CASE(PlayerShouldNotMoveDynamicBoxWhenBothOnPlatform, Collisi
     m_Player->SetPosition();
     BOOST_CHECK(m_Player->GetX() == 50'200);
     BOOST_CHECK(m_Player->GetY() == 10'000);
-}
+}*/
 
 BOOST_AUTO_TEST_SUITE_END()
 

@@ -30,6 +30,4 @@ void PlatformFake::SetupValues(int a_X, int a_Y, const Service::Vector2L& a_Dire
 
 void PlatformFake::Update()
 {
-    IMovable::CheckCollisions();
-    ICarrier::MovePassengers();
 }

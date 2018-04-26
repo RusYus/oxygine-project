@@ -67,8 +67,6 @@ public:
         mCamera->setContent(mLevels.back());
 
         //create player ship
-
-        m_CollisionManager->PrintCarrierId();
         m_Player = new Player(mEventProxy, m_CollisionManager);
 //        mLevels.back()->addChild(mPlayer->GetView());
         mLevels.back()->addChild(m_Player);
@@ -110,7 +108,7 @@ public:
     {
         m_Player->Update(us);
         mLevels.back()->Update(us);
-        m_Player->CheckCollisions();
+        m_CollisionManager->CheckCollisions();
         mLevels.back()->SetPositions();
         m_Player->SetPosition();
 

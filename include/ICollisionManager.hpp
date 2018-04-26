@@ -10,6 +10,5 @@ public:
     virtual ~ICollisionManager() = default;
 
     virtual void AddBody(Basis::BasisObject*) = 0;
-    virtual void PrintCarrierId() = 0;
-    virtual void CheckCollisions(Basis::BasisObject::TId) = 0;
+    virtual void CheckCollisions() = 0;
 };

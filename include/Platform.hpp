@@ -36,7 +36,6 @@ public:
     void Update();
     void SetDirection(const Service::Vector2L&) override;
     void SetPosition() override;
-    void CheckCollisions() override;
 
     void doRender(const oxygine::RenderState&);
 

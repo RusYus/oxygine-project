@@ -32,12 +32,11 @@ public:
     virtual void AddCollisionNormal(const Collision::CollisionInfo&);
     virtual void ResetCollisionNormal(const Collision::CollisionInfo&);
     virtual void SetPosition();
-    virtual void CheckCollisions();
     virtual void AttachToCarrier(ICarrier* a_Carrier);
     virtual void DetachFromCarrier();
     virtual bool IsAttachToAnyCarrier();
     virtual bool IsAttachToCarrier(Basis::BasisObject::TId a_Id);
-    TLevel GetCarrierLevel() const;
+    TLevel GetLevel() const;
 
 protected:
     virtual void UpdateRays();
