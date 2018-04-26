@@ -4,11 +4,10 @@
 IMovable::IMovable(const std::shared_ptr<ICollisionManager>& a_Manager)
     : m_CollisionNormal(0, 0)
     , m_Rays(std::make_shared<std::vector<Collision::Ray>>())
-    , m_CollisionManager(a_Manager)
     , m_Carrier(nullptr)
     , m_Level(0)
 {
-    m_CollisionManager->AddBody(this);
+    a_Manager->AddBody(this);
 }
 
 IMovable::~IMovable()

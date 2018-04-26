@@ -45,7 +45,6 @@ protected:
 protected:
     Service::Vector2L m_Direction;
     Service::Normal2 m_CollisionNormal;
-    std::shared_ptr<ICollisionManager> m_CollisionManager;
     std::shared_ptr<std::vector<Collision::Ray>> m_Rays;
     const int m_MaxSpeed = Service::Constants::MAX_SPEED;
     ICarrier* m_Carrier;
